@@ -7,6 +7,7 @@
  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
  <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
  <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY skos 'http://www.w3.org/2004/02/skos/core#'>
  <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
  <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
  <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
@@ -26,6 +27,7 @@
          xmlns:owl		="&owl;"
          xmlns:dc		="&dc;"
          xmlns:dcterms          ="&dcterms;"
+         xmlns:skos		="&skos;"
          xmlns:ore		="&ore;"
          xmlns:xsd		="&xsd;"
 >
@@ -39,7 +41,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">August 26, 2009</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">April 05, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -80,6 +82,10 @@
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="&skos;ConceptScheme">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="&mebase;User">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
@@ -98,6 +104,10 @@
 
   <rdf:Description rdf:about="&mebase;Versionable">
     <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Commentable">
+      <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&meannot;Citationable">
@@ -120,15 +130,15 @@
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="&meannot;Taggable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="&meac;Attributable">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&meac;Creditable">
-    <rdf:type rdf:resource="&owl;Class"/>
-  </rdf:Description>
-
-  <rdf:Description rdf:about="&meexp;Runnable">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
 
@@ -140,7 +150,9 @@
     <rdfs:comment>A File uploaded by an Actor</rdfs:comment>
     <owl:disjointWith rdf:resource="AbstractWorkflow"/>
     <rdfs:subClassOf rdf:resource="&mebase;Upload"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Commentable"/>
     <rdfs:subClassOf rdf:resource="&meannot;Rateable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Taggable"/>
     <rdfs:subClassOf rdf:resource="&meac;Attributable"/>
     <rdfs:subClassOf rdf:resource="&meac;Creditable"/>
     <rdfs:subClassOf rdf:resource="&meannot;Favouritable"/>
@@ -153,6 +165,7 @@
     <owl:disjointWith rdf:resource="AbstractWorkflow"/>
     <owl:disjointWith rdf:resource="File"/>
     <rdfs:subClassOf rdf:resource="&mebase;Contribution"/>
+    <rdfs:subClassOf rdf:resource="&skos;ConceptScheme"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&dcterms;title" />
@@ -167,9 +180,10 @@
     <rdfs:comment>An AbstractWorkflow from which Workflow and WorkflowVersion can be templated on</rdfs:comment>
     <owl:disjointWith rdf:resource="File"/>
     <rdfs:subClassOf rdf:resource="&meannot;Citationable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Commentable"/>
     <rdfs:subClassOf rdf:resource="&meannot;Reviewable"/>
-    <rdfs:subClassOf rdf:resource="&meexp;Runnable"/>
     <rdfs:subClassOf rdf:resource="&meannot;Rateable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Taggable"/>
     <rdfs:subClassOf rdf:resource="&meac;Attributable"/>
     <rdfs:subClassOf rdf:resource="&meac;Creditable"/>
     <rdfs:subClassOf rdf:resource="&meannot;Favouritable"/>

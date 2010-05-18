@@ -2,6 +2,7 @@ RewriteEngine On
 
 RewriteRule ^(.+[^/])$ $1/
 RewriteRule ^specification/$ spec.html
+RewriteRule ^snarm/$ myexp_snarm.owl
 RewriteRule ^base/$ myexp_base.owl
 RewriteRule ^attrib_credit/$ myexp_attrib_cred.owl
 RewriteRule ^annotations/$ myexp_annot.owl

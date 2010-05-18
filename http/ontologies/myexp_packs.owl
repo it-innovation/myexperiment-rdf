@@ -10,12 +10,14 @@
  <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
  <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
  <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
  <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
 ]>
 
 <rdf:RDF xml:base		="&mepack;"
          xmlns			="&mepack;"
 	 xmlns:mebase		="&mebase;"
+	 xmlns:meannot		="&meannot;"
          xmlns:rdf	 	="&rdf;"
          xmlns:rdfs		="&rdfs;"
          xmlns:owl		="&owl;"
@@ -35,7 +37,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">June 1, 2009</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">March 24, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -101,6 +103,22 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="&mebase;Upload">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Commentable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Favouritable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Rateable">
+      <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="&meannot;Taggable">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
 
@@ -182,6 +200,9 @@
     <rdfs:comment>A Pack of Contributions/remote urls</rdfs:comment>
     <owl:disjointWith rdf:resource="&mebase;Upload"/> 
     <rdfs:subClassOf rdf:resource="&mebase;Contribution" />
+    <rdfs:subClassOf rdf:resource="&meannot;Commentable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Taggable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Rateable"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&ore;aggregates" />

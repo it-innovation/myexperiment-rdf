@@ -32,7 +32,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">November 23, 2009</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">January 12, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -185,6 +185,7 @@
     <rdfs:subClassOf rdf:resource="Processor"/>
     <owl:disjointWith rdf:resource="BeanshellProcessor"/>
     <owl:disjointWith rdf:resource="DataflowProcessor"/>
+    <owl:disjointWith rdf:resource="ConstantProcessor"/>
     <owl:disjointWith rdf:resource="OtherProcessor"/>
     <rdfs:subClassOf>
       <owl:Restriction>
@@ -207,6 +208,7 @@
     <rdfs:subClassOf rdf:resource="Processor"/>
     <owl:disjointWith rdf:resource="WSDLProcessor"/>
     <owl:disjointWith rdf:resource="DataflowProcessor"/>
+    <owl:disjointWith rdf:resource="ConstantProcessor"/>
     <owl:disjointWith rdf:resource="OtherProcessor"/>
      <rdfs:subClassOf>
       <owl:Restriction>
@@ -223,6 +225,7 @@
     <rdfs:subClassOf rdf:resource="Processor"/>
     <owl:disjointWith rdf:resource="BeanshellProcessor"/>
     <owl:disjointWith rdf:resource="WSDLProcessor"/>
+    <owl:disjointWith rdf:resource="ConstantProcessor"/>
     <owl:disjointWith rdf:resource="OtherProcessor"/>
      <rdfs:subClassOf>
       <owl:Restriction>
@@ -233,6 +236,24 @@
     <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
   </owl:Class>
 
+  <owl:Class rdf:about="ConstantProcessor">
+    <rdfs:label>ConstantProcessor</rdfs:label>
+    <rdfs:comment>A Processor that performs the same process each time.  (E.g. a stringconstant processor just echoes the same string each time).</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="Processor"/>
+    <owl:disjointWith rdf:resource="BeanshellProcessor"/>
+    <owl:disjointWith rdf:resource="WSDLProcessor"/>
+    <owl:disjointWith rdf:resource="DataflowProcessor"/>
+    <owl:disjointWith rdf:resource="OtherProcessor"/>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="processor-value"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+
   <owl:Class rdf:about="OtherProcessor">
     <rdfs:label>OtherProcessor</rdfs:label>
     <rdfs:comment>A Processor that executes something else</rdfs:comment>
@@ -240,6 +261,7 @@
     <owl:disjointWith rdf:resource="WSDLProcessor"/>
     <owl:disjointWith rdf:resource="DataflowProcessor"/>
     <owl:disjointWith rdf:resource="BeanshellProcessor"/>
+    <owl:disjointWith rdf:resource="ConstantProcessor"/>
     <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
   </owl:Class>
 
@@ -391,6 +413,15 @@
     <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
   </owl:DatatypeProperty>
 
+  <owl:DatatypeProperty rdf:about="processor-value">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>processor-value</rdfs:label>
+    <rdfs:comment>A Processor may have a value that it represents</rdfs:comment>
+    <rdfs:domain rdf:resource="ConstantProcessor"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:DatatypeProperty>
+
   <owl:DatatypeProperty rdf:about="service-name">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
     <rdfs:label>service-name</rdfs:label>
@@ -403,7 +434,7 @@
   <owl:DatatypeProperty rdf:about="service-category">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
     <rdfs:label>service-category</rdfs:label>
-    <rdfs:comment>The service a Processor executes may have a cateofry</rdfs:comment>
+    <rdfs:comment>The service a Processor executes may have a category</rdfs:comment>
     <rdfs:domain rdf:resource="Processor"/>
     <rdfs:range rdf:resource="&xsd;string"/>
     <rdfs:isDefinedBy rdf:resource="&mecomp;"/>

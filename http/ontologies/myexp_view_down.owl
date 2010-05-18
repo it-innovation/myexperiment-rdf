@@ -86,18 +86,12 @@
   <!-- =============== myExperiment Entity Classes ================= -->
 
   <owl:Class rdf:about="Usage">
-    <rdfs:label>Download</rdfs:label>
+    <rdfs:label>Usage</rdfs:label>
     <rdfs:comment>A Usage of a Contribution, i.e. Viewing, Download, etc.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="&mebase;Annotation"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="user-agent" />
-        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="accessed-from-site" />
         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -190,15 +184,5 @@
     <rdfs:range rdf:resource="&xsd;string"/>
     <rdfs:isDefinedBy rdf:resource="&mevd;"/>
   </owl:DatatypeProperty>
-
-  <owl:DatatypeProperty rdf:about="accessed-from-site">
-    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-    <rdfs:label>accessed-from-site</rdfs:label>
-    <rdfs:comment>Was the Usage performed via the website</rdfs:comment>
-    <rdfs:domain rdf:resource="Usage"/>
-    <rdfs:range rdf:resource="&xsd;boolean"/>
-    <rdfs:isDefinedBy rdf:resource="&mevd;"/>
-  </owl:DatatypeProperty>
-
 
 </rdf:RDF>

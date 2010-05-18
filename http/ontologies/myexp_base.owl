@@ -39,7 +39,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">August 26, 2009</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">March 30, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
     <owl:imports rdf:resource="&snarm;"/>
   </owl:Ontology>
@@ -116,7 +116,7 @@
     <owl:inverseOf rdf:resource="&dcterms;hasVersion"/>
   </rdf:Description>
 
-   <rdf:Description rdf:about="&foaf;based-near">
+   <rdf:Description rdf:about="&foaf;based_near">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
   </rdf:Description>
 
@@ -237,6 +237,25 @@
       <owl:Restriction>
         <owl:onProperty rdf:resource="has-version" />
         <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Version">
+    <rdfs:label>Version</rdfs:label>
+    <rdfs:comment>A Contribution may be a Version of another Contribution</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="Interface"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="version-number" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;isVersionOf" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
@@ -448,25 +467,6 @@
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:Class>
 
- <owl:Class rdf:about="Version">
-    <rdfs:label>Version</rdfs:label>
-    <rdfs:comment>Some Contributions have Versions</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="Contribution"/>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="version-number" />
-        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&dcterms;isVersionOf" />
-        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
- </owl:Class>
-
   <!-- =============== myExperiment Entity Classes ================= -->
   
   <owl:Class rdf:about="Announcement">
@@ -540,12 +540,6 @@
     <owl:equivalentClass rdf:resource="&sioc;UserGroup"/>
     <owl:disjointWith rdf:resource="User"/>
     <rdfs:subClassOf rdf:resource="Actor" />
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&dcterms;created" />
-        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
      <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&sioc;has_owner" />
@@ -673,7 +667,7 @@
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="&foaf;based-near" />
+        <owl:onProperty rdf:resource="&foaf;based_near" />
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf> 
@@ -1085,7 +1079,7 @@
   <owl:DatatypeProperty rdf:about="receive-notifications">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
     <rdfs:label>receive-notifications</rdfs:label>
-    <rdfs:comment>Does the user receive-ntotifications</rdfs:comment>
+    <rdfs:comment>Does the user receive-notifications</rdfs:comment>
     <rdfs:domain rdf:resource="User"/>
     <rdfs:range rdf:resource="&xsd;boolean"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>

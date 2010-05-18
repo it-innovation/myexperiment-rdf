@@ -41,6 +41,7 @@
 	 xmlns:snarm	="&snarm;"
          xmlns:xsd      ="&xsd;"
 >
+
 <!-- ========================= Description ============================= -->
 
   <owl:Ontology rdf:about="&mespec;">
@@ -51,7 +52,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">February 19, 2009</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">March 31, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
     <owl:imports rdf:resource="&mebase;"/>
     <owl:imports rdf:resource="&meac;"/>
@@ -62,6 +63,7 @@
     <owl:imports rdf:resource="&mevd;"/>
     <owl:imports rdf:resource="&mecomp;"/>
   </owl:Ontology>
+
 
 <!-- ============= Annotation Properties =========== -->
 
@@ -93,7 +95,9 @@
     <rdf:type rdf:resource="&owl;AnnotationProperty"/>
   </rdf:Description>
 
+
 <!-- ====================== Specific Subclasses ======================== -->
+
   <owl:Class rdf:about="TavernaEnactor">
     <rdfs:label>TavernaEnactor</rdfs:label>
     <rdfs:comment>Specific Runners that enact Taverna workflows</rdfs:comment>
@@ -101,24 +105,29 @@
     <rdfs:isDefinedBy rdf:resource="&mespec;"/>
   </owl:Class>
 
-<!-- ================ human-start-page for snarm:Policy ================ -->
- <rdf:Description rdf:about="&snarm;Policy">
-   <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;human-start-page" />
-        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
-      </owl:Restriction>
-   </rdfs:subClassOf>
- </rdf:Description>
+<!-- ================ Retroactive assignments to classes ================ -->
+
+  <rdf:Description rdf:about="&mebase;Group">
+    <rdfs:subClassOf rdf:resource="&meannot;Commentable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Taggable"/>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="&mebase;AbstractWorkflow">
+    <rdfs:subClassOf rdf:resource="&meexp;Runnable"/>
+  </rdf:Description>
+
 
 <!-- ========================== Accessers ============================== -->
+
   <snarm:Accesser rdf:about="Friends">
     <dcterms:title>Friends</dcterms:title>
     <dcterms:description>Anyone that the Contribution creator has a accepted Friendship with</dcterms:description>
     <rdfs:isDefinedBy rdf:resource="&mespec;"/>
   </snarm:Accesser>
 
+
 <!-- ======================== Access Types ============================= -->
+
   <snarm:AccessType rdf:about="View">
     <dcterms:title rdf:datatype="&xsd;string">View a myExperiment Contribution</dcterms:title>
     <rdfs:isDefinedBy rdf:resource="&mespec;"/>
@@ -134,13 +143,9 @@
     <rdfs:isDefinedBy rdf:resource="&mespec;"/>
   </snarm:AccessType>
 
-  <snarm:AccessType rdf:about="Use">
-    <dcterms:title rdf:datatype="&xsd;string">Use a myExperiment Web service Contribution</dcterms:title>
-    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
-  </snarm:AccessType>
-
 
 <!-- ======================= Access Options ============================ -->
+
   <snarm:Access rdf:about="PublicView">
     <dcterms:title rdf:datatype="&xsd;string">Anyone can view</dcterms:title>
     <snarm:has-access-type rdf:resource="View"/>
@@ -150,12 +155,6 @@
   <snarm:Access rdf:about="PublicDownload">
     <dcterms:title rdf:datatype="&xsd;string">Anyone can Download</dcterms:title>
     <snarm:has-access-type rdf:resource="Download"/>
-    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
-  </snarm:Access>
-
-  <snarm:Access rdf:about="PublicUse">
-    <dcterms:title rdf:datatype="&xsd;string">Anyone can Use</dcterms:title>
-    <snarm:has-access-type rdf:resource="Use"/>
     <rdfs:isDefinedBy rdf:resource="&mespec;"/>
   </snarm:Access>
 
@@ -180,15 +179,9 @@
     <rdfs:isDefinedBy rdf:resource="&mespec;"/>
   </snarm:RestrictedAccess>
 
-  <snarm:Access rdf:about="FriendsUse">
-    <dcterms:title rdf:datatype="&xsd;string">Friends can Use</dcterms:title>
-    <snarm:has-accesser rdf:resource="Friends"/>
-    <snarm:has-access-type rdf:resource="Use"/>
-    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
-  </snarm:Access>
-
 
 <!-- ===================== Anonymous User ============================ -->
+
 <mebase:User rdf:about="AnonymousUser">
   <sioc:name>Anonymous User</sioc:name>
   <dcterms:created rdf:datatype="&xsd;dateTime">1970-01-01T00:00:00</dcterms:created>
@@ -196,74 +189,5 @@
   <rdfs:isDefinedBy rdf:resource="&mespec;"/>
 </mebase:User>
 
-<!-- ======================== Licenses =============================== -->
-<rdf:Description rdf:about="&cc;License">
-  <rdf:type rdf:resource="&owl;Class"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;Reproduction">
-  <rdf:type rdf:resource="&owl;Thing"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;Distribution">
-  <rdf:type rdf:resource="&owl;Thing"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;Notice">
-  <rdf:type rdf:resource="&owl;Thing"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;Attribution">
-  <rdf:type rdf:resource="&owl;Thing"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;DerivativeWorks">
-  <rdf:type rdf:resource="&owl;Thing"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;ShareAlike">
-  <rdf:type rdf:resource="&owl;Thing"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;permits">
-  <rdf:type rdf:resource="&owl;ObjectProperty"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;requires">
-  <rdf:type rdf:resource="&owl;ObjectProperty"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="&cc;prohibits">
-  <rdf:type rdf:resource="&owl;ObjectProperty"/>
-</rdf:Description>
-
-
-<cc:License rdf:about="http://creativecommons.org/licenses/by-nd/3.0/">
-   <cc:permits rdf:resource="&cc;Reproduction" />
-   <cc:permits rdf:resource="&cc;Distribution" />
-   <cc:requires rdf:resource="&cc;Notice" />
-   <cc:requires rdf:resource="&cc;Attribution" />
-   <cc:prohibits rdf:resource="&cc;DerivativeWorks" />
-   <rdfs:isDefinedBy rdf:resource="&mespec;"/>
-</cc:License>
-
-<cc:License rdf:about="http://creativecommons.org/licenses/by-sa/3.0/">
-   <cc:permits rdf:resource="&cc;Reproduction" />
-   <cc:permits rdf:resource="&cc;Distribution" />
-   <cc:requires rdf:resource="&cc;Notice" />
-   <cc:requires rdf:resource="&cc;Attribution" />
-   <cc:permits rdf:resource="&cc;DerivativeWorks" />
-   <cc:requires rdf:resource="&cc;ShareAlike" />
-   <rdfs:isDefinedBy rdf:resource="&mespec;"/>
-</cc:License>
-
-<cc:License rdf:about="http://creativecommons.org/licenses/by/3.0/">
-   <cc:permits rdf:resource="&cc;Reproduction" />
-   <cc:permits rdf:resource="&cc;Distribution" />
-   <cc:requires rdf:resource="&cc;Notice" />
-   <cc:requires rdf:resource="&cc;Attribution" />
-   <cc:permits rdf:resource="&cc;DerivativeWorks" />
-   <rdfs:isDefinedBy rdf:resource="&mespec;"/>
-</cc:License>
 </rdf:RDF>
 
