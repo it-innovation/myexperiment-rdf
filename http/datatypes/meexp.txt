@@ -1,0 +1,11 @@
+meexp:job-uri anyURI
+meexp:last-status string
+meexp:job-manifest string
+meexp:completed-at dateTime
+meexp:last-status-at dateTime
+meexp:inputs-uri anyURI
+meexp:started-at dateTime
+meexp:submitted-at dateTime
+meexp:runner-url anyURI
+meexp:inputs-data string
+meexp:outputs-uri anyURI

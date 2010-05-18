@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/snarm#'>
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+]>
+
+<rdf:RDF xml:base               ="&meac;" 
+         xmlns			="&meac;"
+	 xmlns:mebase		="&mebase;"
+         xmlns:rdf	 	="&rdf;"
+         xmlns:rdfs		="&rdfs;"
+         xmlns:owl		="&owl;"
+         xmlns:dc		="&dc;"
+	 xmlns:dcterms	        ="&dcterms;"
+	 xmlns:snarm    	="&snarm;"
+         xmlns:xsd		="&xsd;"
+>
+  <!-- =============== Description ==================== -->
+
+  <owl:Ontology rdf:about="&meac;">
+    <rdfs:label>myExperiment Attribution &amp; Creditation v1.0</rdfs:label>
+    <rdfs:comment>This allows contributions to give attribution to earlier contributions and pay credit to users and groups involved in their creation.</rdfs:comment>
+    <dc:language>en</dc:language>
+    <dc:title xml:lang="en">The myExperiment Attribution &amp; Creditation ontology</dc:title>
+    <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
+    <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">January 28, 2009</dc:date>
+    <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
+  </owl:Ontology>
+
+<!-- ============= Annotation Properties =========== -->
+
+  <rdf:Description rdf:about="&dc;language">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;title">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;creator">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;contributor">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;publisher">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;date">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;format">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+
+  <!-- ========= OWL-DL Compliance statements ======== -->  
+
+  <rdf:Description rdf:about="&dcterms;modified">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Contribution">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Interface">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Actor">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Announcement">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Submission">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Message">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Request">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+
+  <!-- ====================== Interfaces ====================== -->
+
+  <owl:Class rdf:about="Attributable">
+    <rdfs:label>Attributable</rdfs:label>
+    <rdfs:comment>An object can be attributed to another object</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Interface"/>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Creditable">
+    <rdfs:label>Creditable</rdfs:label>
+    <rdfs:comment>An object can be credited to someone</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Interface"/>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:Class>
+
+
+  <!-- =============== myExperiment Entity Classes ================= -->
+
+   <owl:Class rdf:about="Attribution">
+    <rdfs:label>Attribution</rdfs:label>
+    <rdfs:comment>An Attribution to a Contribution from another Contribution</rdfs:comment>
+    <owl:disjointWith rdf:resource="&mebase;Request"/>
+    <owl:disjointWith rdf:resource="&mebase;Announcement"/>
+    <owl:disjointWith rdf:resource="&mebase;Contribution"/>
+    <owl:disjointWith rdf:resource="&mebase;Message"/>
+    <owl:disjointWith rdf:resource="Creditation"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Submission"/> 
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="has-attributable" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="attributes" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;modified" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Creditation">
+    <rdfs:label>Creditation</rdfs:label>
+    <rdfs:comment>A Creditation from a Contribution to an Actor</rdfs:comment>
+    <owl:disjointWith rdf:resource="&mebase;Request"/>
+    <owl:disjointWith rdf:resource="&mebase;Announcement"/>
+    <owl:disjointWith rdf:resource="&mebase;Contribution"/>
+    <owl:disjointWith rdf:resource="&mebase;Message"/>
+    <owl:disjointWith rdf:resource="Attribution"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Submission"/>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="has-creditable" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="credits" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;modified" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:Class>
+
+  <!-- =============== Object Properties ============== -->
+
+  <owl:ObjectProperty rdf:about="has-attribution">
+    <rdfs:label>has-attribution</rdfs:label>
+    <rdfs:comment>An Attributable has an attribution for another Attributable</rdfs:comment>
+    <rdfs:domain rdf:resource="Attributable"/>
+    <rdfs:range rdf:resource="Attributable"/>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-attributable">
+    <rdfs:label>has-attributable</rdfs:label>
+    <rdfs:comment>An Attribution has an Atrributable</rdfs:comment>
+    <rdfs:domain rdf:resource="Attribution"/>
+    <rdfs:range rdf:resource="Attributable"/>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="attributes">
+    <rdfs:label>attributes</rdfs:label>
+    <rdfs:comment>An Attribution attributes an Attributable object</rdfs:comment>
+    <rdfs:domain rdf:resource="Attribution"/>
+    <rdfs:range rdf:resource="Attributable"/>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="gives-credit-to">
+    <rdfs:label>gives-credit-to</rdfs:label>
+    <rdfs:comment>A Creditable gives credit to an Actor</rdfs:comment>
+    <rdfs:domain rdf:resource="Creditable"/>
+    <rdfs:range rdf:resource="&mebase;Actor"/>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="credits">
+    <rdfs:label>credits</rdfs:label>
+    <rdfs:comment>A Creditation credits an Actor</rdfs:comment>
+    <rdfs:domain rdf:resource="Creditation"/>
+    <rdfs:range rdf:resource="&mebase;Actor"/>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-creditable">
+    <rdfs:label>has-creditable</rdfs:label>
+    <rdfs:comment>A Creditation has-creditable</rdfs:comment>
+    <rdfs:domain rdf:resource="Creditation"/>
+    <rdfs:range rdf:resource="Creditable"/>
+    <rdfs:isDefinedBy rdf:resource="&meac;"/>
+  </owl:ObjectProperty>
+
+</rdf:RDF>

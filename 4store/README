@@ -1,0 +1,6 @@
+README
+======
+
+1. Make sure that all the folders and directories in your datapath chmodded to 660 with the group set to the web group, (e.g. apache or www).
+2. Make sure all the files in your script directory are chmodded to 770 with the group set to the web group, (e.g. apache or www).
+3. Run scripts/CreateLogFiles.sh

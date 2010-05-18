@@ -1,0 +1,43 @@
+RewriteEngine On
+
+RewriteRule ^css/(.*)$ css/$1 [L]
+RewriteRule ^img/(.*)$ img/$1 [L]
+RewriteRule ^js/(.*)$ js/$1 [L]
+
+RewriteRule ^snarm_explained/?$ snarm_explained.php
+RewriteRule ^current/spec/?$ current_spec.php
+RewriteRule ^generic/spec/?$ generic_spec.php
+RewriteRule ^upload_specs/?$ upload_specs.php
+RewriteRule ^urlencoder/?$ urlencoder.php
+RewriteRule ^swbrowsers/?$ swbrowsers.php
+
+
+RewriteRule ^sparql/?$ sparql.php
+RewriteRule ^howtosparql/?$ howtosparql.php
+
+RewriteRule ^ORE/?$ ore.php
+RewriteRule ^guide/?$ guide.php
+RewriteRule ^Aggregation/([a-zA-Z]+)/([0-9]+)/?$ oreredirect.php?type=$1&id=$2
+RewriteRule ^ResourceMap/([a-zA-Z]+)/([0-9]+)/?$ xmlgen.php?format=ore&type=$1&id=$2
+RewriteRule ^SplashPage/([a-zA-Z]+)/([0-9]+)/?$ splashpage.php?type=$1&id=$2
+RewriteRule ^AtomEntry/([a-zA-Z]+)/([0-9]+)/?$ atomentry.php?type=$1&id=$2
+RewriteRule ^AtomFeed/([a-zA-Z]+)/([0-9]+)/?$ atomfeed.php?type=$1&id=$2&limit=50
+RewriteRule ^AtomFeed/([a-zA-Z]+)/?$ atomfeed.php?type=$1&limit=50
+RewriteRule ^([a-z_]+)/([0-9A-F]+)/([^~]+)$ extractrdf.php?type=$1&id=$2&params=$3
+RewriteRule ^([a-z_]+)/([0-9a-zA-Z_]+)$ xmlgen.php?type=$1&id=$2
+RewriteRule ^([a-z_]+)/$ xmlgen.php?type=$1
+
+<Files ~ "private|current|upload_specs">
+  	Order deny,allow
+ 	Deny from all
+ 	AuthName "Secure myExperiment Area"
+  	AuthUserFile /var/www/html/rdf/.htpass
+  	AuthType Basic
+  	Require valid-user
+  	allow from 127.0.0.1
+        Satisfy Any
+</Files>
+
+<FilesMatch "ExperimentAtomFeed">
+	ForceType application/atom+xml
+</FilesMatch> 

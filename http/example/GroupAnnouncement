@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY dc  'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms  'http://purl.org/dc/terms/'>
+ <!ENTITY cc  'http://web.resource.org/cc/'>
+ <!ENTITY foaf  'http://purl.org/dc/terms/'>
+ <!ENTITY sioc  'http://rdfs.org/sioc/ns#'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/snarm#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+
+]>
+
+<rdf:RDF xmlns:mebase   ="&mebase;"
+         xmlns:meac     ="&meac;"
+         xmlns:meannot  ="&meannot;"
+         xmlns:mepack   ="&mepack;"
+         xmlns:meexp    ="&meexp;"
+         xmlns:mecontrib="&mecontrib;"
+         xmlns:mevd     ="&mevd;"
+         xmlns:mespec   ="&mespec;"
+         xmlns:rdf      ="&rdf;"
+         xmlns:dc       ="&dc;"
+         xmlns:dcterms  ="&dcterms;"
+         xmlns:cc       ="&cc;"
+         xmlns:foaf     ="&foaf;"
+         xmlns:sioc     ="&sioc;"
+         xmlns:snarm    ="&snarm;"
+         xmlns:xsd      ="&xsd;"
+>
+  <mebase:GroupAnnouncement rdf:about="http://rdf.myexperiment.org/example/GroupAnnouncement">
+    <mebase:human-start-page rdf:resource="http://www.myexperiment.org/groups/64/announcements/10" />
+    <dcterms:title rdf:datatype="&xsd;string">FLOSShub: new FLOSS research resource portal</dcterms:title>
+    <mebase:announced-to rdf:resource="http://rdf.myexperiment.org/Group/64" />
+    <mebase:has-announcer rdf:resource="http://rdf.myexperiment.org/User/384" />
+    <mebase:public-announcement rdf:datatype="&xsd;boolean">1</mebase:public-announcement>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-01-22T16:21:37</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-01-22T16:21:37</dcterms:modified>
+    <mebase:text rdf:datatype="&xsd;string">&lt;p&gt;&lt;a href=&quot;http://www.flosshub.org&quot;&gt;FLOSShub&lt;/a&gt; is a one-stop source for free/libre and open source software research resources. Bringing together the distributed expertise of FLOSS developers and researchers around the world, FLOSShub provides a portal to people, papers, data, and know-how.&lt;/p&gt;
+&lt;p&gt;Please feel free to take advantage of the resources available on FLOSShub, and we welcome contributions of your favorite FLOSS resources.&lt;/p&gt;</mebase:text>
+  </mebase:GroupAnnouncement>
+
+</rdf:RDF>

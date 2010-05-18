@@ -1,0 +1,4 @@
+meq:from-term-with-id positiveInteger
+meq:has-term-id positiveInteger
+
+

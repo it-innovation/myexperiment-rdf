@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE feed [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>myExperiment Atom Feed for Experiment 20</title>
+ <link href="http://rdf.myexperiment.org/AtomFeed/Experiment/20" rel="self"/>
+ <link href="http://www.myexperiment.org/"/>
+ <updated>2009-04-02T12:10:31Z</updated>
+ <author>
+   <name>myExperiment</name>
+   <email>enquiries@myexperiment.org</email>
+ </author>
+ <id>http://rdf.myexperiment.org/AtomFeed/Experiment</id>
+
+
+<atom:entry
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:cc="http://web.resource.org/cc/"
+    xmlns:sioc="http://rdfs.org/sioc/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:ore="http://www.openarchives.org/ore/terms/"
+    xmlns:oreatom="http://www.openarchives.org/ore/atom/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:snarm="http://rdf.myexperiment.org/ontologies/snarm/"
+    xmlns:mebase="&mebase;"
+    xmlns:meac="&meac;"
+    xmlns:meannot="&meannot;"
+    xmlns:mepack="&mepack;"
+    xmlns:meexp="&meexp;"
+    xmlns:mecontrib="&mecontrib;"
+    xmlns:mevd="&mevd;"
+    xmlns:mecomp="&mecomp;"
+    xmlns:mespec="&mespec;"
+    xmlns:grddl="http://www.w3.org/2003/g/data-view#"
+    grddl:transformation="http://www.openarchives.org/ore/atom/atom-grddl.xsl">
+
+  <atom:id>tag:rdf.myexperiment.org,2009:Job:67</atom:id>
+
+  <atom:link href="http://rdf.myexperiment.org/Aggregation/Job/67" rel="http://www.openarchives.org/ore/terms/describes"/>
+
+  <atom:author>
+    <atom:name>Don Cruickshank</atom:name>
+    <atom:email>dgc@ecs.soton.ac.uk</atom:email>
+  </atom:author>
+
+  <atom:title>Job_20080910-1323_Don Cruickshank</atom:title>
+
+  <atom:summary type="html"></atom:summary>
+ 
+  <atom:link href="http://rdf.myexperiment.org/ResourceMap/Job/67" rel="http://www.openarchives.org/ore/terms/isDescribedBy" type="application/rdf+xml"/>
+
+  <atom:link href="http://rdf.myexperiment.org/SplashPage/Job/67" rel="alternate"/>
+
+  <atom:category term="http://www.openarchives.org/ore/terms/Aggregation" scheme="http://www.openarchives.org/ore/terms/" label="Aggregation"/>
+
+  <atom:category term="2008-09-10T13:24:13Z" scheme="http://www.openarchives.org/ore/atom/created"/>
+  <atom:category term="2009-01-30T14:45:14Z" scheme="http://www.openarchives.org/ore/atom/modified"/>
+
+  <atom:link href="http://rdf.myexperiment.org/AtomEntry/Job/67" rel="self" type="application/atom+xml"/>
+
+  <atom:published>2008-09-10T13:24:13Z</atom:published>
+  <atom:updated>2009-01-30T14:45:14Z</atom:updated>
+
+  <atom:link href="http://creativecommons.org/licenses/by-nc/2.5/" rel="license" type="application/rdf+xml"/>
+  <atom:rights>This Resource Map is available under the Creative Commons Attribution-Noncommercial 2.5 Generic license</atom:rights>
+
+  <atom:source>
+    <atom:author>
+      <atom:name>myExperiment Mothership RDF Generator</atom:name>
+      <atom:uri>http://rdf.myexperiment.org/</atom:uri>
+    </atom:author>
+    <atom:id>rdf.myexperiment.org,2009:Job</atom:id>
+    <atom:link href="http://rdf.myexperiment.org/AtomFeed/Job" rel="self" type="application/atom+xml"/>
+    <atom:updated></atom:updated>
+    <atom:title>myExperiment Job Feed</atom:title>
+  </atom:source>
+  <atom:link href="http://www.myexperiment.org//experiments/20/jobs/67/edit" rel="edit"/>
+
+  <oreatom:triples>
+  <meexp:Job rdf:about="http://rdf.myexperiment.org/Aggregation/Job/67">
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/experiments/20/jobs/67" />
+    <ore:isDescribedBy rdf:resource="http://rdf.myexperiment.org/ResourceMap/Job/67" />
+    <ore:isDescribedBy rdf:resource="http://rdf.myexperiment.org/AtomEntry/Job/67" />
+    <dcterms:title rdf:datatype="&xsd;string">Job_20080910-1323_Don Cruickshank</dcterms:title>
+    <ore:isAggregatedBy rdf:resource="http://rdf.myexperiment.org/Experiment/20" />
+    <sioc:has_owner rdf:resource="http://rdf.myexperiment.org/User/22" />
+    <ore:aggregates rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517" />
+    <ore:aggregates rdf:resource="http://rdf.myexperiment.org/TavernaEnactor/5" />
+    <meexp:submitted-at rdf:datatype="&xsd;dateTime">2008-09-10T13:24:38Z</meexp:submitted-at>
+    <meexp:started-at rdf:datatype="&xsd;dateTime">2008-09-10T14:24:38Z</meexp:started-at>
+    <meexp:completed-at rdf:datatype="&xsd;dateTime">2008-09-10T14:25:40Z</meexp:completed-at>
+    <meexp:last-status rdf:datatype="&xsd;string">COMPLETE</meexp:last-status>
+    <meexp:last-status-at rdf:datatype="&xsd;dateTime">2009-01-30T14:45:14Z</meexp:last-status-at>
+    <ore:aggregates rdf:resource="http://rdf.myexperiment.org/http://aida.science.uva.nl:9999/remotetaverna/v1/jobs/f1ae6518-134c-467a-9b93-ff922fa586d0" />
+<ore:aggregates rdf:resource="http://rdf.myexperiment.org/Job/67/Input"/>
+<ore:aggregates rdf:resource="http://rdf.myexperiment.org/Job/67/Output"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-09-10T13:24:13Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-01-30T14:45:14Z</dcterms:modified>
+  </meexp:Job>
+
+    <rdf:Description rdf:about="http://www.myexperiment.org/experiments/20/jobs/67">
+      <dcterms:format rdf:datatype="&xsd;string">text/xhtml+xml</dcterms:format>
+      <dcterms:title rdf:datatype="&xsd;string">Human Start Page for Job_20080910-1323_Don Cruickshank</dcterms:title>
+    </rdf:Description>
+
+  <mecontrib:WorkflowVersion rdf:about="http://rdf.myexperiment.org/WorkflowVersion/517">
+    <dcterms:title rdf:datatype="&xsd;string">BioAID_ProteinDiscovery_filterOnHumanUniprot_perDoc_html</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This workflow finds proteins relevant to the query string via the following steps: 1. A user query: a single gene/protein name. E.g.: (EZH2 OR &amp;quot;Enhancer of Zeste&amp;quot;). 2. Retrieve documents: finds &apos;maximumNumberOfHits&apos; relevant documents (abstract+title) based on query (the AIDA service inside is based on Apache&apos;s Lucene) 3. Discover proteins: extract proteins discovered in the set of relevant abstracts with a &apos;named entity recognizer&apos; trained on genomic terms using a Bayesian approach; the AIDA service inside is based on LingPipe. This subworkflow also &apos;filters&apos; false positives from the discovered protein by requiring a discovery has a valid UniProt ID. Martijn Schuemie&apos;s service to do that contains only human UniProt IDs, which is why this workflow only works for human proteins.  Workflow by Marco Roos (AID = Adaptive Information Disclosure, University of Amsterdam; http://adaptivedisclosure.org)  Text mining services by Sophia Katrenko and Edgar Meij (AID), and Martijn Schuemie (BioSemantics, Erasmus University Rotterdam).  Changes to our original BioAID_DiseaseDiscovery workflow:    * Stops at protein discovery    * Use of Martijn Schuemie&apos;s synsets service to        * add synonyms to the query.        * provide uniprot ids to discovered proteins        * filter false positive discoveries, only proteins with a uniprot id go through; this introduces some false negatives (e.g. discovered proteins with a name shorter than 3 characters)    * Counting of results in various ways, but no outputs defined in this simplified workflow.    * Output into simple html table.&lt;/p&gt;</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://rdf.myexperiment.org/ContentType/1" />
+    <dcterms:isVersionOf rdf:resource="http://rdf.myexperiment.org/Workflow/154" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">8</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">0</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://rdf.myexperiment.org/User/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-02-29T01:34:46Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-10-29T09:29:36Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">bioaid_proteindiscovery_filteronhumanuniprot_perdoc_html_14081</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://rdf.myexperiment.org/ResourceMap/WorkflowVersion/517" />
+    <ore:isDescribedBy rdf:resource="http://rdf.myexperiment.org/AtomEntry/WorkflowVersion/517" />
+    <mebase:human-start-page rdf:resource="http://www.myexperiment.org/workflows/154?version=8" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/154/download/bioaid_proteindiscovery_filteronhumanuniprot_perdoc_html_14081.xml?version=8" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/version/image/517/ProteinDiscoveryWorkflowGraphic.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/version/image/517/thumb/ProteinDiscoveryWorkflowGraphic.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/version/image/517/medium/ProteinDiscoveryWorkflowGraphic.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/version/svg/517/bioaid_proteindiscovery_filteronhumanuniprot_perdoc_html_14081_8.svg.xml" />
+    <cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+    <mebase:last-edited-by rdf:resource="http://rdf.myexperiment.org/User/18" />
+    <mebase:has-policy>
+      <snarm:Policy rdf:about="http://rdf.myexperiment.org/Policy/363">
+  <mebase:human-start-page rdf:resource="http://www.myexperiment.org/policies/363"/>
+        <snarm:has-access>
+          <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/Access/ViewUser18">
+            <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/User/18"/>
+            <snarm:has-access-type rdf:resource="&mespec;View"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access>
+          <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/Access/DownloadUser18">
+            <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/User/18"/>
+            <snarm:has-access-type rdf:resource="&mespec;Download"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access>
+          <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/EditUser18">
+            <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/User/18"/>
+            <snarm:has-access-type rdf:resource="&mespec;Edit"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access rdf:resource="&mespec;PublicView"/>
+        <snarm:has-access rdf:resource="&mespec;PublicDownload"/>
+      <snarm:has-access>
+        <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/Access/ViewGroup62">
+          <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/Group/62"/>
+          <snarm:has-access-type rdf:resource="&mespec;View"/>
+        </snarm:RestrictedAccess>
+      </snarm:has-access>
+      <snarm:has-access>
+        <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/Access/DownloadGroup62">
+          <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/Group/62"/>
+          <snarm:has-access-type rdf:resource="&mespec;Download"/>
+        </snarm:RestrictedAccess>
+      </snarm:has-access>
+      <snarm:has-access>
+        <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/Access/EditGroup62">
+          <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/Group/62"/>
+          <snarm:has-access-type rdf:resource="&mespec;Edit"/>
+        </snarm:RestrictedAccess>
+      </snarm:has-access>
+      <snarm:has-access>
+        <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/Access/ViewGroup42">
+          <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/Group/42"/>
+          <snarm:has-access-type rdf:resource="&mespec;View"/>
+        </snarm:RestrictedAccess>
+      </snarm:has-access>
+      <snarm:has-access>
+        <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/Access/DownloadGroup42">
+          <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/Group/42"/>
+          <snarm:has-access-type rdf:resource="&mespec;Download"/>
+        </snarm:RestrictedAccess>
+      </snarm:has-access>
+      <snarm:has-access>
+        <snarm:RestrictedAccess rdf:about="http://rdf.myexperiment.org/Policy/363/Access/EditGroup42">
+          <snarm:has-accesser rdf:resource="http://rdf.myexperiment.org/Group/42"/>
+          <snarm:has-access-type rdf:resource="&mespec;Edit"/>
+        </snarm:RestrictedAccess>
+      </snarm:has-access>
+      </snarm:Policy>
+    </mebase:has-policy>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/1"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/29"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/32"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/35"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/36"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/39"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/41"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/44"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/46"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/52"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/54"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/56"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/57"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/60"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/62"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/65"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/67"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/69"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/70"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/71"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/73"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/74"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/77"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/78"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/79"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/82"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/83"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/84"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/2"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/3"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/4"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/28"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/31"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/34"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/36"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/38"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/41"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/43"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/46"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/47"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/49"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/51"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/53"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/56"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/57"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/59"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/62"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/64"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/67"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/69"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/70"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/71"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/72"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/74"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/76"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/81"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/83"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/5"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/6"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/7"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/8"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/9"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/10"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/11"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/12"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/13"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/14"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/15"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/16"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/17"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/18"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/19"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/20"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/21"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/22"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/23"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/24"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/25"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/26"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/27"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/30"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/33"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/36"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/37"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/40"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/42"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/45"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/47"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/48"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/50"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/53"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/55"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/57"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/58"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/61"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/63"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/66"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/68"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/70"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/71"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/72"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/74"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/75"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/78"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/79"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/80"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/83"/>
+    <mecomp:has-component rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517/Component/84"/>
+  </mecontrib:WorkflowVersion>
+
+
+  <mespec:TavernaEnactor rdf:about="http://rdf.myexperiment.org/TavernaEnactor/5">
+    <mebase:human-start-page rdf:resource="http://www.myexperiment.org/runners/5" />
+    <dcterms:title rdf:datatype="&xsd;string">aida runner</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">aida runner</dcterms:description>
+    <sioc:has_owner rdf:resource="http://rdf.myexperiment.org/Group/62" />
+    <meexp:runner-url rdf:datatype="&xsd;anyURI">http://aida.science.uva.nl:9999/remotetaverna/v1/</meexp:runner-url>
+    <mebase:username rdf:datatype="&xsd;string">marco</mebase:username>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-04-10T16:05:45Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-12-03T11:20:58Z</dcterms:modified>
+  </mespec:TavernaEnactor>
+
+
+  <rdf:Description rdf:about="http://aida.science.uva.nl:9999/remotetaverna/v1/jobs/f1ae6518-134c-467a-9b93-ff922fa586d0">
+    <dcterms:title>Server URI for Job</dcterms:title>
+  </rdf:Description>
+
+<meexp:Data rdf:about="http://rdf.myexperiment.org/Job/67/Input">
+        <mebase:uri rdf:resource="http://aida.science.uva.nl:9999/remotetaverna/v1/data/d782bc1b-9a2e-4a80-a71e-21e19a643470"/>
+        <mebase:text rdf:datatype="&xsd;string">--- 
+query_protein: P53
+</mebase:text>
+      </meexp:Data>
+      <meexp:Data rdf:about="http://rdf.myexperiment.org/Job/67/Output">
+        <mebase:uri rdf:resource="http://aida.science.uva.nl:9999/remotetaverna/v1/data/578c39d6-4a94-494b-81ac-a520e00eeac6"/>
+      </meexp:Data>
+  </oreatom:triples>
+
+</atom:entry>
+<atom:entry
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:cc="http://web.resource.org/cc/"
+    xmlns:sioc="http://rdfs.org/sioc/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:ore="http://www.openarchives.org/ore/terms/"
+    xmlns:oreatom="http://www.openarchives.org/ore/atom/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:snarm="http://rdf.myexperiment.org/ontologies/snarm/"
+    xmlns:mebase="&mebase;"
+    xmlns:meac="&meac;"
+    xmlns:meannot="&meannot;"
+    xmlns:mepack="&mepack;"
+    xmlns:meexp="&meexp;"
+    xmlns:mecontrib="&mecontrib;"
+    xmlns:mevd="&mevd;"
+    xmlns:mecomp="&mecomp;"
+    xmlns:mespec="&mespec;"
+    xmlns:grddl="http://www.w3.org/2003/g/data-view#"
+    grddl:transformation="http://www.openarchives.org/ore/atom/atom-grddl.xsl">
+
+  <atom:id>tag:rdf.myexperiment.org,2009:Job:66</atom:id>
+
+  <atom:link href="http://rdf.myexperiment.org/Aggregation/Job/66" rel="http://www.openarchives.org/ore/terms/describes"/>
+
+  <atom:author>
+    <atom:name>Don Cruickshank</atom:name>
+    <atom:email>dgc@ecs.soton.ac.uk</atom:email>
+  </atom:author>
+
+  <atom:title>Job_20080910-1319_Don Cruickshank</atom:title>
+
+  <atom:summary type="html"></atom:summary>
+ 
+  <atom:link href="http://rdf.myexperiment.org/ResourceMap/Job/66" rel="http://www.openarchives.org/ore/terms/isDescribedBy" type="application/rdf+xml"/>
+
+  <atom:link href="http://rdf.myexperiment.org/SplashPage/Job/66" rel="alternate"/>
+
+  <atom:category term="http://www.openarchives.org/ore/terms/Aggregation" scheme="http://www.openarchives.org/ore/terms/" label="Aggregation"/>
+
+  <atom:category term="2008-09-10T13:20:23Z" scheme="http://www.openarchives.org/ore/atom/created"/>
+  <atom:category term="2008-09-10T13:21:05Z" scheme="http://www.openarchives.org/ore/atom/modified"/>
+
+  <atom:link href="http://rdf.myexperiment.org/AtomEntry/Job/66" rel="self" type="application/atom+xml"/>
+
+  <atom:published>2008-09-10T13:20:23Z</atom:published>
+  <atom:updated>2008-09-10T13:21:05Z</atom:updated>
+
+  <atom:link href="http://creativecommons.org/licenses/by-nc/2.5/" rel="license" type="application/rdf+xml"/>
+  <atom:rights>This Resource Map is available under the Creative Commons Attribution-Noncommercial 2.5 Generic license</atom:rights>
+
+  <atom:source>
+    <atom:author>
+      <atom:name>myExperiment Mothership RDF Generator</atom:name>
+      <atom:uri>http://rdf.myexperiment.org/</atom:uri>
+    </atom:author>
+    <atom:id>rdf.myexperiment.org,2009:Job</atom:id>
+    <atom:link href="http://rdf.myexperiment.org/AtomFeed/Job" rel="self" type="application/atom+xml"/>
+    <atom:updated></atom:updated>
+    <atom:title>myExperiment Job Feed</atom:title>
+  </atom:source>
+  <atom:link href="http://www.myexperiment.org//experiments/20/jobs/66/edit" rel="edit"/>
+
+  <oreatom:triples>
+  <meexp:Job rdf:about="http://rdf.myexperiment.org/Aggregation/Job/66">
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/experiments/20/jobs/66" />
+    <ore:isDescribedBy rdf:resource="http://rdf.myexperiment.org/ResourceMap/Job/66" />
+    <ore:isDescribedBy rdf:resource="http://rdf.myexperiment.org/AtomEntry/Job/66" />
+    <dcterms:title rdf:datatype="&xsd;string">Job_20080910-1319_Don Cruickshank</dcterms:title>
+    <ore:isAggregatedBy rdf:resource="http://rdf.myexperiment.org/Experiment/20" />
+    <sioc:has_owner rdf:resource="http://rdf.myexperiment.org/User/22" />
+    <ore:aggregates rdf:resource="http://rdf.myexperiment.org/WorkflowVersion/517" />
+    <ore:aggregates rdf:resource="http://rdf.myexperiment.org/TavernaEnactor/3" />
+    <ore:aggregates rdf:resource="http://rdf.myexperiment.org/" />
+<ore:aggregates rdf:resource="http://rdf.myexperiment.org/Job/66/Input"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-09-10T13:20:23Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-09-10T13:21:05Z</dcterms:modified>
+  </meexp:Job>
+
+    <rdf:Description rdf:about="http://www.myexperiment.org/experiments/20/jobs/66">
+      <dcterms:format rdf:datatype="&xsd;string">text/xhtml+xml</dcterms:format>
+      <dcterms:title rdf:datatype="&xsd;string">Human Start Page for Job_20080910-1319_Don Cruickshank</dcterms:title>
+    </rdf:Description>
+
+  <mespec:TavernaEnactor rdf:about="http://rdf.myexperiment.org/TavernaEnactor/3">
+    <mebase:human-start-page rdf:resource="http://www.myexperiment.org/runners/3" />
+    <dcterms:title rdf:datatype="&xsd;string">Test runner for AID</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">Test runner for testing the run option of myExperiment for AID and NBIC</dcterms:description>
+    <sioc:has_owner rdf:resource="http://rdf.myexperiment.org/Group/62" />
+    <meexp:runner-url rdf:datatype="&xsd;anyURI">http://rpc269.cs.man.ac.uk:8180/remotetaverna/v1/</meexp:runner-url>
+    <mebase:username rdf:datatype="&xsd;string">marco</mebase:username>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-03-23T10:48:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-03-23T10:48:56Z</dcterms:modified>
+  </mespec:TavernaEnactor>
+
+
+  <rdf:Description rdf:about="">
+    <dcterms:title>Server URI for Job</dcterms:title>
+  </rdf:Description>
+
+<meexp:Data rdf:about="http://rdf.myexperiment.org/Job/66/Input">
+        <mebase:text rdf:datatype="&xsd;string">--- 
+query_protein: P53
+</mebase:text>
+      </meexp:Data>
+  </oreatom:triples>
+
+</atom:entry>
+	
+</feed>

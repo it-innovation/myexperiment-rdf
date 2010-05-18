@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY dc  'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms  'http://purl.org/dc/terms/'>
+ <!ENTITY cc  'http://web.resource.org/cc/'>
+ <!ENTITY foaf  'http://purl.org/dc/terms/'>
+ <!ENTITY sioc  'http://rdfs.org/sioc/ns#'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/snarm#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+
+]>
+
+<rdf:RDF xmlns:mebase   ="&mebase;"
+         xmlns:meac     ="&meac;"
+         xmlns:meannot  ="&meannot;"
+         xmlns:mepack   ="&mepack;"
+         xmlns:meexp    ="&meexp;"
+         xmlns:mecontrib="&mecontrib;"
+         xmlns:mevd     ="&mevd;"
+         xmlns:mespec   ="&mespec;"
+         xmlns:rdf      ="&rdf;"
+         xmlns:dc       ="&dc;"
+         xmlns:dcterms  ="&dcterms;"
+         xmlns:cc       ="&cc;"
+         xmlns:foaf     ="&foaf;"
+         xmlns:sioc     ="&sioc;"
+         xmlns:snarm    ="&snarm;"
+         xmlns:xsd      ="&xsd;"
+>
+  <mebase:User rdf:about="http://rdf.myexperiment.org/example/User">
+    <mebase:human-start-page rdf:resource="http://www.myexperiment.org/users/26" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-23T12:34:33</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-01-29T18:09:02</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">David R Newman</sioc:name>
+    <mebase:openid-url rdf:datatype="&xsd;anyURI">[hidden]</mebase:openid-url>
+    <mebase:username rdf:datatype="&xsd;string">[hidden]</mebase:username>
+    <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/45?size=160x160.png" />
+    <foaf:based-near rdf:datatype="&xsd;string">Southampton</foaf:based-near>
+    <mebase:country rdf:datatype="&xsd;string">United Kingdom</mebase:country>
+    <foaf:homepage rdf:resource="http://www.ecs.soton.ac.uk/~drn05r" />
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2009-01-29T18:09:02</mebase:last-seen-at>
+    <mebase:activated-at rdf:datatype="&xsd;dateTime">2007-07-23T12:34:33</mebase:activated-at>
+    <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
+    <foaf:mbox rdf:resource="mailto:drn05r@ecs.soton.ac.uk" />
+    <mebase:field rdf:datatype="&xsd;string">University Research</mebase:field>
+  </mebase:User>
+
+</rdf:RDF>

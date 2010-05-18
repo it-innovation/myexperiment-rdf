@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+
+]>
+
+<rdf:RDF xml:base		="&meannot;"
+	 xmlns			="&meannot;"
+         xmlns:mebase		="&mebase;"
+         xmlns:rdf	 	="&rdf;"
+         xmlns:rdfs		="&rdfs;"
+         xmlns:owl		="&owl;"
+         xmlns:dc		="&dc;"
+	 xmlns:dcterms		="&dcterms;"
+         xmlns:xsd		="&xsd;"
+>
+  <!-- =============== Description ==================== -->
+
+  <owl:Ontology rdf:about="&meannot;">
+    <rdfs:label>myExperiment Annotations v1.0</rdfs:label>
+    <rdfs:comment>This provides the different types of annotations used in myExperiment.</rdfs:comment>
+    <dc:language>en</dc:language>
+    <dc:title xml:lang="en">The myExperiment Annotations Ontology</dc:title>
+    <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
+    <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">August 03, 2009</dc:date>
+    <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
+  </owl:Ontology>
+
+<!-- =============== Annotation Properties ========= -->
+
+  <rdf:Description rdf:about="&dc;language">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;title">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;creator">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;contributor">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;publisher">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;date">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;format">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+
+
+  <!-- ========= OWL-DL Compliance statements ======== -->  
+
+  <rdf:Description rdf:about="&dcterms;BibliographicCitation">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dcterms;modified">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dcterms;title">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;text">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Annotatable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Annotation">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Submission">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;human-start-page">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
+
+  <!-- ====================== Interfaces ====================== -->
+
+  <owl:Class rdf:about="Citationable">
+    <rdfs:label>Citationable</rdfs:label>
+    <rdfs:comment>An object can be annotated with a Citation</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotatable"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Commentable">
+    <rdfs:label>Commentable</rdfs:label>
+    <rdfs:comment>An object can be annotated with a Comment</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotatable"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Favouritable">
+    <rdfs:label>Favouritable</rdfs:label>
+    <rdfs:comment>An object can be made a Favourite</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotatable"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Reviewable">
+    <rdfs:label>Reviewable</rdfs:label>
+    <rdfs:comment>An object can be annotated with a Review</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotatable"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Rateable">
+    <rdfs:label>Rateable</rdfs:label>
+    <rdfs:comment>An object can be annotated with a Rating</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotatable"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Taggable">
+    <rdfs:label>Taggable</rdfs:label>
+    <rdfs:comment>An object that can be tagged</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotatable"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+
+  <!-- =================== Abstract Classes =================== -->
+
+  <owl:Class rdf:about="Citation">
+    <rdfs:label>Citation</rdfs:label>
+    <rdfs:comment>A Citation made by a User about a piece of work associated with the Citationable object</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&dcterms;BibliographicCitation"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;modified" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Comment">
+    <rdfs:label>Comment</rdfs:label>
+    <rdfs:comment>A Comment made by a User about Contribution</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;text" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+ 
+  <owl:Class rdf:about="Favourite">
+    <rdfs:label>Favourite</rdfs:label>
+    <rdfs:comment>A Favourite created by a User of a Favouritable object</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Rating">
+    <rdfs:label>Rating</rdfs:label>
+    <rdfs:comment>A Rating for a Rateable object</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="rating-score" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Review">
+    <rdfs:label>Review</rdfs:label>
+    <rdfs:comment>A Review for a Reviewable object</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;text" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;modified" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;human-start-page" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Tag">
+    <rdfs:label>Tag</rdfs:label>
+    <rdfs:comment>A Tag to a word or phrase</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Submission"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;modified" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;human-start-page" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Tagging">
+    <rdfs:label>Tag</rdfs:label>
+    <rdfs:comment>A Taggable object can have Taggings</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Annotation" />
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
+  <!-- =============== Object Properties ============== -->
+
+  <owl:ObjectProperty rdf:about="uses-tag">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>uses-tag</rdfs:label>
+    <rdfs:comment>A Tagging uses a Tag</rdfs:comment>
+    <rdfs:domain rdf:resource="Tagging"/>
+    <rdfs:range rdf:resource="Tag"/>
+    <owl:inverseOf rdf:resource="for-tagging"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+
+   <owl:ObjectProperty rdf:about="for-tagging">
+    <rdfs:label>for-tagging</rdfs:label>
+    <rdfs:comment>A Tag may be for a tagging</rdfs:comment>
+    <rdfs:domain rdf:resource="Tag"/>
+    <rdfs:range rdf:resource="Tagging"/>
+    <owl:inverseOf rdf:resource="uses-tag"/> 
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-tag">
+    <rdfs:label>has-tag</rdfs:label>
+    <rdfs:comment>A Taggable object has Tags that tag it</rdfs:comment>
+    <rdfs:domain rdf:resource="Taggable"/>
+    <rdfs:range rdf:resource="Tag"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+
+<!-- =============== Datatype Properties ============== -->
+  
+  <owl:DatatypeProperty rdf:about="accessed-at">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>accessed-at</rdfs:label>
+    <rdfs:comment>A piece of work cited by a Citation was accessed-at a particular dateTime</rdfs:comment>
+    <rdfs:domain rdf:resource="Citation"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="authors">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>authors</rdfs:label>
+    <rdfs:comment>A piece of work cited by a Citation has authors that are represented by a string</rdfs:comment>
+    <rdfs:domain rdf:resource="Citation"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="tag-count">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>tag-count</rdfs:label>
+    <rdfs:comment>A Tag has a count of the number of times it is used</rdfs:comment>
+    <rdfs:domain rdf:resource="Tag"/>
+    <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="citation-url">
+    <rdfs:label>citation-url</rdfs:label>
+    <rdfs:comment>The URL where a citation is located</rdfs:comment>
+    <rdfs:domain rdf:resource="Citation"/>
+    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="isbn">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>isbn</rdfs:label>
+    <rdfs:comment>An piece of work cited by a Citation may have a isbn</rdfs:comment>
+    <rdfs:domain rdf:resource="Citation"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="issn">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>issn</rdfs:label>
+    <rdfs:comment>An piece of work cited by a Citation may have an issn</rdfs:comment>
+    <rdfs:domain rdf:resource="Citation"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+ 
+  <owl:DatatypeProperty rdf:about="publication">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>publication</rdfs:label>
+    <rdfs:comment>An piece of work cited by a Citation may be from a publication</rdfs:comment>
+    <rdfs:domain rdf:resource="Citation"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="published-at">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>published-at</rdfs:label>
+    <rdfs:comment>A piece of work cited by a Citation was published-at a particular dateTime</rdfs:comment>
+    <rdfs:domain rdf:resource="Citation"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="rating-score">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>rating-score</rdfs:label>
+    <rdfs:comment>A Rating has a rating-score between 1 and 5</rdfs:comment>
+    <rdfs:domain rdf:resource="Rating"/>
+    <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:DatatypeProperty>
+
+</rdf:RDF>

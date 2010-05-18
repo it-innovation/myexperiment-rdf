@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc  'http://web.resource.org/cc/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+]>
+
+<rdf:RDF xml:base       ="&mespec;"
+         xmlns   	="&mespec;"
+         xmlns:mebase   ="&mebase;"
+	 xmlns:meac     ="&meac;"
+	 xmlns:meannot  ="&meannot;"
+	 xmlns:meexp    ="&meexp;"
+	 xmlns:mepack   ="&mepack;"
+         xmlns:mecontrib="&mecontrib;"
+	 xmlns:mevd     ="&mevd;"
+         xmlns:mecomp   ="&mecomp;"
+         xmlns:sioc	="&sioc;"
+         xmlns:rdf      ="&rdf;"
+         xmlns:rdfs     ="&rdfs;"
+         xmlns:owl      ="&owl;"
+         xmlns:dc       ="&dc;"
+	 xmlns:dcterms  ="&dcterms;"
+         xmlns:cc	="&cc;"
+	 xmlns:snarm	="&snarm;"
+         xmlns:xsd      ="&xsd;"
+>
+<!-- ========================= Description ============================= -->
+
+  <owl:Ontology rdf:about="&mespec;">
+    <rdfs:label>myExperiment Specific v1.0</rdfs:label>
+    <rdfs:comment>This provides classes and objects specific to myExperiment, including SNARM AccessTypes, CreativeCommons Licenses, the TavernaEnactor (a Taverna specific Runner) and the myExperiment AnonymousUser.</rdfs:comment>
+    <dc:language>en</dc:language>
+    <dc:title xml:lang="en">The myExperiment Specific Ontology</dc:title>
+    <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
+    <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">February 19, 2009</dc:date>
+    <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
+    <owl:imports rdf:resource="&mebase;"/>
+    <owl:imports rdf:resource="&meac;"/>
+    <owl:imports rdf:resource="&meannot;"/>
+    <owl:imports rdf:resource="&mepack;"/>
+    <owl:imports rdf:resource="&meexp;"/>
+    <owl:imports rdf:resource="&mecontrib;"/>
+    <owl:imports rdf:resource="&mevd;"/>
+    <owl:imports rdf:resource="&mecomp;"/>
+  </owl:Ontology>
+
+<!-- ============= Annotation Properties =========== -->
+
+  <rdf:Description rdf:about="&dc;language">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;title">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;creator">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;contributor">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;publisher">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;date">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;format">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+<!-- ====================== Specific Subclasses ======================== -->
+  <owl:Class rdf:about="TavernaEnactor">
+    <rdfs:label>TavernaEnactor</rdfs:label>
+    <rdfs:comment>Specific Runners that enact Taverna workflows</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&meexp;Runner"/>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </owl:Class>
+
+<!-- ================ human-start-page for snarm:Policy ================ -->
+ <rdf:Description rdf:about="&snarm;Policy">
+   <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;human-start-page" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+   </rdfs:subClassOf>
+ </rdf:Description>
+
+<!-- ========================== Accessers ============================== -->
+  <snarm:Accesser rdf:about="Friends">
+    <dcterms:title>Friends</dcterms:title>
+    <dcterms:description>Anyone that the Contribution creator has a accepted Friendship with</dcterms:description>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:Accesser>
+
+<!-- ======================== Access Types ============================= -->
+  <snarm:AccessType rdf:about="View">
+    <dcterms:title rdf:datatype="&xsd;string">View a myExperiment Contribution</dcterms:title>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:AccessType>
+
+  <snarm:AccessType rdf:about="Download">
+    <dcterms:title rdf:datatype="&xsd;string">Download a myExperiment Contribution</dcterms:title>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:AccessType>
+
+  <snarm:AccessType rdf:about="Edit">
+    <dcterms:title rdf:datatype="&xsd;string">Edit a myExperiment Contribution</dcterms:title>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:AccessType>
+
+  <snarm:AccessType rdf:about="Use">
+    <dcterms:title rdf:datatype="&xsd;string">Use a myExperiment Web service Contribution</dcterms:title>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:AccessType>
+
+
+<!-- ======================= Access Options ============================ -->
+  <snarm:Access rdf:about="PublicView">
+    <dcterms:title rdf:datatype="&xsd;string">Anyone can view</dcterms:title>
+    <snarm:has-access-type rdf:resource="View"/>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:Access>
+
+  <snarm:Access rdf:about="PublicDownload">
+    <dcterms:title rdf:datatype="&xsd;string">Anyone can Download</dcterms:title>
+    <snarm:has-access-type rdf:resource="Download"/>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:Access>
+
+  <snarm:Access rdf:about="PublicUse">
+    <dcterms:title rdf:datatype="&xsd;string">Anyone can Use</dcterms:title>
+    <snarm:has-access-type rdf:resource="Use"/>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:Access>
+
+  <snarm:RestrictedAccess rdf:about="FriendsView">
+    <dcterms:title rdf:datatype="&xsd;string">Friends can View</dcterms:title>
+    <snarm:has-accesser rdf:resource="Friends"/>
+    <snarm:has-access-type rdf:resource="View"/>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:RestrictedAccess>
+
+  <snarm:RestrictedAccess rdf:about="FriendsDownload">
+    <dcterms:title rdf:datatype="&xsd;string">Friends can Download</dcterms:title>
+    <snarm:has-accesser rdf:resource="Friends"/>
+    <snarm:has-access-type rdf:resource="Download"/> 
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:RestrictedAccess>
+
+  <snarm:RestrictedAccess rdf:about="FriendsEdit">
+    <dcterms:title rdf:datatype="&xsd;string">Friends can Edit</dcterms:title>
+    <snarm:has-accesser rdf:resource="Friends"/>
+    <snarm:has-access-type rdf:resource="Edit"/>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:RestrictedAccess>
+
+  <snarm:Access rdf:about="FriendsUse">
+    <dcterms:title rdf:datatype="&xsd;string">Friends can Use</dcterms:title>
+    <snarm:has-accesser rdf:resource="Friends"/>
+    <snarm:has-access-type rdf:resource="Use"/>
+    <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+  </snarm:Access>
+
+
+<!-- ===================== Anonymous User ============================ -->
+<mebase:User rdf:about="AnonymousUser">
+  <sioc:name>Anonymous User</sioc:name>
+  <dcterms:created rdf:datatype="&xsd;dateTime">1970-01-01T00:00:00</dcterms:created>
+  <dcterms:modified rdf:datatype="&xsd;dateTime">1970-01-01T00:00:00</dcterms:modified>
+  <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+</mebase:User>
+
+<!-- ======================== Licenses =============================== -->
+<rdf:Description rdf:about="&cc;License">
+  <rdf:type rdf:resource="&owl;Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;Reproduction">
+  <rdf:type rdf:resource="&owl;Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;Distribution">
+  <rdf:type rdf:resource="&owl;Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;Notice">
+  <rdf:type rdf:resource="&owl;Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;Attribution">
+  <rdf:type rdf:resource="&owl;Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;DerivativeWorks">
+  <rdf:type rdf:resource="&owl;Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;ShareAlike">
+  <rdf:type rdf:resource="&owl;Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;permits">
+  <rdf:type rdf:resource="&owl;ObjectProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;requires">
+  <rdf:type rdf:resource="&owl;ObjectProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="&cc;prohibits">
+  <rdf:type rdf:resource="&owl;ObjectProperty"/>
+</rdf:Description>
+
+
+<cc:License rdf:about="http://creativecommons.org/licenses/by-nd/3.0/">
+   <cc:permits rdf:resource="&cc;Reproduction" />
+   <cc:permits rdf:resource="&cc;Distribution" />
+   <cc:requires rdf:resource="&cc;Notice" />
+   <cc:requires rdf:resource="&cc;Attribution" />
+   <cc:prohibits rdf:resource="&cc;DerivativeWorks" />
+   <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+</cc:License>
+
+<cc:License rdf:about="http://creativecommons.org/licenses/by-sa/3.0/">
+   <cc:permits rdf:resource="&cc;Reproduction" />
+   <cc:permits rdf:resource="&cc;Distribution" />
+   <cc:requires rdf:resource="&cc;Notice" />
+   <cc:requires rdf:resource="&cc;Attribution" />
+   <cc:permits rdf:resource="&cc;DerivativeWorks" />
+   <cc:requires rdf:resource="&cc;ShareAlike" />
+   <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+</cc:License>
+
+<cc:License rdf:about="http://creativecommons.org/licenses/by/3.0/">
+   <cc:permits rdf:resource="&cc;Reproduction" />
+   <cc:permits rdf:resource="&cc;Distribution" />
+   <cc:requires rdf:resource="&cc;Notice" />
+   <cc:requires rdf:resource="&cc;Attribution" />
+   <cc:permits rdf:resource="&cc;DerivativeWorks" />
+   <rdfs:isDefinedBy rdf:resource="&mespec;"/>
+</cc:License>
+</rdf:RDF>
+

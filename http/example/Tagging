@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY dc  'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms  'http://purl.org/dc/terms/'>
+ <!ENTITY cc  'http://web.resource.org/cc/'>
+ <!ENTITY foaf  'http://purl.org/dc/terms/'>
+ <!ENTITY sioc  'http://rdfs.org/sioc/ns#'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/snarm#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+
+]>
+
+<rdf:RDF xmlns:mebase   ="&mebase;"
+         xmlns:meac     ="&meac;"
+         xmlns:meannot  ="&meannot;"
+         xmlns:mepack   ="&mepack;"
+         xmlns:meexp    ="&meexp;"
+         xmlns:mecontrib="&mecontrib;"
+         xmlns:mevd     ="&mevd;"
+         xmlns:mespec   ="&mespec;"
+         xmlns:rdf      ="&rdf;"
+         xmlns:dc       ="&dc;"
+         xmlns:dcterms  ="&dcterms;"
+         xmlns:cc       ="&cc;"
+         xmlns:foaf     ="&foaf;"
+         xmlns:sioc     ="&sioc;"
+         xmlns:snarm    ="&snarm;"
+         xmlns:xsd      ="&xsd;"
+>
+  <meannot:Tagging rdf:about="http://rdf.myexperiment.org/example/Tagging">
+    <meannot:uses-tag rdf:resource="http://rdf.myexperiment.org/Tag/540" />
+    <mebase:annotates rdf:resource="http://rdf.myexperiment.org/Workflow/60" />
+    <mebase:has-annotator rdf:resource="http://rdf.myexperiment.org/User/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-10-17T14:44:27</dcterms:created>
+  </meannot:Tagging>
+
+</rdf:RDF>

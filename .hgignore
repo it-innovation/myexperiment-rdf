@@ -1,0 +1,5 @@
+syntax: glob
+*.log
+*.pid
+*~
+http/inc/settings.inc.php

@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+]>
+
+<rdf:RDF xml:base       ="&mecomp;"
+         xmlns          ="&mecomp;"
+         xmlns:mecontrib="&mecontrib;"
+         xmlns:mebase   ="&mebase;"
+         xmlns:rdf      ="&rdf;"
+         xmlns:rdfs     ="&rdfs;"
+         xmlns:owl      ="&owl;"
+         xmlns:dc       ="&dc;"
+         xmlns:dcterms  ="&dcterms;"
+         xmlns:xsd      ="&xsd;"
+>
+
+  <owl:Ontology rdf:about="&mecomp;">
+    <rdfs:label>myExperiment Components v1.0</rdfs:label>
+    <rdfs:comment>This provides classes for representing the components of a workflow</rdfs:comment>
+    <dc:language>en</dc:language>
+    <dc:title xml:lang="en">The myExperiment Components Ontology</dc:title>
+    <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
+    <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">November 23, 2009</dc:date>
+    <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
+  </owl:Ontology>
+
+<!-- ============= Annotation Properties =========== -->
+
+  <rdf:Description rdf:about="&dc;language">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;title">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;creator">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;contributor">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;publisher">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;date">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;format">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+<!-- ========= OWL-DL Compliance statements ======== -->
+
+  <rdf:Description rdf:about="&dcterms;title">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dcterms;description">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+   </rdf:Description>
+
+   <rdf:Description rdf:about="&dcterms;identifier">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+   </rdf:Description>
+
+  <rdf:Description rdf:about="&mecontrib;AbstractWorkflow">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+
+<!-- ================== Classes ==================== -->
+
+  <owl:Class rdf:about="WorkflowComponent">
+    <rdfs:label>WorkflowComponent</rdfs:label>
+    <rdfs:comment>A component of a Workflow (e.g. a Sink, Source, Processor or Link)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="belongs-to-workflow"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="NodeComponent">
+    <rdfs:label>NodeComponent</rdfs:label>
+    <rdfs:comment>A component of a Workflow that is not a Link or IOComponent (i.e. a Sink, Source or Processor)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="WorkflowComponent"/>
+    <owl:disjointWith rdf:resource="IOComponent"/>
+    <owl:disjointWith rdf:resource="Link"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>  
+
+  <owl:Class rdf:about="IOComponent">
+    <rdfs:label>IOComponent</rdfs:label>
+    <rdfs:comment>An Input or Output to a NodeComponent (e.g. a Sink, Source or Processor)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="WorkflowComponent"/>
+    <owl:disjointWith rdf:resource="NodeComponent"/>
+    <owl:disjointWith rdf:resource="Link"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="for-component"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+
+  <owl:Class rdf:about="Link">
+    <rdfs:label>Link</rdfs:label>
+    <rdfs:comment>A component of a Workflow that links a Source to a Sink (Assuming the Link isn't an initial input or a final output)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="WorkflowComponent"/>
+    <owl:disjointWith rdf:resource="NodeComponent"/>
+    <owl:disjointWith rdf:resource="IOComponent"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="to-input"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="from-output"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Processor">
+    <rdfs:label>Processor</rdfs:label>
+    <rdfs:comment>A component of a Workflow that processes some data</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="NodeComponent"/>
+    <owl:disjointWith rdf:resource="Source"/>
+    <owl:disjointWith rdf:resource="Sink"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;description"/>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="WSDLProcessor">
+    <rdfs:label>WSDLProcessor</rdfs:label>
+    <rdfs:comment>A Processor that executes some WSDL</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="Processor"/>
+    <owl:disjointWith rdf:resource="BeanshellProcessor"/>
+    <owl:disjointWith rdf:resource="DataflowProcessor"/>
+    <owl:disjointWith rdf:resource="OtherProcessor"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="processor-uri"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="service-name"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="BeanshellProcessor">
+    <rdfs:label>BeanshellProcessor</rdfs:label>
+    <rdfs:comment>A Processor that executes a Beanshell</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="Processor"/>
+    <owl:disjointWith rdf:resource="WSDLProcessor"/>
+    <owl:disjointWith rdf:resource="DataflowProcessor"/>
+    <owl:disjointWith rdf:resource="OtherProcessor"/>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="processor-script"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="DataflowProcessor">
+    <rdfs:label>DataflowProcessor</rdfs:label>
+    <rdfs:comment>A Processor that executes a Dataflow</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="Processor"/>
+    <owl:disjointWith rdf:resource="BeanshellProcessor"/>
+    <owl:disjointWith rdf:resource="WSDLProcessor"/>
+    <owl:disjointWith rdf:resource="OtherProcessor"/>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="executes-dataflow"/>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="OtherProcessor">
+    <rdfs:label>OtherProcessor</rdfs:label>
+    <rdfs:comment>A Processor that executes something else</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="Processor"/>
+    <owl:disjointWith rdf:resource="WSDLProcessor"/>
+    <owl:disjointWith rdf:resource="DataflowProcessor"/>
+    <owl:disjointWith rdf:resource="BeanshellProcessor"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Sink">
+    <rdfs:label>Sink</rdfs:label>
+    <rdfs:comment>A component of a Workflow that is the sink for the data being output</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="NodeComponent"/>
+    <owl:disjointWith rdf:resource="Source"/>
+    <owl:disjointWith rdf:resource="Processor"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Source">
+    <rdfs:label>Source</rdfs:label>
+    <rdfs:comment>A component of a Workflow that is the source of data being input</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="NodeComponent"/>
+    <owl:disjointWith rdf:resource="Source"/>
+    <owl:disjointWith rdf:resource="Processor"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Input">
+    <rdfs:label>Input</rdfs:label>
+    <rdfs:comment>A Link must have an Input into a NodeComponent (i.e. Source, Sink or Processor)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="IOComponent"/>
+    <owl:disjointWith rdf:resource="Output"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Output">
+    <rdfs:label>Output</rdfs:label>
+    <rdfs:comment>A Link must have an Output from a NodeComponent (i.e. Source, Sink or Processor)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="IOComponent"/>
+    <owl:disjointWith rdf:resource="Input"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Dataflow">
+    <rdfs:label>Dataflow</rdfs:label>
+    <rdfs:comment>A Dataflow is what is executed by an AbretactWorkflow subclass or a DataflowProcessor</rdfs:comment>
+    <owl:disjointWith rdf:resource="WorkflowComponent"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;identifier"/>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:Class>
+
+
+
+<!-- ======================= Object Properties ========================= -->
+  <owl:ObjectProperty rdf:about="belongs-to-workflow">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>belongs-to-workflow</rdfs:label>
+    <rdfs:comment>A WorkflowComponent belongs to a particular Workflow</rdfs:comment>
+    <rdfs:domain rdf:resource="WorkflowComponent"/>
+    <rdfs:range rdf:resource="&mecontrib;AbstractWorkflow"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-component">
+    <rdfs:label>has-component</rdfs:label>
+    <rdfs:comment>A Dataflow may have WorkflowComponents</rdfs:comment>
+    <rdfs:domain rdf:resource="Dataflow"/>
+    <rdfs:range rdf:resource="WorkflowComponent"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="to-input">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>to-input</rdfs:label>
+    <rdfs:comment>A Link WorkflowComponent will go to a Input</rdfs:comment>
+    <rdfs:domain rdf:resource="Link"/>
+    <rdfs:range rdf:resource="Input"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="from-output">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>from-output</rdfs:label>
+    <rdfs:comment>A Link WorkflowComponent will come from an Output</rdfs:comment>
+    <rdfs:domain rdf:resource="Link"/>
+    <rdfs:range rdf:resource="Output"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="for-component">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>for-component</rdfs:label>
+    <rdfs:comment>An IOComponent will input to or output from a NodeComponent (i.e. Sink, Source or Processor)</rdfs:comment>
+    <rdfs:domain rdf:resource="IOComponent"/>
+    <rdfs:range rdf:resource="NodeComponent"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="executes-dataflow">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>executes-dataflow</rdfs:label>
+    <rdfs:comment>An AbstractWorkflow subclass or a DataflowProcessor executes a Dataflow</rdfs:comment>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="&mecontrib;AbstractWorkflow"/>
+          <owl:Class rdf:about="DataflowProcessor"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="Dataflow"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:ObjectProperty>
+
+   <owl:ObjectProperty rdf:about="waits-on">
+    <rdfs:label>waits-on</rdfs:label>
+    <rdfs:comment>A Processor may have to wait on one or more processor to complete before it can execute</rdfs:comment>
+    <rdfs:domain rdf:resource="Processor"/>
+    <rdfs:range rdf:resource="Processor"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:ObjectProperty>
+
+
+<!-- ======================= Datatype Properties ========================= -->
+
+  <owl:DatatypeProperty rdf:about="processor-type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>processor-type</rdfs:label>
+    <rdfs:comment>A Processor must have a type property if it is not a specific Processor class</rdfs:comment>
+    <rdfs:domain rdf:resource="Processor"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="processor-uri">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>processor-uri</rdfs:label>
+    <rdfs:comment>A Processor may have an URI where the service resides</rdfs:comment>
+    <rdfs:domain rdf:resource="Processor"/>
+    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="processor-script">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>processor-script</rdfs:label>
+    <rdfs:comment>A Processor may have a script that it executes</rdfs:comment>
+    <rdfs:domain rdf:resource="Processor"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="service-name">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>service-name</rdfs:label>
+    <rdfs:comment>A Processor may have a name for the service it executes</rdfs:comment>
+    <rdfs:domain rdf:resource="Processor"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="service-category">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>service-category</rdfs:label>
+    <rdfs:comment>The service a Processor executes may have a cateofry</rdfs:comment>
+    <rdfs:domain rdf:resource="Processor"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="authority-name">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label>authority-name</rdfs:label>
+    <rdfs:comment>A Processor may have the name of an authority that is responsible for the service it executes</rdfs:comment>
+    <rdfs:domain rdf:resource="Processor"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="example-value">
+    <rdfs:label>example-value</rdfs:label>
+    <rdfs:comment>A Sink or Source may have one or more example values</rdfs:comment>
+    <rdfs:domain>
+      <owl:Class>    
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="Sink"/>
+          <owl:Class rdf:about="Source"/>
+        </owl:unionOf>
+      </owl:Class>    
+    </rdfs:domain>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&mecomp;"/>
+  </owl:DatatypeProperty>
+
+</rdf:RDF>
+
+
+

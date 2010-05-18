@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+]>
+
+<rdf:RDF xml:base		="&mecontrib;"
+	 xmlns			="&mecontrib;"
+         xmlns:mebase		="&mebase;"
+	 xmlns:meac		="&meac;"
+	 xmlns:meannot		="&meannot;"
+	 xmlns:meexp		="&meexp;"
+         xmlns:rdf	 	="&rdf;"
+         xmlns:rdfs		="&rdfs;"
+         xmlns:owl		="&owl;"
+         xmlns:dc		="&dc;"
+         xmlns:dcterms          ="&dcterms;"
+         xmlns:ore		="&ore;"
+         xmlns:xsd		="&xsd;"
+>
+  <!-- =============== Description ==================== -->
+
+  <owl:Ontology rdf:about="&mecontrib;">
+    <rdfs:label>myExperiment Contributions v1.0</rdfs:label>
+    <rdfs:comment>This provides the different types of contributions used in myExperiment.</rdfs:comment>
+    <dc:language>en</dc:language>
+    <dc:title xml:lang="en">The myExperiment Contributions Ontology</dc:title>
+    <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
+    <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">August 26, 2009</dc:date>
+    <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
+  </owl:Ontology>
+
+<!-- ============= Annotation Properties =========== -->
+
+  <rdf:Description rdf:about="&dc;language">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;title">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;creator">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;contributor">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;publisher">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;date">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;format">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+
+  <!-- ========= OWL-DL Compliance statements ======== -->  
+
+  <rdf:Description rdf:about="&dcterms;title">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;User">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Upload">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Contribution">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Version">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Versionable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Citationable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Favouritable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Rateable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Reviewable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meannot;Tag">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meac;Attributable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meac;Creditable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&meexp;Runnable">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+
+  <!-- =============== myExperiment Entity Classes ================= -->
+
+  <owl:Class rdf:about="File">
+    <rdfs:label>File</rdfs:label>
+    <rdfs:comment>A File uploaded by an Actor</rdfs:comment>
+    <owl:disjointWith rdf:resource="AbstractWorkflow"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Upload"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Rateable"/>
+    <rdfs:subClassOf rdf:resource="&meac;Attributable"/>
+    <rdfs:subClassOf rdf:resource="&meac;Creditable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Favouritable"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Vocabulary">
+    <rdfs:label>Vocabulary</rdfs:label>
+    <rdfs:comment>A Vocabulary of Tags</rdfs:comment>
+    <owl:disjointWith rdf:resource="AbstractWorkflow"/>
+    <owl:disjointWith rdf:resource="File"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Contribution"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="AbstractWorkflow">
+    <rdfs:label>AbstractWorkflow</rdfs:label>
+    <rdfs:comment>An AbstractWorkflow from which Workflow and WorkflowVersion can be templated on</rdfs:comment>
+    <owl:disjointWith rdf:resource="File"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Citationable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Reviewable"/>
+    <rdfs:subClassOf rdf:resource="&meexp;Runnable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Rateable"/>
+    <rdfs:subClassOf rdf:resource="&meac;Attributable"/>
+    <rdfs:subClassOf rdf:resource="&meac;Creditable"/>
+    <rdfs:subClassOf rdf:resource="&meannot;Favouritable"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Upload"/>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="preview" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="svg" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="thumbnail" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="thumbnail-big" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Workflow">
+    <rdfs:label>Workflow</rdfs:label>
+    <rdfs:comment>A Workflow uploaded by an Actor</rdfs:comment>
+    <owl:disjointWith rdf:resource="WorkflowVersion"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Versionable"/>
+    <rdfs:subClassOf rdf:resource="AbstractWorkflow"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="WorkflowVersion">
+    <rdfs:label>WorkflowVersion</rdfs:label>
+    <rdfs:comment>A Version of a Workflow</rdfs:comment>
+     <owl:disjointWith rdf:resource="Workflow"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Version"/>
+    <rdfs:subClassOf rdf:resource="AbstractWorkflow"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:Class>
+
+<!-- =============== Datatype Properties ============== -->
+
+  <owl:DatatypeProperty rdf:about="preview">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>preview</rdfs:label>
+    <rdfs:comment>A Workflow may have a uri that resolves to a preview image representation of it</rdfs:comment>
+    <rdfs:domain rdf:resource="AbstractWorkflow"/>
+    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="svg">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>svg</rdfs:label>
+    <rdfs:comment>A Workflow may have a uri that resolves to an svg representation of it</rdfs:comment>
+    <rdfs:domain rdf:resource="AbstractWorkflow"/>
+    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="thumbnail">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>thumbnail</rdfs:label>
+    <rdfs:comment>A link to a thumbnail image of the Workflow</rdfs:comment>
+    <rdfs:domain rdf:resource="AbstractWorkflow"/>
+    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:DatatypeProperty>
+
+   <owl:DatatypeProperty rdf:about="thumbnail-big">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>thumbnail-big</rdfs:label>
+    <rdfs:comment>A link to a big thumbnail image of the Workflow</rdfs:comment>
+    <rdfs:domain rdf:resource="AbstractWorkflow"/>
+    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:DatatypeProperty>
+
+<!-- ================ Object Properties =============== -->
+
+  <owl:ObjectProperty rdf:about="from-vocabulary">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>last-edited-by</rdfs:label>
+    <rdfs:comment>A Workflow will have been last edited by a particular User</rdfs:comment>
+    <rdfs:domain rdf:resource="&meannot;Tag"/>
+    <rdfs:range rdf:resource="Vocabulary"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="last-edited-by">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>last-edited-by</rdfs:label>
+    <rdfs:comment>A Workflow will have been last edited by a particular User</rdfs:comment>
+    <rdfs:domain rdf:resource="AbstractWorkflow"/>
+    <rdfs:range rdf:resource="&mebase;User"/>
+    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
+  </owl:ObjectProperty>
+ 
+</rdf:RDF>

@@ -1,0 +1,43 @@
+table.center td{
+	text-align: center;
+}
+td.right{
+	text-align: right;
+}
+
+table.listing{
+	border-collapse: collapse;
+	padding: 10px 3px;
+}
+
+table.listing th{
+	background-color: gray;
+	padding: 3px 10px;
+}
+table.listing td{
+	padding: 1px 10px;
+}
+table.listing td.shade{
+	background-color: lightgray;
+}
+ul{ 
+  list-style: none outside;
+  padding: 2px; 
+}
+li{
+  padding: 2px;
+}
+table.borders{
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+table.borders th{
+	background-color: #e0e0e0;
+	border: 1px solid black;
+}
+table.borders td{
+	vertical-align: top;
+	border-color: black;
+	border-style: solid;
+	border-width: 0 1px 1px 1px;
+}

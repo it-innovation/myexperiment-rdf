@@ -1,0 +1,9 @@
+meannot:accessed-at dateTime
+meannot:rating-score positiveInteger
+meannot:issn string
+meannot:published-at dateTime
+meannot:citation-url anyURI
+meannot:publication string
+meannot:isbn string
+meannot:authors string
+meannot:tag-count nonNegativeInteger

@@ -1,0 +1,16 @@
+RewriteEngine On
+
+RewriteRule ^(.+[^/])$ $1/
+RewriteRule ^specification/$ spec.html
+RewriteRule ^base/$ myexp_base.owl
+RewriteRule ^attrib_credit/$ myexp_attrib_cred.owl
+RewriteRule ^annotations/$ myexp_annot.owl
+RewriteRule ^packs/$ myexp_packs.owl
+RewriteRule ^contributions/$ myexp_contrib.owl
+RewriteRule ^experiments/$ myexp_exp.owl
+RewriteRule ^viewings_downloads/$ myexp_view_down.owl
+RewriteRule ^specific/$ myexp_specific.owl
+RewriteRule ^reasoned/$ myexp_reasoned.owl
+RewriteRule ^sparql/$ sparql.php
+RewriteRule ^CHANGELOG/$ CHANGELOG.php
+

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+]>
+
+<rdf:RDF xml:base		="&meexp;"
+	 xmlns			="&meexp;"
+         xmlns:mebase		="&mebase;"
+	 xmlns:mepack		="&mepack;"
+         xmlns:rdf	 	="&rdf;"
+         xmlns:rdfs		="&rdfs;"
+         xmlns:owl		="&owl;"
+         xmlns:dc		="&dc;"
+	 xmlns:dcterms		="&dcterms;"
+	 xmlns:ore		="&ore;"
+	 xmlns:sioc		="&sioc;"
+>
+  <!-- =============== Description ==================== -->
+
+  <owl:Ontology rdf:about="&meexp;">
+    <rdfs:label>myExperiment Experiments v1.0</rdfs:label>
+    <rdfs:comment>This contains the classes required to create experiments and annotate them with jobs that have been or are scheduled to run.</rdfs:comment>
+    <dc:language>en</dc:language>
+    <dc:title xml:lang="en">The myExperiment Experiments Ontology</dc:title>
+    <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
+    <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">June 19, 2009</dc:date>
+    <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
+  </owl:Ontology>
+
+<!-- ============= Annotation Properties =========== -->
+
+  <rdf:Description rdf:about="&dc;language">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;title">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;creator">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;contributor">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;publisher">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;date">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;format">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <!-- ========= OWL-DL Compliance statements ======== -->  
+
+  <rdf:Description rdf:about="&dcterms;title">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Interface">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Submission">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Annotation">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Contribution">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;User">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;username">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;human-start-page">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;uri">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;text">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mepack;Pack">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mepack;PackEntry">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&sioc;has_owner">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dcterms;modified">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <!-- ====================== Interfaces ====================== -->
+ 
+  <owl:Class rdf:about="Runnable">
+    <rdfs:label>Runnable</rdfs:label>
+    <rdfs:comment>An object that can be run by a Runner</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Interface"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:Class>
+
+
+  <!-- =============== myExperiment Entity Classes ================= -->  
+
+  <owl:Class rdf:about="Data">
+    <rdfs:label>Data</rdfs:label>
+    <rdfs:comment>Input to or output from a Job</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;text" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;uri" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:Class>
+ 
+  <owl:Class rdf:about="Experiment">
+    <rdfs:label>Experiment</rdfs:label>
+    <rdfs:comment>An Experiment is a container for experimentation</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mepack;Pack"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Job">
+    <rdfs:label>Job</rdfs:label>
+    <rdfs:comment>An enactment of a Workflow as part of an Experiment</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Contribution"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="has-runnable" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="has-runner" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;human-start-page" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;uri" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Runner">
+    <rdfs:label>Runner</rdfs:label>
+    <rdfs:comment>A Job requires a Runner to run</rdfs:comment>
+    <owl:disjointWith rdf:resource="&mepack;Pack"/>
+    <rdfs:subClassOf rdf:resource="&mebase;Contribution"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="runner-url" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&mebase;username" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:Class>
+
+  <!-- =============== Object Properties ============== -->
+
+  <owl:ObjectProperty rdf:about="has-runner">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>has-runner</rdfs:label>
+    <rdfs:comment>To run a Job, a Job must have a runner</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="Runner"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-parent-job">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>has-parent-job</rdfs:label>
+    <rdfs:comment>A Job may have a parent job</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="Job"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-runnable">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>has-runnable</rdfs:label>
+    <rdfs:comment>A Job has a Runnable object</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="Runnable"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-input">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>has-input</rdfs:label>
+    <rdfs:comment>A Job may have some Data as input</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="Data"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-output">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>has-output</rdfs:label>
+    <rdfs:comment>A Job may have some Data as input</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="Data"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:ObjectProperty>
+
+<!-- =============== Datatype Properties ============== -->
+
+  <owl:DatatypeProperty rdf:about="completed-at">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>completed-at</rdfs:label>
+    <rdfs:comment>A Job is completed-at a particular dateTime to a Runner</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="job-manifest">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>job-manifest</rdfs:label>
+    <rdfs:comment>The Job's manifest</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="last-status">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>last-status</rdfs:label>
+    <rdfs:comment>The last-status of the Job running in the Runner</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="last-status-at">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>last-status-at</rdfs:label>
+    <rdfs:comment>The last dateTime when the last-status of the Job was polled</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="runner-url">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>runner-url</rdfs:label>
+    <rdfs:comment>A Runner must have an runner-url from where to invoke the runner</rdfs:comment>
+    <rdfs:domain rdf:resource="Runner"/>
+    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="started-at">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>started-at</rdfs:label>
+    <rdfs:comment>A Job is started-at a particular dateTime in a Runner</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="submitted-at">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>submitted-at</rdfs:label>
+    <rdfs:comment>A Job is submitted-at a particular dateTime to a Runner</rdfs:comment>
+    <rdfs:domain rdf:resource="Job"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:DatatypeProperty>
+
+</rdf:RDF>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY rdf  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+]>
+
+<rdf:RDF xml:base		="&mepack;"
+         xmlns			="&mepack;"
+	 xmlns:mebase		="&mebase;"
+         xmlns:rdf	 	="&rdf;"
+         xmlns:rdfs		="&rdfs;"
+         xmlns:owl		="&owl;"
+         xmlns:dc		="&dc;"
+	 xmlns:dcterms		="&dcterms;"
+         xmlns:ore              ="&ore;"
+         xmlns:sioc		="&sioc;"
+         xmlns:xsd		="&xsd;"
+>
+  <!-- =============== Description ==================== -->
+
+  <owl:Ontology rdf:about="&mepack;">
+    <rdfs:label>myExperiment Packs v1.0</rdfs:label>
+    <rdfs:comment>This facilitates the use of packs to aggregate contributions and remote urls together.</rdfs:comment>
+    <dc:language>en</dc:language>
+    <dc:title xml:lang="en">The myExperiment Packs Ontology</dc:title>
+    <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
+    <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">June 1, 2009</dc:date>
+    <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
+  </owl:Ontology>
+
+<!-- ============= Annotation Properties =========== -->
+
+  <rdf:Description rdf:about="&dc;language">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;title">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;creator">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;contributor">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;publisher">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;date">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dc;format">
+    <rdf:type rdf:resource="&owl;AnnotationProperty"/>
+  </rdf:Description>
+
+
+  <!-- ========= OWL-DL Compliance statements ======== -->  
+  
+  <rdf:Description rdf:about="&dcterms;description">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dcterms;modified">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&ore;aggregates">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&dcterms;title">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&sioc;has_owner">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Submission">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Contribution">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Upload">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;uri">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&ore;proxyIn">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&ore;proxyFor">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&ore;Proxy">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&ore;isDescribedBy">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
+
+
+  <!-- =================== Abstract Classes =================== -->
+
+  <owl:Class rdf:about="PackEntry">
+    <rdfs:label>PackEntry</rdfs:label>
+    <rdfs:comment>An entry in a Pack</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Submission"/>
+    <rdfs:subClassOf rdf:resource="&ore;Proxy" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&sioc;has_owner" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;modified" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;description" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&ore;proxyIn" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&ore;proxyFor" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mepack;"/>
+  </owl:Class>
+ 
+
+  <!-- =============== myExperiment Entity Classes ================= -->
+  
+  <owl:Class rdf:about="LocalPackEntry">
+    <rdfs:label>LocalPackEntry</rdfs:label>
+    <rdfs:comment>An entry in a Pack that is a Contribution.</rdfs:comment>
+    <owl:disjointWith rdf:resource="RemotePackEntry"/>
+    <rdfs:subClassOf rdf:resource="PackEntry" />
+    <rdfs:isDefinedBy rdf:resource="&mepack;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="Pack">
+    <rdfs:label>Pack</rdfs:label>
+    <rdfs:comment>A Pack of Contributions/remote urls</rdfs:comment>
+    <owl:disjointWith rdf:resource="&mebase;Upload"/> 
+    <rdfs:subClassOf rdf:resource="&mebase;Contribution" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&ore;aggregates" />
+        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&ore;isDescribedBy" />
+        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mepack;"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="RemotePackEntry">
+    <rdfs:label>RemotePackEntry</rdfs:label>
+    <rdfs:comment>An entry in a Pack that is a remote url.</rdfs:comment>
+    <owl:disjointWith rdf:resource="LocalPackEntry"/>
+    <rdfs:subClassOf rdf:resource="PackEntry" />
+     <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&mepack;"/>
+  </owl:Class>
+
+
+<!-- =============== Object Properties ============== -->
+
+<!-- =============== Datatype Properties ============== -->
+
+</rdf:RDF>

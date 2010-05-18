@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <mepack:LocalPackEntry rdf:about="http://rdf.myexperiment.org/example/LocalPackEntry">
+    <ore:proxyIn rdf:resource="http://rdf.myexperiment.org/Pack/1" />
+    <ore:proxyFor rdf:resource="http://rdf.myexperiment.org/Workflow/181" />
+    <sioc:has_owner rdf:resource="http://rdf.myexperiment.org/User/221" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-07-02T11:31:14Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-07-02T11:31:14Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+
+</rdf:RDF>
