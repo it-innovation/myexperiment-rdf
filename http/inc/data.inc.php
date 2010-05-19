@@ -21,7 +21,6 @@
 	if ($domain=="private"){
 		$sql=getPrivateSQL();
 		$mappings=getPrivateMappings();
-		$groups=getPrivateGroups();
 		$prefixes=getPrivatePrefixes();
 	}
 	elseif($domain=="protected"){

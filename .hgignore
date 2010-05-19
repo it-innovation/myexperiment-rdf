@@ -3,3 +3,4 @@ syntax: glob
 *.pid
 *~
 http/inc/settings.inc.php
+http/inc/connect.inc.php

@@ -18,17 +18,8 @@ RewriteRule ^howtosparql/?$ howtosparql.php
 
 RewriteRule ^ORE/?$ ore.php
 RewriteRule ^guide/?$ guide.php
-RewriteRule ^Aggregation/([a-zA-Z]+)/([0-9]+)/?$ oreredirect.php?type=$1&id=$2
-RewriteRule ^ResourceMap/([a-zA-Z]+)/([0-9]+)/?$ xmlgen.php?format=ore&type=$1&id=$2
-RewriteRule ^SplashPage/([a-zA-Z]+)/([0-9]+)/?$ splashpage.php?type=$1&id=$2
-RewriteRule ^AtomEntry/([a-zA-Z]+)/([0-9]+)/?$ atomentry.php?type=$1&id=$2
-RewriteRule ^AtomFeed/([a-zA-Z]+)/([0-9]+)/?$ atomfeed.php?type=$1&id=$2&limit=50
-RewriteRule ^AtomFeed/([a-zA-Z]+)/?$ atomfeed.php?type=$1&limit=50
-RewriteRule ^([a-z_]+)/([0-9A-F]+)/([^~]+)$ extractrdf.php?type=$1&id=$2&params=$3
-RewriteRule ^([a-z_]+)/([0-9a-zA-Z_]+)$ xmlgen.php?type=$1&id=$2
-RewriteRule ^([a-z_]+)/$ xmlgen.php?type=$1
 
-<Files ~ "private|current|upload_specs">
+<Files ~ "private|current|upload_specs|xmlgen">
   	Order deny,allow
  	Deny from all
  	AuthName "Secure myExperiment Area"
