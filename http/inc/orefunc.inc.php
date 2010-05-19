@@ -52,7 +52,21 @@ function clearProxies($entity){
         global $proxies;
         $proxies[$entity]="USED";
 }
-
+function getResourceMapRDF($type,$id){
+        global $datauri;
+	$curtime=date("Y-m-d\TH:i:s\Z");
+        return"  <rdf:Description rdf:about=\"".$datauri."ResourceMap/$type/$id\">
+    <ore:describes rdf:resource=\"".$datauri."$type/$id\"/>
+    <dcterms:creator rdf:parseType=\"Resource\">
+      <foaf:name>myExperiment Mothership RDF Generator</foaf:name>
+      <foaf:page rdf:resource=\"$datauri\" />
+    </dcterms:creator>
+    <dcterms:created rdf:datatype=\"&xsd;dateTime\">$curtime</dcterms:created>
+    <dcterms:modified rdf:datatype=\"&xsd;dateTime\">$curtime</dcterms:modified>
+    <dc:rights>This Resource Map is available under the Creative Commons Attribution-Noncommercial 2.5 Generic license</dc:rights>
+    <dcterms:rights rdf:resource=\"http://creativecommons.org/licenses/by-nc/2.5/\"/>
+  </rdf:Description>\n\n";
+}
 function getAggregatedResourceSQL($type,$id){
         if ($type=="experiments"){
                 $sql=getPrivateSQL();
