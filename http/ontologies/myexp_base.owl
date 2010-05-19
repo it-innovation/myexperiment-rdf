@@ -39,7 +39,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">March 30, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 19, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
     <owl:imports rdf:resource="&snarm;"/>
   </owl:Ontology>
@@ -80,26 +80,32 @@
 
   <rdf:Description rdf:about="&dcterms;created">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&dcterms;description">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&dcterms;modified">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&dcterms;title">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&dcterms;type">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&dcterms;identifier">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&dcterms;Agent">
@@ -116,8 +122,9 @@
     <owl:inverseOf rdf:resource="&dcterms;hasVersion"/>
   </rdf:Description>
 
-   <rdf:Description rdf:about="&foaf;based_near">
+  <rdf:Description rdf:about="&foaf;based_near">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&foaf;homepage">
@@ -145,6 +152,7 @@
 
   <rdf:Description rdf:about="&sioc;name">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&sioc;has_member">

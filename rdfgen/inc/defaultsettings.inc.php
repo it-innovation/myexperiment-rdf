@@ -2,7 +2,7 @@
 	//Current Working Direcetory
         $cwd="/var/www/html/rdf/";
         //Setup include_path
-        ini_set('include_path',ini_get('include_path').":".$cwd."inc/:");
+        ini_set('include_path',ini_get('include_path').":$cwd/inc/:");
 	//The URI for RDF data
 	$datauri="http://rdf.myexperiment.org/";
 	//The URI for RDF data in the guide"

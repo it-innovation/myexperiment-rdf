@@ -6,6 +6,7 @@
 <p><big>This page includes the changelog for the <a href=".">myExperiment Ontology</a> and consequently myExperiment's RDF data.</big></p>
 
 <ul class="changelog">
+  <li><b>19/05/2010</b> Added ranges to properties reused from non-myExperiment ontologies.
   <li><b>05/04/2010</b> Made Vocabulary a subclass of SKOS ConceptScheme and Tag a subclass of Concept changing it's dcterms property to skos:prefLabel.</li>
   <li><b>31/03/2010</b> Removed accessed-from-site as this can be inferred from user-agent.  Also removed retroactive assignment of human-start-page as a property restriction for Policy as there is currently no such thing exists</li>
   <li><b>30/03/2010</b> Made Version a subclass of Interface rather than Contribution.</li>

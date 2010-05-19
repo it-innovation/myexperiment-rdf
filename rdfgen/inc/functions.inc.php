@@ -1,5 +1,20 @@
 <?php
+function getEntityURI($type,$id,$format=''){
+	 global $datauri;
+	 if ($format=="ore") return $datauri."aggregations/$type/$id";
+         elseif ($type=="workflow_versions"){
+	        $wvsql="select workflow_id, version from workflow_versions where id=$id";
+                $wvres=mysql_query($wvsql);
+                return $datauri."workflows/".mysql_result($wvres,0,'workflow_id')."/versions/".mysql_result($wvres,0,'version');
+         }
+         elseif ($type=="group_announcements"){
+   	 	$gasql="select network_id from group_announcements where id=$id";
+                $gares=mysql_query($gasql);
+                return $datauri."groups/".mysql_result($gares,0,'network_id')."/announcements/".$id;
+         }
+         return $datauri."$type/$id";
 
+}
 function getRequester($mship){
 	if (!$mship['user_established_at']) return "groups/".$mship['network_id'];
 	elseif(!$mship['network_established_at']) return "users/".$mship['user_id'];
@@ -195,9 +210,8 @@ function openid_url($user){
 	if ($userid==$user['id'] || $domain=="private") return $user['openid_url'];
 }
 function getResidence($user){
-	$residence="<!-- residence -->\n";
-	if($user['location_city'])$residence.="<dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_city'])."\"/>\n";
-	if($user['location_country'])$residence.="<dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_country'])."\"/>\n";
+	if($user['location_city'])$residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_city'])."\"/>\n";
+	if($user['location_country'])$residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_country'])."\"/>\n";
 	return $residence;
 }
 function request_token($request){
@@ -209,7 +223,7 @@ function username($user){
 	if ($userid==$user['id'] || $domain=="private") return $user['username'];
 }	
 function isPartOfURI($entry){
-	return  "Pack/".$entry['pack_id'];
+	return  "packs/".$entry['pack_id'];
 }
 function getVersionID($entity){
 	if ($entity['contributable_type']=="Workflow") $sql="select id from workflow_versions where workflow_id=$entity[contributable_id] and version=$entity[contributable_version]";

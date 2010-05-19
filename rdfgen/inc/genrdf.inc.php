@@ -19,19 +19,7 @@
 		$useentity=$entityns[$type];
 		$otype=$ontent[$type];
 		$fullentity="$useentity:$otype";
-		if ($format=="ore") $uri=$datauri."aggregations/$type/$id";
-		elseif ($type=="workflow_versions"){
-			$wvsql="select workflow_id, version from workflow_versions where id=$id";
-//			echo $wvsql;
-			$wvres=mysql_query($wvsql);
-			$uri=$datauri."workflows/".mysql_result($wvres,0,'workflow_id')."/versions/".mysql_result($wvres,0,'version');
-		}
-		elseif ($type=="group_announcements"){
-			$gasql="select network_id from group_announcements where id=$id";
-			$gares=mysql_query($gasql);
-			$uri=$datauri."groups/".mysql_result($gares,0,'network_id')."/announcements/".$id;
-		}
-		else $uri=$datauri."$type/$id";
+		$uri = getEntityURI($id,$type,$format);	
 		$stag="  <$fullentity rdf:about=\"$uri\">\n";
 		$xml=$stag;
 		foreach ($template as $field => $property){
@@ -220,32 +208,6 @@
 	        $header.=">\n";
 	        return $header;
 	}
-	function privatepageheader(){
-		global $ontopath;
-		$namespaces['mebase']=$ontopath.'base/';
-                $namespaces['meac']=$ontopath.'attrib_credit/';
-                $namespaces['meannot']=$ontopath.'annotations/';
-                $namespaces['mepack']=$ontopath.'packs/';
-                $namespaces['meexp']=$ontopath.'experiments/';
-                $namespaces['mecontrib']=$ontopath.'contributions/';
-                $namespaces['mevd']=$ontopath.'viewings_downloads/';
-                $namespaces['mecomp']=$ontopath.'components/';
-                $namespaces['mespec']=$ontopath.'specific/';
-		$namespaces['mewn']=$ontopath.'wordnet/';
-		$namespaces['meq']=$ontopath.'questions/';
-                $namespaces['rdf']='http://www.w3.org/1999/02/22-rdf-syntax-ns#';
-                $namespaces['rdfs']='http://www.w3.org/2000/01/rdf-schema#';
-                $namespaces['owl']='http://www.w3.org/2002/07/owl#';
-                $namespaces['dc']='http://purl.org/dc/elements/1.1/';
-                $namespaces['dcterms']='http://purl.org/dc/terms/';
-                $namespaces['cc']='http://web.resource.org/cc/';
-                $namespaces['foaf']='http://xmlns.com/foaf/0.1/';
-                $namespaces['sioc']='http://rdfs.org/sioc/ns#';
-                $namespaces['ore']='http://www.openarchives.org/ore/terms/';
-                $namespaces['snarm']=$ontopath.'snarm/';
-                $namespaces['xsd']='http://www.w3.org/2001/XMLSchema#';
-		return varpageheader($namespaces);
-	}
 
 	function pageheader(){
 		global $ontopath;
@@ -274,6 +236,9 @@
 	}
 	function pagefooter(){
         	return "</rdf:RDF>";
+	}
+	function rdffiledescription($url){
+		return "  <rdf:Description rdf:about=\"$url.rdf\">\n    <foaf:primaryTopic rdf:resource=\"$url\"/>\n  </rdf:Description>\n\n";
 	}
 
 ?>

@@ -25,6 +25,7 @@
 	        $res=mysql_query($cursql);
 		$e=1;
 		$xml=pageheader();
+		if ($id) $xml.=rdffiledescription(getEntityURI($type,$id));
 		if ($params[2]=="dataflows"||$params[2]=="dataflow"){
 			array_shift($params);
 			$version=array_shift($params);

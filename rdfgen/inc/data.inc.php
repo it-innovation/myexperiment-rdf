@@ -1,19 +1,14 @@
 <?php
 	include('settings.inc.php');
-        
+        include('datatypes.inc.php');
 
 	//Get types for datatype properties
-        $dtdata = file();
+	$datatypes=getDatatypes();
 
 	//ORE Stuff
 	$all_ars=array();
 	$aggregateprops=array("mecontrib:preview","mecontrib:thumbnail","mecontrib:thumbnail-big","mecontrib:svg","mebase:has-version","mebase:has-current-version","mebase:content-url","mebase:human-start-page","meexp:has-input","meexp:has-output","meexp:has-runner","meexp:has-runnable","mebase:uri");
 	$aggregateclasses=array("File","Workflow","WorkflowVersion","Pack","Experiment","Job");
-
-	//Clauses for SQL Statements
-        $pubcond="policies.share_mode in (0,1,2)";
-        $protcond="or ((permissions.contributor_id=? and permissions.contributor_type='User' and permissions.view=1) or (permissions.contributor_id in (~) and permissions.contributor_type='Network' and permissions.view=1) or (contributions.contributor_id=? and contributions.contributor_type='User'))";
-        $policy_join="join policies on contributions.policy_id=policies.id left join permissions on policies.id=permissions.policy_id";
 
 	//Entities to SQL table mappings	
 	$tables['announcements']="announcements";
