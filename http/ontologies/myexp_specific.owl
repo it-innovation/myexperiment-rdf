@@ -112,7 +112,7 @@
     <rdfs:subClassOf rdf:resource="&meannot;Taggable"/>
   </rdf:Description>
   
-  <rdf:Description rdf:about="&mebase;AbstractWorkflow">
+  <rdf:Description rdf:about="&mecontrib;AbstractWorkflow">
     <rdfs:subClassOf rdf:resource="&meexp;Runnable"/>
   </rdf:Description>
 

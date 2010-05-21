@@ -233,20 +233,20 @@ function getVersionID($entity){
 	}
 }
 	
-function getHumanStartPage($entity,$type){
+function getHomepage($entity,$type){
 	global $myexp_inst, $hspent, $datauri;	
 	$gtype=$hspent[$type]."/";
-	if ($type=="WorkflowVersion"){
-		$gtype="workflows/".$entity['workflow_id']."?version=";
+	if ($type=="workflow_versions"){
+		$gtype="workflows/".$entity['workflow_id']."/versions/";
 		$entity['id']=$entity['version'];
 	}
-	elseif ($type=="Job") $gtype="experiments/".$entity['experiment_id']."/jobs/";
-	elseif ($type=="GroupAnnouncement") $gtype="groups/".$entity['network_id']."/announcements/";
-	elseif ($type=="Review") $gtype=$hspent[$entity['reviewable_type']]."/".$entity['reviewable_id']."/reviews/";
+	elseif ($type=="jobs") $gtype="experiments/".$entity['experiment_id']."/jobs/";
+	elseif ($type=="group_announcements") $gtype="groups/".$entity['network_id']."/announcements/";
+	elseif ($type=="reviews") $gtype=$hspent[$entity['reviewable_type']]."/".$entity['reviewable_id']."/reviews/";
 	$url=$myexp_inst.$gtype.$entity['id'];
 	addAggregatedResource("    <rdf:Description rdf:about=\"$url\">\n      <dcterms:format rdf:datatype=\"&xsd;string\">text/xhtml+xml</dcterms:format>\n      <dcterms:title rdf:datatype=\"&xsd;string\">Human Start Page for $entity[title]</dcterms:title>\n    </rdf:Description>\n",$datauri."$type/$entity[id]",$url,$entity['format']);
+	if ($url) return $url.".html";
 	return "";
-	return $url;
 	
 }
 function getFilename($entity,$type){
@@ -376,10 +376,15 @@ function getDataflow($entity,$type){
                 $wfvid=mysql_result($res,0,'id');
 		$type="workflow_versions";
                 $fileloc=$comp_path.$wfvid;
+		$id=$entity['id'];
+		$version=$entity["current_version"];
+                
         }
         elseif ($type=="workflow_versions"){
                 $fileloc=$comp_path.$entity['id'];
 		$wfvid=$entity['id'];
+		$id=$entity['workflow_id'];
+		$version=$entity['version'];
         }
 	$data="";
 	if (file_exists($fileloc)){
@@ -390,8 +395,8 @@ function getDataflow($entity,$type){
 	if (strlen($data)>0){
 		$sql="select content_type_id from workflow_versions where id='$wfvid'";
                 $res=mysql_query($sql);
-		if (mysql_result($res,0,'content_type_id')==2) return $datauri.$type."/$wfvid/dataflows/1";
-		return $datauri."workflow_versions/$wfvid/dataflow";
+		if (mysql_result($res,0,'content_type_id')==2) return $datauri."workflows/$id/versions/$version/dataflows/1";
+		return $datauri."workflows/$id/versions/$version/dataflow";
 	}
 	return "";
 }

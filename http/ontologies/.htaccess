@@ -11,6 +11,7 @@ RewriteRule ^contributions/$ myexp_contrib.owl
 RewriteRule ^experiments/$ myexp_exp.owl
 RewriteRule ^viewings_downloads/$ myexp_view_down.owl
 RewriteRule ^specific/$ myexp_specific.owl
+RewriteRule ^components/$ myexp_components.owl
 RewriteRule ^reasoned/$ myexp_reasoned.owl
 RewriteRule ^sparql/$ sparql.php
 RewriteRule ^CHANGELOG/$ CHANGELOG.php

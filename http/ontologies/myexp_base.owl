@@ -39,7 +39,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 19, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 20, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
     <owl:imports rdf:resource="&snarm;"/>
   </owl:Ontology>
@@ -128,8 +128,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="&foaf;homepage">
-    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&foaf;knows">
@@ -137,13 +136,11 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="&foaf;mbox">
-    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&sioc;avatar">
-    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&sioc;Item">
@@ -301,12 +298,6 @@
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;human-start-page" />
-        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:Class>
 
@@ -376,12 +367,6 @@
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&dcterms;description" />
-        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;human-start-page" />
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -507,12 +492,6 @@
       <owl:Restriction>
         <owl:onProperty rdf:resource="&dcterms;modified" />
         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-     <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;human-start-page" />
-        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
@@ -646,12 +625,6 @@
         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;human-start-page" />
-        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:Class>
 
@@ -679,15 +652,15 @@
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf> 
-     <rdfs:subClassOf>
+    <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="&foaf;homepage" />
+        <owl:onProperty rdf:resource="&foaf;mbox" />
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
-     <rdfs:subClassOf>
+    <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="&foaf;mbox" />
+        <owl:onProperty rdf:resource="&foaf;homepage" />
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -763,6 +736,12 @@
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
 
+  <owl:ObjectProperty rdf:about="content-url">
+    <rdfs:label>content-url</rdfs:label>
+    <rdfs:comment>An Upload has content at a URL</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
+  </owl:ObjectProperty>
+
   <owl:ObjectProperty rdf:about="has-current-version">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
     <rdfs:subPropertyOf rdf:resource="has-version"/>
@@ -777,6 +756,14 @@
     <rdfs:domain rdf:resource="Group"/>
     <rdfs:range rdf:resource="GroupAnnouncement"/>
     <owl:inverseOf rdf:resource="announced-to"/>
+    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="email">
+    <rdfs:label>email</rdfs:label>
+    <rdfs:comment>A User has an email address</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="&foaf;mbox"/>
+    <rdfs:domain rdf:resource="User"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
  
@@ -814,6 +801,14 @@
     <owl:inverseOf rdf:resource="is-member"/>
     <rdfs:domain rdf:resource="Group"/>
     <rdfs:range rdf:resource="User"/>
+    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="openid-url">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>openid-url</rdfs:label>
+    <rdfs:comment>A User may have an openid-url represented as a uri</rdfs:comment>
+    <rdfs:domain rdf:resource="User"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
 
@@ -887,6 +882,13 @@
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
 
+  <owl:ObjectProperty rdf:about="uri">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>uri</rdfs:label>
+    <rdfs:comment>The URI for some object</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
+  </owl:ObjectProperty>
+
 <!-- =============== Datatype Properties ============== -->
 
   <owl:DatatypeProperty rdf:about="accepted-at">
@@ -916,13 +918,6 @@
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:DatatypeProperty>
 
-  <owl:DatatypeProperty rdf:about="content-url">
-    <rdfs:label>content-url</rdfs:label>
-    <rdfs:comment>An Upload has content at a URL</rdfs:comment>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
-    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
-  </owl:DatatypeProperty>
-  
   <owl:DatatypeProperty rdf:about="country">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
     <rdfs:label>country</rdfs:label>
@@ -965,15 +960,6 @@
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:DatatypeProperty>
 
-  <owl:DatatypeProperty rdf:about="email">
-    <rdfs:label>email</rdfs:label>
-    <rdfs:comment>A User has an email address</rdfs:comment>
-    <rdfs:subPropertyOf rdf:resource="&foaf;mbox"/>
-    <rdfs:domain rdf:resource="User"/>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
-    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
-  </owl:DatatypeProperty>
-
   <owl:DatatypeProperty rdf:about="email-confirmed-at">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
     <rdfs:label>email-confirmed-at</rdfs:label>
@@ -997,13 +983,6 @@
     <rdfs:comment>A File has a filename</rdfs:comment>
     <rdfs:domain rdf:resource="Upload"/>
     <rdfs:range rdf:resource="&xsd;string"/>
-    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
-  </owl:DatatypeProperty>
-
-  <owl:DatatypeProperty rdf:about="human-start-page">
-    <rdfs:label>human-start-page</rdfs:label>
-    <rdfs:comment>An HTML page that describes a particular object</rdfs:comment>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:DatatypeProperty>
 
@@ -1049,14 +1028,13 @@
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:DatatypeProperty>
 
-  <owl:DatatypeProperty rdf:about="openid-url">
+  <owl:ObjectProperty rdf:about="openid-url">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
     <rdfs:label>openid-url</rdfs:label>
     <rdfs:comment>A User may have an openid-url represented as a uri</rdfs:comment>
     <rdfs:domain rdf:resource="User"/>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
-  </owl:DatatypeProperty>
+  </owl:ObjectProperty>
 
   <owl:DatatypeProperty rdf:about="organisation">
     <rdfs:label>organisation</rdfs:label>
@@ -1111,14 +1089,6 @@
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:DatatypeProperty>
 
-  <owl:DatatypeProperty rdf:about="uri">
-    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-    <rdfs:label>uri</rdfs:label>
-    <rdfs:comment>The URI for some object</rdfs:comment>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
-    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
-  </owl:DatatypeProperty>
- 
   <owl:DatatypeProperty rdf:about="username">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
     <rdfs:label>username</rdfs:label>

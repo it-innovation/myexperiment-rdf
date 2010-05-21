@@ -6,7 +6,7 @@
 		$contrib_type_fpr_uris=array('Group'=>'groups','User'=>'users');
 		if ($contrib_type=="Network") $contrib_type="Group";
 		$contributor=$contrib_type_fpr_uris[$contrib_type]."/".$contrib_id;
-		return "        <snarm:has-access>\n          <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/View$contrib_type$contrib_id\">\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"".$access_ent."View\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n        <snarm:has-access>\n          <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/Download$contrib_type$contrib_id\">\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"".$access_ent."Download\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n        <snarm:has-access>\n          <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/Edit$contrib_type$contrib_id\">\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"".$access_ent."Edit\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n";
+		return "        <snarm:has-access>\n          <snarm:RestrictedAccess>\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"".$access_ent."View\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n        <snarm:has-access>\n          <snarm:RestrictedAccess>\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"".$access_ent."Download\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n        <snarm:has-access>\n          <snarm:RestrictedAccess>\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"".$access_ent."Edit\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n";
 	}
 	function getShareModeAccesses($sm){
 		$access_ent=get_access_entity();
@@ -73,18 +73,18 @@
 		}
 		return $accesses;
 	}
-	function getPolicy($contrib){
+	function getPolicy($contrib,$type=''){
 		global $datauri, $unmodularized,$myexp_inst;
 //        	$policy="<!-- POLICY: $contrib[policy_id] -->\n";
 		//print_r($contrib);
 		$policy_url=$datauri."policies/".$contrib['policy_id'];
-	        $policy.="<snarm:Policy rdf:about=\"".$datauri."policies/".$contrib['policy_id']."\">\n";
+	        if ($type!="policies") $policy.="<snarm:Policy rdf:about=\"".$datauri."policies/".$contrib['policy_id']."\">\n";
 	        $perms=getPermissions($contrib['policy_id']);
 	        $policy.=getContributorPermissions($contrib['contributor_type'],$contrib['contributor_id'],$policy_url);
 	        $policy.=getShareModeAccesses($contrib['share_mode']);
 	        $policy.=getUpdateModeAccesses($contrib['update_mode'],$contrib['share_mode'],$perms);
 	        $policy.=getPermissionAccesses($perms,$policy_url);
-	        $policy.="      </snarm:Policy>";
+	        if ($type!="policies") $policy.="      </snarm:Policy>";
 		return $policy;
 	}
 	function get_access_entity(){

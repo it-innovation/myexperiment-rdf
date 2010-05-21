@@ -2,7 +2,7 @@
 	ini_set('include_path','inc/:.');
 	$pagetitle="RDF Guide";
 	include('header.inc.php');
-	include('data.inc.php');
+	include('settings.inc.php');
 ?>
   <p>Below is a guide on how to retrieve RDF for one or for myExperiment entities.  It should be noted that if you request a URI that does not exist you will receive a 404 response.  When requesting one or more entities if none of them are publicly available you will be prompted for your myExperiment username and password.  However if at least one entity is public you will be returned with the RDF for all public entities that meet your request.</p>
 

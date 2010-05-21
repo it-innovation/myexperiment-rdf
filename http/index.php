@@ -2,12 +2,12 @@
 	ini_set('include_path','inc/:.');
 	$pagetitle="Linked Data";
 	include('header.inc.php');
-	include('data.inc.php');
+	include('settings.inc.php');
 ?>
   <h3 style="margin-top: 0;">Welcome to myExperiment Linked Data</h3>
   <p><a href="http://linkeddata.org/">Linked Data</a> is a way of interconnecting data published on the web that has not been previously linked.  myExperiment is a publishers of such data, making its public data available on the web in three different formats:
     <ul>
-      <li>HTML web pages. E.g  <a href="http://www.myexperiment.org/workflows/16.html">http://www.myexperiment.org/workflows/16.html</a><li>
+      <li>HTML web pages. E.g  <a href="http://www.myexperiment.org/workflows/16.html">http://www.myexperiment.org/workflows/16.html</a></li>
       <li>REST API XML. E.g.  <a href="http://www.myexperiment.org/workflows/16.xml">http://www.myexperiment.org/workflows/16.xml</a></li>
       <li>RDF/XML. E.g.  <a href="http://www.myexperiment.org/workflows/16.rdf">http://www.myexperiment.org/workflows/16.rdf</a></li>
     </ul>

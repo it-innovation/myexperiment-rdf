@@ -19,7 +19,7 @@
 		$useentity=$entityns[$type];
 		$otype=$ontent[$type];
 		$fullentity="$useentity:$otype";
-		$uri = getEntityURI($id,$type,$format);	
+		$uri = getEntityURI($type,$id,$format);	
 		$stag="  <$fullentity rdf:about=\"$uri\">\n";
 		$xml=$stag;
 		foreach ($template as $field => $property){
@@ -238,7 +238,7 @@
         	return "</rdf:RDF>";
 	}
 	function rdffiledescription($url){
-		return "  <rdf:Description rdf:about=\"$url.rdf\">\n    <foaf:primaryTopic rdf:resource=\"$url\"/>\n  </rdf:Description>\n\n";
+		return "  <rdf:Description rdf:about=\"$url.rdf\">\n    <foaf:primaryTopic rdf:resource=\"$url\"/>\n    <foaf:homepage rdf:resource=\"$url.html\"/>\n    <dcterms:hasFormat rdf:resource=\"$url.xml\"/>\n  </rdf:Description>\n\n";
 	}
 
 ?>

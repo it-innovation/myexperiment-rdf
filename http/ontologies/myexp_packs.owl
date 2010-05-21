@@ -126,7 +126,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="&mebase;uri">
-    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&ore;proxyIn">

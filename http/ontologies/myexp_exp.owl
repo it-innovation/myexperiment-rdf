@@ -7,6 +7,7 @@
  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
  <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
  <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
  <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
  <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
  <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
@@ -23,6 +24,7 @@
          xmlns:owl		="&owl;"
          xmlns:dc		="&dc;"
 	 xmlns:dcterms		="&dcterms;"
+	 xmlns:foaf		="&foaf;"
 	 xmlns:ore		="&ore;"
 	 xmlns:sioc		="&sioc;"
 >
@@ -36,7 +38,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 19, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 20, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -101,12 +103,8 @@
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="&mebase;human-start-page">
-    <rdf:type rdf:resource="&owl;ObjectProperty"/>
-  </rdf:Description>
-
   <rdf:Description rdf:about="&mebase;uri">
-    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="&mebase;text">
@@ -197,12 +195,6 @@
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;human-start-page" />
-        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
         <owl:onProperty rdf:resource="&mebase;uri" />
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
@@ -277,6 +269,15 @@
     <rdfs:isDefinedBy rdf:resource="&meexp;"/>
   </owl:ObjectProperty>
 
+  <owl:ObjectProperty rdf:about="runner-url">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:label>runner-url</rdfs:label>
+    <rdfs:comment>A Runner must have an runner-url from where to invoke the runner</rdfs:comment>
+    <rdfs:domain rdf:resource="Runner"/>
+    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
+  </owl:ObjectProperty>
+
+
 <!-- =============== Datatype Properties ============== -->
 
   <owl:DatatypeProperty rdf:about="completed-at">
@@ -312,15 +313,6 @@
     <rdfs:comment>The last dateTime when the last-status of the Job was polled</rdfs:comment>
     <rdfs:domain rdf:resource="Job"/>
     <rdfs:range rdf:resource="&xsd;dateTime"/>
-    <rdfs:isDefinedBy rdf:resource="&meexp;"/>
-  </owl:DatatypeProperty>
-
-  <owl:DatatypeProperty rdf:about="runner-url">
-    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-    <rdfs:label>runner-url</rdfs:label>
-    <rdfs:comment>A Runner must have an runner-url from where to invoke the runner</rdfs:comment>
-    <rdfs:domain rdf:resource="Runner"/>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
     <rdfs:isDefinedBy rdf:resource="&meexp;"/>
   </owl:DatatypeProperty>
 

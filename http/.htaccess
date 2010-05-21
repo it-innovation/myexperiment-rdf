@@ -19,7 +19,7 @@ RewriteRule ^howtosparql/?$ howtosparql.php
 RewriteRule ^ORE/?$ ore.php
 RewriteRule ^guide/?$ guide.php
 
-<Files ~ "private|current|upload_specs|xmlgen">
+<Files ~ "private|current|upload_specs|rdfgen">
   	Order deny,allow
  	Deny from all
  	AuthName "Secure myExperiment Area"
@@ -27,9 +27,7 @@ RewriteRule ^guide/?$ guide.php
   	AuthType Basic
   	Require valid-user
   	allow from 127.0.0.1
+        allow from 152.78.65.3
         Satisfy Any
 </Files>
 
-<FilesMatch "ExperimentAtomFeed">
-	ForceType application/atom+xml
-</FilesMatch> 

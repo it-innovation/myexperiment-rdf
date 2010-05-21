@@ -7,6 +7,7 @@
  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
  <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
  <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>  
  <!ENTITY skos 'http://www.w3.org/2004/02/skos/core#'>
  <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
  <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
@@ -21,6 +22,7 @@
          xmlns:owl		="&owl;"
          xmlns:dc		="&dc;"
 	 xmlns:dcterms		="&dcterms;"
+	 xmlns:foaf		="&foaf;"
 	 xmlns:skos		="&skos;"
          xmlns:xsd		="&xsd;"
 >
@@ -34,7 +36,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 19, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 20, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -109,10 +111,6 @@
 
   <rdf:Description rdf:about="&mebase;Submission">
     <rdf:type rdf:resource="&owl;Class"/>
-  </rdf:Description>
-
-  <rdf:Description rdf:about="&mebase;human-start-page">
-    <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
 
 
@@ -250,12 +248,6 @@
         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;human-start-page" />
-        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&meannot;"/>
   </owl:Class>
 
@@ -276,12 +268,6 @@
         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;human-start-page" />
-        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&meannot;"/>
   </owl:Class>
 
@@ -293,6 +279,13 @@
   </owl:Class>
 
   <!-- =============== Object Properties ============== -->
+
+  <owl:ObjectProperty rdf:about="citation-url">
+    <rdfs:label>citation-url</rdfs:label>
+    <rdfs:comment>The URL where a citation is located</rdfs:comment>
+    <rdfs:domain rdf:resource="Citation"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
 
   <owl:ObjectProperty rdf:about="uses-tag">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
@@ -347,14 +340,6 @@
     <rdfs:comment>A Tag has a count of the number of times it is used</rdfs:comment>
     <rdfs:domain rdf:resource="Tag"/>
     <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
-    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
-  </owl:DatatypeProperty>
-
-  <owl:DatatypeProperty rdf:about="citation-url">
-    <rdfs:label>citation-url</rdfs:label>
-    <rdfs:comment>The URL where a citation is located</rdfs:comment>
-    <rdfs:domain rdf:resource="Citation"/>
-    <rdfs:range rdf:resource="&xsd;anyURI"/>
     <rdfs:isDefinedBy rdf:resource="&meannot;"/>
   </owl:DatatypeProperty>
 
