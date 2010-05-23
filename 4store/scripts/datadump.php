@@ -1,24 +1,17 @@
 #!/usr/bin/php
 <?php
-	if ($argv[1]=="myexp_private"){
-		$domain="private";
-		$ts=$argv[1];
-	}
-	else{
-		$domain="public";
-		$ts="myexp_public";
-	}
-	$start=2;
-	$rdffile="/var/data/tmp/$ts/data.rdf";
-	$rdfgzfile="/var/data/$ts/data.rdf.gz";
-				
-	ini_set('include_path','/var/www/html/rdf/inc/');
-	include('changeddata.inc.php');
-	include('genxml.inc.php');
+	$domain="public";
+	$ts="myexp_public";
+	
+	include('include.inc.php');
+        include('changeddata.inc.php');
+        include('genrdf.inc.php');
 
+	$start=2;
+	$rdffile=$datapath."tmp/$ts/data.rdf";
+	$rdfgzfile="$datapath$ts/data.rdf.gz";
+				
 	$ddsql=$sql;
-	unset($ddsql['Downloads']);
-	unset($ddsql['Viewings']);
 	echo "[".date("H:i:s")."] Creating temporary file $rdffile\n";
 	$fh=fopen($rdffile,"w");
 	fwrite($fh,pageheader());
@@ -44,8 +37,8 @@
 	        fwrite($fh,$xml);
 	}
 	fclose($fh);
- 	echo "[".date("H:i:s")."] Adding Dataflows\n";
-	exec("for dffile in `ls /var/data/dataflows/rdf/*`; do
+ 	echo "[".date("H:i:s")."] Adding dataflows\n";
+	exec("for dffile in `ls ".$datapath."dataflows/rdf/*`; do
         head -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`] \$dffile | tail -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`-46] >> $rdffile
 done");
 	$fh=fopen($rdffile,"a");

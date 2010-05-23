@@ -3,7 +3,7 @@
 	$htmlheader[]='<script src="/js/sparql.js" type="text/javascript"></script>';
 	ini_set('include_path','inc/:.');
 	include('xmlfunc.inc.php');
-	include('sq_connect.inc.php');
+	include('sparqlconnect.inc.php');
         require('4storefunc.inc.php');
 	require('miscfunc.inc.php');
 	$domain="public";

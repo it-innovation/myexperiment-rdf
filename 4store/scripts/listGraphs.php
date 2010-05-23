@@ -1,6 +1,7 @@
 #!/usr/bin/php 
 <?php
-	include('/var/www/html/rdf/inc/xmlfunc.inc.php');
+	include('include.inc.php');
+	include('xmlfunc.inc.php');
 	if (!$argv[1]) die("No Knowledge Base specified!\n");
 	$query="4s-query $argv[1] ".'"select distinct ?g where { graph ?g {?s ?p ?o} }"';
 	$ph=popen($query,'r');

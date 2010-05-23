@@ -100,22 +100,22 @@ function workflowOrVersion($entity){
 	return $datauri.$type."/".$entity['id'];
 }
 function getUrl($workflow,$type="",$format="image"){
- 	global $myexp_inst;
+ 	global $datauri;
 	if ($type) $type.="/";
         if ($workflow['workflow_id']){
-                return $myexp_inst."workflow/version/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
+                return $datauri."workflow/version/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
         }
-        return $myexp_inst."workflow/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
+        return $datauri."workflow/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
 }
 function getWorkflowDownloadUrl($workflow){
-	global $myexp_inst;
+	global $datauri;
 	if ($workflow['workflow_id']){
-                $url=$myexp_inst."workflows/".$workflow['workflow_id']."/download/".urlencode($workflow['unique_name']).".".$workflow['file_ext']."?version=".$workflow['version'];
+                $url=$datauri."workflows/".$workflow['workflow_id']."/download/".urlencode($workflow['unique_name']).".".$workflow['file_ext']."?version=".$workflow['version'];
 		$table="workflow_versions";
 		$id=$workflow['workflow_id'];
         }
         else{
-		$url=$myexp_inst."workflows/".$workflow['id']."/download/".urlencode($workflow['unique_name']).".".$workflow['file_ext'];
+		$url=$datauri."workflows/".$workflow['id']."/download/".urlencode($workflow['unique_name']).".".$workflow['file_ext'];
 		$table="workflows";
 		$id= $workflow['id'];
 	}
@@ -130,8 +130,8 @@ function getWorkflowDownloadUrl($workflow){
 	
 }
 function getFileDownloadUrl($file){
-	global $myexp_inst;
-	return $myexp_inst."blobs/".$file['id']."/download/".urlencode($file['local_name']);
+	global $datauri;
+	return $datauri."blobs/".$file['id']."/download/".urlencode($file['local_name']);
 }
 	
 function getLicense($contrib){
@@ -139,11 +139,7 @@ function getLicense($contrib){
 	return $licenses[$contrib['license']];
 }
 function getCurrentWorkflowVersion($workflow){
-	global $myexp_inst, $mappings, $datauri, $sql;
-/*	$sql="select id from workflow_versions where workflow_id=".$workflow['id']." and version=".$workflow['current_version'];
-	str_replace(array('~','?'),array('0','0'),$sql);
-	$res=mysql_query($sql);
-	$urlpart="WorkflowVersion/".mysql_result($res,0,'id');*/
+	global $mappings, $datauri, $sql;
         $wvsql=$sql['workflow_versions']. " and workflow_id=$workflow[id] and version=$workflow[current_version]";
         $wvsql=str_replace(array('~','?'),array('0','0'),$wvsql);
         $res=mysql_query($wvsql);
@@ -159,15 +155,12 @@ function isCurrentVersion($workflowversion){
 	return mysql_num_rows($res);
 }
 function getWorkflowVersions($workflow){
-	global $myexp_inst, $mappings, $datauri, $sql;
+	global $mappings, $datauri, $sql;
 	$wvsql=$sql['workflow_versions']. " and workflow_id=$workflow[id] and version!=$workflow[current_version]";
-//	str_replace(array('~','?'),array('0','0'),$sql);
-//	echo $wvsql;
 	$res=mysql_query($wvsql);
 	$aggregates="";
 	for ($i=0; $i<mysql_num_rows($res); $i++){
 		$row=mysql_fetch_assoc($res);
-//		print_r($row);
 		addAggregatedResource(printEntity($row,"workflow_versions"),workflowOrVersion($workflow),$datauri."workflows/".$row['workflow_id']."/versions/".$row['version'],$workflow['format']);
 		if ($workflow['format']=="ore") $aggregates.="    <ore:aggregates rdf:resource=\"".$datauri."workflows/".$row['workflow_id']."/versions/".$row['version']."\"/>\n";
 		else $aggregates.="    <mebase:has-version rdf:resource=\"".$datauri."workflows/".$row['workflow_id']."/versions/".$row['version']."\"/>\n";
@@ -234,7 +227,7 @@ function getVersionID($entity){
 }
 	
 function getHomepage($entity,$type){
-	global $myexp_inst, $hspent, $datauri;	
+	global $hspent, $datauri;	
 	$gtype=$hspent[$type]."/";
 	if ($type=="workflow_versions"){
 		$gtype="workflows/".$entity['workflow_id']."/versions/";
@@ -243,7 +236,7 @@ function getHomepage($entity,$type){
 	elseif ($type=="jobs") $gtype="experiments/".$entity['experiment_id']."/jobs/";
 	elseif ($type=="group_announcements") $gtype="groups/".$entity['network_id']."/announcements/";
 	elseif ($type=="reviews") $gtype=$hspent[$entity['reviewable_type']]."/".$entity['reviewable_id']."/reviews/";
-	$url=$myexp_inst.$gtype.$entity['id'];
+	$url=$datauri.$gtype.$entity['id'];
 	addAggregatedResource("    <rdf:Description rdf:about=\"$url\">\n      <dcterms:format rdf:datatype=\"&xsd;string\">text/xhtml+xml</dcterms:format>\n      <dcterms:title rdf:datatype=\"&xsd;string\">Human Start Page for $entity[title]</dcterms:title>\n    </rdf:Description>\n",$datauri."$type/$entity[id]",$url,$entity['format']);
 	if ($url) return $url.".html";
 	return "";
@@ -338,11 +331,11 @@ function getProxyFor($entity){
         return $xml;
 }
 function getDataflowComponents($entity,$type){
-	global $myexp_inst,$datauri;
-	$comp_path="/var/data/ld_dataflows/xml/";
+	global $datauri,$datapath;
+	$comp_path=$datapath."dataflows/xml/";
 	require_once('xmlfunc.inc.php');
 	if ($type=="workflows"){
-		require_once('connect.inc.php');
+		require_once('myexpconnect.inc.php');
 		$sql="select id from workflow_versions where version='$entity[current_version]' and workflow_id='$entity[id]'";
 		$res=mysql_query($sql);
 		$wfvid=mysql_result($res,0,'id');
@@ -367,10 +360,10 @@ function getDataflowComponents($entity,$type){
 }
 	
 function getDataflow($entity,$type){
-	global $datauri;
-	$comp_path="/var/data/ld_dataflows/rdf/";
+	global $datauri,$datapath;
+	$comp_path=$datapath."dataflows/rdf/";
  	if ($type=="workflows"){
-                require_once('connect.inc.php');
+                require_once('myexpconnect.inc.php');
                 $sql="select id from workflow_versions where version='$entity[current_version]' and workflow_id='$entity[id]'";
                 $res=mysql_query($sql);
                 $wfvid=mysql_result($res,0,'id');
@@ -409,5 +402,49 @@ function getLicenseAttributes($license){
 		$xml.="    <cc:$row[predicate] rdf:resource=\"$row[uri]\"/>\n";
 	}   
 	return $xml;;
+}
+function getAnnotationSQL($type, $p1,$p2){
+	global $sql, $annotwhereclause;
+	$cursql=$sql[$type];
+	$whereclause=str_replace('~',$p2,str_replace('?',$p1,$annotwhereclause[$type]));
+ 	if (strpos('where',$cursql) === true) $cursql.=" and $whereclause";
+        else $cursql.=" where $whereclause";
+	
+}
+function getModelAlias($type){
+	if ($type=="File") return "Blob";
+	if ($type=="Group") return "Network";
+	return $type;
+}
+function getAnnotations($entity,$type){
+	global $entannot;
+	foreach($entannot[$type] as $ea){
+	
+	if ($type=="workflows" or $type=="workflow_versions"){
+		getCitations($entity);
+	}
+	$atype=getModelAlias($ontent[$type])
+	getComments($entity,$type,$atype);
+	
+	
+}
+function getCitations($entity){
+	global $sql, $datauri;
+	$cursql = addWhere($sql['citations'],"(workflow_id=$entity[workflow_id] and workflow_version=$entity[version])");
+	$res = mysql_query($cursql);
+	for ($a=0; $a<mysql_num_rows($res); $a++){
+		$xml.="    <meannot:has-citation rdf:resource=\"".$datauri."citations/".mysql_result($res,$a,'id')."\"/>\n";
+	}
+	return $xml;
+}
+function getComments($entity,$type,$atype){
+	global $sql, $datauri, $ontent;
+	$cursql = addWhere($sql['comments'],"(commentable_type='$atype' and commentable_id=$entity[contribution_id])");
+	$res = mysql_query($cursql);
+	for ($a=0; $a<mysql_num_rows($res); $a++){
+                $xml.="    <meannot:has-comment rdf:resource=\"".$datauri."$type/".mysql_result($res,$a,'id')."\"/>\n";
+        }
+        return $xml;
+}
 }
 ?>

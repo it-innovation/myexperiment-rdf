@@ -122,10 +122,10 @@ function getAtomEntryURI($entity,$type){
         return "atom_entries/$type/$entity[id]";
 }
 function getHTMLURI($entity,$type){
-        global $myexp_inst, $hspent;
-        if ($type=="workflow_versions") return $myexp_inst."workflows/$entity[workflow_id]?version=$entity[version]";
-        if ($type=="jobs") return $myexp_inst."experiments/$entity[experiment_id]/jobs/$entity[id]";
-        return $myexp_inst.$hspent[$type]."/$entity[id]";
+        global $datauri, $hspent;
+        if ($type=="workflow_versions") return $datauri."workflows/$entity[workflow_id]?version=$entity[version]";
+        if ($type=="jobs") return $datauri."experiments/$entity[experiment_id]/jobs/$entity[id]";
+        return $datauri.$hspent[$type]."/$entity[id]";
 }
 
 ?>

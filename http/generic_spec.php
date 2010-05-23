@@ -1,10 +1,9 @@
 <?php
-ini_set('include_path','inc/:.');
-include_once('ontconnect.inc.php');
+include('include.icn.php');
+include_once('ontoconnect.inc.php');
 $query="select * from ontologies order by name, namespace";
 $pagetitle="Ontology Specifications";
 $ontimports=array();
-include('settings.inc.php');
 require_once('4storefunc.inc.php');
 $ts="ontologies";
 if ($_GET['ontology']) $ontology=$_GET['ontology'];
@@ -22,7 +21,7 @@ for ($i=0; $i<mysql_num_rows($res); $i++){
 		$filteront=$ontologies[$i]['namespace'];
 		$queryset=$ontologies[$i]['ontology_type'];
 		$timeout=$ontologies[$i]['timeout'];
-		$reasonedont="file:///var/data/ontologies/reasoned/".$ontology."_".$headername."_reasoned.owl";
+		$reasonedont="file://".$datapath."ontologies/reasoned/".$ontology."_".$headername."_reasoned.owl";
         }
 }
 if (!$_GET['ontology']){

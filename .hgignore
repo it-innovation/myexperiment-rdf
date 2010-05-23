@@ -2,8 +2,5 @@ syntax: glob
 *.log
 *.pid
 *~
-http/inc/settings.inc.php
-http/inc/connect.inc.php
-rdfgen/inc/settings.inc.php
-rdfgen/inc/connect.inc.php
+inc/settings.inc.php
 

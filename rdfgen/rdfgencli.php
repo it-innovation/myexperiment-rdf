@@ -3,11 +3,10 @@
 	ini_set('include_path','inc/');
 	chdir("../rdfgen/");
 	require('genrdf.inc.php');
-	function setTypeIDandParams($args){
+	function setTypeIDandParams($args,$noexit=0){
 		$type=$args[1];
 		$id=$args[2];
 		$params=explode("/",$args[3]);
-		$noexit=$args[4];
 		$wfid='0';
 		if ($params[0]){
 			if ($params[0]=="versions" && $type="workflows"){
@@ -41,7 +40,7 @@
 	}
 	list($type,$id,$params,$wfid)=setTypeIDandParams($argv);
 	$uri="$type/$id";
-	if ($params[0]) $uri="/".implode('/'.$params);
+	if ($params[0]) $uri="/".implode('/',$params);
 //	echo "~".sizeof($params)."~";
 	if (entityExists($type,$id)){
 	        $res=getEntityResults($type,$id);

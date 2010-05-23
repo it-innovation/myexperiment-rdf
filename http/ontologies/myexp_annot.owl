@@ -36,7 +36,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 20, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 21, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -313,6 +313,61 @@
     <rdfs:range rdf:resource="Tag"/>
     <rdfs:isDefinedBy rdf:resource="&meannot;"/>
   </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-citation">
+    <rdfs:subPropertyOf rdf:resource="&mebase;has-annotation"/>
+    <rdfs:label>has-citation</rdfs:label>
+    <rdfs:comment>A Citationable object has Citations</rdfs:comment>
+    <rdfs:domain rdf:resource="Citationable"/>
+    <rdfs:range rdf:resource="Citation"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+ 
+  <owl:ObjectProperty rdf:about="has-comment">
+    <rdfs:subPropertyOf rdf:resource="&mebase;has-annotation"/>
+    <rdfs:label>has-comment</rdfs:label>
+    <rdfs:comment>A Commentable object has Comments</rdfs:comment>
+    <rdfs:domain rdf:resource="Commentable"/>
+    <rdfs:range rdf:resource="Comment"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-favourite">
+    <rdfs:subPropertyOf rdf:resource="&mebase;has-annotation"/>
+    <rdfs:label>has-favourite</rdfs:label>
+    <rdfs:comment>A Favouritable object has Favourites</rdfs:comment>
+    <rdfs:domain rdf:resource="Favouritable"/>
+    <rdfs:range rdf:resource="Favourite"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-rating">
+    <rdfs:subPropertyOf rdf:resource="&mebase;has-annotation"/>
+    <rdfs:label>has-rating</rdfs:label>
+    <rdfs:comment>A Rateable object has Rating</rdfs:comment>
+    <rdfs:domain rdf:resource="Rateable"/>
+    <rdfs:range rdf:resource="Rating"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-review">
+    <rdfs:subPropertyOf rdf:resource="&mebase;has-annotation"/>
+    <rdfs:label>has-review</rdfs:label>
+    <rdfs:comment>A Reviewable object has Reviews</rdfs:comment>
+    <rdfs:domain rdf:resource="Reviewable"/>
+    <rdfs:range rdf:resource="Review"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+ 
+  <owl:ObjectProperty rdf:about="has-tagging">
+    <rdfs:subPropertyOf rdf:resource="&mebase;has-annotation"/>
+    <rdfs:label>has-tagging</rdfs:label>
+    <rdfs:comment>A Taggable object has Taggings</rdfs:comment>
+    <rdfs:domain rdf:resource="Taggable"/>
+    <rdfs:range rdf:resource="Tagging"/>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:ObjectProperty>
+ 
 
 <!-- =============== Datatype Properties ============== -->
   

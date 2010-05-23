@@ -1,28 +1,22 @@
 #!/usr/bin/php
 <?php
-	if ($argv[1]=="myexp_private"){
-		$domain="private";
-		$ts=$argv[1];
-	}
-	else{
-		$domain="public";
-		$ts="myexp_public";
-	}
-	$start=2;
-				
-	include('seetings.inc.php');
+	include('include.inc.php');
 	include('changeddata.inc.php');
-	include('genxml.inc.php');
+	include('genrdf.inc.php');
+	$domain="public";
+        $ts=$triplestore;
+        $start=2;
+
 
 	function saveEntities($ts,$type,$xml,$id,$userid,$hasuserid,$fileext=null){
-		global $curids;
+		global $curids, $datapath;
 		$xml.=pagefooter();
                 if ($hasuserid) $fid=$userid;
                 else $fid=$id;
 		if ($fileext && $fileext!="_") $fid.="_$fileext";
 		$curids[]=$fid;
-                $file="/var/data/tmp/$ts/".getGroup($type)."/$fid";
-		$fileold="/var/data/$ts/".getGroup($type)."/$fid";
+                $file=$datapath."tmp/$ts/".getGroup($type)."/$fid";
+		$fileold=$datapath.$ts"/".getGroup($type)."/$fid";
                 $fh=fopen($file,'w');
                 fwrite($fh,$xml);
                 fclose($fh);
@@ -38,12 +32,9 @@
                 }
 	}
 	$cdsql=$sql;
-	$fh=fopen("/var/data/tmp/$ts/delete_files",'w');
+	$fh=fopen($datapath."tmp/$ts/delete_files",'w');
 	fclose($fh);
-	$useuid=array('Downloads','Viewings');
-	unset($cdsql['Downloads']);
-	unset($cdsql['Viewings']);
-	$sepusage=array('Workflow','Pack','File');
+	$sepusage=array('workflows','packs','files');
 	if (sizeof($argv)>$start){
 		$newcsql=array();
 		for ($a=$start; $a<sizeof($argv); $a++){
@@ -64,7 +55,6 @@
 		$fileno=1;
 		$curuserid="";
 		$curcontrib="";
-//		echo $rows;
 		for ($i=0; $i<$rows; $i++){
 			$row=mysql_fetch_assoc($res);
 			if ($insepusage==1){
@@ -75,7 +65,6 @@
 			if (!$row['user_id']) $row['user_id']="AnonymousUser";
 			if (!$curuserid) $curuserid=$row['user_id'];
 			if (!$curcontrib) $curcontrib=$row['contributable_type']."_".$row['contributable_id'];
-			//print_r($currow);
 			if (!$inuseuid || $row['user_id']!=$curuserid){		
 				if (!in_array($k,$useuid)){
 					$xml.=printEntity($row,$k,$mappings[$k],"$datauri$k/",'id','');
@@ -128,9 +117,9 @@
 				$urow=mysql_fetch_assoc($ures);
 				$uxml.=printUsage($k,$urow['id'],$urow['viewings_count'],$urow['downloads_count']);
 			}
-			saveEntities($ts,$k,$uxml,'Usage','','');	
+			saveEntities($ts,$k,$uxml,'usage','','');	
 		}
-		$ph=popen("/var/jena/scripts/sqs.sh $ts list-graphs | grep '/".getGroup($k)."/' | grep '[0-9]'",'r');
+		$ph=popen($ldpath."4store/scripts/sqs.sh $ts list-graphs | grep '/".getGroup($k)."/' | grep '[0-9]'",'r');
 		$fnums=array();
 		while (!feof($ph)){
 			$curf=fgets($ph,8192);
@@ -138,7 +127,7 @@
 			if(strlen(trim($curfb[sizeof($curfb)-1]))>0) $fnums[]=trim($curfb[sizeof($curfb)-1]);
 		}
 		pclose($ph);
-		$ph=popen("ls /var/data/$ts/".getGroup($k)."/ | grep '[0-9]'",'r');
+		$ph=popen("ls $datapath$ts/".getGroup($k)."/ | grep '[0-9]'",'r');
 		$fnums2=array();
                 while (!feof($ph)){
                         $curf=fgets($ph,8192);
@@ -147,25 +136,19 @@
                 pclose($ph);
 		$dels=array_diff($fnums,$curids);
 		$dels2=array_diff($fnums2,$curids);
-/*		for ($d=0; $d<max(sizeof($curids),sizeof($dels),sizeof($dels2)); $d++){
-			echo $curids[$d].",".$dels[$d].",".$dels2[$d]."\n";
-		}*/
 		foreach ($dels2 as $d2){
 			if (!in_array($d2,$dels)) $dels[]=$d2;
 		}
-//		print_r($curid);
-	//	echo "\n#####\n";
-//		print_r($dels);
 		if (is_array($dels)){
-			$fh=fopen("/var/data/tmp/$ts/delete_files",'a');
+			$fh=fopen($datapath."tmp/$ts/delete_files",'a');
 			foreach ($dels as $del){
-				$filedel="/var/data/$ts/".getGroup($k)."/$del\n";
+				$filedel="$datapath$ts/".getGroup($k)."/$del\n";
 	        	        fwrite($fh,$filedel);
 			}
 			fclose($fh);
 		}
 	}
-	$fh=fopen("/var/jena/log/".$ts."_updated.log","w");
+	$fh=fopen($ldpath."4store/log/".$ts."_updated.log","w");
 	$lastupdated=mktime(0,0,0)-120;
 	fwrite($fh,$lastupdated);
 	fclose($fh);	

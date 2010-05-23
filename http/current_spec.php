@@ -1,5 +1,5 @@
 <?php
-ini_set('include_path','inc/:.');
+include('include.inc.php');
 require_once('xmlfunc.inc.php');
 require_once('4storefunc.inc.php');
 $ts='myexp_public';

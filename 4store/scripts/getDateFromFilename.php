@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
-	
-	$lines=@file('/var/data/log/'.$argv[1].'_update_time.log');
+	include('include.inc.php');	
+	$lines=@file($ldpath."4store/log/".$argv[1].'_update_time.log');
 	$lastupdated=$lines[0];
 	$filetimes=@file("php://stdin");
 	foreach ($filetimes as $filetime){

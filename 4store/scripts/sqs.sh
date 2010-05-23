@@ -1,10 +1,6 @@
 #!/bin/bash
-cd /var/4store/code
-export LD_LIBRARY_PATH=/usr/local/lib; 
-JENALIB="/var/4store/lib";
-JAVA_CP=".:$JENALIB/jena.jar:$JENALIB/iri.jar:$JENALIB/arq.jar:$JENALIB/xercesImpl.jar:$JENALIB/xml-apis.jar:$JENALIB/icu4j_3_4.jar:$JENALIB/json.jar:$JENALIB/concurrent.jar:$JENALIB/antlr-2.7.5.jar:$JENALIB/junit.jar:$JENALIB/log4j-1.2.12.jar:$JENALIB/wstx-asl-3.0.0.jar:$JENALIB/stax-api-1.0.jar:$JENALIB/mysql-connector-java-5.0.8-bin.jar:$JENALIB/commons-logging-1.1.1.jar:$JENALIB/commons-logging-1.1.1-javadoc.jar:$JENALIB/commons-logging-1.1.1-sources.jar:$JENALIB/commons-logging-adapters-1.1.1.jar:$JENALIB/commons-logging-api-1.1.1.jar:$JENALIB/commons-logging-tests.jar:$JENALIB/axis.jar:$JENALIB/bcpg-jdk15-139.jar:$JENALIB/bcprov-jdk15-139.jar:$JENALIB/commons-lang-2.0.jar:$JENALIB/grddl.jar:$JENALIB/hsqldb-1.8.0.7.jar:$JENALIB/jakarta-oro-2.0.5.jar:$JENALIB/nekohtml.jar:$JENALIB/ng4j.jar:$JENALIB/saxon8.jar:$JENALIB/tagsoup-1.0.4.jar:";
-PATH4="/usr/local/bin";
-URL_PATH="http://localhost/rdf/"
+source settings.sh
+cd $STORE4_PATH/code
 
 echo "============== `date` =============="
 check(){
@@ -14,7 +10,7 @@ check_triplestore(){
 	case $1 in
           myexp_public)
                 ;;
-          myexp_private)
+          myexp_ld)
                 ;;
           ontologies)
                 ;;
@@ -44,14 +40,14 @@ start(){
 		echo "[`date +%T`] Cannot start SPARQL Query Server $1 as is already running"
 		exit
     	fi
-	$PATH4/4s-backend $1
+	$STORE4EXEC_PATH/4s-backend $1
 	echo "[`date +%T`] Started SPARQL Query Server using $1"
 }
 status(){
 	check_triplestore $1
 	running=$(check $1)
-	updatetime=`head -n 1 ../log/$1_updated.log`
-	updatetimef=`/usr/bin/php ../scripts/dateFormatter.php "$updatetime"`
+	updatetime=`head -n 1 $STORE4_PATH/log/$1_updated.log`
+	updatetimef=`$PHPEXEC_PATH/php $STORE4_PATH/scripts/dateFormatter.php "$updatetime"`
 	if [ $running -gt 0 ]; then  
 		echo "[`date +%T`] SPARQL Query Server $1 running"
 	else
@@ -60,7 +56,7 @@ status(){
 	echo "[`date +%T`] SPARQL Query Server $1 was updated with database snapshot from $updatetimef ($updatetime)"
 }
 test(){
-	working=`/usr/bin/php ../scripts/test4store.php $1`
+	working=`$PHPEXEC_PATH/php $STORE4_PATH/scripts/test4store.php $1`
 	if [ "$working" ]; then
 		if [ $working -eq 1 ]; then
 			echo "[`date +%T`] SPARQL Query Server $1 is functioning correctly"
@@ -79,8 +75,8 @@ reason-ontology(){
 	check_triplestore $1
 	myexp_ts=`expr match "$1" 'myexp_[a-zA-Z0-9_]*'`
 	if [ $myexp_ts -gt 0 ]; then
-		reasoned_filename="/var/data/$1/$1_reasoned.owl"
-		java -cp $JAVA_CP RDFSReasonerOntologyMerger ../config/$1_ontologies.txt > $reasoned_filename 2> /dev/null
+		reasoned_filename="$DATA_PATH/$1/$1_reasoned.owl"
+		java -cp $JAVA_CP RDFSReasonerOntologyMerger $STORE4_PATH/config/$1_ontologies.txt > $reasoned_filename 2> /dev/null
 		echo "[`date +%T`] Ontologies from $1_ontologies.txt successfully reasoned and written to $reasoned_filename"
 	else
 		echo "[`date +%T`] reason command cannot be used with $1 triplestore"
@@ -88,15 +84,15 @@ reason-ontology(){
 }
 reason-file(){
 	check_triplestore $1
-        java -cp $JAVA_CP RDFSReasonerSingleFile ../config/$1_ontologies.txt $2 $3
+        java -cp $JAVA_CP RDFSReasonerSingleFile $STORE4_PATH/config/$1_ontologies.txt $2 $3
 	echo "[`date +%T`] Reasoned file $2 using $1 ontologies and saved to $3"
 }
 add(){
-	error=`$PATH4/4s-import $1 $2 2>&1`
+	error=`$STORE4EXEC_PATH/4s-import $1 $2 2>&1`
 	errcount=1
 	while [[ -n "$error" && $errcount -lt 3 ]]; do
 		sleep 1;
-		error=`$PATH4/4s-import $1 $2 2>&1`
+		error=`$STORE4EXEC_PATH/4s-import $1 $2 2>&1`
 		errcount=$errcount+1
 	done	
 	if [ -n "$error" ]; then 
@@ -107,9 +103,9 @@ add(){
 }
 remove(){
 	if [ ${2:0:7} == "http://" ]; then
-		$PATH4/4s-delete-model $1 $2
+		$STORE4EXEC_PATH/4s-delete-model $1 $2
 	else
-		$PATH4/4s-delete-model $1 file://$2
+		$STORE4EXEC_PATH/4s-delete-model $1 file://$2
 		if [[ "$3" == "delete" ]]; then
         		if [ -f "$2" ]; then
 	        		echo $2 | grep -v '*' | grep -v '^-r' | xargs rm
@@ -137,7 +133,7 @@ remove-list(){
 
 update-cached-files(){	
         echo "[`date +%T`] Updating Cached Files for $1"
-	/usr/bin/php ../scripts/changeddata.php $1
+	$PHPEXEC_PATH/php $STORE4_PATH/scripts/changeddata.php $1
 	echo "[`date +%T`] Updated Cached Files for $1"
 }
 update(){
@@ -154,49 +150,29 @@ update(){
 		else
 			update-cached-files $1
 		fi
-		entity_groups=( Announcements Attributions Citations Comments ContentTypes Creditations AllDownloads Experiments Favourites Files Friendships FriendshipInvitations Groups GroupAnnouncements Jobs Licenses LocalPackEntries Memberships MembershipInvitations Messages Packs Ratings RemotePackEntries Reviews Tags Taggings TavernaEnactors Users AllViewings Vocabularies Workflows WorkflowVersions )
+		entity_groups=( announcements attributions citations comments content_types creditations experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions )
 		day=`date +%e`
                 month=`date +%b`
-		if [ $1 == "myexp_private" ]; then
-			entity_groups=( "${entity_groups[@]}" MappingTypes MergeRules NodeTypes PartsOfSpeech Questions QuestionTypes WordMappings )
-                        for e in ${entity_groups[@]}; do
-				nofiles=`ls /var/data/$1/$e/ | wc -l`
-				if [ $nofiles -gt 0 ]; then
-	                                ls -l /var/data/$1/$e/* | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}' > /tmp/$1_graph_list.txt 2> /dev/null
-        	                        nographs=`cat /tmp/$1_graph_list.txt | wc -l`
-                	                if [ $nographs -gt 0 ]; then
-                        	                reason-files $1 /tmp/$1_graph_list.txt /var/data/$1/reasoned/$e/
-                                	else
-                                        	echo "[`date +%T`] No new $1 graphs to reason for $e"
-                                	fi
-				fi
-                        done
-			rm /tmp/$1_graph_list.txt
-                fi
-		date +%s > ../log/$1_update_time.log
+		date +%s > $STORE4_PATH/log/$1_update_time.log
 		stop $1
 		start $1
 		sleep 3
-		for graph in `cat /var/data/tmp/$1/delete_files`; do
+		for graph in `cat $DATA_PATH/tmp/$1/delete_files`; do
                         remove $1 $graph 
 		done
 		echo "[`date +%T`] Removed all deleted entities from $1"
-		for graph in `ls -l /var/data/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; do
-			remove $1 $graph keep-file
-			added=`add $1 $graph`
+		if `ls -l $DATA_PATH/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; then
+			remove $1 $DATA_PATH/$1/$1_reasoned.owl keep-file
+			added=`add $1 $DATA_PATH/$1/$1_reasoned.owl`
 			if [ $added -gt 0 ]; then
-				echo "[`date +%T`] Added/Updated $graph to $1 Knowledge Base"
+				echo "[`date +%T`] Added/Updated $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
 			else
-				echo "[`date +%T`] Could Not Add/Update $graph to $1 Knowledge Base"
+				echo "[`date +%T`] Could Not Add/Update $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
 			fi
-		done
-		entity_groups=( "${entity_groups[@]}" Dataflows )
+		fi
+		entity_groups=( "${entity_groups[@]}" dataflows )
 		for e in ${entity_groups[@]}; do
-			if [ $1 == "myexp_private" ]; then
-			        filepath="/var/data/$1/reasoned/$e/"
-			else
-				filepath="/var/data/$1/$e/"
-			fi
+			filepath="$DATA_PATH/$1/$e/"
 			for graph in `ls -l $filepath* 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; do
 				remove $1 $graph keep-file
 			 	added=`add $1 $graph`
@@ -213,17 +189,17 @@ update(){
 list-graphs(){
 	check_triplestore $1
 	echo "[`date +%T`] Listing Graphs of $1 Triplestore:"
-	/usr/bin/php ../scripts/listGraphs.php $1
+	$PHPEXEC_PATH/php $STORE4_PATH/scripts/listGraphs.php $1
 }
 count-triples(){
 	check_triplestore $1
-	notriples=`$PATH4/4s-size $1 | tail -3 | head -1 | awk 'BEGIN{FS=" "}{print $2}'`
+	notriples=`$STORE4EXEC_PATH/4s-size $1 | tail -3 | head -1 | awk 'BEGIN{FS=" "}{print $2}'`
 	echo "[`date +%T`] $1 Triplestore has $notriples triples"
-	echo $notriples > ../log/$1_triples.log
+	echo $notriples > $STORE4_PATH/log/$1_triples.log
 	echo "[`date +%T`] Printing number of triples to file log/$1_triples.log"
 }
 get-dataflows(){
-	/usr/bin/php ../scripts/getNewWorkflowVersions.php | awk 'BEGIN{FS=","}{ print " -O /var/data/dataflows/xml/" $1 " -q http://www.myexperiment.org/workflow.xml?id=" $2 "&version=" $3 "&elements=components" }' > /tmp/dataflow_wgets.txt
+	$PHPEXEC_PATH/php $STORE4_PATH/scripts/getNewWorkflowVersions.php | awk -v datapath="$DATA_PATH" -v httpwwwpath="HTTPWWW_PATH" 'BEGIN{FS=","}{ print " -O " datapath "/dataflows/xml/" $1 " -q " httpwwwpath "/workflow.xml?id=" $2 "&version=" $3 "&elements=components" }' > /tmp/dataflow_wgets.txt
 	exec</tmp/dataflow_wgets.txt
 	while read line
 	do
@@ -236,12 +212,12 @@ get-dataflows(){
 }
 reason-dataflows(){
 	echo "[`date +%T`] Generating Dataflow RDF"
-	/usr/bin/php ../scripts/generateDataflowRDF.php
+	$PHPEXEC_PATH/php $STORE4_PATH/scripts/generateDataflowRDF.php
 	echo "[`date +%T`] Reasoning Dataflow RDF"
 	nographs=`cat /tmp/dataflows.txt | wc -l`
 	if [ $nographs -gt 0 ]; then
 		echo "[`date +%T`] Reasoning Dataflow RDF"
-		java -cp $JAVA_CP RDFSReasonerMultiFile ../config/myexp_public_ontologies.txt /tmp/dataflows.txt /var/data/dataflows/reasoned/
+		java -cp $JAVA_CP RDFSReasonerMultiFile $STORE4_PATH/config/myexp_public_ontologies.txt /tmp/dataflows.txt $DATA_PATH/dataflows/reasoned/
 	else
 		echo "[`date +%T`] No Workflow Dataflow RDF to reason"
 	fi
@@ -249,26 +225,26 @@ reason-dataflows(){
 }
 reason-files(){
 	check_triplestore $1
-	java -cp $JAVA_CP RDFSReasonerMultiFile ../config/$1_ontologies.txt $2 $3
-	echo "java RDFSReasonerMultiFile ../config/$1_ontologies.txt $2 $3"
+	java -cp $JAVA_CP RDFSReasonerMultiFile $STORE4_PATH/config/$1_ontologies.txt $2 $3
+	echo "java RDFSReasonerMultiFile $STORE4_PATH/config/$1_ontologies.txt $2 $3"
 	echo "[`date +%T`] Reasoned files in $2 using $1 ontologies and saved to $3"
 }
 generate-spec(){
 	if [ $1 == "myexp_public" ]; then
-		wget -O /var/data/$1/html/spec.html -q http://localhost/rdf/current/spec
-		echo "[`date +%T`] Retrieved specification document for $1 and saved to /var/data/$1/html/spec.html"
+		wget -O $STORE4_PATH/$1/html/spec.html -q $HTTPRDF_PATH/current/spec
+		echo "[`date +%T`] Retrieved specification document for $1 and saved to $DATA_PATH/$1/html/spec.html"
 	else
 		echo "[`date +%T`] Specification document can not be generated for $1"
 	fi
 }
 graph-size(){
 	check_triplestore $1
-	notriples=`$PATH4/4s-query $1 "SELECT * WHERE { GRAPH <$2> { ?s ?p ?o }}" | grep "<result>" | wc -l`	
+	notriples=`$STORE4EXEC_PATH/4s-query $1 "SELECT * WHERE { GRAPH <$2> { ?s ?p ?o }}" | grep "<result>" | wc -l`	
 	echo "There are $notriples triples in $2"
 }
 data-dump(){
 	check_triplestore $1
-	/usr/bin/php ../scripts/datadump.php $1
+	$PHPEXEC_PATH/php $STORE4_PATH/scripts/datadump.php $1
 }
 	
 case "$2" in
@@ -355,7 +331,7 @@ case "$2" in
 	data-dump $1
 	;;
   *)
-	cat ../scripts/sqs_help.txt
+	cat $STORE4_PATH/scripts/sqs_help.txt
 	;;
 esac
 exit 1

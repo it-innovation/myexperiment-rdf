@@ -4,3 +4,11 @@ README
 1. Make sure that all the folders and directories in your datapath chmodded to 660 with the group set to the web group, (e.g. apache or www).
 2. Make sure all the files in your script directory are chmodded to 770 with the group set to the web group, (e.g. apache or www).
 3. Run scripts/CreateLogFiles.sh
+
+README - Instructions for setting up myExperiment Semantic Web Interface
+========================================================================
+
+1. Copy inc/defaultsettings.inc.php to settings.inc.php and update values appropriately.
+
+2. Update .htaccess so that it points to the .htpass file in this directory.
+

@@ -1,6 +1,7 @@
 #!/bin/bash
+source settings.sh
 echo "============== `date` =============="
-cd /var/4store/scripts
+cd $STORE4_PATH/scripts
 scp backup@tents:/home/backup/www.myexperiment.org/latest_db.txt /tmp/
 filepath=`cat /tmp/latest_db.txt`
 filename=`cat /tmp/latest_db.txt | awk 'BEGIN{FS="/"}{ print $NF }'`

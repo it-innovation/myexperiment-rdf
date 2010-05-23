@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
-	include('/var/www/html/rdf/inc/4storefunc.inc.php');
-	if ($argv[1]=="myexp_public" || $argv[1]=="myexp_private"){
+	include('include.inc.php');
+	include('4storefunc.inc.php');
+	if ($argv[1]==$triplestore){
 		echo modularizedFullTestSparqlQueryClient($argv[1]);	
 		exit;
 	}

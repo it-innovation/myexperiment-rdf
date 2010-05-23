@@ -230,8 +230,31 @@ PREFIX ore: <http://www.openarchives.org/ore/terms/>";
         $mappings['users']=array('id'=>'url','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified','name'=>'sioc:name', 'openid_url'=>'@openid_url|mebase:openid-url','username'=>'@username|mebase:username','body'=>'dcterms:description','avatar_id'=>'@-pictureURL|sioc:avatar','location_city'=>'foaf:based-near', 'location_country'=>'mebase:country','residence'=>'@&getResidence|','website'=>'foaf:homepage', 'last_seen_at'=>'mebase:last-seen-at','email_confirmed_at'=>'mebase:email-confirmed-at','activated_at'=>'mebase:activated-at','receive_notifications'=>'mebase:receive-notifications','profile_email'=>'@-mailto_profile|foaf:mbox','organisation'=>'mebase:organisation','field_or_industry'=>'mebase:field','occupations_or_roles'=>'mebase:occuptation','interests'=>'mebase:interests','contact_details'=>'mebase:contact-details');
         $mappings['vocabularies']=array('id'=>'url','title'=>'dcterms:title','description'=>'dcterms:description','user_id'=>'&User|sioc:has_owner','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified');
        	$mappings['workflows']=array('id'=>'url','title'=>'dcterms:title','body'=>'dcterms:description', 'content_type_id'=>'&ContentType|mebase:has-content-type', 'contributor_type'=>'+contributor_id|sioc:has_owner','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified','filename'=>'@&-getFilename|mebase:filename','described_by'=>'@&getResourceMapURI|ore:isDescribedBy','described_by_atom'=>'@&getAtomEntryURI|ore:isDescribedBy','content-url'=>'@-getWorkflowDownloadURL|mebase:content-url','preview'=>'@-getPreview|mecontrib:preview','thumbnail'=>'@-getThumbnail|mecontrib:thumbnail', 'thumbnail_big'=>'@-getThumbnailBig|mecontrib:thumbnail-big','svg'=>'@-getSVG|mecontrib:svg','current_version'=>'@getCurrentWorkflowVersion|mebase:has-current-version','other_versions'=>'@-getWorkflowVersions|','license_id'=>'&License|mebase:has-license','last_edited_by'=>'&User|mebase:last-edited-by','viewings_count'=>'mevd:viewed','downloads_count'=>'mevd:downloaded','policy_id'=>'&Policy|mebase:has-policy','dataflow'=>'@&-getDataflow|mecomp:executes-dataflow');
-       	$mappings['workflow_versions']=array('id'=>'url','title'=>'dcterms:title','body'=>'dcterms:description','content_type_id'=>'&ContentType|mebase:has-content-type', 'workflow_id'=>'&Workflow|dcterms:isVersionOf','version'=>'mebase:version-number','currentversion'=>'@isCurrentVersion|mebase:is-current-version','contributor_type'=>'+contributor_id|sioc:has_owner', 'created_at'=>'dcterms:created', 'updated_at'=>'dcterms:modified','filename'=>'@&-getFilename|mebase:filename','described_by'=>'@&getResourceMapURI|ore:isDescribedBy','described_by_atom'=>'@&getAtomEntryURI|ore:isDescribedBy','content-url'=>'@-getWorkflowDownloadURL|mebase:content-url','preview'=>'@-getPreview|mecontrib:preview', 'thumbnail'=>'@-getThumbnail|mecontrib:thumbnail', 'thumbnail_big'=>'@-getThumbnailBig|mecontrib:thumbnail-big', 'svg'=>'@-getSVG|mecontrib:svg','license_id'=>'&License|mebase:has-license','last_edited_by'=>'&User|mebase:last-edited-by','policy_id'=>'&Policy|mebase:has-policy','dataflow'=>'@&-getDataflow|mecomp:executes-dataflow');
+       	$mappings['workflow_versions']=array('id'=>'url','title'=>'dcterms:title','body'=>'dcterms:description','content_type_id'=>'&ContentType|mebase:has-content-type', 'workflow_id'=>'&Workflow|dcterms:isVersionOf','version'=>'mebase:version-number','currentversion'=>'@isCurrentVersion|mebase:is-current-version','contributor_type'=>'+contributor_id|sioc:has_owner', 'created_at'=>'dcterms:created', 'updated_at'=>'dcterms:modified','filename'=>'@&-getFilename|mebase:filename','described_by'=>'@&getResourceMapURI|ore:isDescribedBy','described_by_atom'=>'@&getAtomEntryURI|ore:isDescribedBy','content-url'=>'@-getWorkflowDownloadURL|mebase:content-url','preview'=>'@-getPreview|mecontrib:preview', 'thumbnail'=>'@-getThumbnail|mecontrib:thumbnail', 'thumbnail_big'=>'@-getThumbnailBig|mecontrib:thumbnail-big', 'svg'=>'@-getSVG|mecontrib:svg','license_id'=>'&License|mebase:has-license','last_edited_by'=>'&User|mebase:last-edited-by','policy_id'=>'&Policy|mebase:has-policy','dataflow'=>'@&-getDataflow|mecomp:executes-dataflow','citations'=>'@getCitations|');
 	
+	
+
+	$enntanot['experiments']=array();
+	$entannot['files']=array('comments','favourites','ratings','taggings');
+	$entannot['groups']=array('comments','taggings');
+	$entannot['packs']=array('comments','favourites','taggings');
+	$entannot['workflows']=array('comments','favourites','ratings','reviews','taggings');
+	$entannot['workflow_versions']=array('citations');
+	
+	$annotwhereclause['citations']="(workflow_id='?' and workflow_version='~')";
+	$annotwhereclause['comments']="(commentable_type='?' and commentable_id='~')";
+	$annotwhereclause['favourites']="(favoruitable_type='?' and favouritable_id='~')";
+	$annotwhereclause['ratings']="(rateable_type='?' and rateable_id='~')";
+	$annotwhereclause['reviews']="(reviewable_type='?' and reviewable_id='~')";
+	$annotwhereclause['taggings']="(taggable_type='?' and taggable_id='~')";
+	
+	$annotprop['citations']="has-citation";
+	$annotprop['comments']="has-comment";
+	$annotprop['favourites']="has-comment";
+ 	$annotprop['ratings']="has-rating";
+ 	$annotprop['reviews']="has-review";
+ 	$annotprop['taggings']="has-tagging";
+
 /*
 	$assocents['announcements']=array('users');
         $assocents['attributions']=array();

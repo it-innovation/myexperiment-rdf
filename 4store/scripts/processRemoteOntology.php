@@ -1,11 +1,11 @@
 <?php
-	ini_set('include_path','/var/www/html/rdf/inc');
+	include('include.inc.php');
 	include('xmlfunc.inc.php');
-	include('ontconnect.inc.php');
+	include('ontoconnect.inc.php');
 	$sql="select * from ontologies where id=$argv[1]";
 	$res=mysql_query($sql);
 	$ont=mysql_fetch_assoc($res);
-	$fh=fopen("/var/data/ontologies/remoteont/$argv[1]_$ont[name].owl",'r');
+	$fh=fopen($datapath."ontologies/remoteont/$argv[1]_$ont[name].owl",'r');
 	$xml="";
 	while (!feof($fh)){
 		$data=fgets($fh,8096);

@@ -1,8 +1,8 @@
 <?php
 	$pagetitle="Ontology Uploader";
-	ini_set('include_path','inc/:.');
+	include('include.inc.php');
 	include('header.inc.php');
-        include('ontconnect.inc.php');
+        include('ontoconnect.inc.php');
 	require_once('4storefunc.inc.php');
 	$types=array("OWL Ontology","RDFS Schema","Unsure");
 	foreach($_POST as $postkey => $postvar){

@@ -696,15 +696,17 @@
     <rdfs:comment>An Annotation is associated with a particular Contribution</rdfs:comment>
     <rdfs:domain rdf:resource="Annotation"/>
     <rdfs:range rdf:resource="Annotatable"/>
+    <owl:inverseOf rdf:resource="has-annotation"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
 
   <owl:ObjectProperty rdf:about="has-annotation">
-    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
     <rdfs:label>has-annotation</rdfs:label>
     <rdfs:comment>An Annotable may have a Annotation</rdfs:comment>
     <rdfs:domain rdf:resource="Annotatable"/>
     <rdfs:range rdf:resource="Annotation"/>
+    <owl:inverseOf rdf:resource="annotates"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
 
