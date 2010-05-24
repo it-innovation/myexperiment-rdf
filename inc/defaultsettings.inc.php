@@ -2,11 +2,10 @@
 	//Symbolic links to dirs
 	$lddir="/var/linkeddata/";
         $httpdir="/var/www/html/linkeddata/";
-        $datadir="/var/data/";
 
 
         //Setup include_path
-        ini_set('include_path',".:$ldpath/inc/:");
+        ini_set('include_path',".:${lddir}inc/:");
 
 	//The URI for RDF data
 	$datauri="http://www.myexperiment.org/";

@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php 
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	include('include.inc.php');
 	require('genrdf.inc.php');
 	function setTypeIDandParams($args,$noexit=0){

@@ -24,8 +24,8 @@ $onturls=array(
 );
 
 function getDatatypes(){
-	global $ldpath;
-	$dtfile=file($ldpath.'rdfgen/datatypes.txt');
+	global $lddir;
+	$dtfile=file($lddir.'rdfgen/datatypes.txt');
 	foreach ($dtfile as $dt){
 		$dtbits = explode(" ",$dt);
 		$datatypes[trim($dtbits[0])]=trim($dtbits[1]);

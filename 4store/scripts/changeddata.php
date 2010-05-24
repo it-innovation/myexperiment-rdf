@@ -119,7 +119,7 @@
 			}
 			saveEntities($ts,$k,$uxml,'usage','','');	
 		}
-		$ph=popen($ldpath."4store/scripts/sqs.sh $ts list-graphs | grep '/".getGroup($k)."/' | grep '[0-9]'",'r');
+		$ph=popen($lddir."4store/scripts/sqs.sh $ts list-graphs | grep '/".getGroup($k)."/' | grep '[0-9]'",'r');
 		$fnums=array();
 		while (!feof($ph)){
 			$curf=fgets($ph,8192);
@@ -148,7 +148,7 @@
 			fclose($fh);
 		}
 	}
-	$fh=fopen($ldpath."4store/log/".$ts."_updated.log","w");
+	$fh=fopen($lddir."4store/log/".$ts."_updated.log","w");
 	$lastupdated=mktime(0,0,0)-120;
 	fwrite($fh,$lastupdated);
 	fclose($fh);	
