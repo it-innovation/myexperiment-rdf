@@ -98,6 +98,6 @@
 	}
 	$newuri=$datauri.implode("/",$uribits).".rdf";
 
-	header("HTTP/1.1 303 See Other");
+	header("HTTP/1.1 301 301 Moved Permanently");
 	header("Location: $newuri");
 ?>
