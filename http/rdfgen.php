@@ -1,6 +1,14 @@
 <?php
 	$url=str_replace("http://www.myexperiment.org/","",$_GET['url']);
-	$url=str_replace(".rdf","",$url);
+	if (strpos($url,".")>0){
+		if (strpos($url,".rdf")>0){
+			$url=str_replace(".rdf","",$url);
+		}
+ 		else{
+			header("HTTP/1.1 404 Not Found");
+			exit();
+		}
+	}	
 	$urlbits=explode("/",$url);
 	$type=array_shift($urlbits);
 	$id=array_shift($urlbits);

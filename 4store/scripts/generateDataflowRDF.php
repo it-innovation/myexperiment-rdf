@@ -26,7 +26,7 @@
 			$xmllines=file($datapath."dataflows/xml/$xf");
 			if (sizeof($xmllines)<=2){
 					exec("rm $datapath$argv[1]/reasoned/$xf ".$datapath."dataflows/rdf/$xf  2> /dev/null");
-					if ($argv[1]=="myexp_public") fwrite($dellist,"$datapath$argv[1]/dataflows/$xf\n");
+					if ($argv[1]==$triplestore) fwrite($dellist,"$datapath$argv[1]/dataflows/$xf\n");
 			}
 			else{
 				$dataflows=pageheader();

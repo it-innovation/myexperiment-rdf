@@ -8,9 +8,7 @@ check(){
 }	
 check_triplestore(){
 	case $1 in
-          myexp_public)
-                ;;
-          myexp_ld)
+          $TRIPLESTORE)
                 ;;
           ontologies)
                 ;;
@@ -150,7 +148,7 @@ update(){
 		else
 			update-cached-files $1
 		fi
-		entity_groups=( announcements attributions citations comments content_types creditations experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions )
+		entity_groups=( announcements attributions citations comments content_types creditations dataflows experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions )
 		day=`date +%e`
                 month=`date +%b`
 		date +%s > $STORE4_PATH/log/$1_update_time.log
@@ -170,8 +168,8 @@ update(){
 				echo "[`date +%T`] Could Not Add/Update $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
 			fi
 		fi
-		entity_groups=( "${entity_groups[@]}" dataflows )
-		for e in ${entity_groups[@]}; do
+		entity_groups=( "${ENTITIES[@]}" dataflows )
+		for e in ${ENTITIES[@]}; do
 			filepath="$DATA_PATH/$1/$e/"
 			for graph in `ls -l $filepath* 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; do
 				remove $1 $graph keep-file
@@ -217,7 +215,7 @@ reason-dataflows(){
 	nographs=`cat /tmp/dataflows.txt | wc -l`
 	if [ $nographs -gt 0 ]; then
 		echo "[`date +%T`] Reasoning Dataflow RDF"
-		java -cp $JAVA_CP RDFSReasonerMultiFile $STORE4_PATH/config/myexp_public_ontologies.txt /tmp/dataflows.txt $DATA_PATH/dataflows/reasoned/
+		java -cp $JAVA_CP RDFSReasonerMultiFile $STORE4_PATH/config/"$TRIPLESTORE"_ontologies.txt /tmp/dataflows.txt $DATA_PATH/dataflows/reasoned/
 	else
 		echo "[`date +%T`] No Workflow Dataflow RDF to reason"
 	fi
@@ -230,7 +228,7 @@ reason-files(){
 	echo "[`date +%T`] Reasoned files in $2 using $1 ontologies and saved to $3"
 }
 generate-spec(){
-	if [ $1 == "myexp_public" ]; then
+	if [ $1 == $TRIPLESTORE ]; then
 		wget -O $STORE4_PATH/$1/html/spec.html -q $HTTPRDF_PATH/current/spec
 		echo "[`date +%T`] Retrieved specification document for $1 and saved to $DATA_PATH/$1/html/spec.html"
 	else

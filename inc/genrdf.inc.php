@@ -1,6 +1,6 @@
 <?php
 	ini_set('include_path','../inc/:inc/:.');
-	require_once('connect.inc.php');
+	require_once('myexpconnect.inc.php');
 	require_once('miscfunc.inc.php');
 	require_once('functions.inc.php');
 	require_once('data.inc.php');
@@ -22,6 +22,7 @@
 		$uri = getEntityURI($type,$id,$format);	
 		$stag="  <$fullentity rdf:about=\"$uri\">\n";
 		$xml=$stag;
+		$xml.="    <foaf:homepage rdf:resource=\"$uri.html\"/>\n    <dcterms:hasFormat rdf:resource=\"$uri.xml\"/>\n";
 		foreach ($template as $field => $property){
 			//$xml.="<!-- $field -->\n";
 			switch (substr($property, 0, 1)){
@@ -238,7 +239,7 @@
         	return "</rdf:RDF>";
 	}
 	function rdffiledescription($url){
-		return "  <rdf:Description rdf:about=\"$url.rdf\">\n    <foaf:primaryTopic rdf:resource=\"$url\"/>\n    <foaf:homepage rdf:resource=\"$url.html\"/>\n    <dcterms:hasFormat rdf:resource=\"$url.xml\"/>\n  </rdf:Description>\n\n";
+		return "  <rdf:Description rdf:about=\"$url.rdf\">\n    <foaf:primaryTopic rdf:resource=\"$url\"/>\n  </rdf:Description>\n\n";
 	}
 
 ?>

@@ -57,3 +57,4 @@ mebase:receive-notifications boolean
 mebase:read-at dateTime
 mebase:deleted-by-sender boolean
 mebase:activated-at dateTime
+foaf:mbox_sha1sum string

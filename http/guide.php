@@ -25,7 +25,7 @@ wget --header "Accept: application/rdf+xml"
     <div class="purple"><h4><?= $guidedatauri ?>&lt;type&gt;/&lt;id&gt;</h4></div>
     <p>Where <b>&lt;type&gt;</b> can be one of:</p>
     <p class="indent">announcements, attributions, citations, comments, content_types, creditations, experiments, favourites, files, friendships, friendship_invitations, groups, group_announcements, jobs, licenses, local_pack_entries, memberships, membership_invitations, messages, packs, ratings, remote_pack_entries, reviews, taverna_enactors, tags, taggings, users, workflows, workflow_versions</p>
-    <div class="green"><h4>E.g. <a href="<?= $guidedatauri ?>workflows/7"><?= $guidedatauri ?>workflows/7</a></h4></div>
+    <div class="green"><h4>E.g. <a href="<?= $guidedatauri ?>workflows/7.rdf"><?= $guidedatauri ?>workflows/7.rdf</a></h4></div>
   </div>
   <br/>
   <div class="hr"></div>
@@ -35,7 +35,7 @@ wget --header "Accept: application/rdf+xml"
     <div class="purple"><h4><?= $guidedatauri ?>&lt;type&gt;</h4></div>
     <p>Where <b>&lt;type&gt;</b> can be one of:</p>
     <p class="indent">announcements, attributions, citations, comments, content_types, creditations, experiments, favourites, files, friendships, friendship_invitations, groups, group_announcements, jobs, licenses, local_pack_entries, memberships, membership_invitations, messages, packs, ratings, remote_pack_entries, reviews, taverna_enactors, tags, taggings, users, workflows, workflow_versions</p>
-    <div class="green"><h4>E.g. <a href="<?= $guidedatauri ?>reviews"><?= $guidedatauri ?>reviews</a></h4></div>
+    <div class="green"><h4>E.g. <a href="<?= $guidedatauri ?>reviews.rdf"><?= $guidedatauri ?>reviews.rdf</a></h4></div>
   </div>
   <br/>
   <div class="hr"></div>
@@ -43,8 +43,8 @@ wget --header "Accept: application/rdf+xml"
     <h3>Components of a Workflow <br/><small>(Currently Public Taverna 1 and Taverna 2 Workflows only)</small></h3>
     <div class="purple"><h4><?= $guidedatauri ?>workflow_version/&lt;id&gt;/dataflow[/1]</h4></div>
     <p>Where <b>&lt;id&gt;</b> is the ID of the Workflow version</p>
-    <div class="green"><h4>E.g. For Taverna 1 Workflows: <a href="<?= $guidedatauri ?>workflow_versions/24/dataflow"><?= $guidedatauri ?>workflow_versions/24/dataflow</a></h4>
-  <h4>E.g. For Taverna 2 Workflows: <a href="<?= $guidedatauri ?>WorkflowVersion/997/dataflow/1"><?= $guidedatauri ?>workflow_versions/997/dataflow/1</a></h4>
+    <div class="green"><h4>E.g. For Taverna 1 Workflows: <a href="<?= $guidedatauri ?>workflows/12/versions/2/dataflow.rdf"><?= $guidedatauri ?>workflows/12/versions/2/dataflow.rdf</a></h4>
+  <h4>E.g. For Taverna 2 Workflows: <a href="<?= $guidedatauri ?>workflows/761/versions/1/dataflow/1.rdf"><?= $guidedatauri ?>workflows/761/versions/1dataflow/1.rdf</a></h4>
 </div>
   </div>
   <br/>

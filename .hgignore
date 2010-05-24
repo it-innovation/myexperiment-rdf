@@ -3,4 +3,4 @@ syntax: glob
 *.pid
 *~
 inc/settings.inc.php
-
+data/*

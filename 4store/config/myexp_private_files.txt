@@ -1,8 +1,0 @@
-data/reasoned/21_RDF_reasoned.owl
-data/reasoned/20_RDFS_reasoned.owl
-data/reasoned/24_OWL_reasoned.owl
-data/reasoned/19_DC_reasoned.owl
-data/reasoned/19_DCTERMS_reasoned.owl
-data/reasoned/5_SIOC_reasoned.owl
-data/reasoned/6_FOAF_reasoned.owl
-data/myexp_reasoned/myexp_private_reasoned.owl

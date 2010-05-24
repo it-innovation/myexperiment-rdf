@@ -186,10 +186,8 @@ function mailto($user){
 	global $userid, $domain;
 	if (validateEmail($user['email']) && ($userid==$user['id'] || $domain=="private")) return "mailto:".$user['email'];
 }
-function mailto_hash($user){
-	 global $userid, $domain;
-        if (validateEmail($user['email']) && ($userid==$user['id'] || $domain=="private")) return "mailto:".$user['email'];
-	return "mailto:".md5($user['email'])."@hidden.org";
+function mbox_sha1sum($user){
+	return sha1($user['email']);
 }
 function mailto_unconfirmed($user){
 	global $userid, $domain;
@@ -407,8 +405,9 @@ function getAnnotationSQL($type, $p1,$p2){
 	global $sql, $annotwhereclause;
 	$cursql=$sql[$type];
 	$whereclause=str_replace('~',$p2,str_replace('?',$p1,$annotwhereclause[$type]));
- 	if (strpos('where',$cursql) === true) $cursql.=" and $whereclause";
+ 	if (strpos($cursql,'where') > 0) $cursql.=" and $whereclause";
         else $cursql.=" where $whereclause";
+	return $cursql;
 	
 }
 function getModelAlias($type){
@@ -417,34 +416,18 @@ function getModelAlias($type){
 	return $type;
 }
 function getAnnotations($entity,$type){
-	global $entannot;
-	foreach($entannot[$type] as $ea){
-	
-	if ($type=="workflows" or $type=="workflow_versions"){
-		getCitations($entity);
-	}
-	$atype=getModelAlias($ontent[$type])
-	getComments($entity,$type,$atype);
-	
-	
-}
-function getCitations($entity){
-	global $sql, $datauri;
-	$cursql = addWhere($sql['citations'],"(workflow_id=$entity[workflow_id] and workflow_version=$entity[version])");
-	$res = mysql_query($cursql);
-	for ($a=0; $a<mysql_num_rows($res); $a++){
-		$xml.="    <meannot:has-citation rdf:resource=\"".$datauri."citations/".mysql_result($res,$a,'id')."\"/>\n";
+	global $entannot, $ontent, $annotprop, $datauri;
+	$ea = $entannot[$type];
+	$atype=getModelAlias($ontent[$type]);
+	$xml="";
+	foreach ($ea as $annot){
+		if ($annot=="citations") $cursql=getAnnotationSQL($annot,$entity['workflow_id'],$entity['version']);
+		else  $cursql=getAnnotationSQL($annot,$atype,$entity['contribution_id']);
+		$res = mysql_query($cursql);
+	        for ($a=0; $a<mysql_num_rows($res); $a++){
+                	$xml.="    <meannot:".$annotprop[$annot]." rdf:resource=\"".$datauri."$annot/".mysql_result($res,$a,'id')."\"/>\n";
+		}
 	}
 	return $xml;
-}
-function getComments($entity,$type,$atype){
-	global $sql, $datauri, $ontent;
-	$cursql = addWhere($sql['comments'],"(commentable_type='$atype' and commentable_id=$entity[contribution_id])");
-	$res = mysql_query($cursql);
-	for ($a=0; $a<mysql_num_rows($res); $a++){
-                $xml.="    <meannot:has-comment rdf:resource=\"".$datauri."$type/".mysql_result($res,$a,'id')."\"/>\n";
-        }
-        return $xml;
-}
 }
 ?>

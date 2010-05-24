@@ -11,13 +11,13 @@ RewriteRule ^generic/spec/?$ generic_spec.php
 RewriteRule ^upload_specs/?$ upload_specs.php
 RewriteRule ^urlencoder/?$ urlencoder.php
 RewriteRule ^swbrowsers/?$ swbrowsers.php
-
-
 RewriteRule ^sparql/?$ sparql.php
 RewriteRule ^howtosparql/?$ howtosparql.php
-
-RewriteRule ^ORE/?$ ore.php
+RewriteRule ^ore/?$ ore.php
 RewriteRule ^guide/?$ guide.php
+
+RewriteRule ^[A-Z].* rdfredirect.php
+
 
 <Files ~ "private|current|upload_specs|rdfgen">
   	Order deny,allow

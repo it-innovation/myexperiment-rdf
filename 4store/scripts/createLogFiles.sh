@@ -1,5 +1,5 @@
 #!/bin/bash
-export settings.sh
+source settings.sh
 cd $STORE4_PATH/log
 touch database.log
 touch $TRIPLESTORE"_4store.log"

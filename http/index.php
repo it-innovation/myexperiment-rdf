@@ -19,7 +19,7 @@
   <p>All myExperiment's public RDF data can queried using the query language SPARQL at <a href="sparql">myExperiment's SPARQL Endpoint</a>.</p>
 
   <h3>OAI-ORE Export</h3>
-  <p>myExperiment Packs and Experiments can be exported as OAI-ORE Resource Maps.  Like RDF export private entities can be accessed using HTTP authentication.  A guide for how to export OAI-ORE Resource Maps can be found <a href="ORE">here</a>.</p>
+  <p>myExperiment Packs and Experiments can be exported as OAI-ORE Resource Maps.  Like RDF export private entities can be accessed using HTTP authentication.  A guide for how to export OAI-ORE Resource Maps can be found <a href="ore/">here</a>.</p>
 
  <br/>
 <?php include('footer.inc.php'); ?>

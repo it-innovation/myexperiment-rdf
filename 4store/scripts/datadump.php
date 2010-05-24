@@ -1,12 +1,10 @@
 #!/usr/bin/php
 <?php
-	$domain="public";
-	$ts="myexp_public";
-	
 	include('include.inc.php');
         include('changeddata.inc.php');
         include('genrdf.inc.php');
-
+	
+        $ts=$triplestore;
 	$start=2;
 	$rdffile=$datapath."tmp/$ts/data.rdf";
 	$rdfgzfile="$datapath$ts/data.rdf.gz";

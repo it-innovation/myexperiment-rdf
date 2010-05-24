@@ -139,6 +139,11 @@
     <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="&foaf;mbox_sha1sum">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="&sioc;avatar">
     <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
@@ -422,7 +427,7 @@
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="&mebase;email" />
+        <owl:onProperty rdf:resource="&foaf;mbox_sha1sum" />
         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -655,6 +660,12 @@
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&foaf;mbox" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&foaf;mbox_sha1sum" />
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>

@@ -1,7 +1,6 @@
 #!/usr/bin/php
 <?php 
-	ini_set('include_path','inc/');
-	chdir("../rdfgen/");
+	include('include.inc.php');
 	require('genrdf.inc.php');
 	function setTypeIDandParams($args,$noexit=0){
 		$type=$args[1];
@@ -9,7 +8,7 @@
 		$params=explode("/",$args[3]);
 		$wfid='0';
 		if ($params[0]){
-			if ($params[0]=="versions" && $type="workflows"){
+			if ($params[0]=="versions" && $type=="workflows"){
 				$type="workflow_versions"; 
 				$wvsql="select id from workflow_versions where workflow_id=$id and version=$params[1]";
 				$wvres=mysql_query($wvsql);
@@ -39,9 +38,8 @@
                 return mysql_query($cursql);
 	}
 	list($type,$id,$params,$wfid)=setTypeIDandParams($argv);
-	$uri="$type/$id";
-	if ($params[0]) $uri="/".implode('/',$params);
-//	echo "~".sizeof($params)."~";
+	$uri="$argv[1]/$argv[2]";
+	if ($argv[3]) $uri.="/".$argv[3];
 	if (entityExists($type,$id)){
 	        $res=getEntityResults($type,$id);
 		$e=1;

@@ -17,6 +17,13 @@
 	//The salt to encrypt hidden values
         $salt="changeme";
 
+	 //Exec paths
+        $store4execpath="/usr/local/bin/";
+        $phppath="/usr/bin/";
+
+	//Triplestore name
+        $triplestore="myexp_public";
+
 	//Database Settings
 	$myexp_db=array("user"=>"username","password"=>"password","server"=>"servername","database"=>"dbname");
 	$onto_db=array("user"=>"username","password"=>"password","server"=>"servername","database"=>"dbname");
