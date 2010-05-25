@@ -1,5 +1,5 @@
 <?php
-ini_set('include_path','inc/');
+include('include.inc.php');
 include('4storefunc.inc.php');
 
 handle_Request($_GET);

@@ -1,5 +1,5 @@
 <?php
-	ini_set('include_path','inc/:.');
+	include('include.inc.php');
 	$pagetitle="URL Encoder/Decoder";
 	include('header.inc.php');
 	include('miscfunc.inc.php');

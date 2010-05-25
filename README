@@ -8,7 +8,7 @@ README - Instructions for setting up myExperiment Linked Data Architecture
 
 3. Create a triplestore using the 4s-backend-setup command
 
-   e.g. 4s-backend-setup --cluster 8 <triplestore> 
+   e.g. 4s-backend-setup --segments 8 <triplestore> 
 
    Take the name of the triplestore and copy that name into the appropriate parameters in inc/settings.inc.php and 4store/scrripts/settings.sh
 

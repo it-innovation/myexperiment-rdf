@@ -19,7 +19,7 @@ RewriteRule ^guide/?$ guide.php
 RewriteRule ^[A-Z].* rdfredirect.php
 
 
-<Files ~ "private|current|upload_specs|rdfgen">
+<Files ~ "private|current|upload_specs|rdfgen|sparql">
   	Order deny,allow
  	Deny from all
  	AuthName "Secure myExperiment Area"

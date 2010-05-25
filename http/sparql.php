@@ -1,13 +1,13 @@
 <?php
 	$pagetitle="SPARQL Endpoint";
 	$htmlheader[]='<script src="/js/sparql.js" type="text/javascript"></script>';
-	ini_set('include_path','inc/:.');
+	include('include.inc.php');
 	include('xmlfunc.inc.php');
 	include('sparqlconnect.inc.php');
         require('4storefunc.inc.php');
 	require('miscfunc.inc.php');
 	$domain="public";
-	$ts=getTriplestoreForDomain($domain);
+	$ts=$triplestore;
 	$notriples=getNoTriples($ts);
 	$prefix="";
 	$lmdate=date('r',strtotime(date('Y-m-d',getLastUpdated($ts)))-60);

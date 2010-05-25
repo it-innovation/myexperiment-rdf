@@ -4,3 +4,4 @@ syntax: glob
 *~
 inc/settings.inc.php
 data/*
+4store/config/*

@@ -1,5 +1,5 @@
 <?php
-	ini_set('include_path','inc/:.');
+	include('include.inc.php');
 	$pagetitle="<small>Semantic Web Browsers</small>";
 	include('header.inc.php');
 	require('miscfunc.inc.php');

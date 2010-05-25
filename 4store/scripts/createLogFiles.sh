@@ -1,11 +1,11 @@
 #!/bin/bash
-source settings.sh
+source `dirname $BASH_SOURCE`/settings.sh
 cd $STORE4_PATH/log
 touch database.log
 touch $TRIPLESTORE"_4store.log"
 touch $TRIPLESTORE"_triples.log"
 touch $TRIPLESTORE"_sparql.log"
-touch $TRIPLESTORE"_updatedlog"
+touch $TRIPLESTORE"_updated.log"
 touch $TRIPLESTORE"_update_time.log"
 touch ontologies_4store.log
 touch ontologies_triples.log

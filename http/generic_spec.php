@@ -1,5 +1,5 @@
 <?php
-include('include.icn.php');
+include('include.inc.php');
 include_once('ontoconnect.inc.php');
 $query="select * from ontologies order by name, namespace";
 $pagetitle="Ontology Specifications";

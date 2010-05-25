@@ -1,7 +1,7 @@
 <?php 
 $domain="protected";
-ini_set('include_path','inc/');
-include('genxml.inc.php');
+include('include.inc.php');
+include('genrdf.inc.php');
 include('loginfunc.inc.php');
 session_start();
 if (entityExists($_GET['type'],$_GET['id'])){	

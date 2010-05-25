@@ -19,10 +19,10 @@
 		$useentity=$entityns[$type];
 		$otype=$ontent[$type];
 		$fullentity="$useentity:$otype";
-		$uri = getEntityURI($type,$id,$format);	
+		$uri = getEntityURI($type,$id,$row,$format);	
 		$stag="  <$fullentity rdf:about=\"$uri\">\n";
 		$xml=$stag;
-		$xml.="    <foaf:homepage rdf:resource=\"$uri.html\"/>\n    <dcterms:hasFormat rdf:resource=\"$uri.xml\"/>\n";
+		$xml.=getHomepageAndFormats($uri,$type,$id,$row);
 		foreach ($template as $field => $property){
 			//$xml.="<!-- $field -->\n";
 			switch (substr($property, 0, 1)){
@@ -76,6 +76,19 @@
 		}	
 		return $xml;
 	}
+	function getHomepageAndFormats($uri,$type,$id,$entity=''){
+		global $homepage, $xmluri, $datauri;
+		if ($homepage[$type]) $xml.="    <foaf:homepage rdf:resource=\"${uri}.html\"/>\n";
+                $xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.rdf\"/>\n";
+		if ($xmluri[$type]){
+			if ($entity['workflow_id']) $curxmluri=$datauri.str_replace("!",$entity['version'],str_replace("~",$entity['workflow_id'],$xmluri[$type]));
+			else $curxmluri=$datauri.$xmluri[$type].$id;
+			
+			$xml.="    <dcterms:hasFormat rdf:resource=\"$curxmluri\"/>\n";
+		}
+		return $xml;
+	}
+
 	function printUsage($type,$id,$views,$downloads){
 		global $datauri;
 		return "  <rdf:Description rdf:about=\"$datauri$type/$id\">

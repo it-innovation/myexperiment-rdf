@@ -45,11 +45,6 @@ function array_combinations($tail){
 	}
 	return array();
 }
-function getTriplestoreForDomain($domain){
-        if ($domain=="public") return "myexp_public";
-        else if ($domain=="private"|| $domain=="protected") return "myexp_private";
-        else return $domain;
-} 
 function getUsefulPrefixesArray($domain,$merge=false){
 	$myexp=array();
 	$other=array();
@@ -82,13 +77,14 @@ function getUsefulPrefixesArray($domain,$merge=false){
 	return array($myexp,$other);
 }
 function getUsefulPrefixes($domain){
+	global $datauri;
 	list($myexp,$other)=getUsefulPrefixesArray($domain);
 	if (sizeof($myexp)>0){
 		$usepref='    <table class="borders">
       <tr><th>myExperiment</th><th>Other</th></tr>
       <tr>
         <td><ul class="nonesmall">
-            <li class="prefix"><a onclick="addPrefixToQuery(this.parentNode.innerHTML)">BASE &lt;http://rdf.myexperiment.org/&gt;</a></li>
+            <li class="prefix"><a onclick="addPrefixToQuery(this.parentNode.innerHTML)">BASE &lt;'.$datauri.'&gt;</a></li>
 ';
 		foreach ($myexp as $pref => $ns){
 			$usepref.="          <li class=\"prefix\"><a onclick=\"addPrefixToQuery(this.parentNode.innerHTML)\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";

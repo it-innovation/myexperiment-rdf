@@ -1,22 +1,22 @@
 #!/usr/bin/php
 <?php
+	$domain="public";
 	include('include.inc.php');
 	include('changeddata.inc.php');
 	include('genrdf.inc.php');
-	$domain="public";
         $ts=$triplestore;
         $start=2;
 
 
-	function saveEntities($ts,$type,$xml,$id,$userid,$hasuserid,$fileext=null){
+	function saveEntities($ts,$type,$xml,$id,$userid,$fileext=null){
 		global $curids, $datapath;
 		$xml.=pagefooter();
                 if ($hasuserid) $fid=$userid;
                 else $fid=$id;
 		if ($fileext && $fileext!="_") $fid.="_$fileext";
 		$curids[]=$fid;
-                $file=$datapath."tmp/$ts/".getGroup($type)."/$fid";
-		$fileold=$datapath.$ts"/".getGroup($type)."/$fid";
+                $file=$datapath."tmp/$ts/$type/$fid";
+		$fileold=$datapath.$ts."/$type/$fid";
                 $fh=fopen($file,'w');
                 fwrite($fh,$xml);
                 fclose($fh);
@@ -44,10 +44,9 @@
 	}
 	foreach ($cdsql as $k => $v){
 		$curids=array();
-		$inuseuid=in_array($k,$useuid);
 		$insepusage=in_array($k,$sepusage);
 		$v=setUserAndGroups($v);
-		echo "[".date("H:i:s")."] Checking ".getGroup($k)."\n";
+		echo "[".date("H:i:s")."] Checking $k\n";
 		$res=mysql_query($v);
 		$rows=mysql_num_rows($res);
 		$xml=pageheader();
@@ -62,49 +61,10 @@
 				unset($row['downloads_count']);
 			}
 			$id=$row['id'];
-			if (!$row['user_id']) $row['user_id']="AnonymousUser";
-			if (!$curuserid) $curuserid=$row['user_id'];
-			if (!$curcontrib) $curcontrib=$row['contributable_type']."_".$row['contributable_id'];
-			if (!$inuseuid || $row['user_id']!=$curuserid){		
-				if (!in_array($k,$useuid)){
-					$xml.=printEntity($row,$k,$mappings[$k],"$datauri$k/",'id','');
-					$ents++;
-				}
-				if ($ents){
-					if ($curuserid=="AnonymousUser") saveEntities($ts,$k,$xml,$id,$curuserid,$inuseuid,$curcontrib);
-					elseif ($fileno>1) saveEntities($ts,$k,$xml,$id,$curuserid,$inuseuid,$fileno);
-					else saveEntities($ts,$k,$xml,$id,$curuserid,$inuseuid);
-					$fileno=1;
-				}
-				$ents=0;
-				$xml=pageheader();
-				//time_nanosleep(0,100000000);
-			}
-			else{
-				if ($curcontrib!=$row['contributable_type']."_".$row['contributable_id'] && $curuserid=="AnonymousUser"){
-					saveEntities($ts,$k,$xml,$id,$curuserid,$inuseuid,$curcontrib);
-					$ents=0;
-					$xml=pageheader();
-				}
-				elseif ($ents>1000 && $curuserid!="AnonymousUser"){
-					saveEntities($ts,$k,$xml,$id,$curuserid,$inuseuid,$curcontrib);
-                                        $ents=0;
-                                        $fileno++;
-                                        $xml=pageheader();
-				}
-				$xml.=printEntity($row,$k,$mappings[$k],"$datauri$k/",'id','');
-				$ents++;
-					
-			}
-			$curuserid=$row['user_id'];
-			$curcontrib=$row['contributable_type']."_".$row['contributable_id'];
+			$xml.=printEntity($row,$k,$mappings[$k],"$datauri$k/",'id','');
+			saveEntities($ts,$k,$xml,$id,$curuserid);
+			$xml=pageheader();
 		}
-		if ($ents>0){
-	//		echo "Saving $id\n";
-			if ($curuserid=="AnonymousUser") saveEntities($ts,$k,$xml,$id,$curuserid,$row['has_user_id'],$curcontrib);
-			elseif ($fileno>1) saveEntities($ts,$k,$xml,$id,$curuserid,$row['has_user_id'],$fileno);
-			else saveEntities($ts,$k,$xml,$id,$curuserid,$row['has_user_id']);
-		}	
 		if ($insepusage){
 			$sqlsplit=explode("from",$v);
 			unset($sqlsplit[0]);
@@ -117,9 +77,9 @@
 				$urow=mysql_fetch_assoc($ures);
 				$uxml.=printUsage($k,$urow['id'],$urow['viewings_count'],$urow['downloads_count']);
 			}
-			saveEntities($ts,$k,$uxml,'usage','','');	
+			saveEntities($ts,$k,$uxml,'usage','');	
 		}
-		$ph=popen($lddir."4store/scripts/sqs.sh $ts list-graphs | grep '/".getGroup($k)."/' | grep '[0-9]'",'r');
+		$ph=popen($lddir."4store/scripts/sqs.sh $ts list-graphs | grep '/$k/' | grep '[0-9]'",'r');
 		$fnums=array();
 		while (!feof($ph)){
 			$curf=fgets($ph,8192);
@@ -127,7 +87,7 @@
 			if(strlen(trim($curfb[sizeof($curfb)-1]))>0) $fnums[]=trim($curfb[sizeof($curfb)-1]);
 		}
 		pclose($ph);
-		$ph=popen("ls $datapath$ts/".getGroup($k)."/ | grep '[0-9]'",'r');
+		$ph=popen("ls $datapath$ts/$k/ | grep '[0-9]'",'r');
 		$fnums2=array();
                 while (!feof($ph)){
                         $curf=fgets($ph,8192);
@@ -142,7 +102,7 @@
 		if (is_array($dels)){
 			$fh=fopen($datapath."tmp/$ts/delete_files",'a');
 			foreach ($dels as $del){
-				$filedel="$datapath$ts/".getGroup($k)."/$del\n";
+				$filedel="$datapath$ts/$k/$del\n";
 	        	        fwrite($fh,$filedel);
 			}
 			fclose($fh);

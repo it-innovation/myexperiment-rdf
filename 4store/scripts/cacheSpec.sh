@@ -1,5 +1,5 @@
 #!/bin/bash
-source settings.sh
+source `dirname $BASH_SOURCE`/settings.sh
 cd $STORE4_PATH/scripts
 echo "============== `date` =============="
 wget -O $DATA_PATH/ontologies/cachedspec/$3_$2_spec.html -q "$HTTPRDF_PATH/generic/spec?ontology=$3&uncached=1"

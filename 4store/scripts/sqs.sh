@@ -1,5 +1,5 @@
 #!/bin/bash
-source settings.sh
+source `dirname $BASH_SOURCE`/settings.sh
 cd $STORE4_PATH/code
 
 echo "============== `date` =============="
@@ -25,9 +25,9 @@ stop(){
 	if [ $running -eq  0 ]; then
                 echo "[`date +%T`] SPARQL Query Server $1 is not running"
 	else
-		pkill -f "4s-backend $1$"
-		pkill -f "4s-httpd $1$"
-		pkill -9 -f "4s-query $1"
+		for pid in `ps aux | grep myexp_ld | grep 4s- | awk 'BEGIN{FS=" "}{print $2}'`; do
+			kill -9 $pid
+		done	
 		echo "[`date +%T`] Stopped SPARQL Query Server $1"
 	fi
 }
@@ -156,11 +156,11 @@ update(){
 		start $1
 		sleep 3
 		for graph in `cat $DATA_PATH/tmp/$1/delete_files`; do
-                        remove $1 $graph 
+                        remove $1 $graph delete 
 		done
 		echo "[`date +%T`] Removed all deleted entities from $1"
 		if `ls -l $DATA_PATH/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; then
-			remove $1 $DATA_PATH/$1/$1_reasoned.owl keep-file
+			remove $1 $DATA_PATH/$1/$1_reasoned.owl
 			added=`add $1 $DATA_PATH/$1/$1_reasoned.owl`
 			if [ $added -gt 0 ]; then
 				echo "[`date +%T`] Added/Updated $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
@@ -168,7 +168,7 @@ update(){
 				echo "[`date +%T`] Could Not Add/Update $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
 			fi
 		fi
-		entity_groups=( "${ENTITIES[@]}" dataflows )
+		ENTITIES=( "${ENTITIES[@]}" dataflows )
 		for e in ${ENTITIES[@]}; do
 			filepath="$DATA_PATH/$1/$e/"
 			for graph in `ls -l $filepath* 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; do
@@ -329,7 +329,7 @@ case "$2" in
 	data-dump $1
 	;;
   *)
-	cat $STORE4_PATH/scripts/sqs_help.txt
+	$STORE4_PATH/scripts/sqs_help.sh
 	;;
 esac
 exit 1

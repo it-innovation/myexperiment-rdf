@@ -23,8 +23,8 @@ body{
 	width: 944px;
 }
 .login{
-	width: 270px;
-	height: 190px;
+	width: 290px;
+	height: 150px;
 	background-color: #D8BFD8;
         border: 2px solid #4B0082;
         padding: 10px;
@@ -198,15 +198,67 @@ table.borders{
 table.borders th{
         background-color: #e0e0e0;
         border: 1px solid black;
+	padding: 5px;
+	text-align: center;
 }
 table.borders td{
         vertical-align: top;
         border-color: black;
         border-style: solid;
-        border-width: 0 1px 1px 1px;
+        border-width: 1px;
+	padding:5px;
 }
 ul.changelog li{
 	padding-right: 25px;
 	padding-bottom: 15px;
 }
-	
+span.link{
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+	font-size: 0.7em;
+}
+
+
+.firstpage{
+	background: url('/img/icons/first.gif') no-repeat center center;
+	width: 13px;
+}	
+.prevpage{
+        background: url('/img/icons/prev.gif') no-repeat center center;
+	width: 12px;
+}
+.nextpage{
+        background: url('/img/icons/next.gif') no-repeat center center;
+	width: 12px;
+}
+.lastpage{
+        background: url('/img/icons/last.gif') no-repeat center center;
+	width: 13px;
+}
+.firstpage, .prevpage, .nextpage, .lastpage{
+	cursor: pointer;
+	padding: 3px;
+}
+.firstpage a, .prevpage a, .nextpage a, .lastpage a{
+	text-decoration: none;
+}
+.nofirstpage{
+        background: url('/img/icons/first-grey.gif') no-repeat center center;
+	width: 13px;
+}
+.noprevpage{
+        background: url('/img/icons/prev-grey.gif') no-repeat center center;
+	width: 12px;
+}
+.nonextpage{
+        background: url('/img/icons/next-grey.gif') no-repeat center center;
+	width: 12px;
+}
+.nolastpage{
+        background: url('/img/icons/last-grey.gif') no-repeat center center;
+	width: 13px;
+}
+.nofirstpage, .noprevpage, .nonextpage, .nolastpage{
+        padding: 3px;
+}	

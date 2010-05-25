@@ -1,5 +1,5 @@
 #!/bin/bash
-source settings.sh
+source `pwd`/`dirname $BASH_SOURCE`/settings.sh
 echo "============== `date` =============="
 cd $STORE4_PATH/scripts
 scp backup@tents:/home/backup/www.myexperiment.org/latest_db.txt /tmp/

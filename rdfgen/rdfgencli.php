@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php 
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	include('include.inc.php');
 	require('genrdf.inc.php');
 	function setTypeIDandParams($args,$noexit=0){
@@ -39,13 +39,13 @@
                 return mysql_query($cursql);
 	}
 	list($type,$id,$params,$wfid)=setTypeIDandParams($argv);
-	$uri="$argv[1]/$argv[2]";
-	if ($argv[3]) $uri.="/".$argv[3];
 	if (entityExists($type,$id)){
 	        $res=getEntityResults($type,$id);
+		$uri=getEntityURI($type,$id,mysql_fetch_assoc($res));
+		$res=getEntityResults($type,$id);
 		$e=1;
 		$xml=pageheader();
-		if ($id) $xml.=rdffiledescription(getEntityURI($type,$id));
+		if ($id) $xml.=rdffiledescription($uri);
 		if ($params[2]=="dataflows"||$params[2]=="dataflow"){
 			array_shift($params);
 			$version=array_shift($params);
@@ -62,7 +62,7 @@
 				foreach($matches as $m){
 					$m=str_replace($datauri,"",$m);
 					$mbits=explode('/',$m);
-					if (strpos($m,'.') === false && $sql[$mbits[0]] && $m != $uri){
+					if (strpos($m,'.') === false && $sql[$mbits[0]] && $datauri.$m != $uri){
 						$args[1]=array_shift($mbits);
 						$args[2]=array_shift($mbits);
 						$args[3]=implode('/',$mbits);

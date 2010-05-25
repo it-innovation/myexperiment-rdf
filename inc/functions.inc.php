@@ -1,7 +1,28 @@
 <?php
-function getEntityURI($type,$id,$format=''){
-	 global $datauri;
-	 if ($format=="ore") return $datauri."aggregations/$type/$id";
+function getEntityURI($type,$id,$entity,$format=''){
+	 global $datauri, $nesting, $annotatable;
+	 if ($nesting[$type]){
+	 	switch ($type){
+			case 'attributions':
+			case 'comments':
+                        case 'creditations':
+			case 'ratings':
+			case 'reviews':
+				return $datauri.$annotatable[$entity[$nesting[$type][0]]]."/".$entity[$nesting[$type][1]]."/$type/$id";
+			case 'favourites':
+				return $datauri."users/".$entity[$nesting[$type][0]]."/$type/$id";
+			case 'jobs':
+				return $datauri."experiments/".$entity[$nesting[$type][0]]."/$type/$id";
+			case 'local_pack_entries':
+			case 'remote_pack_entries':
+				return $datauri."packs/".$entity[$nesting[$type][0]]."/$type/$id";
+			case 'taggings':
+				return $datauri."tags/".$entity[$nesting[$type][0]]."/$type/$id";
+			default:
+				break;
+		}
+	 }
+	 elseif ($format=="ore") return $datauri."aggregations/$type/$id";
          elseif ($type=="workflow_versions"){
 	        $wvsql="select workflow_id, version from workflow_versions where id=$id";
                 $wvres=mysql_query($wvsql);
@@ -13,8 +34,8 @@ function getEntityURI($type,$id,$format=''){
                 return $datauri."groups/".mysql_result($gares,0,'network_id')."/announcements/".$id;
          }
          return $datauri."$type/$id";
-
 }
+
 function getRequester($mship){
 	if (!$mship['user_established_at']) return "groups/".$mship['network_id'];
 	elseif(!$mship['network_established_at']) return "users/".$mship['user_id'];
@@ -168,10 +189,12 @@ function getWorkflowVersions($workflow){
 	return $aggregates;	
 }
 function foafPictureURL($pic_id){
-	return "http://www.myexperiment.org/pictures/show/$pic_id?size=160x160.png";
+	global $datauri;
+	return $datauri."pictures/show/$pic_id?size=160x160.png";
 }
 function pictureURL($user){
-       return "http://www.myexperiment.org/pictures/show/".$user['avatar_id']."?size=160x160.png";
+       global $datauri;
+       return $datauri."pictures/show/".$user['avatar_id']."?size=160x160.png";
 }
 function validateEmail($email){
        if (!preg_match("/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,3})$/", $email)) return 0;
@@ -302,7 +325,7 @@ function getRunnable($entity){
 }
 function getURI($entity){
 	global $datauri;
-	addAggregatedResource("  <rdf:Description rdf:about=\"$entity[job_uri]\">\n    <dcterms:title>Server URI for Job</dcterms:title>\n  </rdf:Description>\n",$datauri."Job/$entity[id]",$entity[job_uri],$entity['format']);
+	addAggregatedResource("  <rdf:Description rdf:about=\"$entity[job_uri]\">\n    <dcterms:title>Server URI for Job</dcterms:title>\n  </rdf:Description>\n",$datauri."jobs/$entity[id]",$entity[job_uri],$entity['format']);
 	return $entity['job_uri'];
 }
 function getRunner($entity){
@@ -310,7 +333,7 @@ function getRunner($entity){
 	$runner="$entity[runner_type]/$entity[runner_id]";
 	$cursql=$sql[$entity['runner_type']]." where id=$entity[runner_id]";
 	$res=mysql_query($cursql);
-	addAggregatedResource(printEntity(mysql_fetch_array($res),$entity['runner_type']),$datauri."Job/$entity[id]",$datauri.$runner,$entity['format']);
+	addAggregatedResource(printEntity(mysql_fetch_array($res),$entity['runner_type']),$datauri."jobs/$entity[id]",$datauri.$runner,$entity['format']);
 	return $runner;
 }
 function getProxyFor($entity){

@@ -7,7 +7,7 @@
 		exit;
 	}
 	elseif ( $argv[1]=="ontologies"){
-		echo modularizedFullTestSparqlQueryClient($argv[1]);
+		echo ontologiesFullTestSparqlQueryClient($argv[1]);
 		exit;
 	}
 	echo '-1';

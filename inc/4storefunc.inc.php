@@ -1,13 +1,16 @@
 <?php
 
 function getCodePath(){
-	return "/var/jena/code";
+	global $lddir;
+	return $lddir."4store/code";
 }
 function getScriptPath(){
-	return "/var/jena/scripts";
+	global $lddir;
+        return $lddir."4store/script";
 }
 function getPath(){
-	return "/usr/local/bin/";
+	global $store4execpath;
+	return $store4execpath;
 }
 function getQueryPreamble(){
 	return "export LD_LIBRARY_PATH=/usr/local/lib; export BANG='!'; "; 
@@ -15,7 +18,7 @@ function getQueryPreamble(){
 
 //Named Graph Functions
 function listNamedGraphs($modelname){
-	$cmd=getScriptPath()."/sqs4.sh $modelname list-graphs";
+	$cmd=getScriptPath()."/sqs.sh $modelname list-graphs";
 	$ph=popen($cmd,"r");
 	$data="";
 	while ($line=fgets($ph,4096)){
@@ -24,12 +27,12 @@ function listNamedGraphs($modelname){
 	return $data;
 }
 function addNamedGraph($modelname,$url){
-	$cmd=getScriptPath()."/sqs4.sh $modelname remove $url";
+	$cmd=getScriptPath()."/sqs.sh $modelname remove $url";
 	$ph=popen($cmd,"r");
 	while ($line=fgets($ph,4096)){
                 $data.=str_replace(" ","",$line);
         }
-	$cmd=getScriptPath()."/sqs4.sh $modelname add $url";
+	$cmd=getScriptPath()."/sqs.sh $modelname add $url";
         $ph=popen($cmd,"r");
         while ($line=fgets($ph,4096)){
                 $data.=str_replace(" ","",$line);
@@ -37,7 +40,7 @@ function addNamedGraph($modelname,$url){
 	return $data;
 }
 function removeNamedGraph($modelname,$url){
-	$cmd=getScriptPath()."/sqs4.sh $modelname remove $url";
+	$cmd=getScriptPath()."/sqs.sh $modelname remove $url";
 	$ph=popen($cmd,"r");
 	while ($line=fgets($ph,4096)){
                 $data.=str_replace(" ","",$line);
@@ -76,11 +79,12 @@ function sparqlQueryClient($kb,$query,$softlimit=1000){
         return $data;
 }
 function sparqlQueryClientMultiple($kb,$queries,$softlimit=1000,$timeout=30){
+	global $lddir;
 	$qfp=md5(time().rand());
 	$qids=array_keys($queries);
 	foreach($qids as $qid){
 		$filenames[$qid]="/tmp/queries/".$qfp."_$qid";
-		$cmd="/var/jena/scripts/runquery.sh $kb \"".$queries[$qid]."\" $softlimit ".$filenames[$qid]." &";
+		$cmd=$lddir."4store/scripts/runquery.sh $kb \"".$queries[$qid]."\" $softlimit ".$filenames[$qid]." &";
 	//	echo $cmd."<br/>\n";
 		exec($cmd);
 	}
@@ -110,7 +114,7 @@ function sparqlQueryClientMultiple($kb,$queries,$softlimit=1000,$timeout=30){
         return $results;
 }
 
-function testSparqlQueryClient($kb="myexp_public"){
+function testSparqlQueryClient($kb){
    //  $cmd=getPath()."java -cp ".getJenaClassPath()." SPARQLQueryClient $portno PING";
        //echo "##$cmd##";
    //  $ph=popen($cmd,"r");
@@ -121,7 +125,7 @@ function testSparqlQueryClient($kb="myexp_public"){
        return false;
 }
 
-function modularizedFullTestSparqlQueryClient($kb="myexp_public"){
+function modularizedFullTestSparqlQueryClient($kb){
         global $ontopath;
 	$query="PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 select ?x where {?x rdfs:isDefinedBy <".$ontopath."snarm/>}";
@@ -135,6 +139,21 @@ select ?x where {?x rdfs:isDefinedBy <".$ontopath."snarm/>}";
         if (strlen($data)==1184) return '1';
         return '0';
 }
+function ontologiesFullTestSparqlQueryClient($kb){
+        global $ontopath;
+        $query="PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+select ?x where {?x rdfs:isDefinedBy <".$ontopath."snarm/>}";
+        $cmd=getQueryPreamble().getPath()."4s-query $kb \"".$query."\" -s 50000 2>/dev/null";
+        $ph=popen($cmd,"r");
+        $data="";
+        while ($line = fgets($ph, 4096)) {
+                $data.=$line;
+        }
+        pclose($ph);
+        if (strlen($data)==1184) return '1';
+        return '0';
+}
+
 function reasonOntology($name,$url,$id,$log){
 	$cmd=getScriptPath()."/reasonRemoteOntology4.sh '$url' $name $id > $log &";
 	//echo $cmd."###<br/>";
@@ -155,12 +174,12 @@ function reasonFiles($filelocs,$modelname,$reasonedloc){
 		foreach ($filelocs as $fileloc) echo "$fileloc\n";
 	}
 	fclose($fh);
-	$cmd=getScriptPath()."/sqs4.sh $modelname reason-files $listfile $reasonedloc";
+	$cmd=getScriptPath()."/sqs.sh $modelname reason-files $listfile $reasonedloc";
 //      echo $cmd."<br/>";
         exec($cmd);
 }
 function reasonFile($fileloc,$kb,$reasonedloc){
-	$cmd=getScriptPath()."/sqs4.sh $kb reason-file $fileloc $reasonedloc";
+	$cmd=getScriptPath()."/sqs.sh $kb reason-file $fileloc $reasonedloc";
 //	echo $cmd;
 	exec($cmd);
 	$flbits=explode("/",$fileloc);
@@ -172,16 +191,18 @@ function reasonFile($fileloc,$kb,$reasonedloc){
 	pclose($ph);*/
 }
 function getNoTriples($kb){
-	$lines=@file("/var/jena/log/".$kb."_4triples.log");
+	global $lddir;
+	$lines=@file($lddir."4store/log/".$kb."_triples.log");
 	if (is_array($lines) && sizeof($lines)>0) return $lines[0];
-	$cmd=getScriptPath()."/sqs4.sh $kb count-triples";
+	$cmd=getScriptPath()."/sqs.sh $kb count-triples";
 	exec($cmd);
-	$lines=@file("/var/jena/log/".$kb."_4triples.log");
+	$lines=@file($lddir."4store/log/".$kb."_triples.log");
         if (is_array($lines)) return $lines[0];
 	return array('0','');
 }
 function getLastUpdated($kb){
-	$lines=@file("/var/jena/log/".$kb."_4update_time.log");
+	global $lddir;
+	$lines=@file($lddir."4store/log/".$kb."_update_time.log");
         return $lines[0];
 }
 ?>

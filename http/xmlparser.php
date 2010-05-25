@@ -1,5 +1,6 @@
 <?php
-	include('inc/xmlfunc.inc.php');
+	include('include.inc.php');
+	include('xmlfunc.inc.php');
 	if ($_POST['filename']){
 		$fh=fopen($_POST['filename'],'r');
 		while ($line = fgets($fh, 4096)) {

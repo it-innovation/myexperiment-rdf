@@ -7,7 +7,7 @@
 	require('miscfunc.inc.php');
 	$domain="ontologies";
 	$prefix="Ontologies ";
-	$ts=getTriplestoreForDomain($domain);
+	$ts="ontologies";
         $notriples=getNoTriples($ts);
 	$ludate=getLastUpdated($ts);
 	$softlimit=1;

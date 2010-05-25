@@ -1,8 +1,6 @@
 #!/bin/bash
-source settings.sh
+source `dirname $BASH_SOURCE`/settings.sh
 cd $STORE4_PATH/config/
-touch $TRIPLESTORE"_ontologies.txt"
-touch $TRIPLESTORE"_files.txt"
 
 echo "$HTTPRDF_PATH/ontologies/snarm/
 $HTTPRDF_PATH/ontologies/base/
@@ -13,7 +11,7 @@ $HTTPRDF_PATH/ontologies/experiments/
 $HTTPRDF_PATH/ontologies/viewings_downloads/
 $HTTPRDF_PATH/ontologies/contributions/
 $HTTPRDF_PATH/ontologies/components/
-$HTTPRDF_PATH/ontologies/specific/" > $TRIPLESTORE"_files.txt"
+$HTTPRDF_PATH/ontologies/specific/" > $TRIPLESTORE"_ontologies.txt"
 
-echo "$DATA_PATH/reasoned/myexp_public_reasoned.owl";
+echo "$DATA_PATH/reasoned/"$TRIPLESTORE"_reasoned.owl" > $TRIPLESTORE"_files.txt"
 
