@@ -92,13 +92,50 @@ function getAccepterTime($mship){
 	return "";
 }
 
+function getMemberships($user){
+	global $sql, $datauri;
+	$msql=$sql['memberships']." where user_id=$user[id]";
+	$mres=mysql_query($msql);
+	for ($m=0; $m<mysql_num_rows($mres); $m++){
+		$xml.="<mebase:has-membership rdf:resource=\"${datauri}users/$user[id]/memberships/".mysql_result($mres,$m,'id')."\"/>\n";
+	}
+	return $xml;
+}
+function getFriendships($user){
+        global $sql, $datauri;
+	$fsql=addWhereClause($sql['friendships'],"user_id=$user[id] or friend_id=$user[id]");
+        $fres=mysql_query($fsql);
+        for ($f=0; $f<mysql_num_rows($fres); $f++){
+                $xml.="<mebase:has-friendship rdf:resource=\"${datauri}users/".mysql_result($fres,$f,'user_id')."/friendships/".mysql_result($fres,$f,'id')."\"/>\n";
+        }
+        return $xml;
+}
+function getFavourites($user){
+	global $sql, $datauri;
+        $fsql=addWhereClause($sql['favourites'],"user_id=$user[id]");
+        $fres=mysql_query($fsql);
+        for ($f=0; $f<mysql_num_rows($fres); $f++){
+                $xml.="<mebase:has-favourite rdf:resource=\"${datauri}users/$user[id]/favourites/".mysql_result($fres,$f,'id')."\"/>\n";
+        }
+        return $xml;
+}
 function getUser($action,$hash=0){
-	global $salt, $data;
+	global $salt, $data, $ontopath;
 	if ($action['user_id'] && $action['user_id']!="AnonymousUser"){
 		if ($hash) return "users/".md5($salt.$action['user_id']);
 	 	return "users/".$action['user_id'];
 	}
-	return "/specific/AnonymousUser";
+	return $ontopath."specific/AnonymousUser";
+}
+function getTaggings($tag){
+	global $sql, $datauri;
+	$tsql=addWhereClause($sql['taggings'],"tag_id=$tag[id]");
+	$tres=mysql_query($tsql);
+	for ($t=0; $t<mysql_num_rows($tres); $t++){
+		$row=mysql_fetch_assoc($tres);
+		$xml.="    <meannot:for-tagging rdf:resource=\"".getEntityURI('taggings',$row['id'],$row)."\"/>\n";
+	}
+	return $xml;
 }
 function getPolicyURI($contrib,$type){
 	if ($type=="workflow_versions"){
@@ -205,14 +242,6 @@ function getWorkflowVersions($workflow){
 		else $aggregates.="    <mebase:has-version rdf:resource=\"".$datauri."workflows/".$row['workflow_id']."/versions/".$row['version']."\"/>\n";
 	}
 	return $aggregates;	
-}
-function getContributionForPolicy($policy){
-	global $ontent, $modelalias, $datauri;
-	$contrib_type = array_search($policy['contributable_type'],$modelalias);
-	if (!$contrib_type) $contrib_type=$policy['contributable_type'];
-	$contrib_type=array_search($contrib_type,$ontent);
-	return $contrib_type."/".$policy['contributable_id'];
-	
 }
 function foafPictureURL($pic_id){
 	global $datauri;
@@ -470,17 +499,15 @@ function getLicenseAttributes($license){
 }
 function getAnnotationSQL($type, $p1,$p2){
 	global $sql, $annotwhereclause;
-	$cursql=$sql[$type];
-	$whereclause=str_replace('~',$p2,str_replace('?',$p1,$annotwhereclause[$type]));
- 	if (strpos($cursql,'where') > 0) $cursql.=" and $whereclause";
-        else $cursql.=" where $whereclause";
+	$cursql=addWhereClause($sql[$type],str_replace('~',$p2,str_replace('?',$p1,$annotwhereclause[$type])));
 	return $cursql;
 	
 }
 function getAnnotations($entity,$type){
 	global $entannot, $ontent, $modelalias, $annotprop, $datauri;
 	$ea = $entannot[$type];
-	$atype=$modelalias[$ontent[$type]];
+	$atype=$ontent[$type];
+	if ($modelalias[$atype]) $atype=$modelalias[$atype];
 	$xml="";
 	foreach ($ea as $annot){
 		if ($annot=="citations") $cursql=getAnnotationSQL($annot,$entity['workflow_id'],$entity['version']);
@@ -490,8 +517,6 @@ function getAnnotations($entity,$type){
 			$row=mysql_fetch_array($res);
                         $auri=getEntityURI($annot,$row['id'],$row);
                         $xml.="    <meannot:".$annotprop[$annot]." rdf:resource=\"$auri\"/>\n";
-
-//                	$xml.="    <meannot:".$annotprop[$annot]." rdf:resource=\"".$datauri."$annot/".mysql_result($res,$a,'id')."\"/>\n";
 		}
 	}
 	return $xml;

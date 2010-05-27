@@ -36,7 +36,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 21, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 27, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -109,9 +109,18 @@
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="&mebase;has-annotation">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="&mebase;Submission">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;User">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
 
 
   <!-- ====================== Interfaces ====================== -->
@@ -333,10 +342,9 @@
   </owl:ObjectProperty>
 
   <owl:ObjectProperty rdf:about="has-favourite">
-    <rdfs:subPropertyOf rdf:resource="&mebase;has-annotation"/>
     <rdfs:label>has-favourite</rdfs:label>
     <rdfs:comment>A Favouritable object has Favourites</rdfs:comment>
-    <rdfs:domain rdf:resource="Favouritable"/>
+    <rdfs:domain rdf:resource="&mebase;User"/>
     <rdfs:range rdf:resource="Favourite"/>
     <rdfs:isDefinedBy rdf:resource="&meannot;"/>
   </owl:ObjectProperty>

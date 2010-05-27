@@ -39,7 +39,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 20, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 27, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
     <owl:imports rdf:resource="&snarm;"/>
   </owl:Ontology>
@@ -858,6 +858,24 @@
     <rdfs:comment>A Request must have a requester</rdfs:comment>
     <rdfs:domain rdf:resource="Request"/>
     <rdfs:range rdf:resource="Actor"/>
+    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="has-friendship">
+    <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+    <rdfs:label>has-friendship</rdfs:label>
+    <rdfs:comment>A User has a Friendship (with another User)</rdfs:comment>
+    <rdfs:domain rdf:resource="User"/>
+    <rdfs:range rdf:resource="Friendship"/>
+    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="has-membership">
+    <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+    <rdfs:label>has-membership</rdfs:label>
+    <rdfs:comment>A User has a Membership (of a Group)</rdfs:comment>
+    <rdfs:domain rdf:resource="User"/>
+    <rdfs:range rdf:resource="Membership"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
 

@@ -1,5 +1,5 @@
 <?php
-	ini_set('include_path','../inc');
+	include('../include.inc.php');
 	$pagetitle="Ontology";
 	include('header.inc.php');
 ?>

@@ -61,22 +61,24 @@
 		        for ($e=0; $e<mysql_num_rows($res); $e++){
        			        $xml.=printEntity(mysql_fetch_assoc($res),$type,$format);
 	        	}
-			if ($e==1){
-				$regex=$datauri.'[^"]+';
+	 		if ($e==1){
+				$regex=$datauri.'[^<>]+>';
 				preg_match_all("!$regex!",$xml,$matches);
 		                $matches=array_unique($matches[0]);
 				foreach($matches as $m){
-					$m=str_replace($datauri,"",$m);
-					$mbits=explode('/',$m);
-					if (strpos($m,'.') === false && $sql[$mbits[0]] && $datauri.$m != $uri){
-						$args[1]=array_shift($mbits);
-						$args[2]=array_shift($mbits);
-						$args[3]=implode('/',$mbits);
-						$args[4]=1;
-				//		print_r($args);
-						list($type,$id,$params,$wfid)=setTypeIDandParams($args);
-						$res=getEntityResults($type,$id);
-						$xml.=printEntity(mysql_fetch_assoc($res),$type,$format);	
+					if (strpos($m,'/>')>0){
+						$mtmp=explode('"',$m);
+						$m=str_replace($datauri,"",$mtmp[0]);
+						$mbits=explode('/',$m);
+						if (strpos($m,'.') === false && $sql[$mbits[0]] && $datauri.$m != $uri){
+							$args[1]=array_shift($mbits);
+							$args[2]=array_shift($mbits);
+							$args[3]=implode('/',$mbits);
+							$args[4]=1;
+							list($type,$id,$params,$wfid)=setTypeIDandParams($args);
+							$res=getEntityResults($type,$id);
+							$xml.=printEntity(mysql_fetch_assoc($res),$type,$format);	
+						}
 					}
 				}
 			}	

@@ -39,4 +39,7 @@ function setRestrict($type,$wclause=array(),$userid=0,$ingroups=0){
         if ($domain!="private") $retsql=setUserAndGroups($retsql,$userid,$ingroups);
         return $retsql;
 }
-
+function addWhereClause($sql,$whereclause){
+	if (stripos($sql,'where')>0) return "$sql and ($whereclause)";
+	return "$sql where $whereclause";
+}
