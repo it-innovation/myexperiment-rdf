@@ -87,6 +87,7 @@
 			
 			$xml.="    <dcterms:hasFormat rdf:resource=\"$curxmluri\"/>\n";
 		}
+//		$xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.xml\"/>\n";
 		return $xml;
 	}
 
