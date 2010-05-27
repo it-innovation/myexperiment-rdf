@@ -9,7 +9,13 @@ function getEntityURI($type,$id,$entity,$format=''){
 			case 'ratings':
 			case 'reviews':
 				return $datauri.$annotatable[$entity[$nesting[$type][0]]]."/".$entity[$nesting[$type][1]]."/$type/$id";
+			case 'policies':
+				return $datauri.$entity[$nesting[$type][0]]."/".$entity[$nesting[$type][1]]."/$type/$id";
+			case 'citations': 
+				return $datauri."workflows/".$entity[$nesting[$type][0]]."/versions/".$entity[$nesting[$type][1]]."/$type/$id";
 			case 'favourites':
+			case 'friendships':
+			case 'memberships':
 				return $datauri."users/".$entity[$nesting[$type][0]]."/$type/$id";
 			case 'jobs':
 				return $datauri."experiments/".$entity[$nesting[$type][0]]."/$type/$id";
@@ -92,7 +98,19 @@ function getUser($action,$hash=0){
 		if ($hash) return "users/".md5($salt.$action['user_id']);
 	 	return "users/".$action['user_id'];
 	}
-	return "ontologies/specific/AnonymousUser";
+	return "/specific/AnonymousUser";
+}
+function getPolicyURI($contrib,$type){
+	if ($type=="workflow_versions"){
+		$policy['contributable_type']="workflows";
+		$policy['contributable_id']=$contrib['workflow_id'];
+	}
+	else{
+		$policy['contributable_type']=$type;
+		$policy['contributable_id']=$contrib['id'];
+	}
+	
+	return getEntityURI('policies',$contrib['policy_id'],$policy);
 }
 function getThumbnail($workflow){
 	$url=getUrl($workflow,'thumb');
@@ -188,6 +206,14 @@ function getWorkflowVersions($workflow){
 	}
 	return $aggregates;	
 }
+function getContributionForPolicy($policy){
+	global $ontent, $modelalias, $datauri;
+	$contrib_type = array_search($policy['contributable_type'],$modelalias);
+	if (!$contrib_type) $contrib_type=$policy['contributable_type'];
+	$contrib_type=array_search($contrib_type,$ontent);
+	return $contrib_type."/".$policy['contributable_id'];
+	
+}
 function foafPictureURL($pic_id){
 	global $datauri;
 	return $datauri."pictures/show/$pic_id?size=160x160.png";
@@ -267,6 +293,23 @@ function getFilename($entity,$type){
 	if ($type=="Workflow"||$type="WorkflowVersion") return $entity['unique_name'].".".$entity['file_ext'];
 	return '';
 }
+function getPackEntries($pack){
+	global $datauri;
+	$lsql="select * from pack_contributable_entries where pack_id=$pack[id]";
+	$lres=mysql_query($lsql);
+	$xml="";
+	for ($e=0; $e<mysql_num_rows($lres); $e++){
+		$xml.="    <mepack:has-pack-entry rdf:resource=\"${datauri}packs/$pack[id]/local_pack_entries/".mysql_result($lres,$e,'id')."\"/>\n";
+	}
+	$rsql="select * from pack_remote_entries where pack_id=$pack[id]";
+	$rres=mysql_query($rsql);
+        for ($e=0; $e<mysql_num_rows($rres); $e++){
+                $xml.="    <mepack:has-pack-entry rdf:resource=\"${datauri}packs/$pack[id]/remote_pack_entries/".mysql_result($rres,$e,'id')."\"/>\n";
+        }
+	return $xml;
+}
+
+	
 function getOutput($entity){
 	global $datauri;
 	if ($entity['outputs_uri']){		
@@ -299,28 +342,28 @@ function getInput($entity){
         return $xml;
 }
 function getRunnable($entity){
-	global $datauri, $mappings, $sql;
+	global $datauri, $mappings, $sql, $annotatable;
 	if ($entity['runnable_version']){
 		$cursql="select id from workflow_versions where workflow_id=$entity[runnable_id] and version=$entity[runnable_version]";
-		$res=mysql_query($cursql) or $return=1;
-		if ($return || mysql_num_rows($res)==0) return "";
+		$res=mysql_query($cursql);
 		$id=mysql_result($res,0,'id');
-		$type="WorkflowVersion";
+		$type="workflow_versions";
 		$idf="workflow_versions.id";
 	}
 	else{
 		$id=$entity['runnable_id'];
-		$type=$entity['runnable_type'];
+		$type=$annotatable[$entity['runnable_type']];
 		$idf="workflows.id";
 	}
-	$runnable="$type/$id";
+//	print_r($entity);
+	$runnable=$annotatable[$entity['runnable_type']]."/".$entity['runnable_id'];
+	if ($entity['runnable_version']) $runnable.="/versions/".$entity['runnable_version'];
 	
 	$cursql="$sql[$type] and $idf=$id";
 	//print_r($entity);
-//	echo "<!-- $type $cursql -->";
 	$res=mysql_query($cursql) or $return=1;
         if ($return || mysql_num_rows($res)==0) return "";
-	addAggregatedResource(printEntity(mysql_fetch_array($res),$type),$datauri."Job/$entity[id]",$datauri.$runnable,$entity['format']);
+	addAggregatedResource(printEntity(mysql_fetch_array($res),$type),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runnable,$entity['format']);
 	return $runnable;
 }
 function getURI($entity){
@@ -330,10 +373,11 @@ function getURI($entity){
 }
 function getRunner($entity){
 	global $datauri, $mappings, $sql;
-	$runner="$entity[runner_type]/$entity[runner_id]";
-	$cursql=$sql[$entity['runner_type']]." where id=$entity[runner_id]";
+	$runner="runners/$entity[runner_id]";
+	$cursql=$sql['runners']." where id=$entity[runner_id]";
 	$res=mysql_query($cursql);
-	addAggregatedResource(printEntity(mysql_fetch_array($res),$entity['runner_type']),$datauri."jobs/$entity[id]",$datauri.$runner,$entity['format']);
+//	echo $cursql;
+	addAggregatedResource(printEntity(mysql_fetch_array($res),'runners'),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runner,$entity['format']);
 	return $runner;
 }
 function getProxyFor($entity){
@@ -433,22 +477,21 @@ function getAnnotationSQL($type, $p1,$p2){
 	return $cursql;
 	
 }
-function getModelAlias($type){
-	if ($type=="File") return "Blob";
-	if ($type=="Group") return "Network";
-	return $type;
-}
 function getAnnotations($entity,$type){
-	global $entannot, $ontent, $annotprop, $datauri;
+	global $entannot, $ontent, $modelalias, $annotprop, $datauri;
 	$ea = $entannot[$type];
-	$atype=getModelAlias($ontent[$type]);
+	$atype=$modelalias[$ontent[$type]];
 	$xml="";
 	foreach ($ea as $annot){
 		if ($annot=="citations") $cursql=getAnnotationSQL($annot,$entity['workflow_id'],$entity['version']);
 		else  $cursql=getAnnotationSQL($annot,$atype,$entity['contribution_id']);
 		$res = mysql_query($cursql);
 	        for ($a=0; $a<mysql_num_rows($res); $a++){
-                	$xml.="    <meannot:".$annotprop[$annot]." rdf:resource=\"".$datauri."$annot/".mysql_result($res,$a,'id')."\"/>\n";
+			$row=mysql_fetch_array($res);
+                        $auri=getEntityURI($annot,$row['id'],$row);
+                        $xml.="    <meannot:".$annotprop[$annot]." rdf:resource=\"$auri\"/>\n";
+
+//                	$xml.="    <meannot:".$annotprop[$annot]." rdf:resource=\"".$datauri."$annot/".mysql_result($res,$a,'id')."\"/>\n";
 		}
 	}
 	return $xml;

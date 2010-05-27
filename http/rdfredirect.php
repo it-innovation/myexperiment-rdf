@@ -2,6 +2,7 @@
 	include('include.inc.php');
 	include('data.inc.php');
 	include('myexpconnect.inc.php');
+	include('functions.inc.php');
 	
 	//Singulars
         $singulars['Announcements']="Announcement";
@@ -71,7 +72,13 @@
 	$uribits=explode("/",substr($_SERVER['REQUEST_URI'],1));
 	if ($singulars[$uribits[0]]) $uribits[0]=$singulars[$uribits[0]];
 	$uribits[0]=$newuritype[$uribits[0]];
-	if ($uribits[0]=="group_announcements" and $uribits[1]){
+	if ($nesting[$uribits[0]]){
+		if (stripos($sql[$uribits[0]],'where')>0) $esql=$sql[$uribits[0]]." and ".$tables[$uribits[0]].".id=$uribits[1]";
+		else $esql=$sql[$uribits[0]]." where ".$tables[$uribits[0]].".id=$uribits[1]";
+		$eres=mysql_query($esql);	
+		$newuri=getEntityURI($uribits[0],$uribits[1],mysql_fetch_assoc($eres)).".rdf";
+	}
+	elseif ($uribits[0]=="group_announcements" and $uribits[1]){
 		$cursql=$sql[$uribits[0]]." where id=$uribits[1]";
 		$res=mysql_query($cursql);
 		if (mysql_num_rows($res)==0){
@@ -96,7 +103,7 @@
                 $uribits[2]="versions";
                 $uribits[3]=mysql_result($res,0,'version');
 	}
-	$newuri=$datauri.implode("/",$uribits).".rdf";
+	if (!$newuri) $newuri=$datauri.implode("/",$uribits).".rdf";
 
 	header("HTTP/1.1 301 301 Moved Permanently");
 	header("Location: $newuri");

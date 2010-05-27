@@ -4,12 +4,18 @@
 	include('include.inc.php');
 	require('genrdf.inc.php');
 	function setTypeIDandParams($args,$noexit=0){
+		global $nesting;
 		$type=$args[1];
 		$id=$args[2];
 		$params=explode("/",$args[3]);
 		$wfid='0';
 		if ($params[0]){
-			if ($params[0]=="versions" && $type=="workflows"){
+			if ($nesting[$params[sizeof($params)-2]]){
+				$type=$params[sizeof($params)-2];
+				$id=$params[sizeof($params)-1];
+				$params=array();
+         		}
+			elseif ($params[0]=="versions" && $type=="workflows"){
 				$type="workflow_versions"; 
 				$wvsql="select id from workflow_versions where workflow_id=$id and version=$params[1]";
 				$wvres=mysql_query($wvsql);
@@ -67,6 +73,7 @@
 						$args[2]=array_shift($mbits);
 						$args[3]=implode('/',$mbits);
 						$args[4]=1;
+				//		print_r($args);
 						list($type,$id,$params,$wfid)=setTypeIDandParams($args);
 						$res=getEntityResults($type,$id);
 						$xml.=printEntity(mysql_fetch_assoc($res),$type,$format);	
