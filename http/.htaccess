@@ -3,7 +3,7 @@ RewriteEngine On
 RewriteRule ^css/(.*)$ css/$1 [L]
 RewriteRule ^img/(.*)$ img/$1 [L]
 RewriteRule ^js/(.*)$ js/$1 [L]
-RewriteRule ^example/(.*)$ example/$1 [L]
+RewriteRule ^([a-z_]+)/example$ example/$1 [L]
 
 RewriteRule ^snarm_explained/?$ snarm_explained.php
 RewriteRule ^current/spec/?$ current_spec.php
@@ -27,6 +27,7 @@ RewriteRule ^[A-Z].* rdfredirect.php
   	AuthType Basic
   	Require valid-user
   	allow from 127.0.0.1
+        allow from 152.78.189.65
         allow from 152.78.65.3
         Satisfy Any
 </Files>

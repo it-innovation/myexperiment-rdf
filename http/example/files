@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/.annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/files/11.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/files/11"/>
+  </rdf:Description>
+
+  <mecontrib:File rdf:about="http://www.myexperiment.org/files/11">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/files/11.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/11.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/file.xml?id=11"/>
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/blobs/11/download/20070320-1.pdf" />
+    <mebase:filename rdf:datatype="&xsd;string">20070320-1.pdf</mebase:filename>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/41" />
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/24" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-16T00:31:00Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2007-11-16T00:31:00Z</dcterms:modified>
+    <dcterms:title rdf:datatype="&xsd;string">pdf file test</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">pdf file test</dcterms:description>
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">305</mevd:viewed>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/files/11/policies/214" />
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/898/taggings/2551"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/39/taggings/2552"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/402/taggings/2553"/>
+  </mecontrib:File>
+
+  <mebase:User rdf:about="http://www.myexperiment.org/users/41">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/users/41.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/41.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/user.xml?id=41"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-26T03:02:01Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-08-19T12:21:33Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">Hong Chang Bum</sioc:name>
+    <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/255?size=160x160.png" />
+    <foaf:homepage rdf:resource="http://socmaster.homelinux.org/~hongiiv" />
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2009-08-19T12:21:33Z</mebase:last-seen-at>
+    <mebase:activated-at rdf:datatype="&xsd;dateTime">2007-07-26T03:02:01Z</mebase:activated-at>
+    <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
+    <foaf:mbox rdf:resource="mailto:hongiiv@gmail.com" />
+    <foaf:mbox_sha1sum rdf:datatype="&xsd;string">da39a3ee5e6b4b0d3255bfef95601890afd80709</foaf:mbox_sha1sum>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1/friendships/107"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/41/friendships/325"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/41/friendships/326"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/41/friendships/327"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/41/friendships/328"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/41/memberships/54"/>
+  </mebase:User>
+
+  <mebase:ContentType rdf:about="http://www.myexperiment.org/content_types/24">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/content_types/24.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/content_types/24.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/type.xml?id=24"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:title rdf:datatype="&xsd;string">Unknown</dcterms:title>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-05-21T10:32:59Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2010-04-23T12:56:44Z</dcterms:modified>
+    <dcterms:type rdf:datatype="&xsd;string">file/unknown</dcterms:type>
+  </mebase:ContentType>
+
+  <mebase:License rdf:about="http://www.myexperiment.org/licenses/2">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/licenses/2.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/licenses/2.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/license.xml?id=2"/>
+    <dcterms:identifier rdf:datatype="&xsd;string">by-sa</dcterms:identifier>
+    <dcterms:title rdf:datatype="&xsd;string">Creative Commons Attribution-Share Alike 3.0 Unported License</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;h4&gt;You are free:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;to Share &amp;mdash; to copy, distribute and transmit the work&lt;/li&gt;
+  &lt;li&gt;to Remix &amp;mdash; to adapt the work&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Under the following conditions:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Attribution &amp;mdash; You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).&lt;/li&gt;
+  &lt;li&gt;Share Alike &amp;mdash; If you alter, transform, or build upon this work, you may distribute the resulting work only under the same, similar or a compatible license.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;With the understanding that:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Waiver &amp;mdash; Any of the above conditions can be waived if you get permission from the copyright holder.&lt;/li&gt;
+  &lt;li&gt;Other Rights &amp;mdash; In no way are any of the following rights affected by the license:
+    &lt;ul&gt;
+      &lt;li&gt;Your fair dealing or fair use rights;&lt;/li&gt;
+      &lt;li&gt;The author&apos;s moral rights;&lt;/li&gt;
+      &lt;li&gt;Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Notice &amp;mdash; For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to &lt;a href=&apos;http://creativecommons.org/licenses/by-sa/3.0/&apos;&gt;http://creativecommons.org/licenses/by-sa/3.0/&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</dcterms:description>
+    <owl:sameAs rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#Notice"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#Attribution"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#ShareAlike"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-07-08T14:09:36Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-07-08T14:09:37Z</dcterms:modified>
+  </mebase:License>
+
+  <snarm:Policy rdf:about="http://www.myexperiment.org/Blob/11/policies/214">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/Blob/11/policies/214.rdf"/>
+        <snarm:has-access>
+          <snarm:RestrictedAccess>
+            <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/41"/>
+            <snarm:has-access-type rdf:resource="&mespec;View"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access>
+          <snarm:RestrictedAccess>
+            <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/41"/>
+            <snarm:has-access-type rdf:resource="&mespec;Download"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access>
+          <snarm:RestrictedAccess>
+            <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/41"/>
+            <snarm:has-access-type rdf:resource="&mespec;Edit"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access rdf:resource="&mespec;PublicView"/>
+        <snarm:has-access rdf:resource="&mespec;PublicDownload"/>
+        <snarm:has-access rdf:resource="&mespec;FriendsEdit"/>
+  </snarm:Policy>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/898/taggings/2551">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/898/taggings/2551.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=2551"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/898" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/files/155" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/1447" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-12-01T07:16:19Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/39/taggings/2552">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/39/taggings/2552.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=2552"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/39" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/files/155" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/1447" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-12-01T07:16:19Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/402/taggings/2553">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/402/taggings/2553.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=2553"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/402" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/files/155" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/1447" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-12-01T07:16:20Z</dcterms:created>
+  </meannot:Tagging>
+
+</rdf:RDF>

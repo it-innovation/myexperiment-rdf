@@ -98,7 +98,7 @@ function getOREAggregatedResources($entry,$type){
                         if ($et['type']=="blob")  $row['type']="file";
                         if (isset($row['runnable_id'])) $row['type']="jobs";
                         if ($entrytype=="remote_pack_entries") $fulluri=$row['uri'];
-                        else $fulluri=$datauri.$etype."/".$row['id'];
+                        else $fulluri=getEntityURI($etype,$row['id'],$row);
                         if ($entrytype!='remote_pack_entries'){
 //                              if ($type=="Experiment") echo "~~".$row['type']."~~<br/>\n";
                                 $csql=setRestrict($etype,array("id","=",$row['id']),$userid,$ingroups);

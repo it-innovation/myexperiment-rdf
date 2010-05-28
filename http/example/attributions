@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/.annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/workflows/72/attributions/12.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/workflows/72/attributions/12"/>
+  </rdf:Description>
+
+  <meac:Attribution rdf:about="http://www.myexperiment.org/workflows/72/attributions/12">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/72/attributions/12.rdf"/>
+    <meac:attributes rdf:resource="http://www.myexperiment.org/workflows/72" />
+    <meac:has-attributable rdf:resource="http://www.myexperiment.org/workflows/75" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-15T09:00:44Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2007-11-15T09:00:44Z</dcterms:modified>
+  </meac:Attribution>
+
+  <mecontrib:Workflow rdf:about="http://www.myexperiment.org/workflows/72">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/72.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/72.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=72"/>
+    <dcterms:title rdf:datatype="&xsd;string">BioAID_DiseaseDiscovery</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This workflow finds disease relevant to the query string via the following steps: 1. A user query: a list of terms or boolean query - look at the Apache Lucene project for all details. E.g.: (EZH2 OR &amp;quot;Enhancer of Zeste&amp;quot; +(mutation chromatin) -clinical); consider adding &apos;ProteinSynonymsToQuery&apos; in front of the input if your query is a protein. 2. Retrieve documents: finds &apos;maximumNumberOfHits&apos; relevant documents (abstract+title) based on query (the AIDA service inside is based on Apache&apos;s Lucene) 3. Discover proteins: extract proteins discovered in the set of relevant abstracts with a &apos;named entity recognizer&apos; trained on genomic terms using a Bayesian approach; the AIDA service inside is based on LingPipe. This subworkflow also &apos;filters&apos; false positives from the discovered protein by requiring a discovery has a valid UniProt ID. Martijn Schuemie&apos;s service to do that contains only human UniProt IDs, which is why this workflow only works for human proteins. 4. Link proteins to disease contained in the OMIM disease database (with a service from Japan that interrogates OMIM)  Workflow by Marco Roos (AID = Adaptive Information Disclosure, University of Amsterdam; http://adaptivedisclosure.org)  Text mining services by Sophia Katrenko and Edgar Meij (AID), and Martijn Schuemie (BioSemantics, Erasmus University Rotterdam). OMIM service from the Center for Information Biology and DNA Data Bank of Japan, National Institute of Genetics, director Hideaki Sugawara (see http://xml.nig.ac.jp)  Changes to our original BioAID_DiseaseDiscovery workflow:    * Use of Martijn Schuemie&apos;s synsets service to        * provide uniprot ids to discovered proteins        * filter false positive discoveries, only proteins with a uniprot id go through; this introduces some false negatives (e.g. discovered proteins with a name shorter than 3 characters)        * solve a major issue with the original workflow where some false positives could contribute disproportionately to the number of discovered diseases    * Counting of results in various ways.&lt;/p&gt;</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-12-15T20:46:09Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-12-15T20:47:50Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">bioaid_diseasediscovery_rathumanmouseuniprotfilter_917872.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflows/72" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflows/72" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/72/download/bioaid_diseasediscovery_rathumanmouseuniprotfilter_917872.xml" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/image/72/BioAID_DiseaseDiscoveryWorkflow_070904_1__1_.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/image/72/thumb/BioAID_DiseaseDiscoveryWorkflow_070904_1__1_.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/image/72/medium/BioAID_DiseaseDiscoveryWorkflow_070904_1__1_.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/svg/72/bioaid_diseasediscovery_rathumanmouseuniprotfilter.svg.xml" />
+    <mebase:has-current-version rdf:resource="http://www.myexperiment.org/workflows/72/versions/3" />
+    <mebase:has-version rdf:resource="http://www.myexperiment.org/workflows/72/versions/1"/>
+    <mebase:has-version rdf:resource="http://www.myexperiment.org/workflows/72/versions/2"/>
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/18" />
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">5447</mevd:viewed>
+    <mevd:downloaded rdf:datatype="&xsd;nonNegativeInteger">1853</mevd:downloaded>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/72/policies/209" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/72/versions/3/dataflow" />
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/707/taggings/757"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/708/taggings/758"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/709/taggings/759"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/710/taggings/760"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/711/taggings/761"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/629/taggings/762"/>
+  </mecontrib:Workflow>
+
+  <mecontrib:Workflow rdf:about="http://www.myexperiment.org/workflows/75">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/75.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/75.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=75"/>
+    <dcterms:title rdf:datatype="&xsd;string">BioAID_ProteinToDiseases</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">This workflow was based on BioAID_DiseaseDiscovery, changes: expects only one protein name, adds protein synonyms).
+
+This workflow finds diseases relevant to the query string via the following steps:
+
+
+&lt;ol&gt;
+&lt;li value=&quot;1&quot;&gt;A user query: a single protein name&lt;/li&gt;
+&lt;li value=&quot;2&quot;&gt;Add synonyms (service courtesy of Martijn Scheumie, Erasmus University Rotterdam)&lt;/li&gt;
+&lt;li value=&quot;3&quot;&gt;Retrieve documents: finds relevant documents (abstract+title) based on query&lt;/li&gt;
+&lt;li value=&quot;4&quot;&gt;Discover proteins: extract proteins discovered in the set of relevant abstracts&lt;/li&gt;
+&lt;/ol&gt;
+
+5. Link proteins to disease contained in the OMIM disease database.</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-14T12:47:57Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2007-11-15T09:00:44Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">bioaid_proteintodiseases_16160.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflows/75" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflows/75" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/75/download/bioaid_proteintodiseases_16160.xml" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/image/75/bioaid_proteintodiseases_16160.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/image/75/thumb/bioaid_proteintodiseases_16160.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/image/75/medium/bioaid_proteintodiseases_16160.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/svg/75/bioaid_proteintodiseases_16160.svg" />
+    <mebase:has-current-version rdf:resource="http://www.myexperiment.org/workflows/75/versions/1" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/18" />
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">1035</mevd:viewed>
+    <mevd:downloaded rdf:datatype="&xsd;nonNegativeInteger">737</mevd:downloaded>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/75/policies/207" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/75/versions/1/dataflow" />
+    <meannot:has-comment rdf:resource="http://www.myexperiment.org/workflows/144/comments/47"/>
+    <meannot:has-comment rdf:resource="http://www.myexperiment.org/workflows/144/comments/49"/>
+    <meannot:has-rating rdf:resource="http://www.myexperiment.org/workflows/144/ratings/100"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/709/taggings/801"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/708/taggings/802"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/712/taggings/803"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/629/taggings/804"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/713/taggings/805"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/714/taggings/806"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/710/taggings/807"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/715/taggings/808"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/1308/taggings/3675"/>
+  </mecontrib:Workflow>
+
+</rdf:RDF>

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/.annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/workflows/16.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/workflows/16"/>
+  </rdf:Description>
+
+  <mecontrib:Workflow rdf:about="http://www.myexperiment.org/workflows/16">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/16.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/16.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=16"/>
+    <dcterms:title rdf:datatype="&xsd;string">Pathways and Gene annotations for QTL region</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This workflow searches for genes which reside in a QTL (Quantitative Trait Loci) region in the mouse, Mus musculus. The workflow requires an input of: a chromosome name or number; a QTL start base pair position; QTL end base pair position. Data is then extracted from BioMart to annotate each of the genes found in this region. The Entrez and UniProt identifiers are then sent to KEGG to obtain KEGG gene identifiers. The KEGG gene identifiers are then used to searcg for pathways in the KEGG pathway database.&lt;/p&gt;
+&lt;p&gt;Example input:&lt;/p&gt;
+&lt;p&gt;chromosome_name: 17&lt;/p&gt;
+&lt;p&gt;start_position: 28500000&lt;/p&gt;
+&lt;p&gt;end_position: 32500000&lt;/p&gt;</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/43" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-11-19T18:18:52Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-11-20T10:33:25Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">pathways_and_gene_annotations_forqtl_region_740037.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflows/16" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflows/16" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/16/download/pathways_and_gene_annotations_forqtl_region_740037.xml" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/image/16/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/image/16/thumb/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/image/16/medium/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/svg/16/pathways_and_gene_annotations_forqtl_region.svg.xml" />
+    <mebase:has-current-version rdf:resource="http://www.myexperiment.org/workflows/16/versions/5" />
+    <mebase:has-version rdf:resource="http://www.myexperiment.org/workflows/16/versions/1"/>
+    <mebase:has-version rdf:resource="http://www.myexperiment.org/workflows/16/versions/2"/>
+    <mebase:has-version rdf:resource="http://www.myexperiment.org/workflows/16/versions/3"/>
+    <mebase:has-version rdf:resource="http://www.myexperiment.org/workflows/16/versions/4"/>
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/43" />
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">5455</mevd:viewed>
+    <mevd:downloaded rdf:datatype="&xsd;nonNegativeInteger">1862</mevd:downloaded>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/16/policies/185" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/16/versions/5/dataflow" />
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/402/taggings/214"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/561/taggings/215"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/562/taggings/216"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/38/taggings/446"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/5/taggings/447"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/611/taggings/448"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/612/taggings/449"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/522/taggings/450"/>
+  </mecontrib:Workflow>
+
+  <mebase:ContentType rdf:about="http://www.myexperiment.org/content_types/1">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/content_types/1.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/content_types/1.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/type.xml?id=1"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/30" />
+    <dcterms:title rdf:datatype="&xsd;string">Taverna 1</dcterms:title>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-05-21T10:32:57Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2010-04-23T12:56:44Z</dcterms:modified>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;Taverna is an open source family of tools for designing and executing workflows, created by the myGrid project and funded by OMII UK, the EPSRC, BBRC, ESRC, JISC and Microsoft.&lt;/p&gt;&lt;p&gt;The family consists of the Taverna Engine (the workhorse), and the Taverna Workbench (desktop client) and Taverna Server (remote workflow execution server) that sit on top of the Engine. See &lt;a href=&quot;http://www.taverna.org.uk/&quot;&gt;http://www.taverna.org.uk/&lt;/a&gt; for further information.&lt;/p&gt;&lt;p&gt;The Taverna 1 Workbench is an earlier version of the workbench which is still available for download. Taverna 1 workflow descriptions are produced and consumed by this version of the workbench. They are in an XML format also known as SCUFL.&lt;/p&gt;&lt;p&gt;Note that the latest version of the workbench is Taverna 2 and is the recommended version. Most Taverna 1 workflows can also be read using the Taverna 2 workbench.&lt;/p&gt;&lt;p&gt;Users of the Taverna 1 workbench can access myExperiment from the workbench using a ???plugin??? which can be downloaded within the workbench.  The plugin allows users to browse, download and open workflows from myExperiment within Taverna.&lt;/p&gt;</dcterms:description>
+    <dcterms:type rdf:datatype="&xsd;string">application/vnd.taverna.scufl+xml</dcterms:type>
+  </mebase:ContentType>
+
+  <mebase:User rdf:about="http://www.myexperiment.org/users/43">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/users/43.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/43.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/user.xml?id=43"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-26T16:46:52Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2010-05-17T12:09:48Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">Paul Fisher</sioc:name>
+    <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/108?size=160x160.png" />
+    <foaf:based-near rdf:resource="Manchester" />
+    <mebase:country rdf:datatype="&xsd;string">United Kingdom</mebase:country>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Manchester"/>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_Kingdom"/>
+    <foaf:homepage rdf:resource="http://www.cs.man.ac.uk/~fisherp/" />
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2010-05-17T12:09:48Z</mebase:last-seen-at>
+    <mebase:activated-at rdf:datatype="&xsd;dateTime">2007-07-26T16:46:52Z</mebase:activated-at>
+    <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
+    <foaf:mbox rdf:resource="mailto:fisherp@cs.manchester.ac.uk" />
+    <foaf:mbox_sha1sum rdf:datatype="&xsd;string">b12cc60cb3a80731a118fdca7535d7cd9e0f09f8</foaf:mbox_sha1sum>
+    <mebase:field rdf:datatype="&xsd;string">Bioinformatics</mebase:field>
+    <mebase:interests rdf:datatype="&xsd;string">Workflows
+QTL analysis
+Microarrays
+Biological pathway analysis
+In silico automation
+Protein 3D structure prediction
+Disease gene identification</mebase:interests>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/84"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/85"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/86"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/87"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/88"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/89"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/90"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/91"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/92"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/93"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/94"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/95"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/96"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/97"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/98"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/99"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/100"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/101"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/102"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/103"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/61/friendships/167"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/62/friendships/179"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/247"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/10/friendships/251"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/162/friendships/258"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/221/friendships/314"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/41/friendships/328"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/255/friendships/329"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/88/friendships/335"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/298/friendships/339"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/411/friendships/359"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/368"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/378"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/384"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/737/friendships/454"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/164/friendships/473"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/9/friendships/505"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/585"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1361/friendships/608"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/674"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1945/friendships/696"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2213/friendships/725"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/47/friendships/763"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2705/friendships/777"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/208/friendships/804"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/839"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/840"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/879"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1583/friendships/883"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/6695/friendships/902"/>
+<mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/7693/friendships/945"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/37"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/44"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/73"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/123"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/135"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/195"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/197"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/544"/>
+<mebase:has-membership rdf:resource="http://www.myexperiment.org/users/43/memberships/1117"/>
+<mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/43/favourites/31"/>
+<mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/43/favourites/41"/>
+  </mebase:User>
+
+  <mecontrib:WorkflowVersion rdf:about="http://www.myexperiment.org/workflows/16/versions/5">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/16/versions/5.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/16/versions/5.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=16&amp;version=5"/>
+    <dcterms:title rdf:datatype="&xsd;string">Pathways and Gene annotations for QTL region</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This workflow searches for genes which reside in a QTL (Quantitative Trait Loci) region in the mouse, Mus musculus. The workflow requires an input of: a chromosome name or number; a QTL start base pair position; QTL end base pair position. Data is then extracted from BioMart to annotate each of the genes found in this region. The Entrez and UniProt identifiers are then sent to KEGG to obtain KEGG gene identifiers. The KEGG gene identifiers are then used to searcg for pathways in the KEGG pathway database.&lt;/p&gt;
+&lt;p&gt;Example input:&lt;/p&gt;
+&lt;p&gt;chromosome_name: 17&lt;/p&gt;
+&lt;p&gt;start_position: 28500000&lt;/p&gt;
+&lt;p&gt;end_position: 32500000&lt;/p&gt;</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <dcterms:isVersionOf rdf:resource="http://www.myexperiment.org/workflows/16" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">5</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">1</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/43" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-11-19T18:18:52Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-11-20T10:33:28Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">pathways_and_gene_annotations_forqtl_region_740037.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflow_versions/1226" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflow_versions/1226" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/16/download/pathways_and_gene_annotations_forqtl_region_740037.xml?version=5" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/version/image/1226/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/version/image/1226/thumb/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/version/image/1226/medium/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/version/svg/1226/pathways_and_gene_annotations_forqtl_region.svg.xml" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/43" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/16/policies/185" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/16/versions/5/dataflow" />
+  </mecontrib:WorkflowVersion>
+
+  <mecontrib:WorkflowVersion rdf:about="http://www.myexperiment.org/workflows/16/versions/1">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/16/versions/1.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/16/versions/1.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=16&amp;version=1"/>
+    <dcterms:title rdf:datatype="&xsd;string">Pathways and Gene annotations for QTL Phenotype</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">This workflow searches for genes which reside in a QTL (Quantitative Trait Loci) region in the mouse, Mus musculus. The workflow requires an input of: a chromosome name or number; a QTL start base pair position; QTL end base pair position. Data is then extracted from BioMart to annotate each of the genes found in this region. The Entrez and UniProt identifiers are then sent to KEGG to obtain KEGG gene identifiers. The KEGG gene identifiers are then used to searcg for pathways in the KEGG pathway database.</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <dcterms:isVersionOf rdf:resource="http://www.myexperiment.org/workflows/16" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">1</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">0</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/43" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-10-03T18:36:02Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2007-10-03T18:36:02Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">pathways_and_gene_annotations_for_qtl_phenotype_25941.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflow_versions/31" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflow_versions/31" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/16/download/pathways_and_gene_annotations_for_qtl_phenotype_25941.xml?version=1" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/version/image/31/pathways_and_gene_annotations_for_qtl_phenotype_25941_1.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/version/image/31/thumb/pathways_and_gene_annotations_for_qtl_phenotype_25941_1.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/version/image/31/medium/pathways_and_gene_annotations_for_qtl_phenotype_25941_1.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/version/svg/31/pathways_and_gene_annotations_for_qtl_phenotype_25941_1.svg" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/43" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/16/policies/185" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/16/versions/1/dataflow" />
+  </mecontrib:WorkflowVersion>
+
+  <mecontrib:WorkflowVersion rdf:about="http://www.myexperiment.org/workflows/16/versions/2">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/16/versions/2.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/16/versions/2.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=16&amp;version=2"/>
+    <dcterms:title rdf:datatype="&xsd;string">Pathways and Gene annotations for QTL Phenotype</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">This workflow searches for genes which reside in a QTL (Quantitative Trait Loci) region in the mouse, Mus musculus. The workflow requires an input of: a chromosome name or number; a QTL start base pair position; QTL end base pair position. Data is then extracted from BioMart to annotate each of the genes found in this region. The Entrez and UniProt identifiers are then sent to KEGG to obtain KEGG gene identifiers. The KEGG gene identifiers are then used to searcg for pathways in the KEGG pathway database.</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <dcterms:isVersionOf rdf:resource="http://www.myexperiment.org/workflows/16" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">2</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">0</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/43" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-10-03T18:36:02Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2007-10-03T18:36:02Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">pathways_and_gene_annotations_for_qtl_phenotype_25941.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflow_versions/32" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflow_versions/32" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/16/download/pathways_and_gene_annotations_for_qtl_phenotype_25941.xml?version=2" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/version/image/32/pathways_and_gene_annotations_for_qtl_phenotype_25941_2.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/version/image/32/thumb/pathways_and_gene_annotations_for_qtl_phenotype_25941_2.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/version/image/32/medium/pathways_and_gene_annotations_for_qtl_phenotype_25941_2.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/version/svg/32/pathways_and_gene_annotations_for_qtl_phenotype_25941_2.svg" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/43" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/16/policies/185" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/16/versions/2/dataflow" />
+  </mecontrib:WorkflowVersion>
+
+  <mecontrib:WorkflowVersion rdf:about="http://www.myexperiment.org/workflows/16/versions/3">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/16/versions/3.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/16/versions/3.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=16&amp;version=3"/>
+    <dcterms:title rdf:datatype="&xsd;string">Mouse QTL Analysis</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This workflow searches for genes which reside in a QTL (Quantitative Trait Loci) region in the mouse, Mus musculus. The workflow requires an input of: a chromosome name or number; a QTL start base pair position; QTL end base pair position. Data is then extracted from BioMart to annotate each of the genes found in this region. The Entrez and UniProt identifiers are then sent to KEGG to obtain KEGG gene identifiers. The KEGG gene identifiers are then used to search for pathways in the KEGG pathway database.&lt;/p&gt;
+&lt;p&gt;This workflow can analyse any mouse chromosome region, or QTL.&lt;/p&gt;</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <dcterms:isVersionOf rdf:resource="http://www.myexperiment.org/workflows/16" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">3</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">0</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/43" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-10-03T18:36:02Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-07-28T13:06:30Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">pathways_and_gene_annotations_for_qtl_phenotype_28303.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflow_versions/238" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflow_versions/238" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/16/download/pathways_and_gene_annotations_for_qtl_phenotype_28303.xml?version=3" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/version/image/238/pathways_and_gene_annotations_for_qtl_phenotype_28303_3.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/version/image/238/thumb/pathways_and_gene_annotations_for_qtl_phenotype_28303_3.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/version/image/238/medium/pathways_and_gene_annotations_for_qtl_phenotype_28303_3.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/version/svg/238/pathways_and_gene_annotations_for_qtl_phenotype_28303_3.svg.xml" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/43" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/16/policies/185" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/16/versions/3/dataflow" />
+    <meannot:has-citation rdf:resource="http://www.myexperiment.org/workflows/16/versions/3/citations/6"/>
+  </mecontrib:WorkflowVersion>
+
+  <mecontrib:WorkflowVersion rdf:about="http://www.myexperiment.org/workflows/16/versions/4">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/16/versions/4.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/16/versions/4.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=16&amp;version=4"/>
+    <dcterms:title rdf:datatype="&xsd;string">Pathways and Gene annotations for QTL Phenotype</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">This workflow searches for genes which reside in a QTL (Quantitative Trait Loci) region in the mouse, Mus musculus. The workflow requires an input of: a chromosome name or number; a QTL start base pair position; QTL end base pair position. Data is then extracted from BioMart to annotate each of the genes found in this region. The Entrez and UniProt identifiers are then sent to KEGG to obtain KEGG gene identifiers. The KEGG gene identifiers are then used to searcg for pathways in the KEGG pathway database.</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <dcterms:isVersionOf rdf:resource="http://www.myexperiment.org/workflows/16" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">4</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">0</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/43" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-10-19T18:12:29Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-10-19T18:12:29Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">pathways_and_gene_annotations_for_qtl_phenotype_598801.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflow_versions/1186" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflow_versions/1186" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/16/download/pathways_and_gene_annotations_for_qtl_phenotype_598801.xml?version=4" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/version/image/1186/pathways_and_gene_annotations_for_qtl_phenotype.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/version/image/1186/thumb/pathways_and_gene_annotations_for_qtl_phenotype.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/version/image/1186/medium/pathways_and_gene_annotations_for_qtl_phenotype.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/version/svg/1186/pathways_and_gene_annotations_for_qtl_phenotype.svg.xml" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/43" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/16/policies/185" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/16/versions/4/dataflow" />
+  </mecontrib:WorkflowVersion>
+
+  <mebase:License rdf:about="http://www.myexperiment.org/licenses/2">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/licenses/2.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/licenses/2.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/license.xml?id=2"/>
+    <dcterms:identifier rdf:datatype="&xsd;string">by-sa</dcterms:identifier>
+    <dcterms:title rdf:datatype="&xsd;string">Creative Commons Attribution-Share Alike 3.0 Unported License</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;h4&gt;You are free:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;to Share &amp;mdash; to copy, distribute and transmit the work&lt;/li&gt;
+  &lt;li&gt;to Remix &amp;mdash; to adapt the work&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Under the following conditions:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Attribution &amp;mdash; You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).&lt;/li&gt;
+  &lt;li&gt;Share Alike &amp;mdash; If you alter, transform, or build upon this work, you may distribute the resulting work only under the same, similar or a compatible license.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;With the understanding that:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Waiver &amp;mdash; Any of the above conditions can be waived if you get permission from the copyright holder.&lt;/li&gt;
+  &lt;li&gt;Other Rights &amp;mdash; In no way are any of the following rights affected by the license:
+    &lt;ul&gt;
+      &lt;li&gt;Your fair dealing or fair use rights;&lt;/li&gt;
+      &lt;li&gt;The author&apos;s moral rights;&lt;/li&gt;
+      &lt;li&gt;Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Notice &amp;mdash; For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to &lt;a href=&apos;http://creativecommons.org/licenses/by-sa/3.0/&apos;&gt;http://creativecommons.org/licenses/by-sa/3.0/&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</dcterms:description>
+    <owl:sameAs rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#Notice"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#Attribution"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#ShareAlike"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-07-08T14:09:36Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-07-08T14:09:37Z</dcterms:modified>
+  </mebase:License>
+
+  <snarm:Policy rdf:about="http://www.myexperiment.org/Workflow/16/policies/185">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/Workflow/16/policies/185.rdf"/>
+        <snarm:has-access>
+          <snarm:RestrictedAccess>
+            <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/43"/>
+            <snarm:has-access-type rdf:resource="&mespec;View"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access>
+          <snarm:RestrictedAccess>
+            <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/43"/>
+            <snarm:has-access-type rdf:resource="&mespec;Download"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access>
+          <snarm:RestrictedAccess>
+            <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/43"/>
+            <snarm:has-access-type rdf:resource="&mespec;Edit"/>
+          </snarm:RestrictedAccess>
+        </snarm:has-access>
+        <snarm:has-access rdf:resource="&mespec;PublicView"/>
+        <snarm:has-access rdf:resource="&mespec;PublicDownload"/>
+        <snarm:has-access rdf:resource="&mespec;FriendsEdit"/>
+  </snarm:Policy>
+
+  <mecontrib:WorkflowVersion rdf:about="http://www.myexperiment.org/workflows/16/versions/5">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/16/versions/5.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/16/versions/5.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=16&amp;version=5"/>
+    <dcterms:title rdf:datatype="&xsd;string">Pathways and Gene annotations for QTL region</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This workflow searches for genes which reside in a QTL (Quantitative Trait Loci) region in the mouse, Mus musculus. The workflow requires an input of: a chromosome name or number; a QTL start base pair position; QTL end base pair position. Data is then extracted from BioMart to annotate each of the genes found in this region. The Entrez and UniProt identifiers are then sent to KEGG to obtain KEGG gene identifiers. The KEGG gene identifiers are then used to searcg for pathways in the KEGG pathway database.&lt;/p&gt;
+&lt;p&gt;Example input:&lt;/p&gt;
+&lt;p&gt;chromosome_name: 17&lt;/p&gt;
+&lt;p&gt;start_position: 28500000&lt;/p&gt;
+&lt;p&gt;end_position: 32500000&lt;/p&gt;</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <dcterms:isVersionOf rdf:resource="http://www.myexperiment.org/workflows/16" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">5</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">1</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/43" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-11-19T18:18:52Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-11-20T10:33:28Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">pathways_and_gene_annotations_forqtl_region_740037.xml</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflow_versions/1226" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflow_versions/1226" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/16/download/pathways_and_gene_annotations_forqtl_region_740037.xml?version=5" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/version/image/1226/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/version/image/1226/thumb/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/version/image/1226/medium/pathways_and_gene_annotations_forqtl_region.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/version/svg/1226/pathways_and_gene_annotations_forqtl_region.svg.xml" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/43" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/16/policies/185" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/16/versions/5/dataflow" />
+  </mecontrib:WorkflowVersion>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/402/taggings/214">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/402/taggings/214.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=214"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/402" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/31" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-07T19:13:23Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/561/taggings/215">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/561/taggings/215.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=215"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/561" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/31" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-07T19:13:23Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/562/taggings/216">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/562/taggings/216.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=216"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/562" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/31" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-07T19:23:25Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/38/taggings/446">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/38/taggings/446.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=446"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/38" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/31" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-15T09:02:44Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/5/taggings/447">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/5/taggings/447.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=447"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/5" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/31" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-15T09:02:44Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/611/taggings/448">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/611/taggings/448.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=448"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/611" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/31" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-15T09:02:44Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/612/taggings/449">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/612/taggings/449.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=449"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/612" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/31" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-15T09:02:44Z</dcterms:created>
+  </meannot:Tagging>
+
+  <meannot:Tagging rdf:about="http://www.myexperiment.org/tags/522/taggings/450">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tags/522/taggings/450.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/tagging.xml?id=450"/>
+    <meannot:uses-tag rdf:resource="http://www.myexperiment.org/tags/522" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/31" />
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-11-15T09:02:44Z</dcterms:created>
+  </meannot:Tagging>
+
+</rdf:RDF>
