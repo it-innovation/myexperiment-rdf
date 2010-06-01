@@ -17,12 +17,12 @@ WHERE{
 <div class="green" id="results1">
 <table class="listing">
   <tr><th>workflow</th><th>ct_title</th></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/167</td><td class="shade">Taverna 1</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/932</td><td>Taverna 2 beta</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/193</td><td class="shade">Taverna 1</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/874</td><td>Taverna 1</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/519</td><td class="shade">Taverna 1</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/545</td><td>Taverna 1</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/167</td><td class="shade">Taverna 1</td></tr>
+  <tr><td><?= $datauri ?>workflows/932</td><td>Taverna 2 beta</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/193</td><td class="shade">Taverna 1</td></tr>
+  <tr><td><?= $datauri ?>workflows/874</td><td>Taverna 1</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/519</td><td class="shade">Taverna 1</td></tr>
+  <tr><td><?= $datauri ?>workflows/545</td><td>Taverna 1</td></tr>
 </table>
 </div>
 <p style="clear: both;">The <em>regex</em> operand allows you to compare two text strings.  In the example above this compares the value of ?ct_title with the text string 'taverna'.  The caret (^) sign is used to indicate that the string for ?ct_title must start with 'taverna', not just have it somewhere within the string.  The 'i' as the third parameter for the regex operand means that the regular expression is case insentive, if you wish it to be case sensitive only the first two parameters are required.</p> 
@@ -41,11 +41,11 @@ WHERE{
 <div class="green" id="results2">
 <table class="listing">
 <tr><th>membership</th><th>requester</th></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Membership/96</td><td class="shade">http://rdf.myexperiment.org/Group/51</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Membership/825</td><td>http://rdf.myexperiment.org/Group/195</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Membership/884</td><td class="shade">http://rdf.myexperiment.org/Group/211</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Membership/745</td><td>http://rdf.myexperiment.org/Group/187</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Membership/721</td><td class="shade">http://rdf.myexperiment.org/Group/194</td></tr>
+  <tr><td class="shade"><?= $datauri ?>users/30/memberships/96</td><td class="shade"><?= $datauri ?>groups/51</td></tr>
+  <tr><td><?= $datauri ?>users/2646/memberships/825</td><td><?= $datauri ?>groups/195</td></tr>
+  <tr><td class="shade"><?= $datauri ?>users/2213/memberships/884</td><td class="shade"><?= $datauri ?>groups/211</td></tr>
+  <tr><td><?= $datauri ?>users/2611/memberships/745</td><td><?= $datauri ?>groups/187</td></tr>
+  <tr><td class="shade"><?= $datauri ?>users/13/memberships/721</td><td class="shade"><?= $datauri ?>groups/194</td></tr>
 </table>
 </div>
 <h3>5.2. On Numbers<a name="On Numbers"/></h3>
@@ -68,13 +68,13 @@ WHERE{
 <div style="float: right; position: relative; top: -35px; text-align: right;">[<a href="sparql?query=PREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+meannot%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fannotations%2F%3E%0D%0APREFIX+mecontrib%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fcontributions%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+DISTINCT+%3Fworkflow+%3Fct_title%0D%0AWHERE%7B%0D%0A++%3Fworkflow+rdf%3Atype+mecontrib%3AWorkflow+%3B%0D%0A++++mebase%3Ahas-content-type+%3Fct+.%0D%0A++%3Fct+dcterms%3Atitle+%3Fct_title+.%0D%0A++%3Frating+rdf%3Atype+meannot%3ARating+%3B%0D%0A++++mebase%3Aannotates+%3Fworkflow+%3B%0D%0A++++meannot%3Arating-score+%3Fscore%0D%0A++FILTER+%28%3Fscore+%3E%3D+4%29%0D%0A%7D&amp;formatting=HTML Table">Run</a>]<br/><span id="results3_show" onclick="showResults('results3');" style="display: none;">[<span class="link">Show&nbsp;Example&nbsp;Results</span>]</span><span id="results3_hide" onclick="hideResults('results3');">[<span class="link">Hide&nbsp;Example&nbsp;Results</span>]</span></div></div>
 <div class="green" id="results3">
 <table class="listing">
-  <tr><td>http://rdf.myexperiment.org/Workflow/244</td><td>Taverna 1</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/742</td><td class="shade">SimileXMLv3</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/19</td><td>Taverna 1</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/133</td><td class="shade">Taverna 1</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/735</td><td>Excel 2007 Macro-Enabled Workbook</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/90</td><td class="shade">Taverna 1</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/549</td><td>Chemistry Plan</td></tr>
+  <tr><td><?= $datauri ?>workflows/244</td><td>Taverna 1</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/742</td><td class="shade">SimileXMLv3</td></tr>
+  <tr><td><?= $datauri ?>workflows/19</td><td>Taverna 1</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/133</td><td class="shade">Taverna 1</td></tr>
+  <tr><td><?= $datauri ?>workflows/735</td><td>Excel 2007 Macro-Enabled Workbook</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/90</td><td class="shade">Taverna 1</td></tr>
+  <tr><td><?= $datauri ?>workflows/549</td><td>Chemistry Plan</td></tr>
 </table>
 </div>
 <p style="clear: both;">
@@ -98,10 +98,10 @@ WHERE{
 <div class="green" id="results4">
 <table class="listing">
   <tr><th>workflow</th><th>ct_title</th></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/173</td><td class="shade">Taverna 1</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/40</td><td>Taverna 1</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/66</td><td class="shade">Taverna 1</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/235</td><td>Taverna 1</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/173</td><td class="shade">Taverna 1</td></tr>
+  <tr><td><?= $datauri ?>workflows/40</td><td>Taverna 1</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/66</td><td class="shade">Taverna 1</td></tr>
+  <tr><td><?= $datauri ?>workflows/235</td><td>Taverna 1</td></tr>
 </table>
 </div>
 <h3>5.3. On Dates<a name="On Dates"/></h3>
@@ -120,11 +120,11 @@ WHERE {
 <div class="green" id="results5">
 <table class="listing">
   <tr><th>workflow</th><th>added</th></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/932</td><td class="shade">2009-10-20T17:00:59Z</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/952</td><td>2009-11-16T12:37:25Z</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/906</td><td class="shade">2009-09-08T15:12:57Z</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/955</td><td>2009-11-16T18:10:54Z</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/912</td><td class="shade">2009-09-15T11:32:52Z</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/932</td><td class="shade">2009-10-20T17:00:59Z</td></tr>
+  <tr><td><?= $datauri ?>workflows/952</td><td>2009-11-16T12:37:25Z</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/906</td><td class="shade">2009-09-08T15:12:57Z</td></tr>
+  <tr><td><?= $datauri ?>workflows/955</td><td>2009-11-16T18:10:54Z</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/912</td><td class="shade">2009-09-15T11:32:52Z</td></tr>
 </table>
 </div>
 <script type= "text/javascript"><!-- 

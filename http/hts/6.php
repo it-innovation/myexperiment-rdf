@@ -15,11 +15,11 @@ WHERE {
 <div class="green" id="results1">
 <table class="listing">
   <tr><th>workflow</th><th>added</th></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/1008</td><td class="shade">2009-12-22T20:45:54Z</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/1005</td><td>2009-12-15T22:33:09Z</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/1004</td><td class="shade">2009-12-15T22:17:56Z</td></tr>
-  <tr><td>http://rdf.myexperiment.org/Workflow/1003</td><td>2009-12-15T22:17:11Z</td></tr>
-  <tr><td class="shade">http://rdf.myexperiment.org/Workflow/1002</td><td class="shade">2009-12-15T22:16:23Z</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/1008</td><td class="shade">2009-12-22T20:45:54Z</td></tr>
+  <tr><td><?= $datauri ?>workflows/1005</td><td>2009-12-15T22:33:09Z</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/1004</td><td class="shade">2009-12-15T22:17:56Z</td></tr>
+  <tr><td><?= $datauri ?>workflows/1003</td><td>2009-12-15T22:17:11Z</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/1002</td><td class="shade">2009-12-15T22:16:23Z</td></tr>
 </table>
 </div>
 <p>The <em>DESC</em> operand means order the results in descending order, in this case latest workflows first.  If you wanted them ordered ascending you don't require any operand.  If you want a second criteria to order on you just add this after the first parammeter.  An example of this might be order by workflow type with the latest of each type first:</p>

@@ -24,7 +24,7 @@ For more info please see http://wiki.myexperiment.org/index.php/MyExperimentalSc
     <li>Improved layout for the Workflow and File pages.</li>
 
 </ul>
-<p><a href="http://www.myexperiment.org/feedback">Feedback </a>always welcome!</p></td></tr>
+<p><a href="<?= $datauri ?>feedback">Feedback </a>always welcome!</p></td></tr>
   <tr><td class="shade"><?= $datauri ?>announcement/25</td><td class="shade"><p>Our paper &quot;Software Design for Empowering Scientists&quot;, which discusses the design principles of Taverna and myExperiment, has appeared in the January/February 2009 issue of IEEE Software (&quot;Developing Scientific Software, Part 2&quot;). The article is available to subscribers on http://www2.computer.org/portal/web/csdl/doi/10.1109/MS.2009.22 and the preprint is available on http://eprints.ecs.soton.ac.uk/15032/&nbsp; The full reference is <br />
 <br />
 De Roure, D. and Goble, C. Software Design for Empowering Scientists, IEEE Software, Volume 26, Issue 1, Jan-Feb 2009, pages 88-95. Digital Object Identifier 10.1109/MS.2009.22<br />

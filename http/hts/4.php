@@ -62,10 +62,10 @@ WHERE{
 <div class="green" id="results3">
 <table class="listing">
   <tr><th>annotation</th><th>annotator</th></tr>
-  <tr><td class="shade">http://www.myexperiment.org/workflows/72/comments/33</td><td class="shade">http://www.myexperiment.org/users/18</td></tr>
-  <tr><td>http://www.myexperiment.org/workflows/72/ratings/63</td><td>http://www.myexperiment.org/users/283</td></tr>
-  <tr><td class="shade">http://www.myexperiment.org/workflows/72/comments/163</td><td class="shade">http://www.myexperiment.org/users/18</td></tr>
-  <tr><td>http://www.myexperiment.org/workflows/72/ratings/132</td><td>http://www.myexperiment.org/users/690</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/72/comments/33</td><td class="shade"><?= $datauri ?>users/18</td></tr>
+  <tr><td><?= $datauri ?>workflows/72/ratings/63</td><td><?= $datauri ?>users/283</td></tr>
+  <tr><td class="shade"><?= $datauri ?>workflows/72/comments/163</td><td class="shade"><?= $datauri ?>users/18</td></tr>
+  <tr><td><?= $datauri ?>workflows/72/ratings/132</td><td><?= $datauri ?>users/690</td></tr>
 </table>
 </div>
 <h3>4.2. OPTIONAL<a name="OPTIONAL"/></h3>
