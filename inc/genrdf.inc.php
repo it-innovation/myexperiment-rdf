@@ -229,7 +229,7 @@
 		global $ontopath;
                 $namespaces['mebase']=$ontopath.'base/';
                 $namespaces['meac']=$ontopath.'attrib_credit/';
-                $namespaces['meannot']=$ontopath.'.annotations/';
+                $namespaces['meannot']=$ontopath.'annotations/';
                 $namespaces['mepack']=$ontopath.'packs/';
                 $namespaces['meexp']=$ontopath.'experiments/';
                 $namespaces['mecontrib']=$ontopath.'contributions/';

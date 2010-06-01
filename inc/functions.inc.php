@@ -67,16 +67,15 @@ function getRequesterTime($mship){
 }
 
 function getAccepter($mship){
-	global $datauri;
 	if (!$mship['user_established_at']){
-		if ($mship['user_id']) return $datauri."users/".$mship['user_id'];
+		if ($mship['user_id']) return "users/".$mship['user_id'];
 		return "";
 	}
 	elseif(!$mship['network_established_at']) return "groups/".$mship['network_id'];
 	else{
 		$utime=strtotime($mship['user_established_at']);
 		$ntime=strtotime($mship['network_established_at']);
-		if ($utime<=$ntime) return $datauri."groups/".$mship['network_id'];
+		if ($utime<=$ntime) return "groups/".$mship['network_id'];
 		else return $datauri."users/".$mship['user_id'];	
 	}
 	return "";
@@ -97,7 +96,7 @@ function getMemberships($user){
 	$msql=$sql['memberships']." where user_id=$user[id]";
 	$mres=mysql_query($msql);
 	for ($m=0; $m<mysql_num_rows($mres); $m++){
-		$xml.="<mebase:has-membership rdf:resource=\"${datauri}users/$user[id]/memberships/".mysql_result($mres,$m,'id')."\"/>\n";
+		$xml.="    <mebase:has-membership rdf:resource=\"${datauri}users/$user[id]/memberships/".mysql_result($mres,$m,'id')."\"/>\n";
 	}
 	return $xml;
 }
@@ -106,7 +105,7 @@ function getFriendships($user){
 	$fsql=addWhereClause($sql['friendships'],"user_id=$user[id] or friend_id=$user[id]");
         $fres=mysql_query($fsql);
         for ($f=0; $f<mysql_num_rows($fres); $f++){
-                $xml.="<mebase:has-friendship rdf:resource=\"${datauri}users/".mysql_result($fres,$f,'user_id')."/friendships/".mysql_result($fres,$f,'id')."\"/>\n";
+                $xml.="    <mebase:has-friendship rdf:resource=\"${datauri}users/".mysql_result($fres,$f,'user_id')."/friendships/".mysql_result($fres,$f,'id')."\"/>\n";
         }
         return $xml;
 }
@@ -115,7 +114,7 @@ function getFavourites($user){
         $fsql=addWhereClause($sql['favourites'],"user_id=$user[id]");
         $fres=mysql_query($fsql);
         for ($f=0; $f<mysql_num_rows($fres); $f++){
-                $xml.="<mebase:has-favourite rdf:resource=\"${datauri}users/$user[id]/favourites/".mysql_result($fres,$f,'id')."\"/>\n";
+                $xml.="    <mebase:has-favourite rdf:resource=\"${datauri}users/$user[id]/favourites/".mysql_result($fres,$f,'id')."\"/>\n";
         }
         return $xml;
 }
@@ -327,13 +326,14 @@ function getPackEntries($pack){
 	$lsql="select * from pack_contributable_entries where pack_id=$pack[id]";
 	$lres=mysql_query($lsql);
 	$xml="";
+	$packurl=getEntityURI('packs',$pack['id'],$pack);
 	for ($e=0; $e<mysql_num_rows($lres); $e++){
-		$xml.="    <mepack:has-pack-entry rdf:resource=\"${datauri}packs/$pack[id]/local_pack_entries/".mysql_result($lres,$e,'id')."\"/>\n";
+		$xml.="    <mepack:has-pack-entry rdf:resource=\"$packurl/local_pack_entries/".mysql_result($lres,$e,'id')."\"/>\n";
 	}
 	$rsql="select * from pack_remote_entries where pack_id=$pack[id]";
 	$rres=mysql_query($rsql);
         for ($e=0; $e<mysql_num_rows($rres); $e++){
-                $xml.="    <mepack:has-pack-entry rdf:resource=\"${datauri}packs/$pack[id]/remote_pack_entries/".mysql_result($rres,$e,'id')."\"/>\n";
+                $xml.="    <mepack:has-pack-entry rdf:resource=\"$packurl/remote_pack_entries/".mysql_result($rres,$e,'id')."\"/>\n";
         }
 	return $xml;
 }
@@ -342,13 +342,13 @@ function getPackEntries($pack){
 function getOutput($entity){
 	global $datauri;
 	if ($entity['outputs_uri']){		
-		$url=$datauri."Job/$entity[id]/Output";
-		$xml="      <meexp:Data rdf:about=\"$url\">\n";
-		if ($entity['outputs_uri']) $xml.= "        <mebase:uri rdf:datatype=\"&xsd;anyURI\">$entity[outputs_uri]</mebase:uri>\n";
+		$uri=getEntityURI('jobs',$entity['id'],$entity);
+		$xml="      <meexp:Data rdf:about=\"$uri/output\">\n";
+		if ($entity['outputs_uri']) $xml.= "        <mebase:uri rdf:resource=\"$entity[outputs_uri]\"/>\n";
 
 		$xml.="      </meexp:Data>";
 		if ($entity['format']=="ore"){
-			addAggregatedResource($xml,$datauri."Job/$entity[id]",$url,$entity['format']);
+			addAggregatedResource($xml,$uri,$url,$entity['format']);
 			$xml=$url;
 		}
 	}
@@ -357,13 +357,13 @@ function getOutput($entity){
 function getInput($entity){
         global $datauri;
 	if ($entity['inputs_uri'] || $entity['inputs_data']){
-		$url=$datauri."Job/$entity[id]/Input";
-		$xml="<meexp:Data rdf:about=\"$url\">\n";
-		if ($entity['inputs_uri']) $xml.= "        <mebase:uri rdf:datatype=\"&xsd;anyURI\">$entity[inputs_uri]</mebase:uri>\n";
+		$uri=getEntityURI('jobs',$entity['id'],$entity);
+		$xml="<meexp:Data rdf:about=\"$uri/input\">\n";
+		if ($entity['inputs_uri']) $xml.= "        <mebase:uri rdf:resource=\"$entity[inputs_uri]\"/>\n";
 		if ($entity['inputs_data']) $xml.= "        <mebase:text rdf:datatype=\"&xsd;string\">$entity[inputs_data]</mebase:text>\n";
 		$xml.="      </meexp:Data>";
 		if ($entity['format']=="ore"){
-                        addAggregatedResource($xml,$datauri."Job/$entity[id]",$url,$entity['format']);
+                        addAggregatedResource($xml,$uri,$url,$entity['format']);
                         $xml=$url;
                 }
 
@@ -395,9 +395,9 @@ function getRunnable($entity){
 	addAggregatedResource(printEntity(mysql_fetch_array($res),$type),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runnable,$entity['format']);
 	return $runnable;
 }
-function getURI($entity){
+function getJobURI($entity){
 	global $datauri;
-	addAggregatedResource("  <rdf:Description rdf:about=\"$entity[job_uri]\">\n    <dcterms:title>Server URI for Job</dcterms:title>\n  </rdf:Description>\n",$datauri."jobs/$entity[id]",$entity[job_uri],$entity['format']);
+	addAggregatedResource("  <rdf:Description rdf:about=\"$entity[job_uri]\">\n    <dcterms:title>Server URI for Job</dcterms:title>\n  </rdf:Description>\n",$datauri."jobs/$entity[id]",$entity['job_uri'],$entity['format']);
 	return $entity['job_uri'];
 }
 function getRunner($entity){
@@ -410,13 +410,14 @@ function getRunner($entity){
 	return $runner;
 }
 function getProxyFor($entity){
-	global $ontent;
+	global $ontent, $modelalias;
 	if ($entity['contributable_type']){
 		if ($entity['contributable_version']){
 			$entity['contributable_id']=getVersionID($entity);
 			if ($entity['contributable_type']=="Workflow") $entity['contributable_type']="WorkflowVersion";
 		}
-		$etype=array_search($entity['contributable_type'],$ontent);
+		if (in_array($entity['contributable_type'],$modelalias)) $etype=array_search($entity['contributable_type'],$modelalias);
+		$etype=array_search($etype,$ontent);
 		return $etype."/".$entity['contributable_id'];
 	}
 	$xml.="    <rdf:Description rdf:about=\"".str_replace("&","&amp;",$entity['uri'])."\"";

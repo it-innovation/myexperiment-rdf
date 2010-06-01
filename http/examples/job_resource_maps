@@ -22,6 +22,7 @@
  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
 ]>
 
+<!-- REQUIRES UPDATING -->
 <rdf:RDF xmlns:mebase	="&mebase;"
 	xmlns:meac	="&meac;"
 	xmlns:meannot	="&meannot;"

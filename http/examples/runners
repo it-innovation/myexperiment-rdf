@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/runners/5.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/runners/5"/>
+  </rdf:Description>
+
+  <mespec:TavernaEnactor rdf:about="http://www.myexperiment.org/runners/5">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/runners/5.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/runners/5.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/runner.xml?id=5"/>
+    <dcterms:title rdf:datatype="&xsd;string">aida runner</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">aida runner</dcterms:description>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/groups/62" />
+    <meexp:runner-url rdf:resource="http://tavernaenactor.example.com:1234/remotetaverna/v1/" />
+    <mebase:username rdf:datatype="&xsd;string">marco</mebase:username>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-04-10T16:05:45Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-12-03T11:20:58Z</dcterms:modified>
+  </mespec:TavernaEnactor>
+
+  <mebase:Group rdf:about="http://www.myexperiment.org/groups/62">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/groups/62.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/groups/62.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/group.xml?id=62"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-01-29T13:52:50Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-01-29T13:52:50Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">AID_myGrid_collaboration</sioc:name>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;A group to share preliminary scientific material in support of scientific collaboration between AID in Amsterdam (plus close friends) and myGrid (plus close friends).&lt;/p&gt;</dcterms:description>
+    <mebase:auto-accept rdf:datatype="&xsd;boolean">0</mebase:auto-accept>
+  </mebase:Group>
+
+</rdf:RDF>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/groups/9.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/groups/9"/>
+  </rdf:Description>
+
+  <mebase:Group rdf:about="http://www.myexperiment.org/groups/9">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/groups/9.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/groups/9.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/group.xml?id=9"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/70" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-23T17:02:58Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-09-17T09:53:02Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">myExperiment</sioc:name>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This is the official group for the myExperiment team&lt;/p&gt;</dcterms:description>
+    <mebase:auto-accept rdf:datatype="&xsd;boolean">0</mebase:auto-accept>
+  </mebase:Group>
+
+  <mebase:User rdf:about="http://www.myexperiment.org/users/70">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/users/70.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/70.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/user.xml?id=70"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-08-02T15:44:50Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2010-03-10T14:29:54Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">Jiten Bhagat</sioc:name>
+    <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/708?size=160x160.png" />
+    <foaf:based-near rdf:resource="Manchester" />
+    <mebase:country rdf:datatype="&xsd;string">United Kingdom</mebase:country>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Manchester"/>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_Kingdom"/>
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2010-03-10T14:29:54Z</mebase:last-seen-at>
+    <mebase:activated-at rdf:datatype="&xsd;dateTime">2007-08-02T15:44:50Z</mebase:activated-at>
+    <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
+    <foaf:mbox rdf:resource="mailto:jits@cs.man.ac.uk" />
+    <foaf:mbox_sha1sum rdf:datatype="&xsd;string">a21d966e941750666cf724536393f6b59f247b50</foaf:mbox_sha1sum>
+    <mebase:interests rdf:datatype="&xsd;string">Web technologies
+&quot;Web 2.0&quot;
+Usability and user interface design
+Agile development
+Social collaboration
+Service-oriented architectures
+Scalable systems development</mebase:interests>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/240"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/241"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/242"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/243"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/244"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/245"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/246"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/247"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/248"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/249"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/254"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/162/friendships/259"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/266"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/269"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/283"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/152/friendships/331"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/255/friendships/348"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/208/friendships/353"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/15/friendships/447"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/209/friendships/452"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/164/friendships/467"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/719/friendships/512"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/573"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/574"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/575"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/576"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1355/friendships/618"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2213/friendships/728"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2705/friendships/770"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/795"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2785/friendships/798"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2788/friendships/799"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2791/friendships/801"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/4533/friendships/860"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/4632/friendships/865"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/221/friendships/919"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/70/memberships/70"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/70/memberships/293"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/70/memberships/542"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/70/memberships/602"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/70/memberships/806"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/70/memberships/843"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/70/favourites/17"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/70/favourites/18"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/70/favourites/61"/>
+  </mebase:User>
+
+</rdf:RDF>

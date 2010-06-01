@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/users/26/memberships/9.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/users/26/memberships/9"/>
+  </rdf:Description>
+
+  <mebase:Membership rdf:about="http://www.myexperiment.org/users/26/memberships/9">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/26/memberships/9.rdf"/>
+    <mebase:has-requester rdf:resource="http://www.myexperiment.org/users/26" />
+    <mebase:has-accepter rdf:resource="http://www.myexperiment.org/groups/9" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-10-03T18:35:44Z</dcterms:created>
+    <mebase:accepted-at rdf:datatype="&xsd;dateTime">2007-10-03T18:35:44Z</mebase:accepted-at>
+  </mebase:Membership>
+
+  <mebase:User rdf:about="http://www.myexperiment.org/users/26">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/users/26.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/26.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/user.xml?id=26"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-23T12:34:33Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2010-05-24T14:22:43Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">David R Newman</sioc:name>
+    <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/45?size=160x160.png" />
+    <foaf:based-near rdf:resource="Southampton" />
+    <mebase:country rdf:datatype="&xsd;string">United Kingdom</mebase:country>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Southampton"/>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_Kingdom"/>
+    <foaf:homepage rdf:resource="http://www.ecs.soton.ac.uk/~drn05r" />
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2010-05-24T14:07:31Z</mebase:last-seen-at>
+    <mebase:activated-at rdf:datatype="&xsd;dateTime">2007-07-23T12:34:33Z</mebase:activated-at>
+    <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
+    <foaf:mbox rdf:resource="mailto:drn05r@ecs.soton.ac.uk" />
+    <foaf:mbox_sha1sum rdf:datatype="&xsd;string">da39a3ee5e6b4b0d3255bfef95601890afd80709</foaf:mbox_sha1sum>
+    <mebase:field rdf:datatype="&xsd;string">University Research</mebase:field>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/26/friendships/51"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/26/friendships/52"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/26/friendships/53"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/26/friendships/54"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/92"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1/friendships/156"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/245"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/164/friendships/474"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/286/friendships/946"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/26/memberships/9"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/26/memberships/548"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/26/memberships/556"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/26/memberships/601"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/26/favourites/22"/>
+  </mebase:User>
+
+  <mebase:Group rdf:about="http://www.myexperiment.org/groups/9">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/groups/9.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/groups/9.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/group.xml?id=9"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/70" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-23T17:02:58Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-09-17T09:53:02Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">myExperiment</sioc:name>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This is the official group for the myExperiment team&lt;/p&gt;</dcterms:description>
+    <mebase:auto-accept rdf:datatype="&xsd;boolean">0</mebase:auto-accept>
+  </mebase:Group>
+
+</rdf:RDF>

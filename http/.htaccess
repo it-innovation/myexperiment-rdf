@@ -3,7 +3,8 @@ RewriteEngine On
 RewriteRule ^css/(.*)$ css/$1 [L]
 RewriteRule ^img/(.*)$ img/$1 [L]
 RewriteRule ^js/(.*)$ js/$1 [L]
-RewriteRule ^([a-z_]+)/example$ example/$1 [L]
+
+RewriteRule ^([a-z_]+)/example$ examples/$1 [L]
 
 RewriteRule ^snarm_explained/?$ snarm_explained.php
 RewriteRule ^current/spec/?$ current_spec.php

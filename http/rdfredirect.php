@@ -3,13 +3,14 @@
 	include('data.inc.php');
 	include('myexpconnect.inc.php');
 	include('functions.inc.php');
+	include('miscfunc.inc.php');
 	
 	//Singulars
         $singulars['Announcements']="Announcement";
         $singulars['Attributions']="Attribution";
         $singulars['Citations']="Citation";
         $singulars['Comments']="Comment";
-        $singulars['CsingularsTypes']="CsingularsType";
+        $singulars['ContentTypes']="ContentType";
         $singulars['Creditations']="Creditation";
         $singulars['Experiments']="Experiment";
         $singulars['Favourites']="Favourite";
@@ -76,15 +77,13 @@
 		if (stripos($sql[$uribits[0]],'where')>0) $esql=$sql[$uribits[0]]." and ".$tables[$uribits[0]].".id=$uribits[1]";
 		else $esql=$sql[$uribits[0]]." where ".$tables[$uribits[0]].".id=$uribits[1]";
 		$eres=mysql_query($esql);	
-		$newuri=getEntityURI($uribits[0],$uribits[1],mysql_fetch_assoc($eres)).".rdf";
+		if (mysql_num_rows($eres)>0) $newuri=getEntityURI($uribits[0],$uribits[1],mysql_fetch_assoc($eres)).".rdf";
+		else sc404();
 	}
 	elseif ($uribits[0]=="group_announcements" and $uribits[1]){
 		$cursql=$sql[$uribits[0]]." where id=$uribits[1]";
 		$res=mysql_query($cursql);
-		if (mysql_num_rows($res)==0){
-			header("HTTP/1.1 404 Not Found");	
-			exit();
-		}
+		if (mysql_num_rows($res)==0) sc404();
 		$id=$uribits[1];
 		$uribits[0]="groups";
 		$uribits[1]=mysql_result($res,0,'network_id');
@@ -94,10 +93,7 @@
 	elseif ($uribits[0]=="workflow_versions" and $uribits[1]){	
 		$cursql=$sql[$uribits[0]]." and $uribits[0].id=$uribits[1]";
                 $res=mysql_query($cursql);
-                if (mysql_num_rows($res)==0){
-                        header("HTTP/1.1 404 Not Found");
-                        exit();
-                }
+                if (mysql_num_rows($res)==0) sc404();
                 $uribits[0]="workflows";
                 $uribits[1]=mysql_result($res,0,'workflow_id');
                 $uribits[2]="versions";

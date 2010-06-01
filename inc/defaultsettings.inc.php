@@ -12,7 +12,9 @@
 	//The URI for RDF data in the guide"
         $guidedatauri="http://www.myexperiment.org/";
 	//The URI path for the ontologies
-	$ontouri="http://rdf.myexperiment.org/ontologies/";
+	$ontopath="http://rdf.myexperiment.org/ontologies/";
+	//The filesystem path for RDF data
+        $datapath="/var/linkeddata/data/";
 	//The salt to encrypt hidden values
         $salt="changeme";
 

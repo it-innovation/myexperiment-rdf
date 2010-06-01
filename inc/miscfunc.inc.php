@@ -105,5 +105,15 @@ function getUsefulPrefixes($domain){
         }
         $usepref.="    </ul>\n";
         return $usepref;
-}	
+}
+function sc404($path=''){
+        header("HTTP/1.0 404 Not Found");
+        header("Content-type: text/html");
+        $pagetitle="404 Not Found";
+        include('header.inc.php');
+        echo "<p>The URL could not be found</p>";
+        include('footer.inc.php');
+	exit();
+}
+
 ?>

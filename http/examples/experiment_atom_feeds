@@ -12,6 +12,7 @@
  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
 ]>
 
+<!-- REQUIRES UPDATING -->
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>myExperiment Atom Feed for Experiment 20</title>

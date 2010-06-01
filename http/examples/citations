@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/workflows/746/versions/1/citations/12.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/workflows/746/versions/1/citations/12"/>
+  </rdf:Description>
+
+  <meannot:Citation rdf:about="http://www.myexperiment.org/workflows/746/versions/1/citations/12">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/746/versions/1/citations/12.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/citation.xml?id="/>
+    <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/1019" />
+    <mebase:annotates rdf:resource="http://www.myexperiment.org/workflows/746/versions/1" />
+    <meannot:authors rdf:datatype="&xsd;string">caArray</meannot:authors>
+    <dcterms:title rdf:datatype="&xsd;string">Experiment data:  Diffuse large B-cell lymphoma outcome prediction</dcterms:title>
+    <meannot:published-at rdf:datatype="&xsd;dateTime">2009-04-23T00:00:00Z</meannot:published-at>
+    <meannot:accessed-at rdf:datatype="&xsd;dateTime">2009-04-23T00:00:00Z</meannot:accessed-at>
+    <meannot:citation-url rdf:resource="https://array.nci.nih.gov/caarray/project/golub-00095" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-04-23T17:51:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-04-23T17:51:56Z</dcterms:modified>
+  </meannot:Citation>
+
+  <mebase:User rdf:about="http://www.myexperiment.org/users/1019">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/users/1019.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/1019.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/user.xml?id=1019"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-07-07T19:35:32Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2010-05-26T16:26:22Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">Wei Tan</sioc:name>
+    <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/510?size=160x160.png" />
+    <foaf:based-near rdf:resource="Chicago" />
+    <mebase:country rdf:datatype="&xsd;string">United States</mebase:country>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Chicago"/>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_States"/>
+    <foaf:homepage rdf:resource="http://www.mcs.anl.gov/~wtan/" />
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2010-05-25T19:15:47Z</mebase:last-seen-at>
+    <mebase:activated-at rdf:datatype="&xsd;dateTime">2008-07-07T19:39:09Z</mebase:activated-at>
+    <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
+    <foaf:mbox rdf:resource="mailto:wtan@mcs.anl.gov" />
+    <foaf:mbox_sha1sum rdf:datatype="&xsd;string">f83dd15abfb8b9b2c3017d1d6dd0bc64a6de23a9</foaf:mbox_sha1sum>
+    <mebase:field rdf:datatype="&xsd;string">Education &amp; Research</mebase:field>
+    <mebase:interests rdf:datatype="&xsd;string">scientific workflow, service oriented architecture, grid computing, Petri net</mebase:interests>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/62/friendships/684"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2196/friendships/709"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/732"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/872"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/873"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/874"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/875"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/876"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/877"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/878"/>
+  </mebase:User>
+
+  <mecontrib:WorkflowVersion rdf:about="http://www.myexperiment.org/workflows/746/versions/1">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/746/versions/1.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/746/versions/1.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflow.xml?id=746&amp;version=1"/>
+    <dcterms:title rdf:datatype="&xsd;string">Lymphoma type prediction based on microarray data</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;span style=&quot;font-size: large;&quot;&gt;Scientific value&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: medium;&quot;&gt;Using gene-expression patterns associated with DLBCL and FL to predict the lymphoma type of an unknown sample.&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: medium;&quot;&gt;Using SVM (Support Vector Machine) to classify data, and predicting the tumor types of unknown examples.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;span style=&quot;font-size: large;&quot;&gt;Steps&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: medium;&quot;&gt;Querying training data from experiments stored in caArray.&lt;br /&gt;
+    &lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: medium;&quot;&gt;Preprocessing, or normalize the microarray data.&lt;br /&gt;
+    &lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: medium;&quot;&gt;Adding training and testing data into SVM service to get classification result. &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/2" />
+    <dcterms:isVersionOf rdf:resource="http://www.myexperiment.org/workflows/746" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">1</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">0</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1019" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-04-23T17:10:37Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-04-23T17:15:00Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">lymphoma_type_prediction_based_on_microarray_data_846970.t2flow</mebase:filename>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/workflow_versions/977" />
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/workflow_versions/977" />
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/746/download/lymphoma_type_prediction_based_on_microarray_data_846970.t2flow?version=1" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/version/image/977/lymphoma_classification_and_prediction_workflow.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/version/image/977/thumb/lymphoma_classification_and_prediction_workflow.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/version/image/977/medium/lymphoma_classification_and_prediction_workflow.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/version/svg/977/" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/1019" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/746/policies/1206" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/746/versions/1/dataflows/1" />
+    <meannot:has-citation rdf:resource="http://www.myexperiment.org/workflows/746/versions/1/citations/11"/>
+    <meannot:has-citation rdf:resource="http://www.myexperiment.org/workflows/746/versions/1/citations/12"/>
+  </mecontrib:WorkflowVersion>
+
+</rdf:RDF>
