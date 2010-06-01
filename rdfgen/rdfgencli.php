@@ -47,14 +47,17 @@
 	list($type,$id,$params,$wfid)=setTypeIDandParams($argv);
 	if (entityExists($type,$id)){
 	        $res=getEntityResults($type,$id);
-		$uri=getEntityURI($type,$id,mysql_fetch_assoc($res));
+		if (isDataflow($params)) $uri=$datauri.$argv[1]."/".$argv[2]."/".$argv[3];
+		else $uri=getEntityURI($type,$id,mysql_fetch_assoc($res));
 		$res=getEntityResults($type,$id);
 		$e=1;
 		$xml=pageheader();
 		if ($id) $xml.=rdffiledescription($uri);
-		if ($params[2]=="dataflows"||$params[2]=="dataflow"){
+		if (isDataflow($params)){
 			array_shift($params);
 			$version=array_shift($params);
+		//	echo "ID $id, WFID $wfid, VERSION $version\n";
+	//		print_r($params);
         		$xml.=extractRDF($id,$wfid,$version,$params);
 	        }
 		else{
@@ -70,14 +73,24 @@
 						$mtmp=explode('"',$m);
 						$m=str_replace($datauri,"",$mtmp[0]);
 						$mbits=explode('/',$m);
+		//				echo "$m\n";
 						if (strpos($m,'.') === false && $sql[$mbits[0]] && $datauri.$m != $uri){
-							$args[1]=array_shift($mbits);
-							$args[2]=array_shift($mbits);
-							$args[3]=implode('/',$mbits);
-							$args[4]=1;
-							list($type,$id,$params,$wfid)=setTypeIDandParams($args);
-							$res=getEntityResults($type,$id);
-							$xml.=printEntity(mysql_fetch_assoc($res),$type,$format);	
+							if (isDataflow($mbits)){
+								$wfid=$mbits[1];
+                                                	        $version=$mbits[3];
+                                        	                $params=array_slice($mbits,4);
+                                                        	$id=getWorkflowVersion($wfid,$version);
+                               	                         	$xml.=extractRDF($id,$wfid,$version,$params)."\n";
+							}
+							else{
+								$args[1]=array_shift($mbits);
+								$args[2]=array_shift($mbits);
+								$args[3]=implode('/',$mbits);
+								$args[4]=1;
+								list($type,$id,$params,$wfid)=setTypeIDandParams($args);
+								$res=getEntityResults($type,$id);
+								$xml.=printEntity(mysql_fetch_assoc($res),$type,$format);	
+							}
 						}
 					}
 				}

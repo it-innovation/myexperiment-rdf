@@ -43,3 +43,9 @@ function addWhereClause($sql,$whereclause){
 	if (stripos($sql,'where')>0) return "$sql and ($whereclause)";
 	return "$sql where $whereclause";
 }
+function getWorkflowVersion($wfid,$version){
+	$wfvsql="select id from workflow_versions where workflow_id=$wfid and version=$version";
+	echo $wfvsql;
+	$res=mysql_query($wfvsql);
+	return mysql_result($res,0,'id');
+}

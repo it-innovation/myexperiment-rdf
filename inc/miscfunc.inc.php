@@ -21,6 +21,11 @@ function array_in_array($needles, $haystack) {
     }
     return false;
 }
+function isDataflow($params){
+	if (in_array('dataflow',$params)) return true;
+	if (in_array('dataflows',$params)) return true;
+	return false;
+}
 function array_combinations($tail){
 	$tkeys=array_keys($tail);
 	$headkey=$tkeys[sizeof($tkeys)-1];

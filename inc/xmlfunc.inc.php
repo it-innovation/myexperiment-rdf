@@ -599,7 +599,9 @@ function extractRDF($id,$wfid,$version,$params){
 	global $datapath,$datauri;
 	//print_r($params);
 	$uri=$datauri."workflows/$wfid/versions/$version/".implode("/",$params);
-        $filename=$datapath."ld_dataflows/rdf/$id";
+//	echo $uri."\n";
+        $filename=$datapath."dataflows/rdf/$id";
+//	echo $filename."\n";
 	//echo "$filename = $uri\n";
         $lines=file($filename);
         $l=0;
