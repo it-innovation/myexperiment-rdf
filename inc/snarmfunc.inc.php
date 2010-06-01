@@ -45,6 +45,13 @@
 		}
 		return $perms;
 	}
+	function addShareAndUpdateMode($contrib){
+		$policysql="select share_mode, update_mode from policies where id =".$contrib['policy_id'];
+		$pres=mysql_query($policysql);
+		$contrib['share_mode']=mysql_result($pres,0,'share_mode');
+	        $contrib['update_mode']=mysql_result($pres,0,'update_mode');
+		return $contrib;
+	}
 	function getPermissionAccesses($perms,$policy_url){
 		global $datauri;
 		$accesses="";
@@ -70,6 +77,7 @@
 		$policy_url=getEntityURI("policies",$contrib['policy_id'],$contrib);
 	        if ($type!="policies") $policy.="<snarm:Policy rdf:about=\"$policy_url\">\n";
 	        $perms=getPermissions($contrib['policy_id']);
+		if (!$contrib['share_mode']) $contrib=addShareAndUpdateMode($contrib);
 	        $policy.=getContributorPermissions($contrib['contributor_type'],$contrib['contributor_id'],$policy_url);
 	        $policy.=getShareModeAccesses($contrib['share_mode']);
 	        $policy.=getUpdateModeAccesses($contrib['update_mode'],$contrib['share_mode'],$perms);
