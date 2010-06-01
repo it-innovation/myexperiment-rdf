@@ -483,8 +483,8 @@ function getDataflow($entity,$type){
 	if (strlen($data)>0){
 		$sql="select content_type_id from workflow_versions where id='$wfvid'";
                 $res=mysql_query($sql);
-		if (mysql_result($res,0,'content_type_id')==2) return $datauri."workflows/$id/versions/$version/dataflows/1";
-		return $datauri."workflows/$id/versions/$version/dataflow";
+		if (mysql_result($res,0,'content_type_id')==2) return $datauri."workflows/$id/versions/$version#dataflows/1";
+		return $datauri."workflows/$id/versions/$version#dataflow";
 	}
 	return "";
 }

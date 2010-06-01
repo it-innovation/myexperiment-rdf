@@ -45,7 +45,7 @@ function addWhereClause($sql,$whereclause){
 }
 function getWorkflowVersion($wfid,$version){
 	$wfvsql="select id from workflow_versions where workflow_id=$wfid and version=$version";
-	echo $wfvsql;
+	//echo $wfvsql;
 	$res=mysql_query($wfvsql);
 	return mysql_result($res,0,'id');
 }

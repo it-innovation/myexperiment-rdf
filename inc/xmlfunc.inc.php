@@ -481,15 +481,18 @@ function tabulateDataflowComponents($parsedxml,$ent_uri,$nested=0){
 					$id=$d;
 					$d++;
 				}
-				$dfs[$ent_uri."/dataflows/$id"]=processDataflowComponents($dataflow['children'],$ent_uri."/dataflows/$d/");
-				$dfs[$ent_uri."/dataflows/$id"]['id']=$dataflow['attrs']['id'];
-				echo $ent_uri."/dataflows/$id = ".sizeof($dfs[$ent_uri."/dataflows/$id"])."\n";
+				$dfs[$ent_uri."#dataflows/$id"]=processDataflowComponents($dataflow['children'],$ent_uri."#dataflows/$d/");
+				$dfs[$ent_uri."#dataflows/$id"]['id']=$dataflow['attrs']['id'];
+			//	echo $ent_uri."#dataflows/$id = ".sizeof($dfs[$ent_uri."#dataflows/$id"])."\n";
 			}
 		}
 	}
 	else{
-		if (is_array($allcomponents)) $dfs[$ent_uri."/dataflow"]=processDataflowComponents($allcomponents,$ent_uri."/dataflow/");
-		echo $ent_uri."/dataflow = ".sizeof($dfs[$ent_uri."/dataflow"])."\n";
+		if (is_array($allcomponents)){
+			if (strpos($ent_uri,'dataflow') > 0) $dfs[$ent_uri."/dataflow"]=processDataflowComponents($allcomponents,$ent_uri."/dataflow/");
+			else $dfs[$ent_uri."#dataflow"]=processDataflowComponents($allcomponents,$ent_uri."#dataflow/");
+		}
+//		echo $ent_uri."/dataflow = ".sizeof($dfs[$ent_uri."/dataflow"])."\n";
 
 	}	
 	if (!$nested){
@@ -595,10 +598,10 @@ function processDataflowComponents($allcomponents,$ent_uri){
 	}
 	return $components;		
 }
-function extractRDF($id,$wfid,$version,$params){
+function extractRDF($id,$wfid,$version,$posthash){
 	global $datapath,$datauri;
 	//print_r($params);
-	$uri=$datauri."workflows/$wfid/versions/$version/".implode("/",$params);
+	$uri=$datauri."workflows/$wfid/versions/$version#$posthash";
 //	echo $uri."\n";
         $filename=$datapath."dataflows/rdf/$id";
 //	echo $filename."\n";
