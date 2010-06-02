@@ -194,7 +194,7 @@ count-triples(){
 	notriples=`$STORE4EXEC_PATH/4s-size $1 | tail -3 | head -1 | awk 'BEGIN{FS=" "}{print $2}'`
 	echo "[`date +%T`] $1 Triplestore has $notriples triples"
 	echo $notriples > $STORE4_PATH/log/$1_triples.log
-	echo "[`date +%T`] Printing number of triples to file log/$1_triples.log"
+	echo "[`date +%T`] Printing number of triples to file $STORE4_PATH/log/$1_triples.log"
 }
 get-dataflows(){
 	$PHPEXEC_PATH/php $STORE4_PATH/scripts/getNewWorkflowVersions.php | awk -v datapath="$DATA_PATH" -v httpwwwpath="HTTPWWW_PATH" 'BEGIN{FS=","}{ print " -O " datapath "/dataflows/xml/" $1 " -q " httpwwwpath "/workflow.xml?id=" $2 "&version=" $3 "&elements=components" }' > /tmp/dataflow_wgets.txt

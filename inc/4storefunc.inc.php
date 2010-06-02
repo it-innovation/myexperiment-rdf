@@ -193,7 +193,7 @@ function reasonFile($fileloc,$kb,$reasonedloc){
 function getNoTriples($kb){
 	global $lddir;
 	$lines=@file($lddir."4store/log/".$kb."_triples.log");
-	if (is_array($lines) && sizeof($lines)>0) return $lines[0];
+	if (is_array($lines) && sizeof($lines)>0 && $lines[0]>0) return $lines[0];
 	$cmd=getScriptPath()."/sqs.sh $kb count-triples";
 	exec($cmd);
 	$lines=@file($lddir."4store/log/".$kb."_triples.log");
