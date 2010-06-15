@@ -8,9 +8,10 @@ function getEntityURI($type,$id,$entity,$format=''){
                         case 'creditations':
 			case 'ratings':
 			case 'reviews':
-				return $datauri.$annotatable[$entity[$nesting[$type][0]]]."/".$entity[$nesting[$type][1]]."/$type/$id";
-			case 'policies':
-				return $datauri.$entity[$nesting[$type][0]]."/".$entity[$nesting[$type][1]]."/$type/$id";
+                        case 'policies':
+                                if ($annotatable[$entity[$nesting[$type][0]]]) $entitytype = $annotatable[$entity[$nesting[$type][0]]]; 
+				else $entitytype = $entity[$nesting[$type][0]];
+				return $datauri.$entitytype."/".$entity[$nesting[$type][1]]."/$type/$id";
 			case 'citations': 
 				return $datauri."workflows/".$entity[$nesting[$type][0]]."/versions/".$entity[$nesting[$type][1]]."/$type/$id";
 			case 'favourites':
@@ -150,22 +151,22 @@ function getPolicyURI($contrib,$type){
 }
 function getThumbnail($workflow){
 	$url=getUrl($workflow,'thumb');
-	addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
 	return $url;
 }
 function getThumbnailBig($workflow){
 	$url=getUrl($workflow,'medium');
-	addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Big Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Big Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
 	return $url;
 }
 function getPreview($workflow){
         $url=getUrl($workflow);
-        addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Preview of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+        if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Preview of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
 	return $url;
 }
 function getSVG($workflow){	
 	$url=getUrl($workflow,'','svg');
-	addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/svg+xml</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">SVG of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/svg+xml</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">SVG of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
 	return $url;
 }
 function workflowOrVersion($entity){
@@ -176,6 +177,7 @@ function workflowOrVersion($entity){
 }
 function getUrl($workflow,$type="",$format="image"){
  	global $datauri;
+        if (!$workflow[$format]) return '';
 	if ($type) $type.="/";
         if ($workflow['workflow_id']){
                 return $datauri."workflow/version/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
@@ -512,11 +514,12 @@ function getAnnotations($entity,$type){
 	$xml="";
 	foreach ($ea as $annot){
 		if ($annot=="citations") $cursql=getAnnotationSQL($annot,$entity['workflow_id'],$entity['version']);
-		else  $cursql=getAnnotationSQL($annot,$atype,$entity['contribution_id']);
+		else  $cursql=getAnnotationSQL($annot,$atype,$entity['id']);
 		$res = mysql_query($cursql);
 	        for ($a=0; $a<mysql_num_rows($res); $a++){
-			$row=mysql_fetch_array($res);
+			$row=mysql_fetch_assoc($res);
                         $auri=getEntityURI($annot,$row['id'],$row);
+                //        $xml.="<!-- ".var_export($row,true)." -->\n";
                         $xml.="    <meannot:".$annotprop[$annot]." rdf:resource=\"$auri\"/>\n";
 		}
 	}
