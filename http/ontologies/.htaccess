@@ -14,5 +14,6 @@ RewriteRule ^specific/$ myexp_specific.owl
 RewriteRule ^components/$ myexp_components.owl
 RewriteRule ^reasoned/$ myexp_reasoned.owl
 RewriteRule ^sparql/$ sparql.php
+RewriteRule ^([a-z_]+)/([a-zA-Z_\-]+)/$ ontent.php?ontology=$1&entity=$2
 RewriteRule ^CHANGELOG/$ CHANGELOG.php
 
