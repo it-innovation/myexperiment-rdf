@@ -223,6 +223,19 @@ PREFIX ore: <http://www.openarchives.org/ore/terms/>";
         $mappings['vocabularies']=array('id'=>'url','title'=>'dcterms:title','description'=>'dcterms:description','user_id'=>'&User|sioc:has_owner','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified');
        	$mappings['workflows']=array('id'=>'url','title'=>'dcterms:title','body'=>'dcterms:description', 'content_type_id'=>'&ContentType|mebase:has-content-type', 'contributor_type'=>'+contributor_id|sioc:has_owner','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified','filename'=>'@&-getFilename|mebase:filename','described_by'=>'@&getResourceMapURI|ore:isDescribedBy','described_by_atom'=>'@&getAtomEntryURI|ore:isDescribedBy','content-url'=>'@-getWorkflowDownloadURL|mebase:content-url','preview'=>'@-getPreview|mecontrib:preview','thumbnail'=>'@-getThumbnail|mecontrib:thumbnail', 'thumbnail_big'=>'@-getThumbnailBig|mecontrib:thumbnail-big','svg'=>'@-getSVG|mecontrib:svg','current_version'=>'@getCurrentWorkflowVersion|mebase:has-current-version','other_versions'=>'@-getWorkflowVersions|','license_id'=>'&License|mebase:has-license','last_edited_by'=>'&User|mebase:last-edited-by','viewings_count'=>'mevd:viewed','downloads_count'=>'mevd:downloaded','policy_id'=>'@&-getPolicyURI|mebase:has-policy','dataflow'=>'@&-getDataflow|mecomp:executes-dataflow','annotations'=>'@&getAnnotations|');
        	$mappings['workflow_versions']=array('id'=>'url','title'=>'dcterms:title','body'=>'dcterms:description','content_type_id'=>'&ContentType|mebase:has-content-type', 'workflow_id'=>'&Workflow|dcterms:isVersionOf','version'=>'mebase:version-number','currentversion'=>'@isCurrentVersion|mebase:is-current-version','contributor_type'=>'+contributor_id|sioc:has_owner', 'created_at'=>'dcterms:created', 'updated_at'=>'dcterms:modified','filename'=>'@&-getFilename|mebase:filename','described_by'=>'@&getResourceMapURI|ore:isDescribedBy','described_by_atom'=>'@&getAtomEntryURI|ore:isDescribedBy','content-url'=>'@-getWorkflowDownloadURL|mebase:content-url','preview'=>'@-getPreview|mecontrib:preview', 'thumbnail'=>'@-getThumbnail|mecontrib:thumbnail', 'thumbnail_big'=>'@-getThumbnailBig|mecontrib:thumbnail-big', 'svg'=>'@-getSVG|mecontrib:svg','license_id'=>'&License|mebase:has-license','last_edited_by'=>'&User|mebase:last-edited-by','policy_id'=>'@&-getPolicyURI|mebase:has-policy','dataflow'=>'@&-getDataflow|mecomp:executes-dataflow','annotations'=>'@&getAnnotations|');
+       
+        //Temporarily unset until ORE stuff can be re-implemented for linked data 
+        unset($mappings['experiments']['described_by']);
+        unset($mappings['experiments']['described_by_atom']);
+        unset($mappings['jobs']['described_by']);
+        unset($mappings['jobs']['described_by_atom']);
+        unset($mappings['packs']['described_by']);
+        unset($mappings['packs']['described_by_atom']);
+        unset($mappings['workflows']['described_by']);
+        unset($mappings['workflows']['described_by_atom']);
+        unset($mappings['workflow_versions']['described_by']);
+        unset($mappings['workflow_versions']['described_by_atom']);
+
 	
 	$xmluri['announcements']="announcement.xml?id=";
 	$xmluri['citations']="citation.xml?id=";
