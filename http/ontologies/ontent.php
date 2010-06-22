@@ -12,6 +12,11 @@
         $entity=str_replace($_GET['entity'],$ontology.$_GET['entity'],$lines[$l]);
         $l++;
         while (strlen(trim($lines[$l]))>0 and $l<sizeof($lines)){
+                 if (preg_match('/rdf:resource="([^"]+)"/',$lines[$l],$matches)){
+                        if ($matches[1] && !preg_match('@(&[a-z]+;|http://)@',$matches[1])){
+                                $lines[$l]=str_replace($matches[1],$ontology.$matches[1],$lines[$l]);
+                        }
+                }
                 $entity.=$lines[$l];
                 $l++;
         }
