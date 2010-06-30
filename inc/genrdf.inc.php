@@ -82,8 +82,9 @@
 		if ($homepage[$type]) $xml.="    <foaf:homepage rdf:resource=\"${uri}.html\"/>\n";
                 $xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.rdf\"/>\n";
 		if ($xmluri[$type]){
-			if ($entity['workflow_id']) $curxmluri=$datauri.str_replace("!",$entity['version'],str_replace("~",$entity['workflow_id'],$xmluri[$type]));
-			else $curxmluri=$datauri.$xmluri[$type].$id;
+		//	if ($entity['workflow_id']) $curxmluri=$datauri.str_replace("!",$entity['version'],str_replace("~",$entity['workflow_id'],$xmluri[$type]));
+		//	else $curxmluri=$datauri.$xmluri[$type].$id;
+			$curxmluri=$uri.".xml";
 			
 			$xml.="    <dcterms:hasFormat rdf:resource=\"$curxmluri\"/>\n";
 		}

@@ -10,7 +10,7 @@
 <small>
     <ul>
       <li>wget --header &quot;Accept: text/html&quot; http://www.myexperiment.org/workflows/16 &rarr; <a href="http://www.myexperiment.org/workflows/16.html"title="Workflow 16's webpage">http://www.myexperiment.org/workflows/16.html</a></li>
-      <li>wget --header &quot;Accept: application/rdf+xml&quot; http://www.myexperiment.org/workflows/16 &rarr; <a href="http://www.myexperiment.org/workflows/16.xml" title="Workflow 16's RDF in XML format">http://www.myexperiment.org/workflows/16.rdf</a></li>
+      <li>wget --header &quot;Accept: application/rdf+xml&quot; http://www.myexperiment.org/workflows/16 &rarr; <a href="http://www.myexperiment.org/workflows/16.rdf" title="Workflow 16's RDF in XML format">http://www.myexperiment.org/workflows/16.rdf</a></li>
       <li>wget --header &quot;Accept: application/xml&quot; http://www.myexperiment.org/workflows/16 &rarr; <a href="http://www.myexperiment.org/workflows/16.xml" title="Workflow 16's REST API XML">http://www.myexperiment.org/workflows/16.xml</a></li>
     </ul>
 </small>
