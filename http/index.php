@@ -17,7 +17,7 @@
   If you are using an application that does not allow you to specify parameters of the HTTP request you can use the explicit URL for the different formats to retrieve data in that format.</p>
    </p>
   <h3>Ontology</h3>
-  <p>The structure of myExperiment RDF is defined by the <a href="ontologies/">myExperiment Ontology</a>.  This is a set of modules that borrows classes/properties from <a hrepf="http://www.foaf-project.org/" title="FOAF Project Homepage">FOAF</a>, <a href="http://www.sioc-project.org/" title="SIOC Project Homepage">SIOC</a>, <a href="http://dublincore.org/" title="Dublin Core Metadata Initiative Homepage">Dublin Core</a>, <a href="http://creativecommons.org/" title="Creative Commons Homepage">Creative Commons</a> and <a href="http://www.openarchives.org/ore/" title-"Open Archives Initiative
+  <p>The structure of myExperiment RDF is defined by the <a href="ontologies/">myExperiment Ontology</a>.  This is a set of modules that borrows classes/properties from <a href="http://www.foaf-project.org/" title="FOAF Project Homepage">FOAF</a>, <a href="http://www.sioc-project.org/" title="SIOC Project Homepage">SIOC</a>, <a href="http://dublincore.org/" title="Dublin Core Metadata Initiative Homepage">Dublin Core</a>, <a href="http://creativecommons.org/" title="Creative Commons Homepage">Creative Commons</a> and <a href="http://www.openarchives.org/ore/" title-"Open Archives Initiative
 Object Reuse and Exchange Homepage">OAI-ORE</a>, that can be assembled to build a comprehensive specification for the myExperiment data model.</p>
 
   <h3>SPARQL Endpoint</h3>
