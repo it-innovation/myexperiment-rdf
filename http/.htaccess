@@ -15,7 +15,6 @@ RewriteRule ^swbrowsers/?$ swbrowsers.php
 RewriteRule ^sparql/?$ sparql.php
 RewriteRule ^howtosparql/?$ howtosparql.php
 RewriteRule ^ore/?$ ore.php
-RewriteRule ^guide/?$ guide.php
 
 RewriteRule ^[A-Z].* rdfredirect.php
 

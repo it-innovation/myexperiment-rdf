@@ -101,8 +101,9 @@ select ?workflow ?ct_title { ?workflow rdf:type mecontrib:Workflow . ?workflow m
     <div class="yellow">
       <p style="text-align: right;"><small>New to SPARQL? Click <a href="howtosparql">here for help</a></small></p>
     <form name="queryform" method="post" action="">
-      <h3 style="margin: 0;">Querying</h3>
-       <p style="padding: 10px 100px;"><small>From time to time modifications are made to the <a href="ontologies/">myExperiment Ontology</a> and therefore the RDF queried by this SPARQL endpoint.  Please check the <a href="ontologies/CHANGELOG">CHANGELOG</a> if your query has ceased to function.  <b>The recent reduction of triples is due to anonymised usage statistics being removed. See the <a href="ontologies/CHANGELOG">CHANGELOG</a>  for more details.</b>
+      <h3 style="margin: 0; margin-bottom: 10px;">Querying</h3>
+       <div class="green" style="font-size: 1.05em;"><b>myExperiment RDF has been updated to use <a href="/">Linked Data Non-Information Resource URIs</a></b></div>
+       <p style="padding: 10px 100px;"><small>From time to time modifications are made to the <a href="ontologies/">myExperiment Ontology</a> and therefore the RDF queried by this SPARQL endpoint.  Please check the <a href="ontologies/CHANGELOG">CHANGELOG</a> if your query has ceased to function.</p>
        <table style="font-size: 10pt;">
           <tr>
             <th style="text-align: right;">No. of Triples:</th>

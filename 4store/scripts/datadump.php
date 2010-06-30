@@ -1,13 +1,14 @@
 #!/usr/bin/php
 <?php
+        $domain="public";
 	include('include.inc.php');
         include('changeddata.inc.php');
         include('genrdf.inc.php');
 	
         $ts=$triplestore;
 	$start=2;
-	$rdffile=$datapath."tmp/$ts/data.rdf";
-	$rdfgzfile="$datapath$ts/data.rdf.gz";
+	$rdffile=$datapath."tmp/$ts/myexperiment.rdf";
+	$rdfgzfile="$datapath$ts/myexperiment.rdf.gz";
 				
 	$ddsql=$sql;
 	echo "[".date("H:i:s")."] Creating temporary file $rdffile\n";
@@ -15,7 +16,7 @@
 	fwrite($fh,pageheader());
 	foreach ($ddsql as $k => $v){
 		$v=setUserAndGroups($v);
-		echo "[".date("H:i:s")."] Adding ".getGroup($k)."\n";
+		echo "[".date("H:i:s")."] Adding $k\n";
 		$res=mysql_query($v);
 		$rows=mysql_num_rows($res);
 		$xml="";

@@ -1,0 +1,42 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns="http://usefulinc.com/ns/doap#"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <Project>
+    <name>myExperiment</name>
+    <shortname>myExperiment</shortname>
+    <shortdesc xml:lang="en">myExperiment makes it easy to find, use and share scientific workflows and other Research Objects, and to build communities.</shortdesc> 
+    <description xml:lang="en">myExperiment is a collaborative environment where scientists can safely publish their workflows and experiment plans, share them with groups and find those of others. Workflows, other digital objects and bundles (called Packs) can now be swapped, sorted and searched like photos and videos on the Web. Unlike Facebook or MySpace, myExperiment fully understands the needs of the researcher and makes it really easy for the next generation of scientists to contribute to a pool of scientific methods, build communities and form relationships - reducing time-to-experiment, sharing expertise and avoiding reinvention.
+    </description>
+    <homepage rdf:resource="http://www.myexperiment.org"/>
+    <wiki rdf:resource="http://wiki.myexperiment.org" />
+    <repository>  
+      <SVNRepository>  
+        <location rdf:resource="http://rubyforge.org/projects/myexperiment/"/>  
+        <browse rdf:resource="http://myexperiment.rubyforge.org/svn/"/>  
+      </SVNRepository>  
+    </repository>
+    <bug-database rdf:resource="http://bugs.myexperiment.org" />
+    <mailing-list rdf:resource="http://lists.nongnu.org/mailman/listinfo/myexperiment-discuss" />
+    <license rdf:resource="http://creativecommons.org/licenses/BSD/"/>
+    <download-page rdf:resource="http://rubyforge.org/projects/myexperiment/" />
+    <programming-language>Ruby-on-Rails</programming-language>
+    <release>
+      <Version>
+        <name>myExperiment Perpetual Beta</name>
+        <created>2007-10-31</created>
+        <revision>Perpetual Beta</revision>
+      </Version>
+    </release>
+    <created>2007-03-01</created>
+    <maintainer> 
+      <foaf:Person rdf:about="http://www.myexperiment.org/users/22">
+        <foaf:name>Don Cruickshank</foaf:name>
+      </foaf:Person> 
+    </maintainer> 
+    <category rdf:resource="http://simal.oss-watch.ac.uk/category/socialNetworking"> 
+      <rdfs:label>Social Networking</rdfs:label>
+    </category>
+  </Project>
+</rdf:RDF>
+

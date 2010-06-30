@@ -376,8 +376,9 @@ function getRunnable($entity){
 	global $datauri, $mappings, $sql, $annotatable;
 	if ($entity['runnable_version']){
 		$cursql="select id from workflow_versions where workflow_id=$entity[runnable_id] and version=$entity[runnable_version]";
-		$res=mysql_query($cursql);
-		$id=mysql_result($res,0,'id');
+                $res=mysql_query($cursql);
+		if (mysql_num_rows($res)>0) $id=mysql_result($res,0,'id');
+		else $id='0';
 		$type="workflow_versions";
 		$idf="workflow_versions.id";
 	}
