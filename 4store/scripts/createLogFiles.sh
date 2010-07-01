@@ -2,6 +2,7 @@
 source `dirname $BASH_SOURCE`/settings.sh
 cd $STORE4_PATH/log
 touch database.log
+touch dataflows.log
 touch $TRIPLESTORE"_4store.log"
 touch $TRIPLESTORE"_triples.log"
 touch $TRIPLESTORE"_sparql.log"
