@@ -6,7 +6,7 @@
 ?>
   <p><a href="http://linkeddata.org/">Linked Data</a> is a way of interconnecting data published on the web that has not been previously linked.  myExperiment is now a publisher of such data.</p>
 
-  <p>Every myExperiment entity, whether it be a Workflow, Pack, User, Group, etc. has its own Non-Information Resource (NIR) URI to identify it.  This URI can also be used  with the appropeiate MIME type specified in the accept parameter of the HTTP request to be redirected to data about it in one of up to three different formats, HTML, RDF and XML, through a process called Content Negiotiation.  E.g.
+  <p>Every myExperiment entity, whether it be a Workflow, Pack, User, Group, etc. has its own Non-Information Resource (NIR) URI to identify it.  This URI can also be used in a HTTP request where the header's accept parameter is set to an appropriate MIME type to retrieve data about it in one of up to three different formats, HTML, RDF and XML. This is done through a process called Content Negiotiation, which redirects to an explicit URL for that particular format.  E.g.
 <small>
     <ul>
       <li>wget --header &quot;Accept: text/html&quot; http://www.myexperiment.org/workflows/16 &rarr; <a href="http://www.myexperiment.org/workflows/16.html"title="Workflow 16's webpage">http://www.myexperiment.org/workflows/16.html</a></li>

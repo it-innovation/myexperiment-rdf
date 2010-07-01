@@ -19,7 +19,7 @@ RewriteRule ^ore/?$ ore.php
 RewriteRule ^[A-Z].* rdfredirect.php
 
 
-<Files ~ "private|current|upload_specs|rdfgen|sparql">
+<Files ~ "private|current|upload_specs|rdfgen">
   	Order deny,allow
  	Deny from all
  	AuthName "Secure myExperiment Area"
