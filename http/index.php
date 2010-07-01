@@ -21,7 +21,7 @@
 Object Reuse and Exchange Homepage">OAI-ORE</a>, that can be assembled to build a comprehensive specification for the myExperiment data model.</p>
 
   <h3>SPARQL Endpoint</h3>
-  <p>All myExperiment's public RDF data can queried using the query language SPARQL at <a href="sparql">myExperiment's SPARQL Endpoint</a>.</p>
+  <p>All myExperiment's public RDF data can queried using the query language SPARQL at <a href="sparql">myExperiment's SPARQL Endpoint</a>.  An introduction to SPARQL with a guide to querying myExperiment RDF <a href="howtosparql">is available here</a>.</p>
 
   <h3>Vocabulary of Interlinked Datasets (VoID)</h3>
   <p>A <a href="void.rdf">description of myExperiment RDF</a> is specified in <a href="http://vocab.deri.ie/void" title="voiD Homepage">voiD</a>.  One thing voiD encourages is the publication of RDF datasets so they can easily be reused by others rather than having to crawl each NIR for its RDF.  All of <a href="myexperiment.rdf.gz">myExperiment's Public RDF can be downloaded as a gzipped file</a>.</p>
