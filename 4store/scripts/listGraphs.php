@@ -14,6 +14,7 @@
 	fclose($ph);
 	if (!$xml) die("Knowledge Base does not exist!\n");
 	$pxml=parseXML($xml);
+	$glist="";
 	if (isset($pxml[0]['children'][1]['children'])){
 		foreach ($pxml[0]['children'][1]['children'] as $graphs){
 			$glist.=$graphs['children'][0]['tagData']."\n";

@@ -1,13 +1,15 @@
 #!/bin/bash
+export LD_PATH = "/var/linkeddata"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export MYSQL_USERNAME="root"
 export MYSQL_PASSWORD=""
-export STORE4_PATH="/var/linkeddata/4store"
+export STORE4_PATH="$LD_PATH/4store"
 export STORE4EXEC_PATH="/usr/local/bin"
 export STORE4LIB_PATH="$STORE4_PATH/lib"
-export DATA_PATH="/var/linkeddata/data"
+export DATA_PATH="$LD_PATH/data"
 export HTTPRDF_PATH="http://rdf.myexperiment.org"
 export HTTPWWW_PATH="http://www.myexperiment.org"
+export HTTPSPEC_PATH="http://rdf.myexperiment.org"
 export PHPEXEC_PATH="/usr/bin"
 export BANG='!'
 export TRIPLESTORE="myexp_ld"

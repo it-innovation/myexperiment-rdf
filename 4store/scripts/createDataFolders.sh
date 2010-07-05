@@ -7,6 +7,7 @@ else
 	mkdir $TRIPLESTORE
 	mkdir $TRIPLESTORE/html
 	mkdir tmp
+	mkdir tmp/queries
 	mkdir tmp/$TRIPLESTORE
 	for e in ${ENTITIES[@]}; do
 		mkdir "$TRIPLESTORE/$e"

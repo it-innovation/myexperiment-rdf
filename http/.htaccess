@@ -29,6 +29,7 @@ RewriteRule ^[A-Z].* rdfredirect.php
   	allow from 127.0.0.1
         allow from 152.78.189.65
         allow from 152.78.65.3
+	allow from 152.78.189.69
         Satisfy Any
 </Files>
 

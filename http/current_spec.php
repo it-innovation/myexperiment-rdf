@@ -2,8 +2,8 @@
 include('include.inc.php');
 require_once('xmlfunc.inc.php');
 require_once('4storefunc.inc.php');
-$ts='myexp_public';
-$reasonedont="file:///var/data/myexp_public/myexp_public_reasoned.owl";
+$reasonedont = "file://${datapath}${triplestore}/${triplestore}_reasoned.owl";
+
 
 //Query 1: Property Domain Class-Property Relations
 $query[1]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -57,7 +57,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 select distinct ?myprop ?exprop where {  GRAPH <$reasonedont> { {?myprop rdf:type owl:DatatypeProperty} UNION {?myprop rdf:type owl:ObjectProperty} . ?myprop rdfs:subPropertyOf ?exprop . FILTER( !REGEX(STR(?exprop),'^$ontopath') && REGEX(STR(?myprop),'^$ontopath'))}}";
 
-$res=sparqlQueryClientMultiple($ts,$query,100000,300);
+$res=sparqlQueryClientMultiple($triplestore,$query,100000,300);
 
 $tableres1=array();
 if (queryFailed($res[1])){

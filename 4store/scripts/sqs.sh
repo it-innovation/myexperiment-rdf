@@ -228,8 +228,11 @@ reason-files(){
 }
 generate-spec(){
 	if [ $1 == $TRIPLESTORE ]; then
-		wget -O $STORE4_PATH/$1/html/spec.html -q $HTTPRDF_PATH/current/spec
+		echo "[`date +%T`] Retrieving specification document from $HTTPSPEC_PATH/current/spec"
+		wget -O $DATA_PATH/$1/html/spec.html -q $HTTPSPEC_PATH/current/spec
 		echo "[`date +%T`] Retrieved specification document for $1 and saved to $DATA_PATH/$1/html/spec.html"
+		#echo "[`date +%T`] Setting group for permissions to $HTTPGROUP for $DATA_PATH/$1/html/spec.html"
+		#sudo chgrp $HTTPGROUP $DATA_PATH/$1/html/spec.html
 	else
 		echo "[`date +%T`] Specification document can not be generated for $1"
 	fi

@@ -14,5 +14,5 @@ else
 	$HTTPRDF_PATH/ontologies/contributions/
 	$HTTPRDF_PATH/ontologies/components/
 	$HTTPRDF_PATH/ontologies/specific/" > $TRIPLESTORE"_ontologies.txt"
-	echo "$DATA_PATH/reasoned/"$TRIPLESTORE"_reasoned.owl" > $TRIPLESTORE"_files.txt"
+	echo "$DATA_PATH/$TRIPLESTORE/"$TRIPLESTORE"_reasoned.owl" > $TRIPLESTORE"_files.txt"
 fi
