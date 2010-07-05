@@ -40,6 +40,7 @@
 	function getPermissions($policy){
 		$permsql="select * from permissions where policy_id=".$policy;
 		$permres=mysql_query($permsql);
+		$perms=array();
 		for ($p=0; $p<mysql_num_rows($permres); $p++){
 			$perms[$p]=mysql_fetch_array($permres);
 		}
@@ -75,9 +76,10 @@
 	}
 	function getPolicy($contrib,$type=''){
 		$policy_url=getEntityURI("policies",$contrib['policy_id'],$contrib);
+		$policy="";
 	        if ($type!="policies") $policy.="<snarm:Policy rdf:about=\"$policy_url\">\n";
 	        $perms=getPermissions($contrib['policy_id']);
-		if (!$contrib['share_mode']) $contrib=addShareAndUpdateMode($contrib);
+		if (!isset($contrib['share_mode'])) $contrib=addShareAndUpdateMode($contrib);
 	        $policy.=getContributorPermissions($contrib['contributor_type'],$contrib['contributor_id'],$policy_url);
 	        $policy.=getShareModeAccesses($contrib['share_mode']);
 	        $policy.=getUpdateModeAccesses($contrib['update_mode'],$contrib['share_mode'],$perms);

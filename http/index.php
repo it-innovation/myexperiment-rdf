@@ -4,9 +4,9 @@
 	include('header.inc.php');
 	include('settings.inc.php');
 ?>
-  <p><a href="http://linkeddata.org/">Linked Data</a> is a way of interconnecting data published on the web that has not been previously linked.  myExperiment is now a publisher of such data.</p>
+  <p>myExperiment's RDF is delivered following the principles of <a href="http://linkeddata.org/">Linked Data</a>.  Linked Data is a way of interconnecting data published on the web that has not been previously linked.</p>
 
-  <p>Every myExperiment entity, whether it be a Workflow, Pack, User, Group, etc. has its own Non-Information Resource (NIR) URI to identify it.  This URI can also be used in a HTTP request where the header's accept parameter is set to an appropriate MIME type to retrieve data about it in one of up to three different formats, HTML, RDF and XML. This is done through a process called Content Negiotiation, which redirects to an explicit URL for that particular format.  E.g.
+  <p>Every myExperiment entity, whether it be a Workflow, Pack, User, Group, etc. has its own Non-Information Resource (NIR) URI to identify it.  This URI can also be used in a HTTP request where the header's accept parameter is set to an appropriate MIME type to retrieve data about it in one of up to three different formats, HTML, RDF and XML. This is done through a process called Content Negotiation, which redirects to an explicit URL for that particular format.  E.g.
 <small>
     <ul>
       <li>wget --header &quot;Accept: text/html&quot; http://www.myexperiment.org/workflows/16 &rarr; <a href="http://www.myexperiment.org/workflows/16.html"title="Workflow 16's webpage">http://www.myexperiment.org/workflows/16.html</a></li>
@@ -16,6 +16,7 @@
 </small>
   If you are using an application that does not allow you to specify parameters of the HTTP request you can use the explicit URL for the different formats to retrieve data in that format.</p>
    </p>
+<p>To make myExperiment's RDF truly Linked Data it must link in with other Linked Data projects.  These links can either be from myExperiment, to myExperiment or a link created by a third party linking myExperiment and another Linked Data project.  Currently myExperiment has only a couple of links out to other Linked Data projects but now that the infrastructure for Linked Data is in place it should be possible to add further links both to and from myExperiment.</p>
   <h3>Ontology</h3>
   <p>The structure of myExperiment RDF is defined by the <a href="ontologies/">myExperiment Ontology</a>.  This is a set of modules that borrows classes/properties from <a href="http://www.foaf-project.org/" title="FOAF Project Homepage">FOAF</a>, <a href="http://www.sioc-project.org/" title="SIOC Project Homepage">SIOC</a>, <a href="http://dublincore.org/" title="Dublin Core Metadata Initiative Homepage">Dublin Core</a>, <a href="http://creativecommons.org/" title="Creative Commons Homepage">Creative Commons</a> and <a href="http://www.openarchives.org/ore/" title-"Open Archives Initiative
 Object Reuse and Exchange Homepage">OAI-ORE</a>, that can be assembled to build a comprehensive specification for the myExperiment data model.</p>

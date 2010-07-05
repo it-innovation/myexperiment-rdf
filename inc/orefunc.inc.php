@@ -28,7 +28,7 @@ function printAggregatedResources($entity){
 }
 function addProxy($type,$id,$entity,$format=''){
         global $proxies, $mappings, $sql, $tables, $userid, $ingroups, $datauri;
-        if (!$format) return;
+        if (!isset($format)) return;
         $psql=setRestrict($type,array("id","=",$id),$userid,$ingroups);
         $pres=mysql_query($psql);
 //      echo "<!-- $entity -->";
@@ -79,9 +79,11 @@ function getAggregatedResourceSQL($type,$id){
 }
 function getOREAggregatedResources($entry,$type){
         global $datauri,$mappings, $sql,$tables,$userid,$ingroups,$ontent;
+	$xml="";
         if ($type=="experiments" || $type=="packs"){
+		if (isset($entry['format'])) $format=$entry['format'];
+                else $format="";
                 $arsql=getAggregatedResourceSQL($type,$entry['id']);
-//              $xml="<!-- $arsql -->\n";
                 $res=mysql_query($arsql);
                 for ($i=0; $i<mysql_num_rows($res); $i++){
                         $row=mysql_fetch_assoc($res);
@@ -90,12 +92,12 @@ function getOREAggregatedResources($entry,$type){
 			$etype=array_search($row['type'],$ontent);
 			$entrytype=array_search($row['entry_type'],$ontent);
 //                      print_r($row);
-                        if ($row['1']) break;
+                        if (isset($row['1'])) break;
                         if ($row['version']){
                                 $row['id']=getVersionID($row);
                                 if ($row['type']=="workflows") $row['type']="workflow_versions";
                         }
-                        if ($et['type']=="blob")  $row['type']="file";
+                        //if ($et['type']=="blob")  $row['type']="file";
                         if (isset($row['runnable_id'])) $row['type']="jobs";
                         if ($entrytype=="remote_pack_entries") $fulluri=$row['uri'];
                         else $fulluri=getEntityURI($etype,$row['id'],$row);
@@ -105,10 +107,10 @@ function getOREAggregatedResources($entry,$type){
 //                              $xml.="<!-- $entry[format] -->\n";
                                 $cres=mysql_query($csql);
                                 if (mysql_num_rows($cres)==1){
-                                        addAggregatedResource(printEntity(mysql_fetch_assoc($cres),$etype),$datauri.$type."/$entry[id]",$datauri.$etype."/$row[id]",$entry['format']);
+                                        addAggregatedResource(printEntity(mysql_fetch_assoc($cres),$etype),$datauri.$type."/$entry[id]",$datauri.$etype."/$row[id]",$format);
                                 }
                         }
-                        else addAggregatedResource("    <rdf:Description rdf:about=\"$row[uri]\"/>\n",$datauri.$type."/$entry[id]",$row['uri'],$entry['format'],'hide');
+                        else addAggregatedResource("    <rdf:Description rdf:about=\"$row[uri]\"/>\n",$datauri.$type."/$entry[id]",$row['uri'],$format,'hide');
                         if($row['entry_type']=='local_pack_entries' || $row['entry_type']=='remote_pack_entries') addProxy($row['entry_type'],$row['proxy_id'],$datauri.$type."/$entry[id]",$entry['format']);
                         $xml.="    <ore:aggregates rdf:resource=\"".str_replace("&","&amp;",$fulluri)."\"/>\n";
                 }

@@ -22,6 +22,7 @@ function setUserAndGroups($sql,$userid=0,$ingroups=0){
 }
 function setRestrict($type,$wclause=array(),$userid=0,$ingroups=0){
         global $mappings, $tables, $sql, $domain;
+	$whereclause="";
         for ($w=0; $w<sizeof($wclause); $w=$w+3){
                 if (!strpos($wclause[$w],'.')) $wclause[$w]=$tables[$type].".".$wclause[$w];
                 if ($wclause[$w+1]=="=" || $wclause[$w+1]=="like") $wclause[$w+2]="'".$wclause[$w+2]."'";
@@ -34,6 +35,7 @@ function setRestrict($type,$wclause=array(),$userid=0,$ingroups=0){
         if (stripos($cursql,"where")) $whereand="and";
         else $whereand="where";
         if (sizeof($csqlbits) > 1) $csqlbits[1]="group by ".$csqlbits[1];
+	else $csqlbits[1]="";
         if ($whereclause) $retsql=$csqlbits[0]." $whereand $whereclause ".$csqlbits[1];
         else $retsql=$cursql;
         if ($domain!="private") $retsql=setUserAndGroups($retsql,$userid,$ingroups);

@@ -80,7 +80,7 @@ function xml2array($domnode,$topelement=false){
 	  			$nodeind['attrs']=$elementarray;
           		}
 			$nodeind['name']=$currentnode;
-			if (!$domnode->firstChild->nextSibling->nodeName && $domnode->firstChild->nodeValue) $nodeind['tagData']=$domnode->firstChild->nodeValue;
+			if (is_object($domnode->firstChild) && !is_object($domnode->firstChild->nextSibling) && $domnode->firstChild->nodeValue) $nodeind['tagData']=$domnode->firstChild->nodeValue;
 			else $nodeind['children']=xml2array($domnode);
 
         	}
@@ -90,7 +90,7 @@ function xml2array($domnode,$topelement=false){
 				$nodeind['attrs']=$elementarray;
         	  	}
         	}
-		if ($nodeind){
+		if (isset($nodeind)){
 			$nodearray[]=$nodeind;
 			$nodeind=null;
 		}
@@ -98,7 +98,7 @@ function xml2array($domnode,$topelement=false){
 	     	$domnode = $domnode->nextSibling;
       	}
 	if($topelement){
-		if (!$x2ans['xmlns:rdfs']) $x2ans['xmlns:rdfs']="http://www.w3.org/2000/01/rdf-schema#";
+		if (!isset($x2ans['xmlns:rdfs'])) $x2ans['xmlns:rdfs']="http://www.w3.org/2000/01/rdf-schema#";
 		
 		$nodearray[0]['attrs']=$x2ans;
 		return $nodearray[0];
@@ -435,9 +435,10 @@ function generateDataflows($dataflows,$ent_uri){
 	$dturi=array('mecomp:processor-uri');
 	$rdf="";
 	$dfmap=array();
+	$components="";
 	foreach($dataflows as $dfuri => $dataflow){
 		$rdf.="  <mecomp:Dataflow rdf:about=\"$dfuri\">\n";
-		if ($dataflow['id']){
+		if (isset($dataflow['id'])){
 			if (sizeof($dfmap)==0) $dfmap=generateDataflowMappings($dataflows);
 			$rdf.="    <dcterms:identifier rdf:datatype=\"&xsd;string\">$dataflow[id]</dcterms:identifier>\n";
 			unset($dataflow['id']);
@@ -481,7 +482,7 @@ function tabulateDataflowComponents($parsedxml,$ent_uri,$nested=0){
 					$id=$d;
 					$d++;
 				}
-				$dfs[$ent_uri."#dataflows/$id"]=processDataflowComponents($dataflow['children'],$ent_uri."#dataflows/$d/");
+				$dfs[$ent_uri."#dataflows/$id"]=processDataflowComponents($dataflow['children'],$ent_uri."#dataflows/$d/",$nested);
 				$dfs[$ent_uri."#dataflows/$id"]['id']=$dataflow['attrs']['id'];
 			//	echo $ent_uri."#dataflows/$id = ".sizeof($dfs[$ent_uri."#dataflows/$id"])."\n";
 			}
@@ -489,8 +490,8 @@ function tabulateDataflowComponents($parsedxml,$ent_uri,$nested=0){
 	}
 	else{
 		if (is_array($allcomponents)){
-			if (strpos($ent_uri,'dataflow') > 0) $dfs[$ent_uri."/dataflow"]=processDataflowComponents($allcomponents,$ent_uri."/dataflow/");
-			else $dfs[$ent_uri."#dataflow"]=processDataflowComponents($allcomponents,$ent_uri."#dataflow/");
+			if (strpos($ent_uri,'dataflow') > 0) $dfs[$ent_uri."/dataflow"]=processDataflowComponents($allcomponents,$ent_uri."/dataflow/",$nested);
+			else $dfs[$ent_uri."#dataflow"]=processDataflowComponents($allcomponents,$ent_uri."#dataflow/",$nested);
 		}
 //		echo $ent_uri."/dataflow = ".sizeof($dfs[$ent_uri."/dataflow"])."\n";
 
@@ -500,12 +501,12 @@ function tabulateDataflowComponents($parsedxml,$ent_uri,$nested=0){
 		return $dfs;
 	}
 }
-function processDataflowComponents($allcomponents,$ent_uri){
+function processDataflowComponents($allcomponents,$ent_uri,$nested=0){
 	$components=array();
         $ptmappings=array("wsdl"=>"WSDLProcessor","arbitrarywsdl"=>"WSDLProcessor","soaplabwsdl"=>"WSDLProcessor","biomobywsdl"=>"WSDLProcessor","beanshell"=>"BeanshellProcessor","workflow"=>"DataflowProcessor");
         $c=1;
 	foreach ($allcomponents as $typedcomponents){
-		if (!is_array($typedcomponents['children'])) $typedcomponents['children']=array();
+		if (!isset($typedcomponents['children']) || !is_array($typedcomponents['children'])) $typedcomponents['children']=array();
 		foreach ($typedcomponents['children'] as $comp){
 			$props=array();
                        	$ctype=ucfirst(strtolower($comp['name']));
@@ -522,14 +523,14 @@ function processDataflowComponents($allcomponents,$ent_uri){
 						$props[]=array('type'=>'dcterms:description','value'=>$property['tagData']);
 						break;
 					  case 'type':
-						if ($ptmappings[$property['tagData']]) $classtype=$ptmappings[$property['tagData']];
+						if (isset($ptmappings[$property['tagData']])) $classtype=$ptmappings[$property['tagData']];
 						else $classtype="OtherProcessor";
 						$props[]=array('type'=>'mecomp:processor-type','value'=>$property['tagData']);
 						break;
 					  case 'examples':
-						if (is_array($property['children'])){
+						if (isset($property['children']) && is_array($property['children'])){
 							foreach ($property['children'] as $example){
-								$props[]=array('type'=>'mecomp:example-value','value'=>$example['tagData']);
+								if (isset($example['tagData'])) $props[]=array('type'=>'mecomp:example-value','value'=>$example['tagData']);
 							}
 						}
 						break;
@@ -546,14 +547,14 @@ function processDataflowComponents($allcomponents,$ent_uri){
 					  case 'endpoint':
 					  case 'wsdl':
 						$props[]=array('type'=>'mecomp:processor-uri','value'=>$property['tagData']);
-                                                       break;
+                                                break;
 					  case 'service-name':
 					  case 'wsdl-operation':
-                                                       $props[]=array('type'=>'mecomp:service-name','value'=>$property['tagData']);
-                                                       break;
+                                               $props[]=array('type'=>'mecomp:service-name','value'=>$property['tagData']);
+                                                break;
 					  case 'biomoby-authority-name':
-						$props[]=array('type'=>'mecomp:authority-name','value'=>$property['tagData']);
-                                                       break;
+						if (isset($property['tagData'])) $props[]=array('type'=>'mecomp:authority-name','value'=>$property['tagData']);
+                                                break;
 					  case 'biomoby-service-category':
 					}	
 				}

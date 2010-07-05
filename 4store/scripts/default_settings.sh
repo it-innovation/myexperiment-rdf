@@ -1,5 +1,7 @@
 #!/bin/bash
 export LD_LIBRARY_PATH="/usr/local/lib"
+export MYSQL_USERNAME="root"
+export MYSQL_PASSWORD=""
 export STORE4_PATH="/var/linkeddata/4store"
 export STORE4EXEC_PATH="/usr/local/bin"
 export STORE4LIB_PATH="$STORE4_PATH/lib"

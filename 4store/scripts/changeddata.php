@@ -11,7 +11,7 @@
 	function saveEntities($ts,$type,$xml,$id,$userid,$fileext=null){
 		global $curids, $datapath;
 		$xml.=pagefooter();
-                if ($hasuserid) $fid=$userid;
+                if (isset($hasuserid)) $fid=$userid;
                 else $fid=$id;
 		if ($fileext && $fileext!="_") $fid.="_$fileext";
 		$curids[]=$fid;

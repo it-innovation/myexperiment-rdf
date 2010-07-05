@@ -58,13 +58,15 @@
 			case '!':
 				break;
 			default:
-				if ($datatypes[$property]){
-					$xml.=printDatatypeProperty($property,$row[$field]);
+                                if (isset($row[$field])){
+					if (isset($datatypes[$property])){
+						$xml.=printDatatypeProperty($property,$row[$field]);
+					}
+					else{
+						$xml.=printEntityProperty($field,$property,$row[$field],"NoDataURI");
+					}	
+					break;
 				}
-				else{
-					$xml.=printEntityProperty($field,$property,$row[$field],"NoDataURI");
-				}	
-				break;
 			}	
 		}
 		$etag="  </$fullentity>\n\n";
@@ -79,9 +81,10 @@
 	}
 	function getHomepageAndFormats($uri,$type,$id,$entity=''){
 		global $homepage, $xmluri, $datauri;
+		$xml="";
 		if ($homepage[$type]) $xml.="    <foaf:homepage rdf:resource=\"${uri}.html\"/>\n";
                 $xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.rdf\"/>\n";
-		if ($xmluri[$type]){
+		if (isset($xmluri[$type])){
 		//	if ($entity['workflow_id']) $curxmluri=$datauri.str_replace("!",$entity['version'],str_replace("~",$entity['workflow_id'],$xmluri[$type]));
 		//	else $curxmluri=$datauri.$xmluri[$type].$id;
 			$curxmluri=$uri.".xml";
@@ -138,10 +141,12 @@
 	function printFunctionProperty($property,$row,$entity_type="",$msg=""){
 		global $datauri, $datatypes, $aggregateprops;
 		$pbits=explode('|',$property);
-		$msgs=explode(",",$msg);
+		if (isset($msg) && is_string($msg)>0) $msgs=explode(",",$msg);
+		else $msgs=array();
 		if (in_array('ore',$msgs)){
 			$row['format']="ore";
 		}
+		else $row['format']="";
 		if (in_array('hide',$msgs) && $pbits[0]=="getOREAggregatedResources") return;
 		if ($entity_type) $value=call_user_func($pbits[0],$row,$entity_type);
 		elseif (in_array('Hash',$msgs)){
@@ -158,6 +163,7 @@
 			return $line;
 		}
 		elseif (array_key_exists($pbits[1],$datatypes) && $datatypes[$pbits[1]]!=""){
+			$fh="";
 			return printDatatypeProperty($pbits[1],$value,$fh);
 		}
 		elseif ($pbits[0]=="getComponentsAsResources" || $pbits=="getWorkflowVersions" ) return $value;
@@ -165,15 +171,15 @@
 			if (in_array("NoDataURI",$msgs)) $uri=$value;
 			else $uri=$datauri.$value;
 			$nsandp=$pbits[1];
-			if (in_array($nsandp,$aggregateprops) && $row['format']=='ore') $nsandp="ore:aggregates";
-			if ($uri) $line="    <$nsandp rdf:resource=\"$uri\" />\n";
-			return $line;
+			if (in_array($nsandp,$aggregateprops) && isset($row['format']) && $row['format']=='ore') $nsandp="ore:aggregates";
+			if ($uri) return "    <$nsandp rdf:resource=\"$uri\" />\n";
+			return;
 		}
 	}	
 	function printDatatypeProperty($property,$value){
 		global $datatypes;
 		$value=xmlentities($value);
-		
+		$line="";
 		if (($datatypes[$property]=="nonNegativeInteger" || $datatypes[$property]=="boolean") && !$value) $value="0";
 		elseif ($datatypes[$property]=="dateTime"){
 			$value=str_replace(" ","T",$value);

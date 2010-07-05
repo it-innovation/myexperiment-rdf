@@ -75,6 +75,7 @@ reason-ontology(){
 	if [ $myexp_ts -gt 0 ]; then
 		reasoned_filename="$DATA_PATH/$1/$1_reasoned.owl"
 		java -cp $JAVA_CP RDFSReasonerOntologyMerger $STORE4_PATH/config/$1_ontologies.txt > $reasoned_filename 2> /dev/null
+		chmod 777 $reasoned_filename
 		echo "[`date +%T`] Ontologies from $1_ontologies.txt successfully reasoned and written to $reasoned_filename"
 	else
 		echo "[`date +%T`] reason command cannot be used with $1 triplestore"
@@ -197,7 +198,7 @@ count-triples(){
 	echo "[`date +%T`] Printing number of triples to file $STORE4_PATH/log/$1_triples.log"
 }
 get-dataflows(){
-	$PHPEXEC_PATH/php $STORE4_PATH/scripts/getNewWorkflowVersions.php | awk -v datapath="$DATA_PATH" -v httpwwwpath="HTTPWWW_PATH" 'BEGIN{FS=","}{ print " -O " datapath "/dataflows/xml/" $1 " -q " httpwwwpath "/workflow.xml?id=" $2 "&version=" $3 "&elements=components" }' > /tmp/dataflow_wgets.txt
+	$PHPEXEC_PATH/php $STORE4_PATH/scripts/getNewWorkflowVersions.php | awk -v datapath="$DATA_PATH" -v httpwwwpath="$HTTPWWW_PATH" 'BEGIN{FS=","}{ print " -O " datapath "/dataflows/xml/" $1 " -q " httpwwwpath "/workflow.xml?id=" $2 "&version=" $3 "&elements=components" }' > /tmp/dataflow_wgets.txt
 	exec</tmp/dataflow_wgets.txt
 	while read line
 	do
@@ -206,12 +207,10 @@ get-dataflows(){
 #	        sleep 2
 	done
 	rm /tmp/dataflow_wgets.txt
-
 }
 reason-dataflows(){
 	echo "[`date +%T`] Generating Dataflow RDF"
-	$PHPEXEC_PATH/php $STORE4_PATH/scripts/generateDataflowRDF.php
-	echo "[`date +%T`] Reasoning Dataflow RDF"
+	$PHPEXEC_PATH/php $STORE4_PATH/scripts/generateDataflowRDF.php $1
 	nographs=`cat /tmp/dataflows.txt | wc -l`
 	if [ $nographs -gt 0 ]; then
 		echo "[`date +%T`] Reasoning Dataflow RDF"
@@ -268,6 +267,12 @@ case "$2" in
   reason-ontology)
 	reason-ontology $1
 	;;
+  reason-dataflows)
+	reason-dataflows $1
+	;;
+  get-dataflows)
+        get-dataflows $1
+        ;;
   reason-file)
 	reason-file $1 $3 $4
 	;;

@@ -1,7 +1,7 @@
 <?php
 function getEntityURI($type,$id,$entity,$format=''){
 	 global $datauri, $nesting, $annotatable;
-	 if ($nesting[$type]){
+	 if (isset($nesting[$type])){
 	 	switch ($type){
 			case 'attributions':
 			case 'comments':
@@ -9,7 +9,7 @@ function getEntityURI($type,$id,$entity,$format=''){
 			case 'ratings':
 			case 'reviews':
                         case 'policies':
-                                if ($annotatable[$entity[$nesting[$type][0]]]) $entitytype = $annotatable[$entity[$nesting[$type][0]]]; 
+                                if (isset($annotatable[$entity[$nesting[$type][0]]])) $entitytype = $annotatable[$entity[$nesting[$type][0]]]; 
 				else $entitytype = $entity[$nesting[$type][0]];
 				return $datauri.$entitytype."/".$entity[$nesting[$type][1]]."/$type/$id";
 			case 'citations': 
@@ -77,7 +77,7 @@ function getAccepter($mship){
 		$utime=strtotime($mship['user_established_at']);
 		$ntime=strtotime($mship['network_established_at']);
 		if ($utime<=$ntime) return "groups/".$mship['network_id'];
-		else return $datauri."users/".$mship['user_id'];	
+		else return "users/".$mship['user_id'];	
 	}
 	return "";
 }
@@ -94,6 +94,7 @@ function getAccepterTime($mship){
 
 function getMemberships($user){
 	global $sql, $datauri;
+	$xml="";
 	$msql=$sql['memberships']." where user_id=$user[id]";
 	$mres=mysql_query($msql);
 	for ($m=0; $m<mysql_num_rows($mres); $m++){
@@ -103,6 +104,7 @@ function getMemberships($user){
 }
 function getFriendships($user){
         global $sql, $datauri;
+	$xml="";
 	$fsql=addWhereClause($sql['friendships'],"user_id=$user[id] or friend_id=$user[id]");
         $fres=mysql_query($fsql);
         for ($f=0; $f<mysql_num_rows($fres); $f++){
@@ -112,6 +114,7 @@ function getFriendships($user){
 }
 function getFavourites($user){
 	global $sql, $datauri;
+	$xml="";
         $fsql=addWhereClause($sql['favourites'],"user_id=$user[id]");
         $fres=mysql_query($fsql);
         for ($f=0; $f<mysql_num_rows($fres); $f++){
@@ -129,6 +132,7 @@ function getUser($action,$hash=0){
 }
 function getTaggings($tag){
 	global $sql, $datauri;
+	$xml="";
 	$tsql=addWhereClause($sql['taggings'],"tag_id=$tag[id]");
 	$tres=mysql_query($tsql);
 	for ($t=0; $t<mysql_num_rows($tres); $t++){
@@ -151,22 +155,30 @@ function getPolicyURI($contrib,$type){
 }
 function getThumbnail($workflow){
 	$url=getUrl($workflow,'thumb');
-	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+	if (isset($workflow['format'])) $format = $workflow['format'];
+        else $format = "";
+	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 }
 function getThumbnailBig($workflow){
 	$url=getUrl($workflow,'medium');
-	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Big Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+	if (isset($workflow['format'])) $format = $workflow['format'];
+        else $format = "";
+	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Big Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 }
 function getPreview($workflow){
         $url=getUrl($workflow);
-        if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Preview of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+	if (isset($workflow['format'])) $format = $workflow['format'];
+        else $format = "";
+        if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Preview of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 }
 function getSVG($workflow){	
 	$url=getUrl($workflow,'','svg');
-	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/svg+xml</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">SVG of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+	if (isset($workflow['format'])) $format = $workflow['format'];
+        else $format = "";
+	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/svg+xml</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">SVG of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 }
 function workflowOrVersion($entity){
@@ -177,16 +189,16 @@ function workflowOrVersion($entity){
 }
 function getUrl($workflow,$type="",$format="image"){
  	global $datauri;
-        if (!$workflow[$format]) return '';
+        if (!isset($workflow[$format])) return '';
 	if ($type) $type.="/";
-        if ($workflow['workflow_id']){
+        if (isset($workflow['workflow_id'])){
                 return $datauri."workflow/version/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
         }
         return $datauri."workflow/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
 }
 function getWorkflowDownloadUrl($workflow){
 	global $datauri;
-	if ($workflow['workflow_id']){
+	if (isset($workflow['workflow_id'])){
                 $url=$datauri."workflows/".$workflow['workflow_id']."/download/".urlencode($workflow['unique_name']).".".$workflow['file_ext']."?version=".$workflow['version'];
 		$table="workflow_versions";
 		$id=$workflow['workflow_id'];
@@ -201,8 +213,9 @@ function getWorkflowDownloadUrl($workflow){
 //	echo "<!-- $ctsql -->\n";
 	$ctres=mysql_query($ctsql);
 //	print_r(mysql_fetch_assoc($ctres));
-	
-	addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">".mysql_result($ctres,0,'mime_type')."</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Workflow File for $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$workflow['format']);
+	if (isset($workflow['format'])) $format = $workflow['format'];
+	else $format = "";
+	addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">".mysql_result($ctres,0,'mime_type')."</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Workflow File for $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 	
 }
@@ -222,7 +235,9 @@ function getCurrentWorkflowVersion($workflow){
         $res=mysql_query($wvsql);
        	$row=mysql_fetch_assoc($res);
 	$aggregates="workflows/$workflow[id]/versions/$workflow[current_version]";
-        addAggregatedResource(printEntity($row,"workflow_versions"),workflowOrVersion($workflow),$datauri."workflows/$workflow[id]/versions/$workflow[current_version]",$workflow['format']);
+	if (isset($workflow['format'])) $format = $workflow['format'];
+        else $format = "";
+        addAggregatedResource(printEntity($row,"workflow_versions"),workflowOrVersion($workflow),$datauri."workflows/$workflow[id]/versions/$workflow[current_version]",$format);
         return $aggregates;
 }
 function isCurrentVersion($workflowversion){
@@ -238,8 +253,11 @@ function getWorkflowVersions($workflow){
 	$aggregates="";
 	for ($i=0; $i<mysql_num_rows($res); $i++){
 		$row=mysql_fetch_assoc($res);
-		addAggregatedResource(printEntity($row,"workflow_versions"),workflowOrVersion($workflow),$datauri."workflows/".$row['workflow_id']."/versions/".$row['version'],$workflow['format']);
-		if ($workflow['format']=="ore") $aggregates.="    <ore:aggregates rdf:resource=\"".$datauri."workflows/".$row['workflow_id']."/versions/".$row['version']."\"/>\n";
+		 if (isset($workflow['format'])) $format = $workflow['format'];
+        	else $format = "";
+		
+		addAggregatedResource(printEntity($row,"workflow_versions"),workflowOrVersion($workflow),$datauri."workflows/".$row['workflow_id']."/versions/".$row['version'],$format);
+		if ($format=="ore") $aggregates.="    <ore:aggregates rdf:resource=\"".$datauri."workflows/".$row['workflow_id']."/versions/".$row['version']."\"/>\n";
 		else $aggregates.="    <mebase:has-version rdf:resource=\"".$datauri."workflows/".$row['workflow_id']."/versions/".$row['version']."\"/>\n";
 	}
 	return $aggregates;	
@@ -280,8 +298,9 @@ function openid_url($user){
 	if ($userid==$user['id'] || $domain=="private") return $user['openid_url'];
 }
 function getResidence($user){
-	if($user['location_city'])$residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_city'])."\"/>\n";
-	if($user['location_country'])$residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_country'])."\"/>\n";
+	$residence="";
+	if(isset($user['location_city'])) $residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_city'])."\"/>\n";
+	if(isset($user['location_country'])) $residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_country'])."\"/>\n";
 	return $residence;
 }
 function request_token($request){
@@ -314,7 +333,9 @@ function getHomepage($entity,$type){
 	elseif ($type=="group_announcements") $gtype="groups/".$entity['network_id']."/announcements/";
 	elseif ($type=="reviews") $gtype=$hspent[$entity['reviewable_type']]."/".$entity['reviewable_id']."/reviews/";
 	$url=$datauri.$gtype.$entity['id'];
-	addAggregatedResource("    <rdf:Description rdf:about=\"$url\">\n      <dcterms:format rdf:datatype=\"&xsd;string\">text/xhtml+xml</dcterms:format>\n      <dcterms:title rdf:datatype=\"&xsd;string\">Human Start Page for $entity[title]</dcterms:title>\n    </rdf:Description>\n",$datauri."$type/$entity[id]",$url,$entity['format']);
+	if (isset($entity['format'])) $format = $entity['format'];
+        else $format = "";
+	addAggregatedResource("    <rdf:Description rdf:about=\"$url\">\n      <dcterms:format rdf:datatype=\"&xsd;string\">text/xhtml+xml</dcterms:format>\n      <dcterms:title rdf:datatype=\"&xsd;string\">Human Start Page for $entity[title]</dcterms:title>\n    </rdf:Description>\n",$datauri."$type/$entity[id]",$url,$format);
 	if ($url) return $url.".html";
 	return "";
 	
@@ -349,8 +370,11 @@ function getOutput($entity){
 		if ($entity['outputs_uri']) $xml.= "        <mebase:uri rdf:resource=\"$entity[outputs_uri]\"/>\n";
 
 		$xml.="      </meexp:Data>";
-		if ($entity['format']=="ore"){
-			addAggregatedResource($xml,$uri,$url,$entity['format']);
+		if (isset($entity['format'])) $format = $entity['format'];
+        	else $format = "";
+
+		if ($format=="ore"){
+			addAggregatedResource($xml,$uri,$url,$format);
 			$xml=$url;
 		}
 	}
@@ -364,8 +388,10 @@ function getInput($entity){
 		if ($entity['inputs_uri']) $xml.= "        <mebase:uri rdf:resource=\"$entity[inputs_uri]\"/>\n";
 		if ($entity['inputs_data']) $xml.= "        <mebase:text rdf:datatype=\"&xsd;string\">$entity[inputs_data]</mebase:text>\n";
 		$xml.="      </meexp:Data>";
-		if ($entity['format']=="ore"){
-                        addAggregatedResource($xml,$uri,$url,$entity['format']);
+		if (isset($entity['format'])) $format = $entity['format'];
+                else $format = "";
+		if ($format=="ore"){
+                        addAggregatedResource($xml,$uri,$url,$format);
                         $xml=$url;
                 }
 
@@ -395,12 +421,16 @@ function getRunnable($entity){
 	//print_r($entity);
 	$res=mysql_query($cursql) or $return=1;
         if ($return || mysql_num_rows($res)==0) return "";
-	addAggregatedResource(printEntity(mysql_fetch_array($res),$type),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runnable,$entity['format']);
+	if (isset($entity['format'])) $format = $entity['format'];
+        else $format = "";
+	addAggregatedResource(printEntity(mysql_fetch_array($res),$type),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runnable,$format);
 	return $runnable;
 }
 function getJobURI($entity){
 	global $datauri;
-	addAggregatedResource("  <rdf:Description rdf:about=\"$entity[job_uri]\">\n    <dcterms:title>Server URI for Job</dcterms:title>\n  </rdf:Description>\n",$datauri."jobs/$entity[id]",$entity['job_uri'],$entity['format']);
+	if (isset($entity['format'])) $format = $entity['format'];
+        else $format = "";
+	addAggregatedResource("  <rdf:Description rdf:about=\"$entity[job_uri]\">\n    <dcterms:title>Server URI for Job</dcterms:title>\n  </rdf:Description>\n",$datauri."jobs/$entity[id]",$entity['job_uri'],$format);
 	return $entity['job_uri'];
 }
 function getRunner($entity){
@@ -409,17 +439,21 @@ function getRunner($entity){
 	$cursql=$sql['runners']." where id=$entity[runner_id]";
 	$res=mysql_query($cursql);
 //	echo $cursql;
-	addAggregatedResource(printEntity(mysql_fetch_array($res),'runners'),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runner,$entity['format']);
+	if (isset($entity['format'])) $format = $entity['format'];
+        else $format = "";
+	addAggregatedResource(printEntity(mysql_fetch_array($res),'runners'),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runner,$format);
 	return $runner;
 }
 function getProxyFor($entity){
 	global $ontent, $modelalias;
-	if ($entity['contributable_type']){
+	$xml="";
+	if (isset($entity['contributable_type'])){
 		if ($entity['contributable_version']){
 			$entity['contributable_id']=getVersionID($entity);
 			if ($entity['contributable_type']=="Workflow") $entity['contributable_type']="WorkflowVersion";
 		}
 		if (in_array($entity['contributable_type'],$modelalias)) $etype=array_search($entity['contributable_type'],$modelalias);
+		else $etype = $entity['contributable_type'];
 		$etype=array_search($etype,$ontent);
 		return $etype."/".$entity['contributable_id'];
 	}
@@ -448,6 +482,7 @@ function getDataflowComponents($entity,$type){
 	}
 	if (file_exists($fileloc)){
 		$fh=fopen($fileloc,"r");
+		$xml="";
  		while(!feof($fh)){
                 	$xml.=fgets($fh);
 	        }
@@ -511,7 +546,7 @@ function getAnnotations($entity,$type){
 	global $entannot, $ontent, $modelalias, $annotprop, $datauri;
 	$ea = $entannot[$type];
 	$atype=$ontent[$type];
-	if ($modelalias[$atype]) $atype=$modelalias[$atype];
+	if (isset($modelalias[$atype])) $atype=$modelalias[$atype];
 	$xml="";
 	foreach ($ea as $annot){
 		if ($annot=="citations") $cursql=getAnnotationSQL($annot,$entity['workflow_id'],$entity['version']);

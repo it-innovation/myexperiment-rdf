@@ -130,7 +130,7 @@ PREFIX ore: <http://www.openarchives.org/ore/terms/>";
 
 
         //SQL
-	if ($domain=="public"){
+	if (isset($domain) && $domain == "public"){
 		$pubcond="policies.share_mode in (0,1,2)";
 	       	$sql['announcements']="select * from announcements";
         	$sql['attributions']="select attributions.* from attributions inner join contributions on attributions.attributor_id=contributions.contributable_id and attributions.attributor_type=contributions.contributable_type inner join policies on contributions.policy_id=policies.id where ($pubcond)";
