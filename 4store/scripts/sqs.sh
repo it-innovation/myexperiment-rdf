@@ -149,7 +149,7 @@ update(){
 		else
 			update-cached-files $1
 		fi
-		entity_groups=( announcements attributions citations comments content_types creditations dataflows experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs policies ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions )
+		ENTITIES=( announcements attributions citations comments content_types creditations dataflows experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs policies ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions )
 		day=`date +%e`
                 month=`date +%b`
 		date +%s > $STORE4_PATH/log/$1_update_time.log
@@ -158,6 +158,7 @@ update(){
 		sleep 3
 		for graph in `cat $DATA_PATH/tmp/$1/delete_files`; do
                         remove $1 $graph delete 
+			echo "[`date +%T`] Removed $graph from $1"
 		done
 		echo "[`date +%T`] Removed all deleted entities from $1"
 		if `ls -l $DATA_PATH/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; then
