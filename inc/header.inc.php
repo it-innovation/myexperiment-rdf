@@ -23,7 +23,7 @@
 <body>
 
 <div class="page">
- <div style="float: right;"><a href="http://www.myexperiment.org/feedback?subject=RDF%20API">Submit Feedback/Bug Report</a></div> <h1>
+ <div style="float: right;"><a href="http://www.myexperiment.org/feedback?subject=Linked%20Data">Submit Feedback/Bug Report</a></div> <h1>
 <?php
 if ($headerimg){
 	if ($headerimg!="none") echo "    <img src=\"$headerimg\" alt=\"$headername Logo\"/>";
