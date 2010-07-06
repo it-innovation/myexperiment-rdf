@@ -8,15 +8,12 @@
         $start=2;
 
 
-	function saveEntities($ts,$type,$xml,$id,$userid,$fileext=null){
+	function saveEntities($ts,$type,$xml,$id,$userid){
 		global $curids, $datapath;
 		$xml.=pagefooter();
-                if (isset($hasuserid)) $fid=$userid;
-                else $fid=$id;
-		if ($fileext && $fileext!="_") $fid.="_$fileext";
-		$curids[]=$fid;
-                $file=$datapath."tmp/$ts/$type/$fid";
-		$fileold=$datapath.$ts."/$type/$fid";
+		$curids[]=$id;
+                $file=$datapath."tmp/$ts/$type/$id";
+		$fileold=$datapath.$ts."/$type/$id";
                 $fh=fopen($file,'w');
                 fwrite($fh,$xml);
                 fclose($fh);
