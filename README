@@ -6,7 +6,7 @@ README - Instructions for setting up myExperiment Linked Data Architecture
 2. Copy 4store/scripts/default_settings.sh to 4store/scripts/settings.sh and adjust the values for STORE4_PATH and DATA_PATH so they point at where the 4store/ and data/ directories have been deplpyed on the server.
 
 
-3. Update http/.htaccess so that it points to the full path version .htpass file in this directory.
+3. Copy http/.htaccess_default to http/.htaccess and update .htaccess so that it points to the full path version of .htpass file in this directory.
 
 
 4. Create a triplestore using the 4s-backend-setup command
@@ -16,7 +16,7 @@ README - Instructions for setting up myExperiment Linked Data Architecture
    Take the name of the triplestore and copy that name into the appropriate parameters in inc/settings.inc.php and 4store/scrripts/settings.sh
 
 
-5. Run 4store/scripts/createLogFiles.sh, 4store/scripts/createConfigFolders.sh and 4store/scripts/createDataFolders.sh to create files and folders for logs, config and data.
+5. Run 4store/scripts/createLogFiles.sh, 4store/scripts/createConfigFolders.sh, 4store/scripts/createDataFolders.sh 4store/scripts/createSymbolicLinks.sh to create files and folders for logs, config and data, as well as symbolic links from the http folder to specific data files.
 
 
 6. Add the following cronjob for the user who has permission to the data/ directory:

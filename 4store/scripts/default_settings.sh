@@ -1,5 +1,5 @@
 #!/bin/bash
-export LD_PATH = "/var/linkeddata"
+export LD_PATH="/var/linkeddata"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export MYSQL_USERNAME="root"
 export MYSQL_PASSWORD=""

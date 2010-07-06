@@ -23,7 +23,7 @@ RewriteRule ^[A-Z].* rdfredirect.php
   	Order deny,allow
  	Deny from all
  	AuthName "Secure myExperiment Area"
-  	AuthUserFile /var/www/html/rdf/.htpass
+  	AuthUserFile /home/drn05r/hg-repos/linkeddata/http/.htpass
   	AuthType Basic
   	Require valid-user
   	allow from 127.0.0.1

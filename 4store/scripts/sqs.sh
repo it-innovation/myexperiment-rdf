@@ -149,7 +149,7 @@ update(){
 		else
 			update-cached-files $1
 		fi
-		entity_groups=( announcements attributions citations comments content_types creditations dataflows experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions )
+		entity_groups=( announcements attributions citations comments content_types creditations dataflows experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs policies ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions )
 		day=`date +%e`
                 month=`date +%b`
 		date +%s > $STORE4_PATH/log/$1_update_time.log
