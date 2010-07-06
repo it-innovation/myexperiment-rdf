@@ -149,7 +149,6 @@ update(){
 		else
 			update-cached-files $1
 		fi
-		ENTITIES=( announcements attributions citations comments content_types creditations dataflows experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs policies ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions )
 		day=`date +%e`
                 month=`date +%b`
 		date +%s > $STORE4_PATH/log/$1_update_time.log
@@ -170,7 +169,7 @@ update(){
 				echo "[`date +%T`] Could Not Add/Update $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
 			fi
 		fi
-		ENTITIES=( "${ENTITIES[@]}" dataflows )
+		ENTITIES=( announcements attributions citations comments content_types creditations dataflows experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs policies ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions dataflows )
 		for e in ${ENTITIES[@]}; do
 			filepath="$DATA_PATH/$1/$e/"
 			for graph in `ls -l $filepath* 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; do
