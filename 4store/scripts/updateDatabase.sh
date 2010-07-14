@@ -1,10 +1,14 @@
 #!/bin/bash
-source `pwd`/`dirname $BASH_SOURCE`/settings.sh
+bashsource=`dirname $BASH_SOURCE`
+if [ "${bashsource:0:1}" == "/" ]; then
+  source "$bashsource/settings.sh"
+else
+  source "`pwd`/$bashsource/settings.sh"
+fi
 echo "============== `date` =============="
 cd $STORE4_PATH/scripts
 scp backup@tents:/home/backup/www.myexperiment.org/latest_db.txt /tmp/
 filepath=`cat /tmp/latest_db.txt`
-echo $filepath
 filename=`cat /tmp/latest_db.txt | awk 'BEGIN{FS="/"}{ print $NF }'`
 scp backup@tents:$filepath /tmp/
 ls -t /tmp/$filename

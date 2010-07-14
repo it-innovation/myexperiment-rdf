@@ -24,7 +24,7 @@
 		for ($i=0; $i<$rows; $i++){
 			$row=mysql_fetch_assoc($res);
 			$id=$row['id'];
-			if (!$row['user_id']) $row['user_id']="AnonymousUser";
+			if (!isset($row['user_id'])) $row['user_id']="AnonymousUser";
 			$xml.=printEntity($row,$k,$mappings[$k],"$datauri$k/",'id','');
 			$ents++;
 			if ($ents==1000){
@@ -38,7 +38,7 @@
 	fclose($fh);
  	echo "[".date("H:i:s")."] Adding dataflows\n";
 	exec("for dffile in `ls ".$datapath."dataflows/rdf/*`; do
-        head -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`] \$dffile | tail -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`-46] >> $rdffile
+        head -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`] \$dffile | tail -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`-48] >> $rdffile
 done");
 	$fh=fopen($rdffile,"a");
         fwrite($fh,pagefooter());
