@@ -16,6 +16,25 @@ function getQueryPreamble(){
 	return "export LD_LIBRARY_PATH=/usr/local/lib; export BANG='!'; "; 
 }
 
+function preProcessQuery($query){
+	global $namespaces, $prefixes, $domain;
+	$query=str_replace('"',"'",$query);
+	$query=str_replace("\'","'",$query);
+        preg_match_all("/([^ \t\n:]+):[^ \t\n:]+/",$query,$namespaces);
+        preg_match_all('/PREFIX ([\w]+):[^\n]+/i',$query,$prefixes);
+        $allprefixes=getUsefulPrefixesArray($domain,true);
+        foreach ($namespaces[1] as $ns){
+        	if (!in_array($ns,$prefixes[1])){
+                	if ($allprefixes[$ns]){
+                        	$query="PREFIX $ns: <".$allprefixes[$ns].">\n".$query;
+                                $prefixes[1][]=$ns;
+                        }
+                }
+        }
+	return $query;
+}
+
+
 //Named Graph Functions
 function listNamedGraphs($modelname){
 	$cmd=getScriptPath()."/sqs.sh $modelname list-graphs";

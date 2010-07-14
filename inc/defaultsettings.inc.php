@@ -11,6 +11,8 @@
 	$datauri="http://www.myexperiment.org/";
 	//The URI for RDF data in the guide"
         $guidedatauri="http://www.myexperiment.org/";
+	//Current host URI path
+        $hostpath="http://".$_SERVER['SERVER_NAME']."/";
 	//The URI path for the ontologies
 	$ontopath="http://rdf.myexperiment.org/ontologies/";
 	//The filesystem path for RDF data

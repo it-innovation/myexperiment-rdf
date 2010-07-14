@@ -1,32 +1,42 @@
 <?php
-	$pagetitle="SPARQL Endpoint";
-	$htmlheader[]='<script src="/js/sparql.js" type="text/javascript"></script>';
-	include('include.inc.php');
-	include('xmlfunc.inc.php');
-	include('sparqlconnect.inc.php');
-        require('4storefunc.inc.php');
-	require('miscfunc.inc.php');
-	$domain="public";
-	$ts=$triplestore;
-	$notriples=getNoTriples($ts);
-	$prefix="";
-	$lmdate=date('r',strtotime(date('Y-m-d',getLastUpdated($ts)))-60);
-    	$format = "sparql";
-        $mimetype="application/xml";
-	$softlimit=1;
-	$maxsoftlimit=100;
-	$formatting="In Page";
-	$clientlive=testSparqlQueryClient($ts);
-        if (!$clientlive) $err="This myExperiment SPARQL Endpoint is currently unavailable";
+$pagetitle="SPARQL Endpoint";
+$htmlheader[]='<script src="/js/sparql.js" type="text/javascript"></script>';
+include('include.inc.php');
+include('xmlfunc.inc.php');
+include('sparqlconnect.inc.php');
+require('4storefunc.inc.php');
+require('miscfunc.inc.php');
+$domain="public";
+$ts=$triplestore;
+$notriples=getNoTriples($ts);
+$prefix="";
+$lmdate=date('r',strtotime(date('Y-m-d',getLastUpdated($ts)))-60);
+$format = "sparql";
+$mimetype="application/xml";
+$softlimit=1;
+$maxsoftlimit=100;
+$formatting="In Page";
+$clientlive=testSparqlQueryClient($ts);
+if (isset($_POST['generate_service'])){
+	$pagetitle="SPARQL Query Service";
+	include('header.inc.php');
+	$query=urlencode(preProcessQuery($_POST['query']));
+	$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query";
+	echo "<p>Below is a URL which you can use give to any application capable of making HTTP requests and it will return you the current results for the query you made.</p>";
+	echo "<p style=\"margin: 0 30px\"><a href=\"$service_url\">$service_url</a></p>";
+	include('footer.inc.php');
+	exit(1);
+}
+if (!$clientlive) $err="This myExperiment SPARQL Endpoint is currently unavailable";
 else{
 	if ($_POST){
-		$query = str_replace('"',"'",$_POST['query']);
+		$query = $_POST['query'];
 		$formatting = $_POST['formatting'];
 		if (is_int(intval($_POST['softlimit'])) && intval($_POST['softlimit'])>0 && intval($_POST['softlimit'])<=$maxsoftlimit) $softlimit=intval($_POST['softlimit']);	
 	}
 	elseif ($_GET){		
 		$formatting="";
-		$query = str_replace('"',"'",rawurldecode($_GET['query']));
+		$query = rawurldecode($_GET['query']);
 		if ($query=="test"){
 			$query="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX mecontrib: <http://rdf.myexperiment.org/ontologies/contributions/>
@@ -45,52 +55,41 @@ select ?workflow ?ct_title { ?workflow rdf:type mecontrib:Workflow . ?workflow m
                 elseif (in_array("text/csv",$accepts)) $formatting="CSV";
                 elseif (!$formatting) $formatting="Raw";
 	}
-	if ($query) {
-		$query=str_replace("\'","'",$query);
-		preg_match_all("/([^ \t\n:]+):[^ \t\n:]+/",$query,$namespaces);
-		preg_match_all('/PREFIX ([\w]+):[^\n]+/i',$query,$prefixes);
-		$allprefixes=getUsefulPrefixesArray($domain,true);
-		foreach ($namespaces[1] as $ns){
-			if (!in_array($ns,$prefixes[1])){
-				if ($allprefixes[$ns]){
-					$query="PREFIX $ns: <".$allprefixes[$ns].">\n".$query;
-					$prefixes[1][]=$ns;
-				}
-			}
-		}		
+	if ($query) {	
+		$query=preProcessQuery($query);
 		$results=sparqlQueryClient($ts,$query,$softlimit*10000);
 		$err=implode('<br/>',$errs);
 	}
-        }
-	$formattings=array("In Page","Raw","HTML Table","CSV","CSV Matrix");
-	$formattinglabels=array("XML (In Page)","XML (Raw)","HTML Table","CSV","CSV Matrix");
-	if ($formatting=="Raw"){
-		header("Content-type: $mimetype");
-		echo $results;
-		$done=1;
+}
+$formattings=array("In Page","Raw","HTML Table","CSV","CSV Matrix");
+$formattinglabels=array("XML (In Page)","XML (Raw)","HTML Table","CSV","CSV Matrix");
+if ($formatting=="Raw"){
+	header("Content-type: $mimetype");
+	echo $results;
+	$done=1;
+}
+elseif ($formatting=="CSV"){
+	header('Content-type: text/csv');
+        echo convertTableToCSV(tabulateSPARQLResults(parseXML($results)));
+	$done=1;
+}
+elseif ($formatting=="CSV Matrix"){
+	$csvmatrix=convertTableToCSVMatrix(tabulateSPARQLResults(parseXML($results)));
+	if ($err){
+		$results=null;
 	}
-	elseif ($formatting=="CSV"){
+	elseif (substr($csvmatrix,0,5)=="ERROR"){
+		$err=$csvmatrix;
+		$results=null;
+	}
+	else{
 		header('Content-type: text/csv');
-                echo convertTableToCSV(tabulateSPARQLResults(parseXML($results)));
+		echo $csvmatrix;
 		$done=1;
 	}
-	elseif ($formatting=="CSV Matrix"){
-		$csvmatrix=convertTableToCSVMatrix(tabulateSPARQLResults(parseXML($results)));
-		if ($err){
-			$results=null;
-		}
-		elseif (substr($csvmatrix,0,5)=="ERROR"){
-			$err=$csvmatrix;
-			$results=null;
-		}
-		else{
-			header('Content-type: text/csv');
-			echo $csvmatrix;
-			$done=1;
-		}
-	}
-	if($clientlive && !$done){
-		include('header.inc.php');
+}
+if($clientlive && !$done){
+	include('header.inc.php');
 ?>
     <div align="center"> 
     <div class="purple">
@@ -139,6 +138,8 @@ select ?workflow ?ct_title { ?workflow rdf:type mecontrib:Workflow . ?workflow m
       </p>
       <p>
         <input type="submit" name="submit_query" value ="Submit Query"/>
+        &nbsp;&nbsp;
+        <input type="submit" name="generate_service" value ="Generate Service for Query"/>
       </p>
     </form>
  </div>
@@ -164,7 +165,7 @@ select ?workflow ?ct_title { ?workflow rdf:type mecontrib:Workflow . ?workflow m
 	}
     ?>
 <?php 
-include('footer.inc.php');
+	include('footer.inc.php');
 }
 elseif (!$done){ 
 	include_once('header.inc.php');
