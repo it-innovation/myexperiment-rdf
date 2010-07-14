@@ -5,6 +5,7 @@
 	require('miscfunc.inc.php');
 	include('data.inc.php');
 	$swbrowsers=array("Raw myExperiment RDF/XML"=>"","Disco"=>"http://www4.wiwiss.fu-berlin.de/rdf_browser/?browse_uri=","Marbles"=>"http://beckr.org/marbles?uri=", "Zitgist RDF Browser"=>"http://dataviewer.zitgist.com/?uri=", "SIOC Browser"=>"http://sparql.captsolo.net/browser/browser.py?url=");
+	$types=array("announcements","content_types","files","experiments","groups","licenses","messages","packs","policies","users","workflows");
 	if ($_POST){
 		$type=$_POST['type'];
 		$id=$_POST['id'];
@@ -49,7 +50,7 @@ else if ($err){
           <select name="type">
             <option value=""></option>
 <?php 
-	foreach (array_keys($tables) as $t){
+	foreach ($types as $t){
 		echo "            <option ";
 		if ($t==$type) echo "selected=\"selected\" ";
 		echo "value=\"$t\">$t</option>\n";

@@ -100,10 +100,10 @@ select ?workflow ?ct_title { ?workflow rdf:type mecontrib:Workflow . ?workflow m
     <br/>
     <div class="yellow">
       <h3 style="text-align: center; margin: 0; margin-bottom: 10px;">Querying</h3>
-      <p style="text-align: right; position: relative; top: -38px;"><small><a href="howtosparql" title="How to SPARQL in myExperiment Guide">Need help querying myExperiment RDF?<br/>New to SPARQL?</a></small></p>
+      <p style="text-align: right; position: relative; top: -38px;"><small><a href="/howtosparql" title="How to SPARQL in myExperiment Guide">Need help querying myExperiment RDF?<br/>New to SPARQL?</a></small></p>
     <form name="queryform" method="post" action="">
        <div class="green" style="font-size: 1.05em;"><b>myExperiment RDF has been updated to use <a href="/">Linked Data Non-Information Resource URIs</a></b></div>
-       <p style="padding: 10px 100px;"><small>From time to time modifications are made to the <a href="ontologies/">myExperiment Ontology</a> and therefore the RDF queried by this SPARQL endpoint.  Please check the <a href="ontologies/CHANGELOG">CHANGELOG</a> if your query has ceased to function.</p>
+       <p style="padding: 10px 100px;"><small>From time to time modifications are made to the <a href="/ontologies/">myExperiment Ontology</a> and therefore the RDF queried by this SPARQL endpoint.  Please check the <a href="/ontologies/CHANGELOG">CHANGELOG</a> if your query has ceased to function.</p>
        <table style="font-size: 10pt;">
           <tr>
             <th style="text-align: right;">No. of Triples:</th>
