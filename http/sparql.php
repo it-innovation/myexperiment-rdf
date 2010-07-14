@@ -18,14 +18,19 @@ $maxsoftlimit=100;
 $formatting="In Page";
 $clientlive=testSparqlQueryClient($ts);
 if (isset($_POST['generate_service'])){
-	$pagetitle="SPARQL Query Service";
-	include('header.inc.php');
-	$query=urlencode(preProcessQuery($_POST['query']));
-	$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query";
-	echo "<p>Below is a URL which you can use give to any application capable of making HTTP requests and it will return you the current results for the query you made.</p>";
-	echo "<p style=\"margin: 0 30px\"><a href=\"$service_url\">$service_url</a></p>";
-	include('footer.inc.php');
-	exit(1);
+	if (isset($_POST['query']) and strlen($_POST['query'])>0){
+		$pagetitle="SPARQL Query Service";
+	        include('header.inc.php');
+		$query=urlencode(preProcessQuery($_POST['query']));
+		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query";
+		echo "<p>Below is a URL which you can use give to any application capable of making HTTP requests and it will return you the current results for the query you made.</p>";
+		echo "<p style=\"margin: 0 30px\"><a href=\"$service_url\">$service_url</a></p>";
+		include('footer.inc.php');
+	       exit(1);
+	}
+	else{
+		$err="No Query was Submitted";
+	}
 }
 if (!$clientlive) $err="This myExperiment SPARQL Endpoint is currently unavailable";
 else{
@@ -131,8 +136,9 @@ if($clientlive && !$done){
           <td><input type="text" size="3" maxlength="3" name="softlimit" value="<?=$softlimit?>" />%</td>
         </tr>
       </table>
-      <?php if ($err) echo "<br/><div class=\"red\"><b>$err</b></div>\n"; ?>
-      <?php if ($msg) echo "<br/><div class=\"green\"><b>$msg</b></div>\n"; ?>
+      <?php if ($err) echo "<br/><div class=\"red\"><b>$err</b></div><br/>\n"; ?>
+      <?php if ($msg) echo "<br/><div class=\"green\"><b>$msg</b></div><br/>\n"; ?>
+      
       <p>
         <textarea name="query" id="querybox" cols="110" rows="12" style="width: 800px;"><?= htmlentities($query) ?></textarea>
       </p>
