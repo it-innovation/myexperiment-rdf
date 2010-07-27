@@ -19,7 +19,7 @@
         <dcterms:subject rdf:resource="http://dbpedia.org/resource/Discourse"/>
         <dcterms:subject rdf:resource="http://dbpedia.org/resource/Social_network_service"/>
         <dcterms:subject rdf:resource="http://dbpedia.org/resource/Workflow"/>
-        <void:dataDump rdf:resource="http://rdf.myexperiment.org/data.rdf.gz"/>
+        <void:dataDump rdf:resource="http://rdf.myexperiment.org/myexperiment.rdf.gz"/>
         <void:exampleResource rdf:resource="http://www.myexperiment.org/comments/2"/>
         <void:exampleResource rdf:resource="http://www.myexperiment.org/files/4"/>
         <void:exampleResource rdf:resource="http://www.myexperiment.org/groups/9"/>
