@@ -26,7 +26,7 @@
   <!-- =============== Description ==================== -->
 
   <owl:Ontology rdf:about="&meac;">
-    <rdfs:label>myExperiment Attribution &amp; Creditation v1.0</rdfs:label>
+    <rdfs:label>myExperiment Attribution &amp; Credit v1.0</rdfs:label>
     <rdfs:comment>This allows contributions to give attribution to earlier contributions and pay credit to users and groups involved in their creation.</rdfs:comment>
     <dc:language>en</dc:language>
     <dc:title xml:lang="en">The myExperiment Attribution &amp; Creditation ontology</dc:title>

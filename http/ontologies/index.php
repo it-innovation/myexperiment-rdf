@@ -33,7 +33,7 @@
 <ul>
   <li><b><a href="http://rdf.myexperiment.org/ontologies/snarm/">SNARM</a></b> or Simple Network Access Rights Management defines Policies for describing who can do what with certain objects.</li>
   <li><b><a href="http://rdf.myexperiment.org/ontologies/base/">Base</a></b> provides the base elements required by myExperiment for content management, social networking and object annotation.)</li>
-  <li><b><a href="http://rdf.myexperiment.org/ontologies/attrib_credit/">Attributions &amp; Creditations</a></b> allows contributions to give attribution to earlier contributions and pay credit to users and groups involved in their creation.</li>
+  <li><b><a href="http://rdf.myexperiment.org/ontologies/attrib_credit/">Attributions &amp; Credit</a></b> allows contributions to give attribution to earlier contributions and pay credit to users and groups involved in their creation.</li>
   <li><b><a href="http://rdf.myexperiment.org/ontologies/annotations/">Annotations</a></b> provides the different types of annotations used in myExperiment.</li>
   <li><b><a href="http://rdf.myexperiment.org/ontologies/packs/">Packs</a></b> facilitates the use of packs to aggregate contributions and remote urls together. (<a href="#Packs">More Information</a>)</li>
   <li><b><a href="http://rdf.myexperiment.org/ontologies/experiments/">Experiments</a></b> contains the classes required to create experiments and annotate them with jobs that have been or are scheduled to run. (<a href="#Experiments">More Information</a>)</li>
