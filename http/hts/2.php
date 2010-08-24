@@ -15,7 +15,8 @@ WHERE {
 <p>Prefixes are not required within a query they just save rewriting the namespace each time you need to use it in a query and it makes the query easier to read.  The previous query could be re-written as follows if you didn't want to use prefixes:</p>
 <div class="yellow"><pre>SELECT ?a ?text
 WHERE {
-  ?a <b>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</b> <b>&lt;http://rdf.myexperiment.org/ontologies/base/Announcement&gt;</b> .
+  ?a <b>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;</b> 
+    <b>&lt;http://rdf.myexperiment.org/ontologies/base/Announcement&gt;</b> .
   ?a <b>&lt;http://rdf.myexperiment.org/ontologies/base/text&gt;</b> ?text
 }
 

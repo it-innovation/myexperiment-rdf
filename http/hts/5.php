@@ -1,5 +1,5 @@
 <h2>5. FILTER</h2>
-<p>The <em>FILTER</em> clause is used within the curly parenthesis {} as a subclause of the WHERE clause.  As it's name suggests, it allows you to filter out the results based on certain conditions.  Most commonly you may want to filter on text but you can also filter on numbers and dates.</p>
+<p>The <em>FILTER</em> clause is used within the curly parenthesis {} as a subclause of the WHERE clause.  As its name suggests, it allows you to filter the results based on certain conditions.  Most commonly you may want to filter on text but you can also filter on numbers and dates.</p>
 <h3>5.1. On Text<a name="On Text"/></h3>
 <p>An example of a query where you want to filter on text is when you want to find all Taverna workflows (both 1 and 2):</p>
 <div class="yellow"><pre>PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;

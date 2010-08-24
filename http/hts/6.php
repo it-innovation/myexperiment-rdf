@@ -46,7 +46,6 @@ ORDER BY <b>?ct_title</b> DESC(?added)</pre>
   <tr><td class="shade"><?= $datauri ?>workflows/994</td><td class="shade">2009-12-04T10:47:04Z</td><td class="shade">Taverna 1</td></tr>
   <tr><td><?= $datauri ?>workflows/1005</td><td>2009-12-15T22:33:09Z</td><td>Taverna 2 beta</td></tr>
   <tr><td class="shade"><?= $datauri ?>workflows/1004</td><td class="shade">2009-12-15T22:17:56Z</td><td class="shade">Taverna 2 beta</td></tr>
-  <tr><td><?= $datauri ?>workflows/1003</td><td>2009-12-15T22:17:11Z</td><td>Taverna 2 beta</td></tr>
 </table>
 </div>
 

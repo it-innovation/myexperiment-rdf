@@ -11,7 +11,7 @@
 
 <head>
   <title><?php if (!$headername) echo 'myExperiment'; else echo $headername ?> <?= $san_pt; ?></title>
-  <link rel="stylesheet" type="text/css" href="<?=$hpath?>/css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="<?=$hpath?>/css/<?php if ($_GET['nobackground'] == true) echo "nb"; ?>style.css"/>
   <link rel="icon" href="<?=$hpath?>/img/favicon.ico" type="image/x-icon" />
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <?php

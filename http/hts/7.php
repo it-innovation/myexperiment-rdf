@@ -54,6 +54,7 @@ LIMIT 10
   <tr><td class="shade"><?= $datauri ?>workflows/990</td><td class="shade">2009-12-01T04:08:08Z</td></tr>
   <tr><td><?= $datauri ?>workflows/989</td><td>2009-12-01T03:01:28Z</td></tr>
 </table>
+</div>
 <p>If you then want the third set of 10 you can change to <em>OFFSET 20</em>.  The OFFSET clause can be used without the LIMIT clause, by removing the LIMIT clause in the example above you will get all but the more recent 10 workflows.</p>
 </div>
 

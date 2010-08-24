@@ -1,6 +1,6 @@
 <h2>1. Using the SPARQL Endpoint</h2>
 <p>The <a href="/sparql">myExperiment SPARQL endpoint</a> has a number of features to assist in its use.  As explained in the <a href="?page=PREFIX">PREFIX</a> page, both the PREFIX and BASE clauses facilitate writing more succinct and easier to follow queries.  If you need to include any prefixes in your query you need just click on the appropriate prefixes in the <em>Useful Prefixes</em> table and they will be prepended to your query.  If you fail to add all the required prefixes the endpoint will attempt to add them automatically mapping the prefixes inside the curly brackets {} to those defined in the Useful Prefixes table.</p>
-<p>myExperiment's triplestore to which the SPARQL endpoint queries is updated with the previous day's data between 08:40 and 09:00 each moroning UK time.  The endpoint provides information about the time the latest snapshot was taken and the number of triples, so you can be sure how current the data is.</p>
+<p>myExperiment's triplestore to which the SPARQL endpoint queries is updated with the previous day's data between 08:10 and 08:30 each morning UK time.  The endpoint provides information about the time the latest snapshot was taken and the number of triples, so you can be sure how current the data is.</p>
 <p>SPARQL results can be rendered in a number of formats:</p>
 <ul>
   <li><b>XML (In Page):</b> The default format, which renders the XML SPARQL results as preformatted HTML in the SPARQL endpoint page.</li>
