@@ -1,16 +1,17 @@
 #!/usr/bin/php
 <?php 
-//	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	error_reporting(E_ALL);
 	include('include.inc.php');
 	require('genrdf.inc.php');
 	function setTypeIDandParams($args,$noexit=0){
 		global $nesting;
 		$type=$args[1];
 		$id=$args[2];
-		$params=explode("/",$args[3]);
+		if (isset($args[3])) $params=explode("/",$args[3]);
+		else $params = array();
 		$wfid='0';
-		if ($params[0]){
-			if ($nesting[$params[sizeof($params)-2]]){
+		if (isset($params[0]) and strlen($params[0])>0){
+			if (sizeof($params)>1 && $nesting[$params[sizeof($params)-2]]){
 				$type=$params[sizeof($params)-2];
 				$id=$params[sizeof($params)-1];
 				$params=array();
@@ -53,7 +54,7 @@
 		$xml=pageheader();
 		if ($id) $xml.=rdffiledescription($uri);
 		for ($e=0; $e<mysql_num_rows($res); $e++){
-       			$xml.=printEntity(mysql_fetch_assoc($res),$type,$format);
+       			$xml.=printEntity(mysql_fetch_assoc($res),$type);
 	       	}
 	 	if ($e==1){
 			$regex=$datauri.'[^<>]+>';
@@ -64,9 +65,9 @@
 					$mtmp=explode('"',$m);
 					$m=str_replace($datauri,"",$mtmp[0]);
 					$mhbits=explode('#',$m);
-					$posthash=$mhbits[1];
+					if (isset($mhbits[1])) $posthash=$mhbits[1];
+					else $posthash="";
 					$mbits=explode('/',$mhbits[0]);
-//					echo "$datauri$m - $uri\n";
 					if (strpos($m,'.') === false && $sql[$mbits[0]] && $datauri.$m != $uri){
 						if ($posthash){
 							$wfid=$mbits[1];
@@ -79,14 +80,16 @@
 							$args[2]=array_shift($mbits);
 							$args[3]=implode('/',$mbits);
 							$args[4]=1;
-							list($type,$id,$params,$wfid)=setTypeIDandParams($args);
-							$res=getEntityResults($type,$id);
-							$xml.=printEntity(mysql_fetch_assoc($res),$type,$format);	
+							list($type,$id,$params,$wfid)=setTypeIDandParams($args,true);
+							if (isset($type)){
+								$res=getEntityResults($type,$id);	
+								$xml.=printEntity(mysql_fetch_assoc($res),$type);	
+							}
 						}
 					}
 				}
 			}
-		}	
+		}
 //		exit();
   		$xml.=pagefooter();
 		header('Content-type: application/rdf+xml');
