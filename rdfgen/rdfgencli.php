@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php 
-	error_reporting(E_ALL);
+//	error_reporting(E_ALL);
 	include('include.inc.php');
 	require('genrdf.inc.php');
 	function setTypeIDandParams($args,$noexit=0){
@@ -45,6 +45,7 @@
                 else $cursql=$sql[$type];
                 return mysql_query($cursql);
 	}
+	if (sizeof($argv)>4) exit("Too many arguments!\n");
 	list($type,$id,$params,$wfid)=setTypeIDandParams($argv);
 	if (entityExists($type,$id)){
 	        $res=getEntityResults($type,$id);
