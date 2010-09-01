@@ -80,7 +80,7 @@
     <dcterms:modified rdf:datatype="&xsd;dateTime">2009-06-12T16:23:33Z</dcterms:modified>
     <sioc:name rdf:datatype="&xsd;string">Andrea Wiggins</sioc:name>
     <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/298?size=160x160.png" />
-    <foaf:based-near rdf:resource="Syracuse, NY" />
+    <foaf:based_near rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Syracuse, NY</foaf:based_near>
     <mebase:country rdf:datatype="&xsd;string">United States</mebase:country>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Syracuse,_NY"/>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_States"/>

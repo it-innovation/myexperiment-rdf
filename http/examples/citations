@@ -72,7 +72,7 @@
     <dcterms:modified rdf:datatype="&xsd;dateTime">2010-05-26T16:26:22Z</dcterms:modified>
     <sioc:name rdf:datatype="&xsd;string">Wei Tan</sioc:name>
     <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/510?size=160x160.png" />
-    <foaf:based-near rdf:resource="Chicago" />
+    <foaf:based_near rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chicago</foaf:based_near>
     <mebase:country rdf:datatype="&xsd;string">United States</mebase:country>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Chicago"/>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_States"/>

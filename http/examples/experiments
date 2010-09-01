@@ -73,7 +73,7 @@
     <dcterms:modified rdf:datatype="&xsd;dateTime">2010-05-25T15:08:14Z</dcterms:modified>
     <sioc:name rdf:datatype="&xsd;string">Don Cruickshank</sioc:name>
     <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/589?size=160x160.png" />
-    <foaf:based-near rdf:resource="Southampton" />
+    <foaf:based_near rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Southampton</foaf:based_near>
     <mebase:country rdf:datatype="&xsd;string">United Kingdom</mebase:country>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Southampton"/>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_Kingdom"/>

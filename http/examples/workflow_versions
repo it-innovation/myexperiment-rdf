@@ -140,7 +140,7 @@
     <dcterms:modified rdf:datatype="&xsd;dateTime">2010-05-17T12:09:48Z</dcterms:modified>
     <sioc:name rdf:datatype="&xsd;string">Paul Fisher</sioc:name>
     <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/108?size=160x160.png" />
-    <foaf:based-near rdf:resource="Manchester" />
+    <foaf:based_near rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manchester</foaf:based_near>
     <mebase:country rdf:datatype="&xsd;string">United Kingdom</mebase:country>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Manchester"/>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_Kingdom"/>

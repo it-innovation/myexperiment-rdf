@@ -85,7 +85,7 @@ Barend&lt;/p&gt;</mebase:text>
     <dcterms:modified rdf:datatype="&xsd;dateTime">2010-05-02T11:54:02Z</dcterms:modified>
     <sioc:name rdf:datatype="&xsd;string">Barend</sioc:name>
     <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/728?size=160x160.png" />
-    <foaf:based-near rdf:resource="Leiden" />
+    <foaf:based_near rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Leiden</foaf:based_near>
     <mebase:country rdf:datatype="&xsd;string">Netherlands</mebase:country>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Leiden"/>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Netherlands"/>
