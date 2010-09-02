@@ -1,7 +1,7 @@
 <?php
 function entityExists($type,$ids=array()){
         global $tables;
-        if (!$tables[$type]) return 0;
+        if (!isset($tables[$type])) return 0;
         if (!is_array($ids)) $ids=array($ids);
         $cursql="select * from ".$tables[$type];
         if (sizeof($ids)>0 && $ids[0]>0){

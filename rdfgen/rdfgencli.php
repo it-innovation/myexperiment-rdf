@@ -5,13 +5,16 @@
 	require('genrdf.inc.php');
 	function setTypeIDandParams($args,$noexit=0){
 		global $nesting;
-		$type=$args[1];
-		$id=$args[2];
+		if (isset($args[2])){
+			$type=$args[1];
+			$id=$args[2];
+		}
+		else exit("Not enough arguments!\n");
 		if (isset($args[3])) $params=explode("/",$args[3]);
 		else $params = array();
 		$wfid='0';
 		if (isset($params[0]) and strlen($params[0])>0){
-			if (sizeof($params)>1 && $nesting[$params[sizeof($params)-2]]){
+			if (sizeof($params)>1 && isset($nesting[$params[sizeof($params)-2]])){
 				$type=$params[sizeof($params)-2];
 				$id=$params[sizeof($params)-1];
 				$params=array();
