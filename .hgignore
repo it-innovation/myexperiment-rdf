@@ -6,3 +6,4 @@ inc/settings.inc.php
 4store/scripts/settings.sh
 data/*
 4store/config/*
+http/.htaccess
