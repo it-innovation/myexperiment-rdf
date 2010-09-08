@@ -25,10 +25,10 @@ if (isset($_POST['generate_service'])){
 	if (isset($_POST['query']) and strlen($_POST['query'])>0){
 		$pagetitle="SPARQL Query Service";
 	        include('header.inc.php');
-		if ($mimetypes[$_POST['formatting']]=="text/html" || $mimetypes[$_POST['formatting']]=="application/xml") $formatparam="Raw";
-		else $formatparam=$_POST['formatting'];
+		if ($mimetypes[$_POST['formatting']]=="text/html" || $mimetypes[$_POST['formatting']]=="application/xml") $formatparam="";
+		else $formatparam="&amp;formatting=".$_POST['formatting'];
 		$query=urlencode(preProcessQuery($_POST['query']));
-		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query&amp;formatting=$formatparam";
+		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query$formatparam";
 		echo "<p>Below is a URL which you can use give to any application capable of making HTTP requests and it will return you the current results for the query you made.</p>";
 		echo "<p style=\"margin: 0 30px\"><a href=\"$service_url\">$service_url</a></p>";
 		include('footer.inc.php');
