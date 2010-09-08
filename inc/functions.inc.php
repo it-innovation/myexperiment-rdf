@@ -267,8 +267,9 @@ function foafPictureURL($pic_id){
 	return $datauri."pictures/show/$pic_id?size=160x160.png";
 }
 function pictureURL($user){
-       global $datauri;
-       return $datauri."pictures/show/".$user['avatar_id']."?size=160x160.png";
+       	global $datauri;
+       	if (isset($user['avatar_id']) && $user['avatar_id']>0) return $datauri."pictures/show/".$user['avatar_id']."?size=160x160.png";
+	return $datauri."images/avatar.png";
 }
 function validateEmail($email){
        if (!preg_match("/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,3})$/", $email)) return 0;
@@ -299,8 +300,8 @@ function openid_url($user){
 }
 function getResidence($user){
 	$residence="";
-	if(isset($user['location_city'])) $residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_city'])."\"/>\n";
-	if(isset($user['location_country'])) $residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",$user['location_country'])."\"/>\n";
+	if(isset($user['location_city']) && strlen(trim($user['location_city']))>0) $residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",xmlentities($user['location_city']))."\"/>\n";
+	if(isset($user['location_country']) && strlen(trim($user['location_country']))>0) $residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",xmlentities($user['location_country']))."\"/>\n";
 	return $residence;
 }
 function request_token($request){

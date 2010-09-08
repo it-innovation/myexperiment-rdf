@@ -27,6 +27,18 @@
 		foreach ($template as $field => $property){
 			//$xml.="<!-- $field -->\n";
 			switch (substr($property, 0, 1)){
+			case '<':
+				$row[$field]=xmlentities($row[$field]);
+				 if (isset($row[$field])){
+                                        if (isset($datatypes[$property])){
+                                                $xml.=printDatatypeProperty(substr($property, 1),$row[$field]);
+                                        }
+                                        else{
+                                                $xml.=printEntityProperty($field,substr($property, 1),$row[$field],"NoDataURI");
+                                        }
+                                        break;
+                                }
+				break;
 			case '+':
 				$propbits=explode("+",$property);
 				array_shift($propbits);
