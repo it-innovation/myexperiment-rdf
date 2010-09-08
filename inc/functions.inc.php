@@ -300,8 +300,16 @@ function openid_url($user){
 }
 function getResidence($user){
 	$residence="";
-	if(isset($user['location_city']) && strlen(trim($user['location_city']))>0) $residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",xmlentities($user['location_city']))."\"/>\n";
-	if(isset($user['location_country']) && strlen(trim($user['location_country']))>0) $residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/".str_replace(" ","_",xmlentities($user['location_country']))."\"/>\n";
+	$mats=array(",","(",")","/","  ");
+	$reps=array(" ","",""," "," ");
+	if(isset($user['location_city']) && strlen(trim($user['location_city']))>0) {
+		$city = str_replace(" ","_",ucwords(str_replace($mats,$reps,xmlentities($user['location_city']))));
+		$residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/$city\"/>\n";
+	}
+	if(isset($user['location_country']) && strlen(trim($user['location_country']))>0) {
+		$country = str_replace(" ","_",ucwords(str_replace($mats,$reps,xmlentities($user['location_country']))));
+		$residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/$country\"/>\n";
+	}
 	return $residence;
 }
 function request_token($request){

@@ -30,7 +30,7 @@
 			case '<':
 				$row[$field]=xmlentities($row[$field]);
 				 if (isset($row[$field])){
-                                        if (isset($datatypes[$property])){
+                                        if (isset($datatypes[substr($property, 1)])){
                                                 $xml.=printDatatypeProperty(substr($property, 1),$row[$field]);
                                         }
                                         else{

@@ -73,6 +73,7 @@ function getUsefulPrefixesArray($domain,$merge=false){
         	$other['sioc']='http://rdfs.org/sioc/ns#';
 	        $other['ore']='http://www.openarchives.org/ore/terms/';
         	$other['cc']='http://web.resource.org/cc/';
+		$other['dbpedia']='http://dbpedia.org/ontology/';
 	}
 	if (trim($domain)=="private" ){
 		$myexp['mewn']='http://rdf.myexperiment.org/ontologies/wordnet/';
