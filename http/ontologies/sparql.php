@@ -40,7 +40,7 @@
 			}
 		}
 		else{
-			$results=sparqlQueryClient($ts,$query,$softlimit*1000);
+			$results=sparqlQueryClient($ts,$query,"sparql",$softlimit*1000);
 			if ($results) $clientlive=true;
 			if (substr($results,0,12)=="Query Failed"){
 				$err=$results;

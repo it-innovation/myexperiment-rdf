@@ -11,18 +11,24 @@ $ts=$triplestore;
 $notriples=getNoTriples($ts);
 $prefix="";
 $lmdate=date('r',strtotime(date('Y-m-d',getLastUpdated($ts)))-60);
-$format = "sparql";
-$mimetype="application/xml";
 $softlimit=1;
 $maxsoftlimit=100;
 $formatting="In Page";
+$format = "sparql";
+$mimetype="application/xml";
+$formattings=array("In Page","Raw","HTML Table","Text","JSON","CSV","CSV Matrix");
+$formattinglabels=array("XML (In Page)","XML (Raw)","HTML Table","Text","JSON","CSV","CSV Matrix");
+$formats=array("In Page"=>"sparql","Raw"=>"sparql","HTML Table"=>"sparql","Text"=>"text","JSON"=>"json","CSV"=>"sparql","CSV Matrix"=>"sparql");
+$mimetypes=array("In Page"=>"text/html","Raw"=>"application/xml","HTML Table"=>"text/html","Text"=>"text/plain","JSON"=>"application/json","CSV"=>"text/csv","CSV Matrix"=>"text/csv");
 $clientlive=testSparqlQueryClient($ts);
 if (isset($_POST['generate_service'])){
 	if (isset($_POST['query']) and strlen($_POST['query'])>0){
 		$pagetitle="SPARQL Query Service";
 	        include('header.inc.php');
+		if ($mimetypes[$_POST['formatting']]=="text/html" || $mimetypes[$_POST['formatting']]=="application/xml") $formatparam="Raw";
+		else $formatparam=$_POST['formatting'];
 		$query=urlencode(preProcessQuery($_POST['query']));
-		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query";
+		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query&amp;formatting=$formatparam";
 		echo "<p>Below is a URL which you can use give to any application capable of making HTTP requests and it will return you the current results for the query you made.</p>";
 		echo "<p style=\"margin: 0 30px\"><a href=\"$service_url\">$service_url</a></p>";
 		include('footer.inc.php');
@@ -62,13 +68,13 @@ select ?workflow ?ct_title { ?workflow rdf:type mecontrib:Workflow . ?workflow m
 	}
 	if ($query) {	
 		$query=preProcessQuery($query);
-		$results=sparqlQueryClient($ts,$query,$softlimit*10000);
+		if (isset($formats[$formatting])) $format=$formats[$formatting];
+		if (isset($mimetypes[$formatting]))$mimetype=$mimetypes[$formatting];
+		$results=sparqlQueryClient($ts,$query,$format,$softlimit*10000);
 		$err=implode('<br/>',$errs);
 	}
 }
-$formattings=array("In Page","Raw","HTML Table","CSV","CSV Matrix");
-$formattinglabels=array("XML (In Page)","XML (Raw)","HTML Table","CSV","CSV Matrix");
-if ($formatting=="Raw"){
+if ($formatting=="Raw" || $formatting=="Text" || $formatting=="JSON"){
 	header("Content-type: $mimetype");
 	echo $results;
 	$done=1;

@@ -66,13 +66,13 @@ function removeNamedGraph($modelname,$url){
         }
 	return $data;
 }
-function sparqlQueryClient($kb,$query,$softlimit=1000){
+function sparqlQueryClient($kb,$query,$format="sparql",$softlimit=1000){
 	global $timetaken, $errs;
 	$errs=array();
         $data="";
 	$oquery=$query;
 	$query=str_replace('!','${BANG}',$query);
-        $cmd=getQueryPreamble().getPath()."4s-query $kb \"".$query."\" -s $softlimit";
+        $cmd=getQueryPreamble().getPath()."4s-query -f $format $kb \"".$query."\" -s $softlimit";
 	$start=time();
         $ph=popen($cmd,'r');
 	$data="";
