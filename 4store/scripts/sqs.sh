@@ -114,14 +114,9 @@ remove(){
         fi
 }
 add-list(){
-	for graph in `cat $2`; do
-	 	added=`add $1 $graph`
-	       	if [ $added -gt 0 ]; then
-              		echo "[`date +%T`] Added $graph to $1 Knowledge Base"
-        	else
-                	echo "[`date +%T`] Could Not Add $graph to $1 Knowledge Base"
-        	fi
-        done
+	thelist=`cat $2 | tr '\n' ' '`
+	$STORE4EXEC_PATH/4s-import $1 $thelist 2>&1
+       	echo "[`date +%T`] Finished adding all graphs in $2 to $1 Knowledge Base"
 }
 remove-list(){
         for graph in `cat $2`; do
@@ -169,18 +164,15 @@ update(){
 				echo "[`date +%T`] Could Not Add/Update $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
 			fi
 		fi
-		ENTITIES=( announcements attributions citations comments content_types creditations dataflows experiments favourites files friendships friendship_invitations groups group_announcements jobs licenses local_pack_entries memberships membership_invitations messages packs policies ratings remote_pack_entries reviews tags taggings taverna_enactors users vocabularies workflows workflow_versions dataflows )
 		for e in ${ENTITIES[@]}; do
 			filepath="$DATA_PATH/$1/$e/"
-			for graph in `ls -l $filepath* 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; do
-				remove $1 $graph keep-file
-			 	added=`add $1 $graph`
-                        	if [ $added -gt 0 ]; then
-                                	echo "[`date +%T`] Added/Updated $graph to $1 Knowledge Base"
-                        	else
-                                	echo "[`date +%T`] Could Not Add/Update $graph to $1 Knowledge Base"
-                        	fi
-			done
+			thelist=`ls -l $filepath* 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}' | tr '\n' ' '`
+			if [ `echo $thelist | wc -w` -gt 0 ]; then 
+				$STORE4EXEC_PATH/4s-import $1 $thelist 2>&1
+                       		echo "[`date +%T`] Finished adding/updating all graphs for $e to $1 Knowledge Base"
+			else
+				echo "[`date +%T`] No graphs to add/update for $e to $1 Knowledge Base"
+			fi
                 done
 	fi
 	count-triples $1
