@@ -300,14 +300,14 @@ function openid_url($user){
 }
 function getResidence($user){
 	$residence="";
-	$mats=array("(",")","/",",","  ");
-	$reps=array("",""," ",", "," ");
+	$mats=array("/",",","  ");
+	$reps=array(" ",", "," ");
 	if(isset($user['location_city']) && strlen(trim($user['location_city']))>0) {
-		$city = str_replace("+","_",urlencode(ucwords(strtolower(trim(str_replace($mats,$reps,$user['location_city']))))));
+		$city = str_replace("+","_",urlencode(my_ucwords(trim(str_replace($mats,$reps,$user['location_city'])))));
 		$residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/$city\"/>\n";
 	}
 	if(isset($user['location_country']) && strlen(trim($user['location_country']))>0) {
-		$country = str_replace("+","_",urlencode(ucwords(strtolower(trim(str_replace($mats,$reps,$user['location_country']))))));
+		$country = str_replace("+","_",urlencode(my_ucwords(trim(str_replace($mats,$reps,$user['location_country'])))));
 		$residence.="    <dbpedia:residence rdf:resource=\"http://dbpedia.org/resource/$country\"/>\n";
 	}
 	return $residence;

@@ -1,6 +1,6 @@
 #!/bin/bash
 source `dirname $BASH_SOURCE`/settings.sh
-if [ -e $DATA_PATH/$TRIPLE_STORE ]; then
+if [ -e $DATA_PATH/$TRIPLESTORE ]; then
 	echo "Data folders have already been created!"
 else
 	cd $DATA_PATH

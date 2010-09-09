@@ -21,6 +21,17 @@ function array_in_array($needles, $haystack) {
     }
     return false;
 }
+function my_ucwords($str){
+	$strbits=explode(' ',$str);
+	foreach ($strbits as $sbn => $sbit ){
+		if (!(strlen($sbit)==2 && $sbit == strtoupper($sbit))){
+			$strbits[$sbn]=ucfirst(strtolower($sbit));
+		}
+	}
+	$str=implode(' ',$strbits);
+	return $str;
+}
+
 function isDataflow($params){
 	if (in_array('dataflow',$params)) return true;
 	if (in_array('dataflows',$params)) return true;
