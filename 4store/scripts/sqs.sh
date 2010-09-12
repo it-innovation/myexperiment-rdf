@@ -256,12 +256,13 @@ generate-voidspec(){
         	linkset=`echo $l | awk 'BEGIN{FS="|"}{print $1}'`
 	        linkseturi=`echo $l | awk 'BEGIN{FS="|"}{print $2}'`
         	objset=`echo $l | awk 'BEGIN{FS="|"}{print $3}'`
-	        filename="myExperiment-$linkset.nt"
-        	nolinks=`cat $DATA_PATH/${1}/linksets/$filename | wc -l`
+	        filename="myExperiment-$linkset"
+        	nolinks=`cat $DATA_PATH/${1}/linksets/$filename.nt | wc -l`
 	        echo "  <void:Linkset rdf:about=\"$HTTPRDF_PATH/linksets/$filename\">
     <void:subjectsTarget rdf:resource=\"$HTTPRDF_PATH/myExperiment.rdf#myexpDataset\"/>
-    <void:objectsTarget rdf:resource=\"$objset\"/>" >> $outputfile
-        	cat $DATA_PATH/${1}/linksets/$filename | awk 'BEGIN{FS=" "}{print $2}' | sed 's/[<>]//g' | sort -u | sed 's/^/    <void:linkPredicate rdf:resource=\"/g' | sed 's/$/\"\/>/g' >> $outputfile
+    <void:objectsTarget rdf:resource=\"$objset\"/>
+    <void:dataDump rdf:resource=\"$filename.nt\"/>" >> $outputfile
+        	cat $DATA_PATH/${1}/linksets/$filename.nt | awk 'BEGIN{FS=" "}{print $2}' | sed 's/[<>]//g' | sort -u | sed 's/^/    <void:linkPredicate rdf:resource=\"/g' | sed 's/$/\"\/>/g' >> $outputfile
 	        echo "    <void:statItem>
       <scovo:Item>
         <scovo:dimension rdf:resource=\"http://rdfs.org/ns/void#noOfTriples\"/>
