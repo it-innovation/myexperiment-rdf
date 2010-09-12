@@ -22,3 +22,9 @@ README - Instructions for setting up myExperiment Linked Data Architecture
 6. Add the following cronjob for the user who has permission to the data/ directory:
 
    23 * * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/getdataflows.sh reason >> <LINKED_DATA_REPO>/4store/log/dataflows.log
+   5 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/updateDatabase.sh 1>> <LINKED_DATA_REPO>/4store/log/database.log
+   15 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> update 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_4store.log
+   25 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> data-dump 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_dump.log
+   30 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> generate-linksets 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_4store.log
+   35 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> generate-voidspec 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_4store.log
+   55 * * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> test 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_4store.log
