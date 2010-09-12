@@ -1,4 +1,4 @@
-echo "Usage: triplestore <triplestore_name> {start|stop|restart|status|update|add|remove|test|reason-ontology|reason-file|reason-files|list-graphs|count-triples|generate-spec|graph-size|data-dump|help} [OPTIONS]
+echo "Usage: triplestore <triplestore_name> {start|stop|restart|status|update|add|remove|test|reason-ontology|reason-file|reason-files|list-graphs|count-triples|generate-spec|graph-size|data-dump|generate-linksets|generate-voidspec|help} [OPTIONS]
 
 Examples
 
@@ -62,6 +62,12 @@ Examples
   E.g. <graphuri> = file://$DATA_PATH/$TRIPLESTORE/workflows/12
 
 ./sqs.sh <triplestore> data-dump
+  <triplestore> = [ $TRIPLESTORE ]
+
+./sqs.sh <triplestore> generate-linksets
+  <triplestore> = [ $TRIPLESTORE ]
+
+./sqs.sh <triplestore> generate-voidspec
   <triplestore> = [ $TRIPLESTORE ]
 
 ./sqs.sh <triplestore> help

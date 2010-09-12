@@ -11,6 +11,7 @@ else
 	touch $TRIPLESTORE"_sparql.log"
 	touch $TRIPLESTORE"_updated.log"
 	touch $TRIPLESTORE"_update_time.log"
+	touch $TRIPLESTORE"_datadump_triples.log"
 	touch ontologies_4store.log
 	touch ontologies_triples.log
 	touch ontologies_sparql.log

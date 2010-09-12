@@ -43,6 +43,8 @@ done");
 	$fh=fopen($rdffile,"a");
         fwrite($fh,pagefooter());
 	fclose($fh);
+	echo "[".date("H:i:s")."] Calculating the number of triples and saving to $lddir/4store/log/${ts}_datadump_triples.log.\n";
+	exec("rapper -c $rdffile 2>&1 | tail -n 1 | awk 'BEGIN{FS=\" \"}{print $4}' > $lddir/4store/log/${ts}_datadump_triples.log");
 	echo "[".date("H:i:s")."] Gzipping to $rdfgzfile\n";
 	exec("gzip -c $rdffile > $rdfgzfile");	
 	echo "[".date("H:i:s")."] Deleting temporary file $rdffile\n";

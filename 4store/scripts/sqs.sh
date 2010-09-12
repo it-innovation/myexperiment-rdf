@@ -232,11 +232,47 @@ generate-spec(){
 graph-size(){
 	check_triplestore $1
 	notriples=`$STORE4EXEC_PATH/4s-query $1 "SELECT * WHERE { GRAPH <$2> { ?s ?p ?o }}" | grep "<result>" | wc -l`	
-	echo "There are $notriples triples in $2"
+	echo "[`date +%T`] There are $notriples triples in $2"
 }
 data-dump(){
 	check_triplestore $1
 	$PHPEXEC_PATH/php $STORE4_PATH/scripts/datadump.php $1
+}
+generate-linksets(){
+	check_triplestore $1
+	for l in `cat ../config/linksets.txt`; do
+	        linkset=`echo $l | awk 'BEGIN{FS="|"}{print $1}'`
+        	linkseturi=`echo $l | awk 'BEGIN{FS="|"}{print $2}'`
+	        $STORE4EXEC_PATH/4s-query -f text --soft-limit=1000000 $1 "select * where { ?s ?p ?o . FILTER(isURI(?o) && REGEX(STR(?o),'^$linkseturi+','i'))}" | grep "^<" | sed "s/$/ ./g" > $DATA_PATH/$1/linksets/myExperiment-$linkset.nt
+        	echo "[`date +%T`] Created Linkset $DATA_PATH/$1/linksets/myExperiment-$linkset.nt"
+	done
+}
+generate-voidspec(){
+	check_triplestore $1
+	notriples=`cat $STORE4_PATH/log/${1}_datadump_triples.log`
+	outputfile="$DATA_PATH/${1}/void.rdf"
+	cat ../config/voidbase.rdf | sed "s/NO_OF_TRIPLES/$notriples/" > $outputfile
+	for l in `cat ../config/linksets.txt`; do
+        	linkset=`echo $l | awk 'BEGIN{FS="|"}{print $1}'`
+	        linkseturi=`echo $l | awk 'BEGIN{FS="|"}{print $2}'`
+        	objset=`echo $l | awk 'BEGIN{FS="|"}{print $3}'`
+	        filename="myExperiment-$linkset.nt"
+        	nolinks=`cat $DATA_PATH/${1}/linksets/$filename | wc -l`
+	        echo "  <void:Linkset rdf:about=\"$HTTPRDF_PATH/linksets/$filename\">
+    <void:subjectsTarget rdf:resource=\"$HTTPRDF_PATH/myExperiment.rdf#myexpDataset\"/>
+    <void:objectsTarget rdf:resource=\"$objset\"/>" >> $outputfile
+        	cat $DATA_PATH/${1}/linksets/$filename | awk 'BEGIN{FS=" "}{print $2}' | sed 's/[<>]//g' | sort -u | sed 's/^/    <void:linkPredicate rdf:resource=\"/g' | sed 's/$/\"\/>/g' >> $outputfile
+	        echo "    <void:statItem>
+      <scovo:Item>
+        <scovo:dimension rdf:resource=\"http://rdfs.org/ns/void#noOfTriples\"/>
+        <rdf:value rdf:datatype=\"http://www.w3.org/2001/XMLSchema#nonNegativeInteger\">$nolinks</rdf:value>
+      </scovo:Item>
+    </void:statItem>
+  </void:Linkset>
+" >> $outputfile
+	done
+	echo "</rdf:RDF>" >> $outputfile
+	echo "[`date +%T`] Created voID specification at $outputfile"
 }
 	
 case "$2" in
@@ -328,6 +364,12 @@ case "$2" in
   data-dump)
 	data-dump $1
 	;;
+  generate-linksets)
+	generate-linksets $1
+	;;
+  generate-voidspec)
+        generate-voidspec $1
+        ;;
   *)
 	$STORE4_PATH/scripts/sqs_help.sh
 	;;

@@ -8,3 +8,5 @@ inc/settings.inc.php
 data/*
 4store/config/*
 http/.htaccess
+http/linksets
+http/void.rdf
