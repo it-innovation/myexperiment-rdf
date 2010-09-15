@@ -683,7 +683,7 @@
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&dbpedia;residence" />
-        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxCardinality>
+        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
