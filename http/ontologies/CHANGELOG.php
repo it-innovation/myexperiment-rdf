@@ -6,6 +6,7 @@
 <p><big>This page includes the changelog for the <a href=".">myExperiment Ontology</a> and consequently myExperiment's RDF data.</big></p>
 
 <ul class="changelog">
+  <li><b>15/09/2010</b> Added DBPedia's residence property as potential field(s) for a User.</li>
   <li><b>01/07/2010</b> Added various has-x properties to allow users in the Linked Data world to more easily navigate around myExperiment entities.</li>
   <li><b>01/07/2010</b> Migrated RDF to use Linked Data Non-Information Resource URIs.  This has also involved providing information about the RDF document itself and not just the entity it is describing.</li>
   <li><b>01/07/2010</b> Consensus seems that xsd:anyURI should only be used if the resource is non-resolvable therefore have switched to unrestricted ObjectProperty where URIs can be resolved.  Also removed mebase:human-start-page as it is covered by the foaf:homepage in the description of the graph.</li>

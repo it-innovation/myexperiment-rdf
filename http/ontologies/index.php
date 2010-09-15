@@ -21,6 +21,7 @@
   <li><a href="http://www.foaf-project.org/" title="FOAF Project Homepage">FOAF</a> and <a href="http://www.sioc-project.org/" title="SIOC Project Homepage">SIOC</a> to describe the social network.</li>
   <li><a href="http://creativecommons.org/ns#" title="Creative Commons Namespace Page">Creative Commons</a> to define licenses for shared objects.</li>
   <li><a href="http://www.openarchives.org/ore/" title="OAI-ORE Homepage">OAI-ORE</a> to support the aggregation of resources.</li>
+  <li><a href="http://dbpedia.org/About" title="DBPedia Homepage">DBPedia</a> so users can specify where they are resident as a URI rather than a literal.</li>
 </ul>
 <p>myExperiment borrows terms in a number of ways:</p>
 <ul>

@@ -12,6 +12,7 @@
  <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
  <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
  <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
  <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
 ]>
 
@@ -27,6 +28,7 @@
 	 xmlns:sioc   		="&sioc;"
 	 xmlns:snarm    	="&snarm;"
          xmlns:ore		="&ore;"
+         xmlns:dbpedia		="&dbpedia;"
          xmlns:xsd		="&xsd;"
 >
   <!-- =============== Description ==================== -->
@@ -39,7 +41,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 27, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">September 15, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
     <owl:imports rdf:resource="&snarm;"/>
   </owl:Ontology>
@@ -209,6 +211,9 @@
     <rdf:type rdf:resource="&owl;ObjectProperty"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="&dbpedia;residence">
+    <rdf:type rdf:resource="&owl;ObjectProperty"/>
+  </rdf:Description>
 
 
 
@@ -673,6 +678,12 @@
       <owl:Restriction>
         <owl:onProperty rdf:resource="&foaf;homepage" />
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dbpedia;residence" />
+        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
