@@ -1,0 +1,3 @@
+DBPedia|http://dbpedia.org/resource/|http://dbpedia.org/void.ttl#Geonames
+DBLP|http://dblp.l3s.de/d2r/resource/|http://dblp.rkbexplorer.com/id/void
+ECS-EPrints|http://eprints.ecs.soton.ac.uk/id/|http://eprints.rkbexplorer.com/id/void

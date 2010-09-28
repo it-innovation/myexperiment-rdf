@@ -6,7 +6,7 @@ syntax: glob
 inc/settings.inc.php
 4store/scripts/settings.sh
 data/*
-4store/config/*
+4store/config/myexp*
 http/.htaccess
 http/linksets
 http/void.rdf

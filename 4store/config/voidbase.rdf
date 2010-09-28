@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rdf:RDF xmlns="http://www.myexperiment.org/void.ttl/#"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:log="http://www.w3.org/2000/10/swap/log#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:void="http://rdfs.org/ns/void#"
+	 xmlns:scovo="http://purl.org/NET/scovo#">
+
+  <void:Dataset rdf:about="http://rdf.myexperiment.org/void.rdf#myExpDataset">
+    <dcterms:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">myExperiment</dcterms:title>
+    <dcterms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">myExperiment's Public Dataset</dcterms:description>
+    <dcterms:source rdf:resource="http://www.myexperiment.org/"/>
+    <dcterms:license rdf:resource="http://www.opendatacommons.org/licenses/pddl/1.0/"/>
+    <dcterms:publisher rdf:resource="http://www.myexperiment.org/"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Annotation"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Content_management_system"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Discourse"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Social_network_service"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Workflow"/>
+    <void:dataDump rdf:resource="http://rdf.myexperiment.org/myexperiment.rdf.gz"/>
+    <void:statItem>
+      <scovo:Item>
+        <scovo:dimension rdf:resource="http://rdfs.org/ns/void#noOfTriples"/>
+        <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">NO_OF_TRIPLES</rdf:value>
+      </scovo:Item>
+    </void:statItem>
+    <void:exampleResource rdf:resource="http://www.myexperiment.org/comments/2"/>
+    <void:exampleResource rdf:resource="http://www.myexperiment.org/files/4"/>
+    <void:exampleResource rdf:resource="http://www.myexperiment.org/groups/9"/>
+    <void:exampleResource rdf:resource="http://www.myexperiment.org/packs/3"/>
+    <void:exampleResource rdf:resource="http://www.myexperiment.org/taggings/2"/>
+    <void:exampleResource rdf:resource="http://www.myexperiment.org/tags/39"/>
+    <void:exampleResource rdf:resource="http://www.myexperiment.org/users/26"/>
+    <void:exampleResource rdf:resource="http://www.myexperiment.org/workflows/12"/>
+    <void:sparqlEndpoint rdf:resource="http://rdf.myexperiment.org/sparql"/>
+    <void:vocabulary rdf:resource="http://purl.org/dc/terms/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/annotations/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/attrib_credit/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/base/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/components/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/contributions/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/experiments/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/packs/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/snarm/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/specific/"/>
+    <void:vocabulary rdf:resource="http://rdf.myexperiment.org/ontologies/viewings_downloads/"/>
+    <void:vocabulary rdf:resource="http://rdfs.org/sioc/ns#"/>
+    <void:vocabulary rdf:resource="http://web.resource.org/cc/"/>
+    <void:vocabulary rdf:resource="http://www.openarchives.org/ore/terms/"/>
+    <void:vocabulary rdf:resource="http://xmlns.com/foaf/0.1/"/>
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/"/>
+  </void:Dataset>
+
