@@ -45,7 +45,6 @@ public static void main (String args[]) {
         }
         catch (IOException ioe){
                 System.out.println(SQSTimestamp.getTimestamp("time")+" Failed to read ontologies or data list file");
-        //      ioe.printStackTrace();
                 System.exit(1);
         }
 	System.out.print(SQSTimestamp.getTimestamp("time")+" Processing Ontologies from "+args[0]);

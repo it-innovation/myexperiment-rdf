@@ -3,7 +3,6 @@
 	$lddir="/var/linkeddata/";
         $httpdir="/var/www/html/linkeddata/";
 
-
         //Setup include_path
         ini_set('include_path',".:${lddir}inc/:");
 
@@ -12,8 +11,9 @@
 	//The URI for RDF data in the guide"
         $guidedatauri="http://www.myexperiment.org/";
 	//Current host URI path
-        $hostpath="http://".$_SERVER['SERVER_NAME']."/";
-	//The URI path for the ontologies
+	if (isset($_SERVER['SERVER_NAME'])) $hostpath="http://".$_SERVER['SERVER_NAME']."/";
+        else $hostpath=$datauri;
+        //The URI path for the ontologies
 	$ontopath="http://rdf.myexperiment.org/ontologies/";
 	//The filesystem path for RDF data
         $datapath="/var/linkeddata/data/";
@@ -28,8 +28,8 @@
         $triplestore="myexp_public";
 
 	//Database Settings
-	$myexp_db=array("user"=>"username","password"=>"password","server"=>"servername","database"=>"dbname");
-	$onto_db=array("user"=>"username","password"=>"password","server"=>"servername","database"=>"dbname");
-	$sparql_db=array("user"=>"username","password"=>"password","server"=>"servername","database"=>"dbname");
+	$myexp_db=array("user"=>"username","password"=>"password","server"=>"localhost","database"=>"dbname");
+	$onto_db=array("user"=>"username","password"=>"password","server"=>"localhost","database"=>"dbname");
+	$sparql_db=array("user"=>"username","password"=>"password","server"=>"localhost","database"=>"dbname");
 
 ?>

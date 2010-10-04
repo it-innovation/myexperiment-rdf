@@ -25,7 +25,7 @@ stop(){
 	if [ $running -eq  0 ]; then
                 echo "[`date +%T`] SPARQL Query Server $1 is not running"
 	else
-		for pid in `ps aux | grep myexp_ld | grep 4s- | awk 'BEGIN{FS=" "}{print $2}'`; do
+		for pid in `ps aux | grep $1 | grep 4s- | awk 'BEGIN{FS=" "}{print $2}'`; do
 			kill -9 $pid
 		done	
 		echo "[`date +%T`] Stopped SPARQL Query Server $1"
@@ -155,7 +155,8 @@ update(){
 			echo "[`date +%T`] Removed $graph from $1"
 		done
 		echo "[`date +%T`] Removed all deleted entities from $1"
-		if `ls -l $DATA_PATH/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}'`; then
+		ontology_updated=`ls -l $DATA_PATH/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print 1}'` 
+		if [ -n "$ontology_updated" ]; then
 			remove $1 $DATA_PATH/$1/$1_reasoned.owl
 			added=`add $1 $DATA_PATH/$1/$1_reasoned.owl`
 			if [ $added -gt 0 ]; then
@@ -166,7 +167,7 @@ update(){
 		fi
 		for e in ${ENTITIES[@]}; do
 			filepath="$DATA_PATH/$1/$e/"
-			thelist=`ls -l $filepath* 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}' | tr '\n' ' '`
+			thelist=`ls -l $filepath* 2>/dev/null | grep -v "*.owl" | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}' | tr '\n' ' '`
 			if [ `echo $thelist | wc -w` -gt 0 ]; then 
 				$STORE4EXEC_PATH/4s-import $1 $thelist 2>&1
                        		echo "[`date +%T`] Finished adding/updating all graphs for $e to $1 Knowledge Base"
@@ -275,6 +276,27 @@ generate-voidspec(){
 	echo "</rdf:RDF>" >> $outputfile
 	echo "[`date +%T`] Created voID specification at $outputfile"
 }
+run-diagnostic(){
+ 	check_triplestore $1
+        if [[ "$2" == "graphs" ]]; then
+                nographs=`$STORE4EXEC_PATH/4s-query --soft-limit=1000000 $1 "SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o }}" | grep "<result>" | wc -l`
+                echo "[`date +%T`] $1 has $nographs graphs"
+                for e in ${ENTITIES[@]}; do
+                   nofiles=`ls $DATA_PATH/$1/$e/ | wc -l`
+                   nographs=`$STORE4EXEC_PATH/4s-query --soft-limit=1000000 $1 "SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } . FILTER (REGEX(STR(?g),'/$e/')) }" | grep "<result>" | wc -l`
+                  echo "[`date +%T`] $e has $nographs graphs for $nofiles files"
+                done
+        elif [[ "$2" == "triples" ]]; then
+                count-triples $1
+                for e in ${ENTITIES[@]}; do
+                   notriples=`$STORE4EXEC_PATH/4s-query --soft-limit=1000000 $1 "SELECT ?o WHERE { GRAPH ?g { ?s ?p ?o } . FILTER (REGEX(STR(?g),'/$e/')) }" | grep "<result>" | wc -l`
+                   echo "[`date +%T`] $e has $notriples triples"
+                done
+        else
+                $STORE4EXEC_PATH/4s-query --soft-limit=1000000 $1 "SELECT ?g WHERE { GRAPH ?g { ?s ?p ?o } . FILTER (REGEX(STR(?g),'/$2/')) }" | grep "<binding" | awk 'BEGIN{FS="<|>"}{print $5}' | awk 'BEGIN{FS="/"}{print $NF}' | sort | uniq -c
+        fi
+}
+
 	
 case "$2" in
   start)
@@ -371,6 +393,9 @@ case "$2" in
   generate-voidspec)
         generate-voidspec $1
         ;;
+  run-diagnostic)
+	run-diagnostic $1 $3
+	;;
   *)
 	$STORE4_PATH/scripts/sqs_help.sh
 	;;

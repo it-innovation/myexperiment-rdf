@@ -6,6 +6,7 @@ else
 	cd $DATA_PATH
 	mkdir $TRIPLESTORE
 	mkdir $TRIPLESTORE/html
+        mkdir $TRIPLESTORE/linksets
 	mkdir tmp
 	mkdir tmp/queries
 	mkdir tmp/$TRIPLESTORE

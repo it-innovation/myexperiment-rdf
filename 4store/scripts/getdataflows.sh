@@ -18,5 +18,5 @@ do
 done
 echo "[`date +%T`] All new Components XML downloaded"
 if [ "$1" == "reason" ]; then
-	./reasonDataflows.sh
+	./reasonDataflows.sh $TRIPLESTORE
 fi

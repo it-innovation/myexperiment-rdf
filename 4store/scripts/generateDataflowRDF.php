@@ -20,7 +20,7 @@
 	pclose($ph2);
 	$fhlist=fopen('/tmp/dataflows.txt','w');
 	$dellist=fopen('/tmp/deldataflows.txt','w');
-	//$xmlfiles=array('542');
+	//$xmlfiles=array('1860');
 	foreach ($xmlfiles as $xf){
 		if (!in_array($xf,$resfiles)){
 			$xmllines=file($datapath."dataflows/xml/$xf");

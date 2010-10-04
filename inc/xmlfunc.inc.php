@@ -567,7 +567,8 @@ function processDataflowComponents($allcomponents,$ent_uri,$nested=0){
  					$inputprops[]=array('type'=>'dcterms:title','value'=>$comp['children'][0]['children'][1]['tagData']);
 					$cval=array_search($comp['children'][0]['children'][0]['tagData'],$complist['Processor']);
 				}
-				else $cval=array_search($comp['children'][0]['children'][0]['tagData'],$complist['Sink']);
+				else if (isset($complist['Sink'])) $cval=array_search($comp['children'][0]['children'][0]['tagData'],$complist['Sink']);
+				else $cval=array_search($comp['children'][0]['children'][0]['tagData'],$complist['Processor']);
 				$inputprops[]=array('type'=>'mecomp:for-component','value'=>$cval);
 				$components[$c++]=array('type'=>'Input','props'=>$inputprops);
 				//Output
