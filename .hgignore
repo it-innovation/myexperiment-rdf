@@ -10,3 +10,4 @@ data/*
 http/.htaccess
 http/linksets
 http/void.rdf
+http/myexperiment.rdf.gz
