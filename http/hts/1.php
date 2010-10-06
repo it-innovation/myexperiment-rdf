@@ -7,7 +7,7 @@
   <li><b>HTML Table:</b> Renders the results in an HTML table, giving a more visual way to view your results.</li>
   <li><b>XML (Raw):</b> Renders just the SPARQL results on an application/sparql-results+xml content type page.</li>
   <li><b>Text:</b> Returns a Simple Subject-Predicate-Object text representation.</li>
-  <li><b>Text:</b> Returns a JSON encoded version, of SPARQL results XML.</li>
+  <li><b>JSON:</b> Returns a JSON encoded version, of SPARQL results XML.</li>
   <li><b>CSV:</b> Returns results as comma separated values, in table columns format.</li>
   <li><b>CSV Matrix:</b> Returns results as comma separated values in a matrix format, where the first variable is enumrated on the x-axis, the second variable is enumerated on the y-axis and 1s are rendered for each tuplet.</li>
 </ul>
@@ -37,6 +37,8 @@ WHERE{
   <li>In Page</li>
   <li>Raw</li>
   <li>HTML Table</li>
+  <li>Text</li>
+  <li>JSON</li>
   <li>CSV</li>
   <li>CSV Matrix</li>
 </ul>
