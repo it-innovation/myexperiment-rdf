@@ -41,7 +41,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">September 15, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">November 25, 2010</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
     <owl:imports rdf:resource="&snarm;"/>
   </owl:Ontology>
@@ -142,6 +142,11 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="&foaf;mbox_sha1sum">
+    <rdf:type rdf:resource="&owl;DatatypeProperty"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&foaf;name">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
     <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
@@ -299,6 +304,12 @@
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&sioc;name" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&foaf;name" />
         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -549,6 +560,12 @@
         <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&sioc;has_member" />
+        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:Class>
 
@@ -686,6 +703,12 @@
         <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&sioc;member_of" />
+        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:Class>
 
@@ -818,16 +841,6 @@
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
 
-  <owl:ObjectProperty rdf:about="has-member">
-    <owl:equivalentProperty rdf:resource="&sioc;has_member" />
-    <rdfs:label>has-member</rdfs:label>
-    <rdfs:comment>A Group has-member that is a User</rdfs:comment>
-    <owl:inverseOf rdf:resource="is-member"/>
-    <rdfs:domain rdf:resource="Group"/>
-    <rdfs:range rdf:resource="User"/>
-    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
-  </owl:ObjectProperty>
-
   <owl:ObjectProperty rdf:about="openid-url">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
     <rdfs:label>openid-url</rdfs:label>
@@ -895,16 +908,6 @@
     <rdfs:comment>Contributions that are shared within a Group</rdfs:comment>
     <rdfs:domain rdf:resource="Group"/>
     <rdfs:range rdf:resource="Contribution"/>
-    <rdfs:isDefinedBy rdf:resource="&mebase;"/>
-  </owl:ObjectProperty>
-
-  <owl:ObjectProperty rdf:about="is-member">
-    <owl:equivalentProperty rdf:resource="&sioc;member_of" />
-    <rdfs:label>is-member</rdfs:label>
-    <rdfs:comment>A User is-member of a Group</rdfs:comment>
-    <owl:inverseOf rdf:resource="has-member"/>
-    <rdfs:domain rdf:resource="User"/>
-    <rdfs:range rdf:resource="Group"/>
     <rdfs:isDefinedBy rdf:resource="&mebase;"/>
   </owl:ObjectProperty>
 

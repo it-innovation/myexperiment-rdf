@@ -92,6 +92,18 @@ function getAccepterTime($mship){
 	return "";
 }
 
+function getMembers($group){
+	global $datauri;
+	$xml="";
+        $msql = "select * from memberships where network_id=$group[id] and network_established_at is not null and user_established_at is not null";
+	$mres=mysql_query($msql);
+        $xml.="    <sioc:has_member rdf:resource=\"${datauri}users/".$group['user_id']."\"/>\n";
+        for ($m=0; $m<mysql_num_rows($mres); $m++){
+        	$xml.="    <sioc:has_member rdf:resource=\"${datauri}users/".mysql_result($mres,$m,'user_id')."\"/>\n";
+        }
+	return $xml;
+}
+
 function getMemberships($user){
 	global $sql, $datauri;
 	$xml="";
@@ -279,7 +291,10 @@ function validateEmail($email){
 function mailto_foaf($email){
 	if (validateEmail($email)) return "mailto:".$email;
 }
-
+function getSiocAndFoafName($user){
+	global $datatypes;
+	return "    <sioc:name rdf:datatype=\"&xsd;".$datatypes['sioc:name']."\"/>$user[name]</sioc:name>\n    <foaf:name rdf:datatype=\"&xsd;".$datatypes['foaf:name']."\"/>$user[name]</foaf:name>\n";
+}   
 function mailto($user){
 	global $userid, $domain;
 	if (validateEmail($user['email']) && ($userid==$user['id'] || $domain=="private")) return "mailto:".$user['email'];

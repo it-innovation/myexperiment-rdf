@@ -58,3 +58,4 @@ mebase:read-at dateTime
 mebase:deleted-by-sender boolean
 mebase:activated-at dateTime
 foaf:mbox_sha1sum string
+foaf:name string

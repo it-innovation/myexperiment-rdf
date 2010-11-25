@@ -63,6 +63,9 @@
 	 	if ($e==1){
 			$regex=$datauri.'[^<>]+>';
 			preg_match_all("!$regex!",$xml,$matches);
+			foreach ($matches as $m => $match){
+				$matches[$m]=str_replace(array(" ","\n","\t"),array("","",""),$match);
+			}
 		        $matches=array_unique($matches[0]);
 			foreach($matches as $m){
 				if (strpos($m,'/>')>0){

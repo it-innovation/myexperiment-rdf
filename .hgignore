@@ -11,3 +11,5 @@ http/.htaccess
 http/linksets
 http/void.rdf
 http/myexperiment.rdf.gz
+http/ontologies/spec.html
+http/ontologies/myexp_reasoned.owl
