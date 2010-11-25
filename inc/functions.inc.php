@@ -293,7 +293,7 @@ function mailto_foaf($email){
 }
 function getSiocAndFoafName($user){
 	global $datatypes;
-	return "    <sioc:name rdf:datatype=\"&xsd;".$datatypes['sioc:name']."\"/>$user[name]</sioc:name>\n    <foaf:name rdf:datatype=\"&xsd;".$datatypes['foaf:name']."\"/>$user[name]</foaf:name>\n";
+	return "    <sioc:name rdf:datatype=\"&xsd;".$datatypes['sioc:name']."\">$user[name]</sioc:name>\n    <foaf:name rdf:datatype=\"&xsd;".$datatypes['foaf:name']."\">$user[name]</foaf:name>\n";
 }   
 function mailto($user){
 	global $userid, $domain;
