@@ -1,7 +1,5 @@
 #!/bin/bash
-if [ "$1" == "reason" ]; then
-  echo "============== `date` =============="
-fi
+echo "============== `date` =============="
 bashsource=`dirname $BASH_SOURCE`
 if [ "${bashsource:0:1}" == "/" ]; then
   source "$bashsource/settings.sh"

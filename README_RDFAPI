@@ -1,0 +1,15 @@
+README - Instructions for setting up myExperiment Linked Data Architecture (RDF API Only)
+========================================================================================
+
+1. Copy inc/defaultsettings.inc.php to inc/settings.inc.php and update values appropriately.
+
+
+2. Copy 4store/scripts/default_settings.sh to 4store/scripts/settings.sh and adjust the values for STORE4_PATH and DATA_PATH so they point at where the 4store/ and data/ directories have been deployed on the server.
+
+
+3. Run 4store/scripts/createLogFiles.sh, to create files and folders for logs.
+
+
+4. Add the following cronjob for the user who has permission to the data/ directory:
+
+   23 * * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/getdataflows.sh >> <LINKED_DATA_REPO>/4store/log/dataflows.log

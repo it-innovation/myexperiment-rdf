@@ -1,5 +1,7 @@
 README - Instructions for setting up myExperiment Linked Data Architecture
 ==========================================================================
+*** N.B. If you only wish to set up the RDF API and not the SPARQL endpoint, public dataset snapshotting, voID specification generation etc. please use README_RDFAPI ***
+
 1. Create mysql databases: m2_production, ontology_specifications and sparql_queries
 
 
@@ -9,25 +11,25 @@ README - Instructions for setting up myExperiment Linked Data Architecture
 3. Copy inc/defaultsettings.inc.php to inc/settings.inc.php and update values appropriately.
 
 
-2. Copy 4store/scripts/default_settings.sh to 4store/scripts/settings.sh and adjust the values for STORE4_PATH and DATA_PATH so they point at where the 4store/ and data/ directories have been deployed on the server.
+4. Copy 4store/scripts/default_settings.sh to 4store/scripts/settings.sh and adjust the values for STORE4_PATH and DATA_PATH so they point at where the 4store/ and data/ directories have been deployed on the server.
 
 
-3. Copy http/.htaccess_default to http/.htaccess and update .htaccess so that it points to the full path version of .htpass file in this directory.
+5. Copy http/.htaccess_default to http/.htaccess and update .htaccess so that it points to the full path version of .htpass file in this directory.
 
 
-4. Create a triplestore using the 4s-backend-setup command
+6. Create a triplestore using the 4s-backend-setup command
 
    e.g. 4s-backend-setup --segments 8 <triplestore> 
 
    Take the name of the triplestore and copy that name into the appropriate parameters in inc/settings.inc.php and 4store/scripts/settings.sh
 
 
-5. Run 4store/scripts/createLogFiles.sh, 4store/scripts/createConfigFolders.sh, 4store/scripts/createDataFolders.sh and 4store/scripts/createSymbolicLinks.sh to create files and folders for logs, config and data, as well as symbolic links from the http folder to specific data files.
+7. Run 4store/scripts/createLogFiles.sh, 4store/scripts/createConfigFolders.sh, 4store/scripts/createDataFolders.sh and 4store/scripts/createSymbolicLinks.sh to create files and folders for logs, config and data, as well as symbolic links from the http folder to specific data files.
 
 
-6. Add the following cronjob for the user who has permission to the data/ directory:
+8. Add the following cronjob for the user who has permission to the data/ directory:
 
-   0 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/getdataflows.sh <TRIPLESTORE> reason >> <LINKED_DATA_REPO>/4store/log/dataflows.log
+   0 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/getdataflows.sh reason 1>> <LINKED_DATA_REPO>/4store/log/dataflows.log
    5 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/updateDatabase.sh 1>> <LINKED_DATA_REPO>/4store/log/database.log
    15 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> update 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_4store.log
    25 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> data-dump 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_dump.log

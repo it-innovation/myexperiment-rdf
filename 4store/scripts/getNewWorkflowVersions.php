@@ -17,8 +17,14 @@
 	}
 	fclose($ph);
 	$wfv_file=explode("\n",$lswfv);
-	foreach($wfv_file as $k => $v) $wfv_file[$k]=trim($v);
-		
+	foreach($wfv_file as $k => $v){
+ 		if(strlen(trim($v))>0){
+			$wfv_file[$k]=trim($v);
+		}
+		else{
+			unset($wfv_file[$k]);
+		}
+	}
 	$i=0;
 	foreach ($wfv_db as $wfv){
 		if (!in_array($wfv,$wfv_file)){
