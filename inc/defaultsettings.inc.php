@@ -32,4 +32,8 @@
 	$onto_db=array("user"=>"username","password"=>"password","server"=>"localhost","database"=>"dbname");
 	$sparql_db=array("user"=>"username","password"=>"password","server"=>"localhost","database"=>"dbname");
 
+        //4store version info
+        $store4versions="4Store (undefined), Raptor (undefined), Rasqal (undefined)";
+
+
 ?>
