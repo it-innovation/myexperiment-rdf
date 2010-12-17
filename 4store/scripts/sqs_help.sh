@@ -1,4 +1,4 @@
-echo "Usage: triplestore <triplestore_name> {start|stop|restart|status|update|add|remove|test|reason-ontology|reason-file|reason-files|list-graphs|count-triples|generate-spec|graph-size|data-dump|generate-linksets|generate-voidspec|help} [OPTIONS]
+echo "Usage: triplestore <triplestore_name> {start|stop|restart|status|update|add|remove|test|reason-ontology|reason-file|reason-files|list-graphs|count-triples|generate-spec|graph-size|data-dump|generate-linksets|generate-voidspec|run-diagnostic|check-versions|help} [OPTIONS]
 
 Examples
 
@@ -68,6 +68,12 @@ Examples
   <triplestore> = [ $TRIPLESTORE ]
 
 ./sqs.sh <triplestore> generate-voidspec
+  <triplestore> = [ $TRIPLESTORE ]
+
+./sqs.sh <triplestore> run-diagnostic
+  <triplestore> = [ $TRIPLESTORE ]
+
+./sqs.sh <triplestore> check-versions
   <triplestore> = [ $TRIPLESTORE ]
 
 ./sqs.sh <triplestore> help
