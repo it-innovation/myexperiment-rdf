@@ -116,7 +116,7 @@ if($clientlive && !$done){
        <table style="font-size: 10pt;">
           <tr>
             <th style="text-align: right;">Version Info:</th>
-            <td><?= $store4versions ?></td>
+            <td><?= getVersions() ?></td>
           </tr>
           <tr>
             <th style="text-align: right;">No. of Triples:</th>

@@ -225,4 +225,9 @@ function getLastUpdated($kb){
 	$lines=@file($lddir."4store/log/".$kb."_update_time.log");
         return $lines[0];
 }
+function getVersions(){
+        global $lddir;
+        $lines=@file($lddir."4store/log/4storeversions.log");
+        return $lines[0];
+}
 ?>
