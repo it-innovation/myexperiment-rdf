@@ -77,6 +77,7 @@ function getUsefulPrefixesArray($domain,$merge=false){
 		$myexp['mepack']='http://rdf.myexperiment.org/ontologies/packs/';
 		$myexp['meexp']='http://rdf.myexperiment.org/ontologies/experiments/';
 		$myexp['mecontrib']='http://rdf.myexperiment.org/ontologies/contributions/';
+                $myexp['meac']='http://rdf.myexperiment.org/ontologies/attrib_credit/';
 		$myexp['mevd']='http://rdf.myexperiment.org/ontologies/viewings_downloads/';
 		$myexp['mecomp']='http://rdf.myexperiment.org/ontologies/components/';
 		$myexp['mespec']='http://rdf.myexperiment.org/ontologies/specific/';
