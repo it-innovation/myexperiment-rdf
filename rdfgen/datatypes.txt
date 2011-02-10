@@ -26,6 +26,7 @@ mebase:country string
 mebase:contact-details string
 meexp:completed-at dateTime
 skos:prefLabel string
+skos:definition string
 mecomp:authority-name string
 mevd:viewings-count nonNegativeInteger
 mebase:occupation string
@@ -58,4 +59,3 @@ mebase:read-at dateTime
 mebase:deleted-by-sender boolean
 mebase:activated-at dateTime
 foaf:mbox_sha1sum string
-foaf:name string

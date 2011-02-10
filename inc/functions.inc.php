@@ -22,9 +22,12 @@ function getEntityURI($type,$id,$entity,$format=''){
 				return $datauri."experiments/".$entity[$nesting[$type][0]]."/$type/$id";
 			case 'local_pack_entries':
 			case 'remote_pack_entries':
+			case 'pack_relationships':
 				return $datauri."packs/".$entity[$nesting[$type][0]]."/$type/$id";
 			case 'taggings':
 				return $datauri."tags/".$entity[$nesting[$type][0]]."/$type/$id";
+			case 'concepts':
+				return $datauri."vocabularies/".$entity[$nesting[$type][0]]."/$type/$id";
 			default:
 				break;
 		}
@@ -585,4 +588,91 @@ function getAnnotations($entity,$type){
 	}
 	return $xml;
 }
+function getPackRelationships($pack){
+	global $sql, $datauri;
+	$rsql=$sql['pack_relationships'];
+	if (strpos("where",$rsql)>0) $rsql.=" and ";
+	else $rsql.=" where ";
+	$rsql.="pack_id=$pack[id]";
+	$res=mysql_query($rsql);
+	$xml="";
+	for ($r=0; $r<mysql_num_rows($res); $r++){
+		$xml.="    <mepack:has-pack-relationship rdf:resource=\"${datauri}packs/$pack[id]/relationships/".mysql_result($res,$r,'id')."\"/>\n";
+	}
+	return $xml;
+}
+function getConcepts($entity){
+	global $sql, $datauri;
+        $conceptsql=$sql['concepts'];
+        if (!stripos('where',$sql['concepts'])) $conceptsql.=" where ";
+        else $conceptsql.=" and ";
+        $conceptsql.="vocabulary_id=$entity[id]";
+        $res=mysql_query($conceptsql);
+	$xml="";
+        for ($c=0; $c<mysql_num_rows($res); $c++){
+                $row=mysql_fetch_assoc($res);
+		$xml.="    <mecontrib:has-concept rdf:resource=\"${datauri}vocabularies/$entity[id]/concepts/$row[id]\"/>\n";
+	}
+	return $xml;
+}	
+
+function getConceptRelations($entity){
+	global $sql, $datauri;
+	$xml="";
+	$conceptsql=$sql['concept_relations'];
+	if (!stripos('where',$sql['concept_relations'])) $conceptsql.=" where ";
+        else $conceptsql.=" and ";
+        $conceptrelsql=$conceptsql."subject_concept_id=$entity[id]";
+        $res=mysql_query($conceptrelsql);
+        for ($r=0; $r<mysql_num_rows($res); $r++){
+                $row=mysql_fetch_assoc($res);
+                $xml.="    <skos:$row[relation_type] rdf:resource=\"${datauri}vocabularies/$entity[vocabulary_id]/concepts/$row[object_concept_id]\"/>\n";
+        }
+	$conceptrelrevsql=$conceptsql."object_concept_id=$entity[id]";
+	$res2=mysql_query($conceptrelrevsql);
+	for ($r=0; $r<mysql_num_rows($res2); $r++){
+		$row2=mysql_fetch_assoc($res2);
+		$relationtype="";
+		if ($row2['relation_type']=="broader") $relationtype="narrower";	
+		elseif ($row2['relation_type']=="narrower") $relationtype="broader";
+		elseif ($row2['relation_type']=="related") $relationtype="related";
+		if (strlen($relationtype)>0)
+	                $xml.="    <skos:$relationtype rdf:resource=\"${datauri}vocabularies/$entity[vocabulary_id]/concepts/$row2[subject_concept_id]\"/>\n";
+	}
+	return $xml;
+}
+function getRelationshipSubject($entity){
+	print_r($entity);
+	return getRelationshipNode($entity['subject_id'],$entity['subject_type']);
+}
+function getRelationshipObject($entity){
+        return getRelationshipNode($entity['objekt_id'],$entity['objekt_type']);
+}
+function getRelationshipPredicate($entity){
+	return getConcept(array('vocabulary_id'=>$entity['vocabulary_id'],'id'=>$entity['concept_id']));
+}
+function getRelationshipNode($id,$type){
+	global $datauri, $tables;
+	$oetype=getOntologyEntityTypeFromDBType($type);
+	$table=$tables[$oetype];
+	$nsql="select * from $table where id = $id";
+	$res=mysql_query($nsql);
+	$row=mysql_fetch_assoc($res);
+	if ($type=="PackRemoteEntry") return $row['uri'];
+	if ($type=="PackContributableEntry"){
+		$uri = $datauri.getOntologyEntityTypeFromDBType($row['contributable_type'])."/".$row['contributable_id'];
+		if ($row['contributable_version']) return $uri."/versions/".$row['contributable_version'];
+		return $uri;
+	}
+}
+function getConcept($entity){
+	return "vocabularies/$entity[vocabulary_id]/concepts/$entity[id]";
+}
+function getOntologyEntityTypeFromDBType($type){
+	global $modelalias, $ontent;
+	if (in_array($type,$modelalias)) $type=array_search($type,$modelalias);
+	if (in_array($type,$ontent)) $type=array_search($type,$ontent);
+	return $type;
+}
+
 ?>
