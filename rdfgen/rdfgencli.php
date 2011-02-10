@@ -29,7 +29,11 @@
 			elseif ($params[0]=="announcements" && $type=="groups"){
 				$type="group_announcements";
 				$id=$params[1];
-			}	
+			}
+                        elseif ($params[0]=="relationships" && $type=="packs"){
+                                $type="pack_relationships";
+                                $id=$params[1];
+                        }	
 			elseif (!$noexit){
 				exit();
 			}
@@ -97,7 +101,6 @@
 				}
 			}
 		}
-//		exit();
   		$xml.=pagefooter();
 		header('Content-type: application/rdf+xml');
 		echo $xml;

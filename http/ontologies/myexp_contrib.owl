@@ -7,7 +7,6 @@
  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
  <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
  <!ENTITY dcterms 'http://purl.org/dc/terms/'>
- <!ENTITY skos 'http://www.w3.org/2004/02/skos/core#'>
  <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
  <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
  <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
@@ -27,7 +26,6 @@
          xmlns:owl		="&owl;"
          xmlns:dc		="&dc;"
          xmlns:dcterms          ="&dcterms;"
-         xmlns:skos		="&skos;"
          xmlns:ore		="&ore;"
          xmlns:xsd		="&xsd;"
 >
@@ -41,7 +39,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 20, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">February 10, 2011</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -83,14 +81,6 @@
     <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="&skos;ConceptScheme">
-    <rdf:type rdf:resource="&owl;Class"/>
-  </rdf:Description>
-
-  <rdf:Description rdf:about="&mebase;User">
-    <rdf:type rdf:resource="&owl;Class"/>
-  </rdf:Description>
-
   <rdf:Description rdf:about="&mebase;Upload">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
@@ -98,6 +88,11 @@
   <rdf:Description rdf:about="&mebase;Contribution">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;User">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
 
   <rdf:Description rdf:about="&mebase;Version">
     <rdf:type rdf:resource="&owl;Class"/>
@@ -157,22 +152,6 @@
     <rdfs:subClassOf rdf:resource="&meac;Attributable"/>
     <rdfs:subClassOf rdf:resource="&meac;Creditable"/>
     <rdfs:subClassOf rdf:resource="&meannot;Favouritable"/>
-    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
-  </owl:Class>
-
-  <owl:Class rdf:about="Vocabulary">
-    <rdfs:label>Vocabulary</rdfs:label>
-    <rdfs:comment>A Vocabulary of Tags</rdfs:comment>
-    <owl:disjointWith rdf:resource="AbstractWorkflow"/>
-    <owl:disjointWith rdf:resource="File"/>
-    <rdfs:subClassOf rdf:resource="&mebase;Contribution"/>
-    <rdfs:subClassOf rdf:resource="&skos;ConceptScheme"/>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&dcterms;title" />
-        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
   </owl:Class>
 
@@ -271,15 +250,6 @@
     <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
   </owl:ObjectProperty>
 
-  <owl:ObjectProperty rdf:about="from-vocabulary">
-    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-    <rdfs:label>last-edited-by</rdfs:label>
-    <rdfs:comment>A Workflow will have been last edited by a particular User</rdfs:comment>
-    <rdfs:domain rdf:resource="&meannot;Tag"/>
-    <rdfs:range rdf:resource="Vocabulary"/>
-    <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
-  </owl:ObjectProperty>
-
   <owl:ObjectProperty rdf:about="last-edited-by">
     <rdf:type rdf:resource="&owl;FunctionalProperty"/>
     <rdfs:label>last-edited-by</rdfs:label>
@@ -288,5 +258,5 @@
     <rdfs:range rdf:resource="&mebase;User"/>
     <rdfs:isDefinedBy rdf:resource="&mecontrib;"/>
   </owl:ObjectProperty>
- 
+
 </rdf:RDF>

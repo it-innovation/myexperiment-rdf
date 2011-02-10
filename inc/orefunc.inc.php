@@ -101,10 +101,11 @@ function getOREAggregatedResources($entry,$type){
                         if (isset($row['runnable_id'])) $row['type']="jobs";
                         if ($entrytype=="remote_pack_entries") $fulluri=$row['uri'];
                         else $fulluri=getEntityURI($etype,$row['id'],$row);
-                        if ($entrytype!='remote_pack_entries'){
+                        if (strlen($etype)>0 && $entrytype!='remote_pack_entries'){
 //                              if ($type=="Experiment") echo "~~".$row['type']."~~<br/>\n";
                                 $csql=setRestrict($etype,array("id","=",$row['id']),$userid,$ingroups);
 //                              $xml.="<!-- $entry[format] -->\n";
+				//echo "<!-- $csql -->\n";
                                 $cres=mysql_query($csql);
                                 if (mysql_num_rows($cres)==1){
                                         addAggregatedResource(printEntity(mysql_fetch_assoc($cres),$etype),$datauri.$type."/$entry[id]",$datauri.$etype."/$row[id]",$format);

@@ -5,20 +5,20 @@
 		$contrib_type_fpr_uris=array('Group'=>'groups','User'=>'users');
 		if ($contrib_type=="Network") $contrib_type="Group";
 		$contributor=$contrib_type_fpr_uris[$contrib_type]."/".$contrib_id;
-		return "        <snarm:has-access>\n          <snarm:RestrictedAccess>\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"&mespec;View\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n        <snarm:has-access>\n          <snarm:RestrictedAccess>\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"&mespec;Download\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n        <snarm:has-access>\n          <snarm:RestrictedAccess>\n            <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n            <snarm:has-access-type rdf:resource=\"&mespec;Edit\"/>\n          </snarm:RestrictedAccess>\n        </snarm:has-access>\n";
+		return "    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;View\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Download\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Edit\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
 	}
 	function getShareModeAccesses($sm){
 		switch ($sm){
 		case 0:
-			return "        <snarm:has-access rdf:resource=\"&mespec;PublicView\"/>\n        <snarm:has-access rdf:resource=\"&mespec;PublicDownload\"/>\n";
+			return "    <snarm:has-access rdf:resource=\"&mespec;PublicView\"/>\n    <snarm:has-access rdf:resource=\"&mespec;PublicDownload\"/>\n";
 		case 1:  
-			return "        <snarm:has-access rdf:resource=\"&mespec;PublicView\"/>\n        <snarm:has-access rdf:resource=\"&mespec;FriendsDownload\"/>\n";
+			return "    <snarm:has-access rdf:resource=\"&mespec;PublicView\"/>\n    <snarm:has-access rdf:resource=\"&mespec;FriendsDownload\"/>\n";
 		case 2:
-			return "        <snarm:has-access rdf:resource=\"&mespec;PublicView\"/>\n";
+			return "    <snarm:has-access rdf:resource=\"&mespec;PublicView\"/>\n";
 		case 3:
-			return "        <snarm:has-access rdf:resource=\"&mespec;FriendsView\"/>\n        <snarm:has-access rdf:resource=\"&mespec;FriendsDownload\"/>\n";
+			return "    <snarm:has-access rdf:resource=\"&mespec;FriendsView\"/>\n    <snarm:has-access rdf:resource=\"&mespec;FriendsDownload\"/>\n";
 		case 4;
-                        return "        <snarm:has-access rdf:resource=\"&mespec;FriendsView\"/>\n";
+                        return "    <snarm:has-access rdf:resource=\"&mespec;FriendsView\"/>\n";
 		default: 
 			return "";
 		}
@@ -27,10 +27,10 @@
 	function getUpdateModeAccesses($um,$sm){
 		switch ($um){
 		case 0:
-			if ($sm==0 && is_int($sm)) return "        <snarm:has-access rdf:resource=\"&mespec;PublicEdit\"/>\n";
-			elseif ($sm==1 || $sm==3) return "        <snarm:has-access rdf:resource=\"&mespec;FriendsEdit\"/>\n";
+			if ($sm==0 && is_int($sm)) return "    <snarm:has-access rdf:resource=\"&mespec;PublicEdit\"/>\n";
+			elseif ($sm==1 || $sm==3) return "    <snarm:has-access rdf:resource=\"&mespec;FriendsEdit\"/>\n";
 		case 1:
-			return "        <snarm:has-access rdf:resource=\"&mespec;FriendsEdit\"/>\n";
+			return "    <snarm:has-access rdf:resource=\"&mespec;FriendsEdit\"/>\n";
 		default:
 			return "";
 		}
@@ -61,15 +61,15 @@
 			if ($perms[$p]['contributor_type']=="Network") $perms[$p]['contributor_type']="groups";
 			if ($perms[$p]['view']){
 				$a++;
-				$accesses.="      <snarm:has-access>\n        <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/View".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n          <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n          <snarm:has-access-type rdf:resource=\"&mespec;View\"/>\n        </snarm:RestrictedAccess>\n      </snarm:has-access>\n";
+				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/View".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n        <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;View\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
 			}
 			if ($perms[$p]['download']){
 				$a++;
- 				$accesses.="      <snarm:has-access>\n        <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/Download".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n          <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n          <snarm:has-access-type rdf:resource=\"&mespec;Download\"/>\n        </snarm:RestrictedAccess>\n      </snarm:has-access>\n";
+ 				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/Download".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n        <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Download\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
 			}
 			if ($perms[$p]['edit']){
 				$a++;
- 				$accesses.="      <snarm:has-access>\n        <snarm:RestrictedAccess rdf:about=\"$policy_url/accessed/Edit".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n          <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n          <snarm:has-access-type rdf:resource=\"&mespec;Edit\"/>\n        </snarm:RestrictedAccess>\n      </snarm:has-access>\n";
+ 				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess rdf:about=\"$policy_url/accessed/Edit".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n        <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Edit\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
 			}
 		}
 		return $accesses;
