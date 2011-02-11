@@ -486,7 +486,7 @@ function getProxyFor($entity){
 	}
 	$xml.="    <rdf:Description rdf:about=\"".str_replace("&","&amp;",$entity['uri'])."\"";
         if ($entity['alternate_uri']) $xml.=">\n      <rdfs:seeAlso>\n        <rdf:Description rdf:about=\"".str_replace("&","&amp;",$entity['alternate_uri'])."\"/>\n      </rdfs:seeAlso>\n    </rdf:Description>\n";
-	else $xml.="/>\n";
+	else $xml.="/>";
         return $xml;
 }
 function getDataflowComponents($entity,$type){
@@ -596,8 +596,10 @@ function getPackRelationships($pack){
 	$rsql.="pack_id=$pack[id]";
 	$res=mysql_query($rsql);
 	$xml="";
-	for ($r=0; $r<mysql_num_rows($res); $r++){
-		$xml.="    <mepack:has-pack-relationship rdf:resource=\"${datauri}packs/$pack[id]/relationships/".mysql_result($res,$r,'id')."\"/>\n";
+	if ($res!==false){
+		for ($r=0; $r<mysql_num_rows($res); $r++){
+			$xml.="    <mepack:has-pack-relationship rdf:resource=\"${datauri}packs/$pack[id]/relationships/".mysql_result($res,$r,'id')."\"/>\n";
+		}
 	}
 	return $xml;
 }
