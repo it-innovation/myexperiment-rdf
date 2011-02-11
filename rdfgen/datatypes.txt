@@ -59,3 +59,9 @@ mebase:read-at dateTime
 mebase:deleted-by-sender boolean
 mebase:activated-at dateTime
 foaf:mbox_sha1sum string
+neiss:latitude double
+neiss:longitude double
+neiss:zoom positiveInteger
+neiss:map_descriptor string
+neiss:copyright_statement string
+neiss:copyright_text string

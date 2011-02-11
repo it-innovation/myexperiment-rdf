@@ -263,6 +263,7 @@
 	        $namespaces['cc']='http://web.resource.org/cc/';
         	$namespaces['foaf']='http://xmlns.com/foaf/0.1/';
 	        $namespaces['sioc']='http://rdfs.org/sioc/ns#';
+		$namespaces['skos']='http://www.w3.org/2004/02/skos/core#';
         	$namespaces['ore']='http://www.openarchives.org/ore/terms/';
 		$namespaces['dbpedia']='http://dbpedia.org/ontology/';
         	$namespaces['snarm']=$ontopath.'snarm/';

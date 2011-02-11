@@ -642,7 +642,6 @@ function getConceptRelations($entity){
 	return $xml;
 }
 function getRelationshipSubject($entity){
-	print_r($entity);
 	return getRelationshipNode($entity['subject_id'],$entity['subject_type']);
 }
 function getRelationshipObject($entity){
