@@ -79,7 +79,7 @@
 					if (isset($mhbits[1])) $posthash=$mhbits[1];
 					else $posthash="";
 					$mbits=explode('/',$mhbits[0]);
-					if (strpos($m,'.') === false && $sql[$mbits[0]] && $datauri.$m != $uri){
+					if (strpos($m,'.') === false && $mbits[0] && $sql[$mbits[0]] && $datauri.$m != $uri){
 						if ($posthash){
 							$wfid=$mbits[1];
                                                	        $version=$mbits[3];

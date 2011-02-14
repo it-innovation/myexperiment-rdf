@@ -45,65 +45,68 @@
 		$v=setUserAndGroups($v);
 		echo "[".date("H:i:s")."] Checking $k\n";
 		$res=mysql_query($v);
-		$rows=mysql_num_rows($res);
-		$xml=pageheader();
-		$ents=0;
-		$fileno=1;
-		$curuserid="";
-		$curcontrib="";
-		for ($i=0; $i<$rows; $i++){
-			$row=mysql_fetch_assoc($res);
-			if ($insepusage==1){
-				unset($row['viewings_count']);
-				unset($row['downloads_count']);
-			}
-			$id=$row['id'];
-			$xml.=printEntity($row,$k,$mappings[$k],"$datauri$k/",'id','');
-			saveEntities($ts,$k,$xml,$id,$curuserid);
+		if ($res!==false){
+			$rows=mysql_num_rows($res);
 			$xml=pageheader();
-		}
-		if ($insepusage){
-			$sqlsplit=explode("from",$v);
-			unset($sqlsplit[0]);
-			$endv=implode("from",$sqlsplit);
-			$tname=$tables[$k];
-			$usql="select $tname.id, contributions.viewings_count, contributions.downloads_count from $endv";
-			$ures=mysql_query($usql);
-			$uxml=pageheader();
-			for ($u=0; $u<mysql_num_rows($ures); $u++){
-				$urow=mysql_fetch_assoc($ures);
-				$uxml.=printUsage($k,$urow['id'],$urow['viewings_count'],$urow['downloads_count']);
+			$ents=0;
+			$fileno=1;
+			$curuserid="";
+			$curcontrib="";
+			for ($i=0; $i<$rows; $i++){
+				$row=mysql_fetch_assoc($res);
+				if ($insepusage==1){
+					unset($row['viewings_count']);
+					unset($row['downloads_count']);
+				}
+				$id=$row['id'];
+				$xml.=printEntity($row,$k,$mappings[$k],"$datauri$k/",'id','');
+				saveEntities($ts,$k,$xml,$id,$curuserid);
+				$xml=pageheader();
 			}
-			saveEntities($ts,$k,$uxml,'usage','');	
-		}
-		$ph=popen($lddir."4store/scripts/sqs.sh $ts list-graphs | grep '/$k/' | grep '[0-9]'",'r');
-		$fnums=array();
-		while (!feof($ph)){
-			$curf=fgets($ph,8192);
-			$curfb=explode("/",$curf);
-			if(strlen(trim($curfb[sizeof($curfb)-1]))>0) $fnums[]=trim($curfb[sizeof($curfb)-1]);
-		}
-		pclose($ph);
-		$ph=popen("ls $datapath$ts/$k/ | grep '[0-9]'",'r');
-		$fnums2=array();
-                while (!feof($ph)){
-                        $curf=fgets($ph,8192);
-                        if(strlen(trim($curf))>0) $fnums2[]=trim($curf);
-                }
-                pclose($ph);
-		$dels=array_diff($fnums,$curids);
-		$dels2=array_diff($fnums2,$curids);
-		foreach ($dels2 as $d2){
-			if (!in_array($d2,$dels)) $dels[]=$d2;
-		}
-		if (is_array($dels)){
-			$fh=fopen($datapath."tmp/$ts/delete_files",'a');
-			foreach ($dels as $del){
-				$filedel="$datapath$ts/$k/$del\n";
-	        	        fwrite($fh,$filedel);
+			if ($insepusage){
+				$sqlsplit=explode("from",$v);
+				unset($sqlsplit[0]);
+				$endv=implode("from",$sqlsplit);
+				$tname=$tables[$k];
+				$usql="select $tname.id, contributions.viewings_count, contributions.downloads_count from $endv";
+				$ures=mysql_query($usql);
+				$uxml=pageheader();
+				for ($u=0; $u<mysql_num_rows($ures); $u++){
+					$urow=mysql_fetch_assoc($ures);
+					$uxml.=printUsage($k,$urow['id'],$urow['viewings_count'],$urow['downloads_count']);
+				}
+				saveEntities($ts,$k,$uxml,'usage','');	
 			}
-			fclose($fh);
+			$ph=popen($lddir."4store/scripts/sqs.sh $ts list-graphs | grep '/$k/' | grep '[0-9]'",'r');
+			$fnums=array();
+			while (!feof($ph)){
+				$curf=fgets($ph,8192);
+				$curfb=explode("/",$curf);
+				if(strlen(trim($curfb[sizeof($curfb)-1]))>0) $fnums[]=trim($curfb[sizeof($curfb)-1]);
+			}
+			pclose($ph);
+			$ph=popen("ls $datapath$ts/$k/ | grep '[0-9]'",'r');
+			$fnums2=array();
+	                while (!feof($ph)){
+        	                $curf=fgets($ph,8192);
+                	        if(strlen(trim($curf))>0) $fnums2[]=trim($curf);
+	                }	
+        	        pclose($ph);
+			$dels=array_diff($fnums,$curids);
+			$dels2=array_diff($fnums2,$curids);
+			foreach ($dels2 as $d2){
+				if (!in_array($d2,$dels)) $dels[]=$d2;
+			}
+			if (is_array($dels)){
+				$fh=fopen($datapath."tmp/$ts/delete_files",'a');
+				foreach ($dels as $del){
+					$filedel="$datapath$ts/$k/$del\n";
+		        	        fwrite($fh,$filedel);
+				}
+				fclose($fh);
+			}
 		}
+		else echo "[".date("H:i:s")."] Invalid SQL query: <$v>\n";
 	}
 	$fh=fopen($lddir."4store/log/".$ts."_updated.log","w");
 	$lastupdated=mktime(0,0,0)-120;

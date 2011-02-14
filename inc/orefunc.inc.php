@@ -10,18 +10,21 @@ function getAggregatedResourceSQL($type,$id){
         return "";
 }
 function getOREAggregatedResources($entry,$type){
-        global $datauri,$mappings, $sql,$tables,$userid,$ingroups,$ontent, $iterations;
+        global $datauri,$mappings,$sql,$tables,$userid,$ingroups,$ontent, $iterations;
 	$xml="";
         if ($type=="experiments" || $type=="packs"){
                 $arsql=getAggregatedResourceSQL($type,$entry['id']);
                 $res=mysql_query($arsql);
                 for ($i=0; $i<mysql_num_rows($res); $i++){
                         $row=mysql_fetch_assoc($res);
-			if ($row['type']=="Blob")  $row['type']="File";
-                        if (isset($row['runnable_id'])) $row['type']="Job";
+			if (isset($row['type']) && $row['type']=="Blob")  $row['type']="File";
+                        if (isset($row['runnable_id'])){
+				$row['type']="Job";
+				$row['entry_type']="LocalPackEntry";
+			}
 			$etype=array_search($row['type'],$ontent);
 			$entrytype=array_search($row['entry_type'],$ontent);
-                        if ($row['version']){
+                        if (isset($row['version']) && $row['version']>0){
                                 $row['id']=getVersionID($row);
                                 if ($row['type']=="workflows") $row['type']="workflow_versions";
                         }

@@ -15,6 +15,7 @@ function entityExists($type,$ids=array()){
 		if ($res) return 1;
 	}
 	$res=mysql_query($cursql);
+	if ($res===false) return 0;
         return mysql_num_rows($res);
 }
 function setUserAndGroups($sql,$userid=0,$ingroups=0){

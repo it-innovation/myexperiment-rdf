@@ -172,28 +172,24 @@ function getThumbnail($workflow){
 	$url=getUrl($workflow,'thumb');
 	if (isset($workflow['format'])) $format = $workflow['format'];
         else $format = "";
-	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 }
 function getThumbnailBig($workflow){
 	$url=getUrl($workflow,'medium');
 	if (isset($workflow['format'])) $format = $workflow['format'];
         else $format = "";
-	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Big Thumbnail of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 }
 function getPreview($workflow){
         $url=getUrl($workflow);
 	if (isset($workflow['format'])) $format = $workflow['format'];
         else $format = "";
-        if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/x-png</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Preview of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 }
 function getSVG($workflow){	
 	$url=getUrl($workflow,'','svg');
 	if (isset($workflow['format'])) $format = $workflow['format'];
         else $format = "";
-	if ($url) addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">image/svg+xml</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">SVG of $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 }
 function workflowOrVersion($entity){
@@ -230,7 +226,6 @@ function getWorkflowDownloadUrl($workflow){
 //	print_r(mysql_fetch_assoc($ctres));
 	if (isset($workflow['format'])) $format = $workflow['format'];
 	else $format = "";
-	addAggregatedResource("  <rdf:Description rdf:about=\"$url\">\n    <dcterms:format rdf:datatype=\"&xsd;string\">".mysql_result($ctres,0,'mime_type')."</dcterms:format>\n    <dcterms:title rdf:datatype=\"&xsd;string\">Workflow File for $workflow[title]</dcterms:title>\n  </rdf:Description>\n",workflowOrVersion($workflow),$url,$format);
 	return $url;
 	
 }
@@ -252,7 +247,6 @@ function getCurrentWorkflowVersion($workflow){
 	$aggregates="workflows/$workflow[id]/versions/$workflow[current_version]";
 	if (isset($workflow['format'])) $format = $workflow['format'];
         else $format = "";
-        addAggregatedResource(printEntity($row,"workflow_versions"),workflowOrVersion($workflow),$datauri."workflows/$workflow[id]/versions/$workflow[current_version]",$format);
         return $aggregates;
 }
 function isCurrentVersion($workflowversion){
@@ -271,7 +265,6 @@ function getWorkflowVersions($workflow){
 		 if (isset($workflow['format'])) $format = $workflow['format'];
         	else $format = "";
 		
-		addAggregatedResource(printEntity($row,"workflow_versions"),workflowOrVersion($workflow),$datauri."workflows/".$row['workflow_id']."/versions/".$row['version'],$format);
 		if ($format=="ore") $aggregates.="    <ore:aggregates rdf:resource=\"".$datauri."workflows/".$row['workflow_id']."/versions/".$row['version']."\"/>\n";
 		else $aggregates.="    <mebase:has-version rdf:resource=\"".$datauri."workflows/".$row['workflow_id']."/versions/".$row['version']."\"/>\n";
 	}
@@ -362,7 +355,6 @@ function getHomepage($entity,$type){
 	$url=$datauri.$gtype.$entity['id'];
 	if (isset($entity['format'])) $format = $entity['format'];
         else $format = "";
-	addAggregatedResource("    <rdf:Description rdf:about=\"$url\">\n      <dcterms:format rdf:datatype=\"&xsd;string\">text/xhtml+xml</dcterms:format>\n      <dcterms:title rdf:datatype=\"&xsd;string\">Human Start Page for $entity[title]</dcterms:title>\n    </rdf:Description>\n",$datauri."$type/$entity[id]",$url,$format);
 	if ($url) return $url.".html";
 	return "";
 	
@@ -391,37 +383,25 @@ function getPackEntries($pack){
 	
 function getOutput($entity){
 	global $datauri;
+	$xml="";
 	if ($entity['outputs_uri']){		
 		$uri=getEntityURI('jobs',$entity['id'],$entity);
 		$xml="      <meexp:Data rdf:about=\"$uri/output\">\n";
 		if ($entity['outputs_uri']) $xml.= "        <mebase:uri rdf:resource=\"$entity[outputs_uri]\"/>\n";
 
 		$xml.="      </meexp:Data>";
-		if (isset($entity['format'])) $format = $entity['format'];
-        	else $format = "";
-
-		if ($format=="ore"){
-			addAggregatedResource($xml,$uri,$url,$format);
-			$xml=$url;
-		}
 	}
 	return $xml;
 }
 function getInput($entity){
         global $datauri;
+	$xml="";
 	if ($entity['inputs_uri'] || $entity['inputs_data']){
 		$uri=getEntityURI('jobs',$entity['id'],$entity);
 		$xml="<meexp:Data rdf:about=\"$uri/input\">\n";
 		if ($entity['inputs_uri']) $xml.= "        <mebase:uri rdf:resource=\"$entity[inputs_uri]\"/>\n";
 		if ($entity['inputs_data']) $xml.= "        <mebase:text rdf:datatype=\"&xsd;string\">$entity[inputs_data]</mebase:text>\n";
 		$xml.="      </meexp:Data>";
-		if (isset($entity['format'])) $format = $entity['format'];
-                else $format = "";
-		if ($format=="ore"){
-                        addAggregatedResource($xml,$uri,$url,$format);
-                        $xml=$url;
-                }
-
 	}
         return $xml;
 }
@@ -440,24 +420,20 @@ function getRunnable($entity){
 		$type=$annotatable[$entity['runnable_type']];
 		$idf="workflows.id";
 	}
-//	print_r($entity);
 	$runnable=$annotatable[$entity['runnable_type']]."/".$entity['runnable_id'];
 	if ($entity['runnable_version']) $runnable.="/versions/".$entity['runnable_version'];
 	
 	$cursql="$sql[$type] and $idf=$id";
-	//print_r($entity);
-	$res=mysql_query($cursql) or $return=1;
-        if ($return || mysql_num_rows($res)==0) return "";
+	$res=mysql_query($cursql);
+        if ($res!== false || mysql_num_rows($res)==0) return "";
 	if (isset($entity['format'])) $format = $entity['format'];
         else $format = "";
-	addAggregatedResource(printEntity(mysql_fetch_array($res),$type),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runnable,$format);
 	return $runnable;
 }
 function getJobURI($entity){
 	global $datauri;
 	if (isset($entity['format'])) $format = $entity['format'];
         else $format = "";
-	addAggregatedResource("  <rdf:Description rdf:about=\"$entity[job_uri]\">\n    <dcterms:title>Server URI for Job</dcterms:title>\n  </rdf:Description>\n",$datauri."jobs/$entity[id]",$entity['job_uri'],$format);
 	return $entity['job_uri'];
 }
 function getRunner($entity){
@@ -468,7 +444,6 @@ function getRunner($entity){
 //	echo $cursql;
 	if (isset($entity['format'])) $format = $entity['format'];
         else $format = "";
-	addAggregatedResource(printEntity(mysql_fetch_array($res),'runners'),$datauri."experiments/$entity[experiment_id]/jobs/$entity[id]",$datauri.$runner,$format);
 	return $runner;
 }
 function getProxyFor($entity){
@@ -626,20 +601,22 @@ function getConceptRelations($entity){
         else $conceptsql.=" and ";
         $conceptrelsql=$conceptsql."subject_concept_id=$entity[id]";
         $res=mysql_query($conceptrelsql);
-        for ($r=0; $r<mysql_num_rows($res); $r++){
-                $row=mysql_fetch_assoc($res);
-                $xml.="    <skos:$row[relation_type] rdf:resource=\"${datauri}vocabularies/$entity[vocabulary_id]/concepts/$row[object_concept_id]\"/>\n";
-        }
-	$conceptrelrevsql=$conceptsql."object_concept_id=$entity[id]";
-	$res2=mysql_query($conceptrelrevsql);
-	for ($r=0; $r<mysql_num_rows($res2); $r++){
-		$row2=mysql_fetch_assoc($res2);
-		$relationtype="";
-		if ($row2['relation_type']=="broader") $relationtype="narrower";	
-		elseif ($row2['relation_type']=="narrower") $relationtype="broader";
-		elseif ($row2['relation_type']=="related") $relationtype="related";
-		if (strlen($relationtype)>0)
-	                $xml.="    <skos:$relationtype rdf:resource=\"${datauri}vocabularies/$entity[vocabulary_id]/concepts/$row2[subject_concept_id]\"/>\n";
+	if ($res!==false){
+	        for ($r=0; $r<mysql_num_rows($res); $r++){
+        	        $row=mysql_fetch_assoc($res);
+                	$xml.="    <skos:$row[relation_type] rdf:resource=\"${datauri}vocabularies/$entity[vocabulary_id]/concepts/$row[object_concept_id]\"/>\n";
+	        }
+		$conceptrelrevsql=$conceptsql."object_concept_id=$entity[id]";
+		$res2=mysql_query($conceptrelrevsql);
+		for ($r=0; $r<mysql_num_rows($res2); $r++){
+			$row2=mysql_fetch_assoc($res2);
+			$relationtype="";
+			if ($row2['relation_type']=="broader") $relationtype="narrower";	
+			elseif ($row2['relation_type']=="narrower") $relationtype="broader";
+			elseif ($row2['relation_type']=="related") $relationtype="related";
+			if (strlen($relationtype)>0)
+	        	        $xml.="    <skos:$relationtype rdf:resource=\"${datauri}vocabularies/$entity[vocabulary_id]/concepts/$row2[subject_concept_id]\"/>\n";
+		}
 	}
 	return $xml;
 }

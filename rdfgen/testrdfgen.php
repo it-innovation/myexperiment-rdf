@@ -1,0 +1,32 @@
+#!/usr/bin/php
+<?php
+	if (file_exists('entity_sizes.txt')){
+		$lines=file('entity_sizes.txt');
+		foreach ($lines as $line){
+			$lbits=explode(" ",$line);
+			$entity_sizes[$lbits[0]]=array('id'=>$lbits[1],'size'=>trim($lbits[2]));
+		}
+	}
+	else{
+		$argv[1]="Regenerate";
+		$lines=file('entity_sizes.txt.pre');
+                foreach ($lines as $line){
+                        $lbits=explode(" ",$line);
+                        $entity_sizes[$lbits[0]]=array('id'=>$lbits[1],'size'=>trim($lbits[2]));
+                }
+	}
+	if (isset($argv[1]) && $argv[1]=="Regenerate") $fh=fopen('entity_sizes.txt','w');
+	foreach ($entity_sizes as $entity => $entsize){
+		echo "Checking $entity/$entsize[id]:\n";
+		$ph=popen("./rdfgencli.php $entity $entsize[id] | wc -l",'r');
+		$entsize['newsize']=trim(fgets($ph,8192));
+		fclose($ph);
+		if ($entsize['newsize']<$entsize['size']){
+			file_put_contents("php://stderr","Current size of $entsize[id] is smaller than previous size ($entsize[newsize] v $entsize[size])");
+			echo "\nERROR: $entsize[newsize] < $entsize[size]\n\n\n";
+		}
+		echo "\nOK: $entsize[newsize] >= $entsize[size]\n\n\n";
+		if (isset($argv[1]) && $argv[1]=="Regenerate") fwrite($fh,"$entity $entsize[id] $entsize[newsize]\n");
+	}
+	if (isset($argv[1]) && $argv[1]=="Regenerate") fclose($fh);
+?>

@@ -165,9 +165,10 @@
 			$value=call_user_func($pbits[0],$row,1);
 		}
 		else $value=call_user_func($pbits[0],$row);
-		if (!$pbits[1]) return $value;
+		if (!isset($pbits[1]) || !$pbits[1]) return $value;
 		elseif (in_array("EncapsulatedObject",$msgs)){
 			$nsandp=$pbits[1];
+			$line="";
 			if ($value){
 				if ($row['format']=="ore" && in_array($pbits[1],$aggregateprops)) $line="<ore:aggregates rdf:resource=\"$value\"/>\n";
 				else $line="    <$nsandp>\n      $value\n    </$nsandp>\n";
