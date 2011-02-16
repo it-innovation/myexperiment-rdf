@@ -306,7 +306,7 @@ run-diagnostic(){
 }
 check-versions(){
 	store4version=`$STORE4EXEC_PATH/4s-info --version 2>&1 | head -n 1 | awk '{print $NF}'`
- 	raptorversion=`$STORE4EXEC_PATH/rapper --version`
+ 	raptorversion=`pkg-config raptor2 --modversion`
  	rasqalversion=`$STORE4EXEC_PATH/rasqal-config --version`
  	echo "4store ($store4version), Raptor (v$raptorversion), Rasqal (v$rasqalversion)" > $STORE4_PATH/log/4storeversions.log
  	echo "[`date +%T`] Check 4Store, Raptor and Rasqal versions for $1 triplestore and written to $STORE4_PATH/log/4storeversions.log"
