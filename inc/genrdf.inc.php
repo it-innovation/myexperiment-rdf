@@ -245,7 +245,7 @@
 	        return $header;
 	}
 
-	function pageheader(){
+	function pageheader($namespaces=array()){
 		global $ontopath;
                 $namespaces['mebase']=$ontopath.'base/';
                 $namespaces['meac']=$ontopath.'attrib_credit/';

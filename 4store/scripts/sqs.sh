@@ -132,49 +132,58 @@ update-cached-files(){
 }
 update(){
         check_triplestore $1
-        check-versions $1        
+        check-versions $1
+	reason-ontology $1        
 	get-dataflows
         reason-dataflows $1
-	if [ -n "$2" ]; then 
-		if [ $2 == "no-cache" ]; then
-			echo "[`date +%T`] Not Updating Cached Files"
-		else
-			update-cached-files $1
-		fi
-	else
-		update-cached-files $1
-	fi
+	data-dump $1
+#	if [ -n "$2" ]; then 
+#		if [ $2 == "no-cache" ]; then
+#			echo "[`date +%T`] Not Updating Cached Files"
+#		else
+#			update-cached-files $1
+#		fi
+#	else
+#		update-cached-files $1
+#	fi
 	day=`date +%e`
         month=`date +%b`
 	date +%s > $STORE4_PATH/log/$1_update_time.log
+	added=`add $1 $DATA_PATH/$1/myexperiment.rdf`
+        if [ $added -gt 0 ]; then
+        	echo "[`date +%T`] Added/Updated myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
+        else
+        	echo "[`date +%T`] Could Not Add/Update myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
+        fi
+
 	#stop $1
 	#start $1
 	#sleep 3
-	for graph in `cat $DATA_PATH/tmp/$1/delete_files`; do
-                       remove $1 $graph delete 
-		echo "[`date +%T`] Removed $graph from $1"
-	done
-	echo "[`date +%T`] Removed all deleted entities from $1"
-	ontology_updated=`ls -l $DATA_PATH/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print 1}'` 
-	if [ -n "$ontology_updated" ]; then
-		remove $1 $DATA_PATH/$1/$1_reasoned.owl
-		added=`add $1 $DATA_PATH/$1/$1_reasoned.owl`
-		if [ $added -gt 0 ]; then
-			echo "[`date +%T`] Added/Updated $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
-		else
-			echo "[`date +%T`] Could Not Add/Update $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
-		fi
-	fi
-	for e in ${ENTITIES[@]}; do
-		filepath="$DATA_PATH/$1/$e/"
-		thelist=`ls -l $filepath* 2>/dev/null | grep -v "*.owl" | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}' | tr '\n' ' '`
-		if [ `echo $thelist | wc -w` -gt 0 ]; then 
-			$STORE4EXEC_PATH/4s-import $1 $thelist 2>&1
-               		echo "[`date +%T`] Finished adding/updating all graphs for $e to $1 Knowledge Base"
-		else
-			echo "[`date +%T`] No graphs to add/update for $e to $1 Knowledge Base"
-		fi
-        done
+#	for graph in `cat $DATA_PATH/tmp/$1/delete_files`; do
+ #                      remove $1 $graph delete 
+#		echo "[`date +%T`] Removed $graph from $1"
+#	done
+#	echo "[`date +%T`] Removed all deleted entities from $1"
+#	ontology_updated=`ls -l $DATA_PATH/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print 1}'` 
+#	if [ -n "$ontology_updated" ]; then
+#		remove $1 $DATA_PATH/$1/$1_reasoned.owl
+#		added=`add $1 $DATA_PATH/$1/$1_reasoned.owl`
+#		if [ $added -gt 0 ]; then
+#			echo "[`date +%T`] Added/Updated $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
+#		else
+#			echo "[`date +%T`] Could Not Add/Update $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
+#		fi
+#	fi
+#	for e in ${ENTITIES[@]}; do
+#		filepath="$DATA_PATH/$1/$e/"
+#		thelist=`ls -l $filepath* 2>/dev/null | grep -v "*.owl" | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}' | tr '\n' ' '`
+#		if [ `echo $thelist | wc -w` -gt 0 ]; then 
+#			$STORE4EXEC_PATH/4s-import $1 $thelist 2>&1
+ #              		echo "[`date +%T`] Finished adding/updating all graphs for $e to $1 Knowledge Base"
+#		else
+#			echo "[`date +%T`] No graphs to add/update for $e to $1 Knowledge Base"
+#		fi
+ #       done
 	count-triples $1
 }	
 list-graphs(){
@@ -297,7 +306,7 @@ run-diagnostic(){
 }
 check-versions(){
 	store4version=`$STORE4EXEC_PATH/4s-info --version 2>&1 | head -n 1 | awk '{print $NF}'`
- 	raptorversion=`$STORE4EXEC_PATH/raptor-config --version`
+ 	raptorversion=`$STORE4EXEC_PATH/rapper --version`
  	rasqalversion=`$STORE4EXEC_PATH/rasqal-config --version`
  	echo "4store ($store4version), Raptor (v$raptorversion), Rasqal (v$rasqalversion)" > $STORE4_PATH/log/4storeversions.log
  	echo "[`date +%T`] Check 4Store, Raptor and Rasqal versions for $1 triplestore and written to $STORE4_PATH/log/4storeversions.log"
