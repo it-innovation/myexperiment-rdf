@@ -535,7 +535,8 @@ function processDataflowComponents($allcomponents,$ent_uri,$nested=0){
 						}
 						break;
 					  case 'script':
-						$props[]=array('type'=>'mecomp:processor-script','value'=>$property['tagData']);
+						if (isset($property['tagData'])) $props[]=array('type'=>'mecomp:processor-script','value'=>$property['tagData']);
+						else $props[]=array('type'=>'mecomp:processor-script');
 						break;
 					  case 'model':
 						tabulateDataflowComponents($property['children'],$ent_uri."components/$c",$nested+1);

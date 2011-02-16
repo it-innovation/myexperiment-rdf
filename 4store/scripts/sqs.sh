@@ -147,9 +147,9 @@ update(){
 	day=`date +%e`
         month=`date +%b`
 	date +%s > $STORE4_PATH/log/$1_update_time.log
-	stop $1
-	start $1
-	sleep 3
+	#stop $1
+	#start $1
+	#sleep 3
 	for graph in `cat $DATA_PATH/tmp/$1/delete_files`; do
                        remove $1 $graph delete 
 		echo "[`date +%T`] Removed $graph from $1"
