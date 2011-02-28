@@ -1,4 +1,5 @@
 #!/bin/bash
+export PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/usr/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig"
 export LD_PATH="/var/linkeddata"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export MYSQL_USERNAME="root"
