@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY skos 'http://www.w3.org/2004/02/skos/core#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:skos      ="&skos;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo"/>
+  </rdf:Description>
+
+  <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo.rdf"/>
+    <rdf:subject rdf:resource="http://www.myexperiment.org/files/2" />
+    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/9" />
+    <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
+  </mepack:Relationship>
+
+  <mecontrib:File rdf:about="http://www.myexperiment.org/files/2">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/files/2.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/2.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/2.xml"/>
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/blobs/2/download/post_workflow.xml" />
+    <mebase:filename rdf:datatype="&xsd;string">post_workflow.xml</mebase:filename>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/10" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T17:02:25Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:02:25Z</dcterms:modified>
+    <dcterms:title rdf:datatype="&xsd;string">Population parameters</dcterms:title>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/files/2/policies/29" />
+  </mecontrib:File>
+
+  <mepack:Concept rdf:about="http://www.myexperiment.org/vocabularies/1/concepts/9">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/9.rdf"/>
+    <skos:prefLabel rdf:datatype="&xsd;string">is input data for</skos:prefLabel>
+    <skos:definition rdf:datatype="&xsd;string">this term is used to indicate that an object is input data to another object.</skos:definition>
+    <skos:inScheme rdf:resource="http://www.myexperiment.org/vocabularies/1" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T16:53:27Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-10T17:29:33Z</dcterms:modified>
+    <skos:narrower rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/11"/>
+  </mepack:Concept>
+
+  <mecontrib:Workflow rdf:about="http://www.myexperiment.org/workflows/1">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/1.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/1.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/1.xml"/>
+    <dcterms:title rdf:datatype="&xsd;string">Demonstration of configurable iteration</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">This workflow shows the use of the iteration strategy editor to ensure that only relevant combinations of inputs are used during an implicit iteration.</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T17:00:33Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:00:33Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">demonstration_of_configurable_iteration_548200.xml</mebase:filename>
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/1/download/demonstration_of_configurable_iteration_548200.xml" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/image/1/demonstration_of_configurable_iteration.png" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/image/1/thumb/demonstration_of_configurable_iteration.png" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/image/1/medium/demonstration_of_configurable_iteration.png" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/svg/1/demonstration_of_configurable_iteration.svg.xml" />
+    <mebase:has-current-version rdf:resource="http://www.myexperiment.org/workflows/1/versions/1" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/1" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/1/policies/27" />
+  </mecontrib:Workflow>
+
+</rdf:RDF>

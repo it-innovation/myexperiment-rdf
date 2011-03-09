@@ -57,11 +57,13 @@
     <ore:aggregates rdf:resource="http://www.myexperiment.org/files/2"/>
     <ore:aggregates rdf:resource="http://www.myexperiment.org/files/1"/>
     <ore:aggregates rdf:resource="http://www.myexperiment.org/workflows/1"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/relationships/wuodfghufoghurosf"/>
     <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/1"/>
     <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/2"/>
     <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/4"/>
-    <mepack:has-pack-relationship rdf:resource="http://www.myexperiment.org/packs/1/relationships/1"/>
-    <mepack:has-pack-relationship rdf:resource="http://www.myexperiment.org/packs/1/relationships/2"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/relationships/1"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/relationships/2"/>
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
     <dcterms:title rdf:datatype="&xsd;string">Test pack</dcterms:title>
     <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This is a pack that will&amp;nbsp;contain relationships.&lt;/p&gt;</dcterms:description>
@@ -123,6 +125,20 @@
     <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/1/policies/27" />
   </mecontrib:Workflow>
 
+  <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd.rdf"/>
+    <rdf:subject rdf:resource="http://www.myexperiment.org/files/2" />
+    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/9" />
+    <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
+  </mepack:Relationship>
+
+  <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/wuodfghufoghurosf">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/relationships/wuodfghufoghurosf.rdf"/>
+    <rdf:subject rdf:resource="http://www.myexperiment.org/files/1" />
+    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/10" />
+    <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
+  </mepack:Relationship>
+
   <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/1/local_pack_entries/1">
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/1.rdf"/>
     <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
@@ -150,22 +166,18 @@
     <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:03:37Z</dcterms:modified>
   </mepack:LocalPackEntry>
 
-  <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/1/pack_relationships/1">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/pack_relationships/1.rdf"/>
-    <rdf:subject rdf:resource="http://www.myexperiment.org/files/2" />
-    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/9" />
-    <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
-    <mepack:in-pack rdf:resource="http://www.myexperiment.org/packs/1" />
+  <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/1/relationships/1">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/relationships/1.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd"/>
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
     <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-10T17:54:21Z</dcterms:created>
   </mepack:PackRelationship>
 
   <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/1/pack_relationships/2">
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/pack_relationships/2.rdf"/>
-    <rdf:subject rdf:resource="http://www.myexperiment.org/files/1" />
-    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/10" />
-    <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
-    <mepack:in-pack rdf:resource="http://www.myexperiment.org/packs/1" />
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/relationships/wuodfghufoghurosf"/>
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
     <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-10T17:54:21Z</dcterms:created>
   </mepack:PackRelationship>

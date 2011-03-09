@@ -252,29 +252,36 @@ query_protein: P53
     <mebase:deleted-by-sender rdf:datatype="&xsd;boolean">0</mebase:deleted-by-sender>
   </mebase:Message>
 
-  <mepack:Pack rdf:about="http://www.myexperiment.org/packs/8">
-    <foaf:homepage rdf:resource="http://www.myexperiment.org/packs/8.html"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/8.rdf"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/pack.xml?id=8"/>
-    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/resource_maps/packs/8" />
-    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/atom_entries/packs/8" />
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/workflows/69"/>
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/files/4"/>
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/packs/9"/>
-    <ore:aggregates rdf:resource="http://www.mygrid.org.uk/ontology"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/8/local_pack_entries/74"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/8/local_pack_entries/75"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/8/local_pack_entries/78"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/8/remote_pack_entries/13"/>
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/61" />
-    <dcterms:title rdf:datatype="&xsd;string">Testing123</dcterms:title>
-    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;A pack that has packs&lt;/p&gt;</dcterms:description>
-    <dcterms:created rdf:datatype="&xsd;dateTime">2008-07-12T08:33:53Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-07-12T08:33:53Z</dcterms:modified>
-    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">140</mevd:viewed>
-    <mevd:downloaded rdf:datatype="&xsd;nonNegativeInteger">51</mevd:downloaded>
-    <mebase:has-policy rdf:resource="http://www.myexperiment.org/packs/8/policies/493" />
+  <mepack:Pack rdf:about="http://www.myexperiment.org/packs/1">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/packs/1.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1.xml"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/files/2"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/files/1"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/workflows/1"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/relationships/wuodfghufoghurosf"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/1"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/2"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/4"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/relationships/1"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/relationships/2"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
+    <dcterms:title rdf:datatype="&xsd;string">Test pack</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This is a pack that will&amp;nbsp;contain relationships.&lt;/p&gt;</dcterms:description>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T16:55:05Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T16:55:05Z</dcterms:modified>
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">10</mevd:viewed>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/packs/1/policies/26" />
   </mepack:Pack>
+
+  <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/1/relationships/1">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/relationships/1.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-10T17:54:21Z</dcterms:created>
+  </mepack:PackRelationship>
 
   <snarm:Policy rdf:about="http://www.myexperiment.org/Workflow/16/policies/185">
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/Workflow/16/policies/185.rdf"/>
@@ -309,6 +316,13 @@ query_protein: P53
     <mebase:has-annotator rdf:resource="http://www.myexperiment.org/users/1" />
     <dcterms:created rdf:datatype="&xsd;dateTime">2007-10-03T18:36:31Z</dcterms:created>
   </meannot:Rating>
+
+  <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo.rdf"/>
+    <rdf:subject rdf:resource="http://www.myexperiment.org/files/2" />
+    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/9" />
+    <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
+  </mepack:Relationship>
 
   <mepack:RemotePackEntry rdf:about="http://www.myexperiment.org/packs/8/remote_pack_entries/13">
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/8/remote_pack_entries/13.rdf"/>

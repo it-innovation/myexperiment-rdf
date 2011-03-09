@@ -10,6 +10,13 @@
     <li><a href="?page=PREFIX#BASE">BASE</a></li>
   </ol>
   <li><a href="?page=SELECT">SELECT</a></li>
+  <ol>
+    <li><a href="?page=SELECT#DISTINCT">DISTINCT</a></li>
+    <li><a href="?page=SELECT#COUNT">COUNT</a></li>
+    <li><a href="?page=SELECT#SUM">SUM</a></li>
+    <li><a href="?page=SELECT#AVG">AVG</a></li>
+    <li><a href="?page=SELECT#MAX_MIN">MAX and MIN</a></li>
+  </ol>
   <li><a href="?page=WHERE">WHERE</a></li>
   <ol>
     <li><a href="?page=WHERE#UNION">UNION</a></li>
@@ -23,6 +30,7 @@
     <li><a href="?page=FILTER#On Dates">On Dates</a></li>
   </ol>
   </li>
+  <li><a href="?page=GROUP BY">GROUP BY</a></li>
   <li><a href="?page=ORDER BY">ORDER BY</a></li>
   <li><a href="?page=LIMIT">LIMIT</a></li>
   <ol>
