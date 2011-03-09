@@ -45,7 +45,6 @@ GROUP BY ?user</pre>
   <tr><th>user</th><th>total_downloads</th></tr>
   <tr><td class="shade">http://www.myexperiment.org/users/6890</td><td class="shade">351</td></tr>
   <tr><td>http://www.myexperiment.org/users/36</td><td>520</td></tr>
-
   <tr><td class="shade">http://www.myexperiment.org/users/10173</td><td class="shade">359</td></tr>
   <tr><td>http://www.myexperiment.org/users/884</td><td>792</td></tr>
   <tr><td class="shade">http://www.myexperiment.org/users/87</td><td class="shade">667</td></tr>
@@ -53,7 +52,7 @@ GROUP BY ?user</pre>
 </table>
 </div>
 <br/>
-<p>Again, the <em>GROUP BY</em> clause can also be used with the <a href="?page=SELECT#AVG">AVG</a>, <a href="?page=SELECT#MIN">MAX</a> and <a href="?page=SELECT#MIN">MIN</a> function to get for example the average, maximum and minium ratings of workflows.</p>
+<p>Again, the <em>GROUP BY</em> clause can also be used with the <a href="?page=SELECT#AVG">AVG</a>, <a href="?page=SELECT#MAX_MIN">MAX and MIN</a> function to get for example the average, maximum and minium ratings of workflows.</p>
 <div class="yellow"><pre>PREFIX mebase: &lt;http://rdf.myexperiment.org/ontologies/base/&gt;
 PREFIX meannot: &lt;http://rdf.myexperiment.org/ontologies/annotations/&gt;
 PREFIX mecontrib: &lt;http://rdf.myexperiment.org/ontologies/contributions/&gt;
@@ -79,7 +78,7 @@ GROUP BY ?workflow</pre>
   <tr><td>http://www.myexperiment.org/workflows/688</td><td>4</td><td>4</td><td>4</td></tr>
 </table>
 <br/>
-<p style="font-size: 0.9em; font-weight: bold;">N.B. Currently (March 9th 2011) 4Store does not properly handle flaoting point numbers properly so results may need to be manually rounded to make 4.4999999999999999991 into 4.5.</p>
+<p style="font-size: 0.9em; font-weight: bold;">N.B. Currently (March 9th 2011) 4Store does not properly handle floating point numbers properly so average results may need to be manually rounded to make 4.4999999999999999991 into 4.5.</p>
 </div>
 <br/>
 <script type= "text/javascript"><!-- 
