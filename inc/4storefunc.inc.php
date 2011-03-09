@@ -6,7 +6,7 @@ function getCodePath(){
 }
 function getScriptPath(){
 	global $lddir;
-        return $lddir."4store/script";
+        return $lddir."4store/scripts";
 }
 function getPath(){
 	global $store4execpath;
@@ -175,7 +175,7 @@ select ?x where {?x rdfs:isDefinedBy <".$ontopath."snarm/>}";
 }
 
 function reasonOntology($name,$url,$id,$log){
-	$cmd=getScriptPath()."/reasonRemoteOntology4.sh '$url' $name $id > $log &";
+	$cmd=getScriptPath()."/reasonRemoteOntology.sh '$url' $name $id > $log &";
 	//echo $cmd."###<br/>";
         exec($cmd);
 }

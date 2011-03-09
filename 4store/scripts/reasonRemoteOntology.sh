@@ -1,5 +1,5 @@
 #!/bin/bash
-source `pwd`/`dirname $BASH_SOURCE`/settings.sh
+source `dirname $BASH_SOURCE`/settings.sh
 triplestore="ontologies"
 echo "============== `date` =============="
 cd $STORE4_PATH/code/

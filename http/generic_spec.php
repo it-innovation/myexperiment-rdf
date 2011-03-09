@@ -47,7 +47,7 @@ if (!$_GET['ontology']){
 }
 if (!$_GET['uncached'] && $headername){
 	if ($_GET['ontology']) $print=1;
-	$lines=file('/var/data/ontologies/cachedspec/'.$ontology.'_'.$headername.'_spec.html');
+	$lines=file($datapath.'ontologies/cachedspec/'.$ontology.'_'.$headername.'_spec.html');
 	foreach ($lines as $line){
 		if (preg_match('!</body>!',$line)) $print=0;
 		if ($print) echo $line;
@@ -62,10 +62,10 @@ if ($ontology){
 	if ($queryset=="OWL Ontology") include('owl_specqueries.inc.php');
 	elseif ($queryset=="RDFS Schema") include('rdfs_specqueries.inc.php');
 	else include('specqueries.inc.php');
-	//print_r($queries);
+//	print_r($queries);
 	//exit;
 	$res=sparqlQueryClientMultiple($ts,$queries,10000,$timeout);
-	//print_r($res);	
+//	print_r($res);	
 	//Retrieve Class Property Relations
 	$tableres1=array();
 	if (isset($res[1])){
