@@ -134,4 +134,24 @@ function sc404($path=''){
 	exit();
 }
 
+function get_accept_types($accept_str){
+        $accepts=array();
+        $types=explode(",",$accept_str);
+        foreach ($types as $type){
+                $tbits=explode(";",$type);
+                if (sizeof($tbits)>1){
+                        $qvalbits=explode("=",$tbits[1]);
+                        $accepts[$tbits[0]]=$qvalbits[1];
+                }
+                else $accepts[$tbits[0]]=1;
+        }
+        arsort($accepts,SORT_NUMERIC);
+	return $accepts;
+}
+function get_first_choice_mimetype($accept_str){
+	$accepts=get_accept_types($accept_str);
+	$akeys=array_keys($accepts);
+	if ($akeys[0]=='*/*') return "application/sparql-results+xml";
+	return $akeys[0];
+}
 ?>

@@ -13,23 +13,39 @@ $prefix="";
 $lmdate=date('r',strtotime(date('Y-m-d',getLastUpdated($ts)))-60);
 $softlimit=1;
 $maxsoftlimit=100;
-$formatting="In Page";
-$format = "sparql";
+$formatting="";
 $mimetype="application/xml";
-$formattings=array("In Page","Raw","HTML Table","Text","JSON","CSV","CSV Matrix");
-$formattinglabels=array("XML (In Page)","XML (Raw)","HTML Table","Text","JSON","CSV","CSV Matrix");
-$formats=array("In Page"=>"sparql","Raw"=>"sparql","HTML Table"=>"sparql","Text"=>"text","JSON"=>"json","CSV"=>"sparql","CSV Matrix"=>"sparql");
-$mimetypes=array("In Page"=>"text/html","Raw"=>"application/xml","HTML Table"=>"text/html","Text"=>"text/plain","JSON"=>"application/json","CSV"=>"text/csv","CSV Matrix"=>"text/csv");
+$format="sparql";
+
+$formats=array("HTML Table"=>array("sparql","text/html"), "XML"=>array("sparql","application/xml"),"Text"=>array("text","text/plain"),"JSON"=>array("json","application/json"),"CSV"=>array("sparql","text/csv"),"CSV Matrix"=>array("sparql","text/csv"));
+if (isset($_POST['formatting'])) $formatting=$_POST['formatting'];
+elseif (isset($_GET['formatting']) && strlen($_GET['formatting'])>0) $formatting=$_GET['formatting'];
+else{
+	$fc_mimetype=get_first_choice_mimetype($_SERVER['HTTP_ACCEPT']);
+	foreach ($formats as $fname => $aformat){
+		if ($fc_mimetype==$aformat[1]){
+			$formatting=$fname;
+			break;
+		}
+	}
+}
+
+if (strlen($formatting)>0){
+	$format=$formats[$formatting][0];
+	$mimetype=$formats[$formatting][1];
+}
+
 $clientlive=testSparqlQueryClient($ts);
 if (isset($_POST['generate_service'])){
 	if (isset($_POST['query']) and strlen($_POST['query'])>0){
 		$pagetitle="SPARQL Query Service";
 	        include('header.inc.php');
-		if ($mimetypes[$_POST['formatting']]=="text/html" || $mimetypes[$_POST['formatting']]=="application/xml") $formatparam="";
-		else $formatparam="&amp;formatting=".$_POST['formatting'];
+		if (strlen($formatting)>0 && $formatting!="HTML Table") $formatparam="&formatting=".$formatting;
+		
 		$query=urlencode(preProcessQuery($_POST['query']));
 		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query$formatparam";
 		echo "<p>Below is a URL which you can use give to any application capable of making HTTP requests and it will return you the current results for the query you made.</p>";
+		echo "<div class=\"red\"><b>WARNING:</b> This service require the HTTP request to explictly specify its accept type in the request header.  if this is not set appropriately the format returned will most likely be XML or HTML if requested from a web browser. To select a particular format, click back and select it from the list provided before clicking &quot;Generate Service for Query&quot; again.</div><br/>\n";
 		echo "<p style=\"margin: 0 30px\"><a href=\"$service_url\">$service_url</a></p>";
 		include('footer.inc.php');
 	       exit(1);
@@ -42,61 +58,39 @@ if (!$clientlive) $err="This myExperiment SPARQL Endpoint is currently unavailab
 else{
 	if ($_POST){
 		$query = $_POST['query'];
-		$formatting = $_POST['formatting'];
 		if (is_int(intval($_POST['softlimit'])) && intval($_POST['softlimit'])>0 && intval($_POST['softlimit'])<=$maxsoftlimit) $softlimit=intval($_POST['softlimit']);	
 	}
 	elseif ($_GET){		
-		$formatting="";
 		$query = rawurldecode($_GET['query']);
-		if ($query=="test"){
-			$query="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX mecontrib: <http://rdf.myexperiment.org/ontologies/contributions/>
-PREFIX mebase: <http://rdf.myexperiment.org/ontologies/base/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-select ?workflow ?ct_title { ?workflow rdf:type mecontrib:Workflow . ?workflow mebase:has-content-type ?ct . ?ct dcterms:title ?ct_title . FILTER(REGEX(?ct_title,'trident','i'))}";
-			if ($_POST['format']) $formatting = mysql_real_escape_string($_POST['formatting']);
-			elseif ($_GET['format']) $formatting = mysql_real_escape_string($_GET['formatting']); 
-			else $formatting="In Page";
-		}
-		$accepts=explode(",",$_SERVER['HTTP_ACCEPT']);
 		if (is_int(intval($_GET['softlimit'])) && intval($_GET['softlimit'])>0 && intval($_GET['softlimit'])<=$maxsoftlimit) $softlimit=intval($_GET['softlimit']);
-                //if (array_in_array(array("text/html","application/xhtml"),$accepts)) $formatting="";
-		if ($_GET['formatting']) $formatting=$_GET['formatting'];
-                elseif (array_in_array(array("text/xml","application/xml","application/rdf+xml","application/sparql-results+xml"),$accepts)) $formatting="Raw";
-                elseif (in_array("text/csv",$accepts)) $formatting="CSV";
-                elseif (!$formatting) $formatting="Raw";
 	}
 	if ($query) {	
 		$query=preProcessQuery($query);
-		if (isset($formats[$formatting])) $format=$formats[$formatting];
-		if (isset($mimetypes[$formatting]))$mimetype=$mimetypes[$formatting];
 		$results=sparqlQueryClient($ts,$query,$format,$softlimit*10000);
 		$err=implode('<br/>',$errs);
 	}
 }
-if ($formatting=="Raw" || $formatting=="Text" || $formatting=="JSON"){
-	header("Content-type: $mimetype");
-	echo $results;
+if ($formatting!="HTML Table"){
 	$done=1;
-}
-elseif ($formatting=="CSV"){
-	header('Content-type: text/csv');
-        echo convertTableToCSV(tabulateSPARQLResults(parseXML($results)));
-	$done=1;
-}
-elseif ($formatting=="CSV Matrix"){
-	$csvmatrix=convertTableToCSVMatrix(tabulateSPARQLResults(parseXML($results)));
-	if ($err){
-		$results=null;
+	if ($formatting=="CSV"||$mimetype=="text/csv") $results=convertTableToCSV(tabulateSPARQLResults(parseXML($results)));
+	elseif ($formatting=="CSV Matrix"){
+		$csvmatrix=convertTableToCSVMatrix(tabulateSPARQLResults(parseXML($results)));
+		if ($err){
+                	$results=null;
+			$done=0;
+	        }
+        	elseif (substr($csvmatrix,0,5)=="ERROR"){
+                	$err=$csvmatrix;
+	                $results=null;
+			$done=0;
+	        }
+		else{
+	                $results=$csvmatrix;
+	        }
 	}
-	elseif (substr($csvmatrix,0,5)=="ERROR"){
-		$err=$csvmatrix;
-		$results=null;
-	}
-	else{
-		header('Content-type: text/csv');
-		echo $csvmatrix;
-		$done=1;
+	if ($done){
+		header("Content-type: $mimetype");
+		echo $results;
 	}
 }
 if($clientlive && !$done){
@@ -131,10 +125,11 @@ if($clientlive && !$done){
             <td>
               <select name="formatting">
           <?php
+	$formattings=array_keys($formats);
         for ($f=0; $f<sizeof($formattings); $f++){
                 echo "            <option ";
                 if ($formattings[$f]==$formatting) echo 'selected="selected" ';
-                echo "value=\"".$formattings[$f]."\">".$formattinglabels[$f]."</option>\n";
+                echo "value=\"".$formattings[$f]."\">".$formattings[$f]."</option>\n";
         }
 ?>
               </select>
@@ -167,8 +162,7 @@ if($clientlive && !$done){
 		echo "<h3>Results</h3>";
 		if ($timetaken==0) $timetaken="<1";
 		echo "<p><b>Time Taken:</b> $timetaken seconds</p>\n";
-		if ($formatting=="In Page") echo "<pre style=\"white-space: pre-wrap;\">".htmlentities($results)."</pre>";
-		elseif ($formatting=="HTML Table"){
+		if ($formatting=="HTML Table"){
 			$parsedxml=parseXML($results);
 			$tabres=tabulateSparqlResults($parsedxml);
 			$formattedoutput=drawSparqlResultsTable($tabres);
