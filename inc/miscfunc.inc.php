@@ -101,14 +101,14 @@ function getUsefulPrefixes($domain){
 		$usepref='    <table class="borders">
       <tr><th>myExperiment</th><th>Other</th></tr>
       <tr>
-        <td><ul class="nonesmall">
+        <td style="text-align: left;"><ul class="nonesmall">
             <li class="prefix"><a onclick="addPrefixToQuery(this.parentNode.innerHTML)">BASE &lt;'.$datauri.'&gt;</a></li>
 ';
 		foreach ($myexp as $pref => $ns){
 			$usepref.="          <li class=\"prefix\"><a onclick=\"addPrefixToQuery(this.parentNode.innerHTML)\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";
 		}
 		$usepref.='        </ul></td>
-        <td><ul class="nonesmall">
+        <td style="text-align: justify;"><ul class="nonesmall">
 ';		
 		foreach ($other as $pref => $ns){
 		  	$usepref.="          <li class=\"prefix\"><a onclick=\"addPrefixToQuery(this.parentNode.innerHTML)\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";
@@ -149,9 +149,13 @@ function get_accept_types($accept_str){
 	return $accepts;
 }
 function get_first_choice_mimetype($accept_str){
+	$priority=array("text/html","application/xhtml+xml","application/xml");
 	$accepts=get_accept_types($accept_str);
 	$akeys=array_keys($accepts);
-	if ($akeys[0]=='*/*') return "application/sparql-results+xml";
+	foreach ($priority as $p){
+		if ($accepts[$p]==1) return $p;
+	}
+	if ($accepts['*/*']==1) return "text/html";
 	return $akeys[0];
 }
 ?>

@@ -13,28 +13,31 @@ $prefix="";
 $lmdate=date('r',strtotime(date('Y-m-d',getLastUpdated($ts)))-60);
 $softlimit=1;
 $maxsoftlimit=100;
-$formatting="";
+$formatting="XML";
 $mimetype="application/xml";
 $format="sparql";
 
-$formats=array("HTML Table"=>array("sparql","text/html"), "XML"=>array("sparql","application/xml"),"Text"=>array("text","text/plain"),"JSON"=>array("json","application/json"),"CSV"=>array("sparql","text/csv"),"CSV Matrix"=>array("sparql","text/csv"));
+$formats=array("HTML Table"=>array("sparql",array("text/html","application/xhtml+xml")), "XML"=>array("sparql",array("application/xml","applications/sparql-results+xml")),"Text"=>array("text",array("text/plain")),"JSON"=>array("json",array("application/json")),"CSV"=>array("sparql",array("text/csv","application/csv")),"CSV Matrix"=>array("sparql",array("text/csv","application/csv")));
 if (isset($_POST['formatting'])) $formatting=$_POST['formatting'];
 elseif (isset($_GET['formatting']) && strlen($_GET['formatting'])>0) $formatting=$_GET['formatting'];
 else{
+	$mtfound=0;
 	$fc_mimetype=get_first_choice_mimetype($_SERVER['HTTP_ACCEPT']);
 	foreach ($formats as $fname => $aformat){
-		if ($fc_mimetype==$aformat[1]){
-			$formatting=$fname;
-			break;
+		foreach ($aformat[1] as $amimetype){
+			if ($fc_mimetype==$amimetype){
+				$formatting=$fname;
+				$mtfound=1;
+				break;
+			}
 		}
+		if ($mtfound) break;
 	}
 }
-
-if (strlen($formatting)>0){
+if ($formatting!="XML"){
 	$format=$formats[$formatting][0];
-	$mimetype=$formats[$formatting][1];
+	$mimetype=$formats[$formatting][1][0];
 }
-
 $clientlive=testSparqlQueryClient($ts);
 if (isset($_POST['generate_service'])){
 	if (isset($_POST['query']) and strlen($_POST['query'])>0){
@@ -45,7 +48,9 @@ if (isset($_POST['generate_service'])){
 		$query=urlencode(preProcessQuery($_POST['query']));
 		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query$formatparam";
 		echo "<p>Below is a URL which you can use give to any application capable of making HTTP requests and it will return you the current results for the query you made.</p>";
-		echo "<div class=\"red\"><b>WARNING:</b> This service require the HTTP request to explictly specify its accept type in the request header.  if this is not set appropriately the format returned will most likely be XML or HTML if requested from a web browser. To select a particular format, click back and select it from the list provided before clicking &quot;Generate Service for Query&quot; again.</div><br/>\n";
+		if ($formatting=="HTML Table"){
+			echo "<div class=\"red\"><b>WARNING:</b> This service require the HTTP request to explictly specify its accept type in the request header.  if this is not set appropriately the format returned will most likely be HTML with an embedded table of results. To select a particular format, click back and select it from the list provided before clicking &quot;Generate Service for Query&quot; again.</div><br/>\n";
+		}
 		echo "<p style=\"margin: 0 30px\"><a href=\"$service_url\">$service_url</a></p>";
 		include('footer.inc.php');
 	       exit(1);
@@ -72,7 +77,7 @@ else{
 }
 if ($formatting!="HTML Table"){
 	$done=1;
-	if ($formatting=="CSV"||$mimetype=="text/csv") $results=convertTableToCSV(tabulateSPARQLResults(parseXML($results)));
+	if ($formatting=="CSV") $results=convertTableToCSV(tabulateSPARQLResults(parseXML($results)));
 	elseif ($formatting=="CSV Matrix"){
 		$csvmatrix=convertTableToCSVMatrix(tabulateSPARQLResults(parseXML($results)));
 		if ($err){
@@ -110,19 +115,19 @@ if($clientlive && !$done){
        <table style="font-size: 10pt;">
           <tr>
             <th style="text-align: right;">Version Info:</th>
-            <td><?= getVersions() ?></td>
+            <td style="text-align: left;"><?= getVersions() ?></td>
           </tr>
           <tr>
             <th style="text-align: right;">No. of Triples:</th>
-            <td><?= $notriples ?></td>
+            <td style="text-align: left;"><?= $notriples ?></td>
           </tr>
           <tr>
             <th style="text-align: right;">Last Snapshot Taken At:</th>
-            <td><?= $lmdate ?></td>
+            <td style="text-align: left;"><?= $lmdate ?></td>
           </tr>
           <tr>
             <th style="text-align: right;">Format:</th>
-            <td>
+            <td style="text-align: left;">
               <select name="formatting">
           <?php
 	$formattings=array_keys($formats);
@@ -137,7 +142,7 @@ if($clientlive && !$done){
         </tr>
         <tr>
           <th style="text-align: right;">Soft Limit:</th>
-          <td><input type="text" size="3" maxlength="3" name="softlimit" value="<?=$softlimit?>" />%</td>
+          <td style="text-align: left;"><input type="text" size="3" maxlength="3" name="softlimit" value="<?=$softlimit?>" />%</td>
         </tr>
       </table>
       <?php if ($err) echo "<br/><div class=\"red\"><b>$err</b></div><br/>\n"; ?>
