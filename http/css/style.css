@@ -261,4 +261,12 @@ span.link{
 }
 .nofirstpage, .noprevpage, .nonextpage, .nolastpage{
         padding: 3px;
-}	
+}
+.CodeMirror-wrapping{
+	margin: 10px;
+        border-top: 1px solid DarkGray;
+	border-bottom: 1px solid #F0F0F0;
+	border-left: 1px solid #F0F0F0;
+	border-right: 1px solid #F0F0F0;
+}
+

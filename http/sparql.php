@@ -1,6 +1,8 @@
 <?php
 $pagetitle="SPARQL Endpoint";
+$htmlheader[]='<link rel="stylesheet" type="text/css" href="/css/style.css"/>';
 $htmlheader[]='<script src="/js/sparql.js" type="text/javascript"></script>';
+$htmlheader[]='<script src="/js/codemirror.js" type="text/javascript"></script>';
 include('include.inc.php');
 include('xmlfunc.inc.php');
 include('sparqlconnect.inc.php');
@@ -151,6 +153,14 @@ if($clientlive && !$done){
       <p>
         <textarea name="query" id="querybox" cols="110" rows="12" style="width: 800px;"><?= htmlentities($query) ?></textarea>
       </p>
+      <script type="text/javascript">
+var editor = CodeMirror.fromTextArea('querybox', {
+    parserfile: ["parsesparql.js"],
+    path: "js/",
+    stylesheet: "css/sparqlcolors.css"
+});
+      </script>
+
       <p>
         <input type="submit" name="submit_query" value ="Submit Query"/>
         &nbsp;&nbsp;
