@@ -209,6 +209,16 @@ get-dataflows(){
 	done
 	rm /tmp/dataflow_wgets.txt
 }
+delete-non-public-dataflows(){
+	echo "[`date +%T`] Deleting Dataflow RDF for no longer public Workflows"
+	$PHPEXEC_PATH/php $STORE4_PATH/scripts/getPublicDownloadableDataflows.php | sort > /tmp/public_downloadable_dataflows.txt
+	ls $DATA_PATH/dataflows/rdf/ | sort > /tmp/current_dataflows.txt
+	for  dfdel in `diff /tmp/public_downloadable_dataflows.txt /tmp/current_dataflows.txt | grep ">" | awk 'BEGIN{FS=" "}{print $2}'`; do
+	#	rm $DATA_PATH/dataflows/xml/$dfdel $DATA_PATH/dataflows/rdf/$dfdel $DATA_PATH/dataflows/reasoned/$dfdel
+		echo "[`date +%T`] Deleted retrieved XML and generated RDF for Workflow Version $dfdel"
+	done
+ 	rm /tmp/public_downloadable_dataflows.txt /tmp/current_dataflows.txt
+}			
 reason-dataflows(){
 	echo "[`date +%T`] Generating Dataflow RDF"
 	$PHPEXEC_PATH/php $STORE4_PATH/scripts/generateDataflowRDF.php $1
@@ -341,6 +351,9 @@ case "$2" in
   get-dataflows)
         get-dataflows $1
         ;;
+  delete-non-public-dataflows)
+	delete-non-public-dataflows $1
+	;;
   reason-file)
 	reason-file $1 $3 $4
 	;;
