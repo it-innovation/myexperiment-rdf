@@ -31,6 +31,15 @@ function preProcessQuery($query){
                         }
                 }
         }
+	$qlines=explode("\n",$query);
+	foreach ($qlines as $q => $line){
+		if (preg_match("/^[ \t]*BASE/",$line)){
+			array_splice($qlines,$q,1);
+			array_unshift($qlines,$line);
+			break;
+		}
+	}
+	$query=implode("\n",$qlines);
 	return $query;
 }
 

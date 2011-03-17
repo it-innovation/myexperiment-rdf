@@ -1,17 +1,3 @@
-function addPrefixToQuery(prefix){
-	prefix=prefix.replace('<a onclick="addPrefixToQuery(this.parentNode.innerHTML)">','')
-	prefix=prefix.replace('<a onclick="addNamespaceToQuery(this.innerHTML)">','')
-	prefix=prefix.replace("</a>",'')
-	prefix=prefix.replace("</a>",'')
-	prefix=prefix.replace('&gt;','>')
-	prefix=prefix.replace('&lt;','<')
-	querybox=document.getElementById('querybox').value
-	document.getElementById('querybox').value=prefix+'\n'+querybox
-	document.getElementById('querybox').focus()
-}
-function addNamespaceToQuery(ns){
-        ns=ns.replace('&gt;','>')
-        ns=ns.replace('&lt;','<')
-        document.getElementById('querybox').value+=ns
-	document.getElementById('querybox').focus()
+function addPrefixToQuery(prefix,ns){
+	alert("PREFIX lines will be automatically added to a query if a prefix detected within the query is listed in \"Useful Prefixes\".\n\nE.g. If your query contains \""+prefix+":Entity\", the line: \n\n\tPREFIX "+prefix+": <"+ns+">\n\nwill appear at the top of the query, after you submit.");
 }

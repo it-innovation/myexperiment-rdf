@@ -71,6 +71,7 @@ function getUsefulPrefixesArray($domain,$merge=false){
         $other['dc']='http://purl.org/dc/elements/1.1/';
         $other['dcterms']='http://purl.org/dc/terms/';
 	if (trim($domain)=="private" || trim($domain)=="public"){
+		$myexp['myexp']='http://www.myexperiment.org/';
 		$myexp['snarm']='http://rdf.myexperiment.org/ontologies/snarm/';
 		$myexp['mebase']='http://rdf.myexperiment.org/ontologies/base/';
 		$myexp['meannot']='http://rdf.myexperiment.org/ontologies/annotations/';
@@ -102,16 +103,16 @@ function getUsefulPrefixes($domain){
       <tr><th>myExperiment</th><th>Other</th></tr>
       <tr>
         <td style="text-align: left;"><ul class="nonesmall">
-            <li class="prefix"><a onclick="addPrefixToQuery(this.parentNode.innerHTML)">BASE &lt;'.$datauri.'&gt;</a></li>
+           <li class="prefix">BASE &lt;'.$datauri.'&gt;</li>
 ';
 		foreach ($myexp as $pref => $ns){
-			$usepref.="          <li class=\"prefix\"><a onclick=\"addPrefixToQuery(this.parentNode.innerHTML)\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";
+			$usepref.="          <li class=\"prefix\"><a onclick=\"addPrefixToQuery('$pref','$ns')\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";
 		}
 		$usepref.='        </ul></td>
         <td style="text-align: justify;"><ul class="nonesmall">
 ';		
 		foreach ($other as $pref => $ns){
-		  	$usepref.="          <li class=\"prefix\"><a onclick=\"addPrefixToQuery(this.parentNode.innerHTML)\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";
+		  	$usepref.="          <li class=\"prefix\"><a onclick=\"addPrefixToQuery('$pref','$ns')\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";
                 }
                 $usepref.="        </ul></td>\n      </tr>\n    </table>\n";
 		return $usepref;
@@ -119,7 +120,7 @@ function getUsefulPrefixes($domain){
 	$usepref='    <ul class="none">
 ';
 	foreach ($other as $pref => $ns){
-                          $usepref.="      <li class=\"prefix\"><a onclick=\"addPrefixToQuery(this.parentNode.innerHTML)\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";
+                          $usepref.="      <li class=\"prefix\"><a onclick=\"addPrefixToQuery('$pref','$ns')\">PREFIX $pref: &lt;$ns&gt;</a></li>\n";
         }
         $usepref.="    </ul>\n";
         return $usepref;
