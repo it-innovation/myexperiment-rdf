@@ -150,6 +150,15 @@ update(){
 	day=`date +%e`
         month=`date +%b`
 	date +%s > $STORE4_PATH/log/$1_update_time.log
+	ontologies=( snarm.owl myexp_base.owl myexp_annot.owl myexp_attrib_cred.owl myexp_view_down.owl myexp_packs.owl myexp_contrib.owl myexp_exp.owl myexp_components.owl myexp_specific.owl )
+	for o in ${ontologies[@]}; do
+		added=`add $1 $LD_PATH/http/ontologies/$o`
+		if [ $added -gt 0 ]; then
+	                echo "[`date +%T`] Added/Updated myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
+        	else
+                	echo "[`date +%T`] Could Not Add/Update myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
+        	fi
+	done
 	added=`add $1 $DATA_PATH/$1/myexperiment.rdf`
         if [ $added -gt 0 ]; then
         	echo "[`date +%T`] Added/Updated myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
@@ -316,7 +325,8 @@ run-diagnostic(){
         fi
 }
 check-versions(){
-	store4version=`$STORE4EXEC_PATH/4s-info --version 2>&1 | head -n 1 | awk '{print $NF}'`
+#	store4version=`$STORE4EXEC_PATH/4s-info --version 2>&1 | head -n 1 | awk '{print $NF}'`
+	store4version="4sr-v1.0.0"
  	raptorversion=`pkg-config raptor2 --modversion`
  	rasqalversion=`$STORE4EXEC_PATH/rasqal-config --version`
  	echo "4store ($store4version), Raptor (v$raptorversion), Rasqal (v$rasqalversion)" > $STORE4_PATH/log/4storeversions.log
