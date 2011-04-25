@@ -150,7 +150,7 @@ update(){
 	day=`date +%e`
         month=`date +%b`
 	date +%s > $STORE4_PATH/log/$1_update_time.log
-	ontologies=( snarm.owl myexp_base.owl myexp_annot.owl myexp_attrib_cred.owl myexp_view_down.owl myexp_packs.owl myexp_contrib.owl myexp_exp.owl myexp_components.owl myexp_specific.owl )
+	ontologies=( myexp_snarm.owl myexp_base.owl myexp_annot.owl myexp_attrib_cred.owl myexp_view_down.owl myexp_packs.owl myexp_contrib.owl myexp_exp.owl myexp_components.owl myexp_specific.owl )
 	for o in ${ontologies[@]}; do
 		added=`add $1 $LD_PATH/http/ontologies/$o`
 		if [ $added -gt 0 ]; then

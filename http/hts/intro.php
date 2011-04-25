@@ -3,6 +3,10 @@
 <ol>
   <li><a href="?page=Using the SPARQL Endpoint">Using the SPARQL Endpoint</a></li>
   <ol>
+    <li><a href="?page=Using the SPARQL Endpoint#Useful Prefixes">Useful Prefixes</a></li>
+    <li><a href="?page=Using the SPARQL Endpoint#Formatting">Formatting</a></li>
+    <li><a href="?page=Using the SPARQL Endpoint#Soft Limit">Soft Limit</a></li>
+    <li><a href="?page=Using the SPARQL Endpoint#Reasoning">Reasoning</a></li>
     <li><a href="?page=Using the SPARQL Endpoint#Automated Querying">Automated Querying</a></li>
   </ol>
   <li><a href="?page=PREFIX">PREFIX</a></li>
