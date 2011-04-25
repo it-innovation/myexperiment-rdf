@@ -26,27 +26,59 @@ WHERE{
 </div>
 <br/>
 <p>The <em>Soft Limit</em> option determines the amount of resources dedicated to returning all the matching results.  In general 1% is sufficient.  However, if all the results are not returned then a warning message will be displayed and you can try re-running the query with a greater Soft Limit percentage.</p>
+<p>The <em>Enable RDFS Reasoning</em> option allows you to make use of <a href="http://4s-reasoner.ecs.soton.ac.uk/">4Store Reasoner</a>, an RDFS reasoner addition to 4Store.  This will perform query-time RDFS reasoning on RDFS subClassOf and subPropertyOf properties.  The following query will return more results is RDFS reasoning is enabled because all the super classes of Workflow:</p>
+<div class="yellow"><pre>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+SELECT ?type 
+WHERE { 
+  &lt;http://www.myexperiment.org/workflows/16&gt; rdf:type ?type 
+}</pre><div style="float: right; position: relative; top: -35px; text-align: right;">[<a href="/sparql?query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Ftype+%0D%0AWHERE+%7B+%0D%0A++%3C<?= urlencode($datauri) ?>workflows%2F16%3E+rdf%3Atype+%3Ftype+%0D%0A%7D%0D%0A%0D%0A&amp;formatting=HTML Table">Run <font style="font-size: 0.6em;">(Without Reasoning)</font></a>]
+[<a href="/sparql?query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Ftype+%0D%0AWHERE+%7B+%0D%0A++%3C<?= urlencode($datauri) ?>workflows%2F16%3E+rdf%3Atype+%3Ftype+%0D%0A%7D%0D%0A%0D%0A&amp;formatting=HTML Table&amp;reasoning=1">Run <font style="font-size: 0.6em;">(With Reasoning)</font></a>]<br/><span id="results2_show" onclick="showResults('results2');" style="display: none;">[<span class="link">Show&nbsp;Example&nbsp;Results</span>]</span><span id="results2_hide" onclick="hideResults('results2');">[<span class="link">Hide&nbsp;Example&nbsp;Results</span>]</span></div></div>
+<div class="green" id="results2" style="clear: both; position: relative; top: -26px;">
+  <table style="margin-left: auto; margin-right: auto;"><tr><td style="vertical-align: top;">
+    <h4 style="text-align: center; padding-bottom: 5px;">Without Reasoning</h4>
+    <table class="listing">
+      <tr><th>type</th></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/contributions/Workflow</td></tr>
+    </table>
+  </td>
+  <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td style="vertical-align: top;">
+    <h4 style="text-align: center; padding-bottom: 5px;">With Reasoning</h4>
+    <table class="listing">
+      <tr><th>type</th></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/contributions/Workflow</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/contributions/AbstractWorkflow</td></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/experiments/Runnable</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/base/Interface</td></tr>
+    </table>
+  </td></tr></table>
+</div>
 
 <h3><a name="Automated Querying"/>1.1. Automated Querying</h3>
 <p>If you wish to write automated queries rather than using the endpoint form you can insert the query (in URL encoded format) into the URL as the <em>query</em> parameter in the HTTP GET header.  If you have built a query using the endpoint form and want to use it as an automated service in something such as a workflow, instead of clicking &quot;Submit Query&quot;, click on &quot;Generate Service from Query&quot;.  This will take you to a page with a link something like the one below, that you can copy and paste into your workflow or HTTP request capable application.</a></p>
 <code><small><a target="_blank" href="/sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D"><?= $hostpath ?>sparql<b>?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D</b></a></small></code>
+<br/><br/>
 <p>As you will notice is you click on the link above this will return results is raw SPARQL results XML format.  If you wish to get the results in a different format you can also set the <em>formatting</em> parameter in the GET header:</p>
-<code><small><a target="_blank" href="/sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D&amp;formatting=In Page"><?= $hostpath ?>sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D<b>&amp;formatting=In Page</b></a></small></code>
+<code><small><a target="_blank" href="/sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D&amp;formatting=In Page"><?= $hostpath ?>sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D<b>&amp;<b>formatting=HTML Table</b></a></small></code>
 <p>The options for the formatting parameter are:</p>
 <ul>
-  <li>In Page</li>
-  <li>Raw</li>
   <li>HTML Table</li>
+  <li>XML</li>
   <li>Text</li>
   <li>JSON</li>
   <li>CSV</li>
   <li>CSV Matrix</li>
 </ul>
 <p>The Soft Limit can also be set as an integer between 1 (default) and 100 by using the GET header parameter <em>softlimit</em>:</p>
-<code><small><a target="_blank" href="/sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D&amp;formatting=In Page&amp;softlimit=5"><?= $hostpath ?>sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D&amp;formatting=In Page<b>&amp;softlimit=5</b></a></small></code>
+<code><small><a target="_blank" href="/sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D&amp;formatting=In Page&amp;softlimit=5"><?= $hostpath ?>sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D&amp;formatting=HTML Table<b>&amp;softlimit=5</b></a></small></code>
+<br/><br/>
+<p>Finally reasoning can be enabled by setting the <em>reasoning</em> parameter to 1, yes, or true in the GET header:</p>
+<code><small><a target="_blank" href="/sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D&amp;formatting=In Page&amp;reasoning=1"><?= $hostpath ?>sparql?query=PREFIX+mebase%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fbase%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Frequester+%3Faccepter+%0D%0AWHERE%7B+%0D%0A++%3Ffriendship+rdf%3Atype+mebase%3AFriendship+%3B%0D%0A++++mebase%3Aaccepted-at+%3Faccepted_time+%3B+%0D%0A++++mebase%3Ahas-requester+%3Frequester+%3B%0D%0A++++mebase%3Ahas-accepter+%3Faccepter+%0D%0A%7D&amp;formatting=HTML Table<b>&amp;reasoning=1</b></a></small></code>
+
 <br/><br/>
 
 <script type= "text/javascript"><!-- 
   hideResults('results1');
+  hideResults('results2')
 --></script>
 

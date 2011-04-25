@@ -14,6 +14,7 @@ $notriples=getNoTriples($ts);
 $prefix="";
 $lmdate=date('r',strtotime(date('Y-m-d',getLastUpdated($ts)))-60);
 $softlimit=1;
+$reasoning=0;
 $maxsoftlimit=100;
 $formatting="XML";
 $mimetype="application/xml";
@@ -46,9 +47,10 @@ if (isset($_POST['generate_service'])){
 		$pagetitle="SPARQL Query Service";
 	        include('header.inc.php');
 		if (strlen($formatting)>0 && $formatting!="HTML Table") $formatparam="&formatting=".$formatting;
-		
+		if ($_POST['softlimit']>1) $softlimitparam="&amp;softlimit=$_POST[softlimit]";
+		if (isset($_POST['reasoning'])) $reasoningparam="&amp;reasoning=$_POST[reasoning]";
 		$query=urlencode(preProcessQuery($_POST['query']));
-		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query$formatparam";
+		$service_url="http://".$_SERVER['SERVER_NAME']."/sparql?query=$query$formatparam$softlimitparam$reasoningparam";
 		echo "<p>Below is a URL which you can use give to any application capable of making HTTP requests and it will return you the current results for the query you made.</p>";
 		if ($formatting=="HTML Table"){
 			echo "<div class=\"red\"><b>WARNING:</b> This service require the HTTP request to explictly specify its accept type in the request header.  if this is not set appropriately the format returned will most likely be HTML with an embedded table of results. To select a particular format, click back and select it from the list provided before clicking &quot;Generate Service for Query&quot; again.</div><br/>\n";
@@ -58,7 +60,7 @@ if (isset($_POST['generate_service'])){
 	       exit(1);
 	}
 	else{
-		$err="No Query was Submitted";
+		$err="No query was submitted";
 	}
 }
 if (!$clientlive) $err="This myExperiment SPARQL Endpoint is currently unavailable";
@@ -66,14 +68,16 @@ else{
 	if ($_POST){
 		$query = $_POST['query'];
 		if (is_int(intval($_POST['softlimit'])) && intval($_POST['softlimit'])>0 && intval($_POST['softlimit'])<=$maxsoftlimit) $softlimit=intval($_POST['softlimit']);	
+		if (isset($_POST['reasoning']) && strlen($_POST['reasoning'])>0) $reasoning=1;
 	}
 	elseif ($_GET){		
 		$query = rawurldecode($_GET['query']);
 		if (is_int(intval($_GET['softlimit'])) && intval($_GET['softlimit'])>0 && intval($_GET['softlimit'])<=$maxsoftlimit) $softlimit=intval($_GET['softlimit']);
+		if (isset($_GET['reasoning']) && strlen($_GET['reasoning'])>0) $reasoning=1;
 	}
 	if ($query) {	
 		$query=preProcessQuery($query);
-		$results=sparqlQueryClient($ts,$query,$format,$softlimit*10000);
+		$results=sparqlQueryClient($ts,$query,$format,$softlimit*10000,$reasoning);
 		$err=implode('<br/>',$errs);
 	}
 }
@@ -145,6 +149,10 @@ if($clientlive && !$done){
         <tr>
           <th style="text-align: right;">Soft Limit:</th>
           <td style="text-align: left;"><input type="text" size="3" maxlength="3" name="softlimit" value="<?=$softlimit?>" />%</td>
+        </tr>
+        <tr>
+          <th style="text-align: right;">Enable RDFS Reasoning:</th>
+          <td style="text-align: left;"><input type="checkbox" <?php if ($reasoning) echo "checked=\"checked\""; ?> name="reasoning" value="1"/></td>
         </tr>
       </table>
       <?php if ($err) echo "<br/><div class=\"red\"><b>$err</b></div><br/>\n"; ?>

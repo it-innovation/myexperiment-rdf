@@ -75,13 +75,14 @@ function removeNamedGraph($modelname,$url){
         }
 	return $data;
 }
-function sparqlQueryClient($kb,$query,$format="sparql",$softlimit=1000){
+function sparqlQueryClient($kb,$query,$format="sparql",$softlimit=1000,$reasoning=0){
 	global $timetaken, $errs;
 	$errs=array();
         $data="";
 	$oquery=$query;
-	$query=str_replace('!','${BANG}',$query);
-        $cmd=getQueryPreamble().getPath()."4s-query -f $format $kb \"".$query."\" -s $softlimit";
+	$query=str_replace(array('!',"\r","\n","\t","  "),array('${BANG}',' ',' ',' ',' '),$query);
+	if ($reasoning==1 || (is_string($reasoning) && (strtolower($reasoning)=="true" || strtolower($reasoning)=="yes"))) $reason="-R CP";
+        $cmd=getQueryPreamble().getPath()."4s-query $reason -f $format $kb \"".$query."\" -s $softlimit";
 	$start=time();
         $ph=popen($cmd,'r');
 	$data="";
@@ -103,7 +104,7 @@ function sparqlQueryClient($kb,$query,$format="sparql",$softlimit=1000){
 	}
 	else $status='failed';
 	$sql="insert into sparql_queries values('','$kb','$oquery',$start,$stop,'$status','$data')";
-	mysql_query($sql);
+	mysql_query($sql); 
         return $data;
 }
 function sparqlQueryClientMultiple($kb,$queries,$softlimit=1000,$timeout=30){
