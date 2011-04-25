@@ -26,7 +26,7 @@ WHERE{
 </div>
 <br/>
 <p>The <em>Soft Limit</em> option determines the amount of resources dedicated to returning all the matching results.  In general 1% is sufficient.  However, if all the results are not returned then a warning message will be displayed and you can try re-running the query with a greater Soft Limit percentage.</p>
-<p>The <em>Enable RDFS Reasoning</em> option allows you to make use of <a href="http://4s-reasoner.ecs.soton.ac.uk/">4Store Reasoner</a>, an RDFS reasoner addition to 4Store.  This will perform query-time RDFS reasoning on RDFS subClassOf and subPropertyOf properties.  The following query will return more results is RDFS reasoning is enabled because all the super classes of Workflow:</p>
+<p>The <em>Enable RDFS Reasoning</em> option allows you to make use of <a href="http://4s-reasoner.ecs.soton.ac.uk/">4Store Reasoner</a>, an RDFS reasoner addition to 4Store.  This will perform query-time RDFS reasoning on RDFS subClassOf and subPropertyOf properties.  The following query will return more results if RDFS reasoning is enabled because all the super classes of Workflow:</p>
 <div class="yellow"><pre>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
 SELECT ?type 
 WHERE { 
