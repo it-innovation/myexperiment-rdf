@@ -3,7 +3,7 @@
 	include('include.inc.php');
 	include('genrdf.inc.php');
 	$ph=popen('ls '.$datapath.'dataflows/xml/','r');
-	$ph2=popen('ls '.$datapath.'dataflows/reasoned/','r');
+	$ph2=popen('ls '.$datapath.'dataflows/rdf/','r');
 	$temp="";
 	while (!feof($ph)){
 		$temp.=fread($ph,8192);
@@ -25,7 +25,7 @@
 		if (!in_array($xf,$resfiles)){
 			$xmllines=file($datapath."dataflows/xml/$xf");
 			if (sizeof($xmllines)<=2){
-				exec("rm $datapath$argv[1]/reasoned/$xf ".$datapath."dataflows/rdf/$xf  2> /dev/null");
+				exec("rm ".$datapath."dataflows/rdf/$xf  2> /dev/null");
 				if ($argv[1]==$triplestore) fwrite($dellist,"$datapath$argv[1]/dataflows/$xf\n");
 			}
 			else{
