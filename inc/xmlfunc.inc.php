@@ -451,7 +451,7 @@ function generateDataflows($dataflows,$ent_uri){
 	                	       $rdf.="        <".$prop['type']." rdf:datatype=\"&xsd;string\">".xmlentities($prop['value'])."</".$prop['type'].">\n";
                         	}
 				elseif (in_array($prop['type'],$dturi)){
-					$components.="        <".$prop['type']." rdf:datatype=\"&xsd;anyURI\">".xmlentities($prop['value'])."</".$prop['type'].">\n";
+					$rdf.="        <".$prop['type']." rdf:resource=\"".xmlentities($prop['value'])."\"/>\n";
 				}
 				elseif ($prop['type']=="mecomp:executes-dataflow"){
 					if (substr($prop['value'],0,7)!="http://") $prop['value']=$dfmap[$prop['value']];
