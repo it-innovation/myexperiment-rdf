@@ -130,6 +130,27 @@ update-cached-files(){
 	$PHPEXEC_PATH/php $STORE4_PATH/scripts/changeddata.php $1
 	echo "[`date +%T`] Updated Cached Files for $1"
 }
+import(){
+ 	day=`date +%e`
+        month=`date +%b`
+        date +%s > $STORE4_PATH/log/$1_update_time.log
+        ontologies=( myexp_snarm.owl myexp_base.owl myexp_annot.owl myexp_attrib_cred.owl myexp_view_down.owl myexp_packs.owl myexp_contrib.owl myexp_exp.owl myexp_components.owl myexp_specific.owl )
+        for o in ${ontologies[@]}; do
+                added=`add $1 $LD_PATH/http/ontologies/$o`
+                if [ $added -gt 0 ]; then
+                        echo "[`date +%T`] Added/Updated myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
+                else
+                        echo "[`date +%T`] Could Not Add/Update myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
+                fi
+        done
+        added=`add $1 $DATA_PATH/$1/myexperiment.rdf`
+        if [ $added -gt 0 ]; then
+                echo "[`date +%T`] Added/Updated myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
+        else
+                echo "[`date +%T`] Could Not Add/Update myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
+        fi
+	count-triples $1
+}
 update(){
         check_triplestore $1
         check-versions $1
@@ -147,24 +168,25 @@ update(){
 #	else
 #		update-cached-files $1
 #	fi
-	day=`date +%e`
-        month=`date +%b`
-	date +%s > $STORE4_PATH/log/$1_update_time.log
-	ontologies=( myexp_snarm.owl myexp_base.owl myexp_annot.owl myexp_attrib_cred.owl myexp_view_down.owl myexp_packs.owl myexp_contrib.owl myexp_exp.owl myexp_components.owl myexp_specific.owl )
-	for o in ${ontologies[@]}; do
-		added=`add $1 $LD_PATH/http/ontologies/$o`
-		if [ $added -gt 0 ]; then
-	                echo "[`date +%T`] Added/Updated myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
-        	else
-                	echo "[`date +%T`] Could Not Add/Update myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
-        	fi
-	done
-	added=`add $1 $DATA_PATH/$1/myexperiment.rdf`
-        if [ $added -gt 0 ]; then
-        	echo "[`date +%T`] Added/Updated myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
-        else
-        	echo "[`date +%T`] Could Not Add/Update myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
-        fi
+	import $1
+#	day=`date +%e`
+#       month=`date +%b`
+#	date +%s > $STORE4_PATH/log/$1_update_time.log
+#	ontologies=( myexp_snarm.owl myexp_base.owl myexp_annot.owl myexp_attrib_cred.owl myexp_view_down.owl myexp_packs.owl myexp_contrib.owl myexp_exp.owl myexp_components.owl myexp_specific.owl )
+#	for o in ${ontologies[@]}; do
+#		added=`add $1 $LD_PATH/http/ontologies/$o`
+#		if [ $added -gt 0 ]; then
+#	                echo "[`date +%T`] Added/Updated myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
+ #       	else
+  #              	echo "[`date +%T`] Could Not Add/Update myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
+   #     	fi
+#	done
+#	added=`add $1 $DATA_PATH/$1/myexperiment.rdf`
+ #       if [ $added -gt 0 ]; then
+  #      	echo "[`date +%T`] Added/Updated myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
+   #     else
+    #    	echo "[`date +%T`] Could Not Add/Update myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
+     #   fi
 
 	#stop $1
 	#start $1
@@ -194,7 +216,7 @@ update(){
 #			echo "[`date +%T`] No graphs to add/update for $e to $1 Knowledge Base"
 #		fi
  #       done
-	count-triples $1
+#count-triples $1
 }	
 list-graphs(){
 	check_triplestore $1
@@ -326,7 +348,7 @@ run-diagnostic(){
 }
 check-versions(){
 #	store4version=`$STORE4EXEC_PATH/4s-info --version 2>&1 | head -n 1 | awk '{print $NF}'`
-	store4version="4sr-v1.0.0"
+	store4version="4sr-2fc0eaf"
  	raptorversion=`pkg-config raptor2 --modversion`
  	rasqalversion=`$STORE4EXEC_PATH/rasqal-config --version`
  	echo "4store ($store4version), Raptor (v$raptorversion), Rasqal (v$rasqalversion)" > $STORE4_PATH/log/4storeversions.log
@@ -352,6 +374,9 @@ case "$2" in
 	;;
   update)
 	update $1 $3
+	;;
+  import)
+	import $1
 	;;
   reason-ontology)
 	reason-ontology $1

@@ -1,4 +1,4 @@
-echo "Usage: triplestore <triplestore_name> {start|stop|restart|status|update|add|remove|test|reason-ontology|reason-file|reason-files|list-graphs|count-triples|generate-spec|graph-size|data-dump|generate-linksets|generate-voidspec|run-diagnostic|check-versions|help} [OPTIONS]
+echo "Usage: triplestore <triplestore_name> {start|stop|restart|status|update|import|add|remove|test|reason-ontology|reason-file|reason-files|list-graphs|count-triples|generate-spec|graph-size|data-dump|generate-linksets|generate-voidspec|run-diagnostic|check-versions|help} [OPTIONS]
 
 Examples
 
@@ -15,6 +15,9 @@ Examples
   <triplestore> = [ $TRIPLESTORE, ontologies ]
 
 ./sqs.sh <triplestore> update [ no-cache ]
+  <triplestore> = [ $TRIPLESTORE ]
+
+./sqs.sh <triplestore> import
   <triplestore> = [ $TRIPLESTORE ]
 
 ./sqs.sh <triplestore> reason-ontology

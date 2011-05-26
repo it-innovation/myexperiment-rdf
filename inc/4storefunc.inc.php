@@ -81,7 +81,7 @@ function sparqlQueryClient($kb,$query,$format="sparql",$softlimit=1000,$reasonin
         $data="";
 	$oquery=$query;
 	$query=str_replace(array('!',"\r","\n","\t","  "),array('${BANG}',' ',' ',' ',' '),$query);
-	if ($reasoning==1 || (is_string($reasoning) && (strtolower($reasoning)=="true" || strtolower($reasoning)=="yes"))) $reason="-R CP";
+	if ($reasoning==1 || (is_string($reasoning) && (strtolower($reasoning)=="true" || strtolower($reasoning)=="yes"))) $reason="-R CPDR";
         $cmd=getQueryPreamble().getPath()."4s-query $reason -f $format $kb \"".$query."\" -s $softlimit";
 	$start=time();
         $ph=popen($cmd,'r');
