@@ -29,13 +29,13 @@ WHERE{
 <h3><a name="Soft Limit"/>1.3. Soft Limit</h3>
 <p>The <em>Soft Limit</em> option determines the amount of resources dedicated to returning all the matching results.  In general 1% is sufficient.  However, if all the results are not returned then a warning message will be displayed and you can try re-running the query with a greater Soft Limit percentage.</p>
 <h3><a name="Reasoning"/>1.4. Reasoning</h3> 
-<p>The <em>Enable RDFS Reasoning</em> option allows you to make use of <a href="http://4s-reasoner.ecs.soton.ac.uk/">4Store Reasoner</a>, an RDFS reasoner addition to 4Store.  This will perform query-time RDFS reasoning on RDFS subClassOf and subPropertyOf properties.  The following query will return more results if RDFS reasoning is enabled because all the super classes of Workflow:</p>
+<p>The <em>Enable RDFS Reasoning</em> option allows you to make use of <a href="http://4s-reasoner.ecs.soton.ac.uk/">4Store Reasoner</a>, an RDFS reasoner addition to 4Store.  This will perform query-time RDFS reasoning on RDFS subClassOf, subPropertyOf, domain and range properties.  The following query will return more results if RDFS reasoning is enabled because all the super classes of Workflow:</p>
 <div class="yellow"><pre>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-SELECT ?type 
+SELECT DISTINCT ?type 
 WHERE { 
   &lt;http://www.myexperiment.org/workflows/16&gt; rdf:type ?type 
-}</pre><div style="float: right; position: relative; top: -35px; text-align: right;">[<a href="/sparql?query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Ftype+%0D%0AWHERE+%7B+%0D%0A++%3C<?= urlencode($datauri) ?>workflows%2F16%3E+rdf%3Atype+%3Ftype+%0D%0A%7D%0D%0A%0D%0A&amp;formatting=HTML Table">Run <font style="font-size: 0.6em;">(Without Reasoning)</font></a>]
-[<a href="/sparql?query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+%3Ftype+%0D%0AWHERE+%7B+%0D%0A++%3C<?= urlencode($datauri) ?>workflows%2F16%3E+rdf%3Atype+%3Ftype+%0D%0A%7D%0D%0A%0D%0A&amp;formatting=HTML Table&amp;reasoning=1">Run <font style="font-size: 0.6em;">(With Reasoning)</font></a>]<br/><span id="results2_show" onclick="showResults('results2');" style="display: none;">[<span class="link">Show&nbsp;Example&nbsp;Results</span>]</span><span id="results2_hide" onclick="hideResults('results2');">[<span class="link">Hide&nbsp;Example&nbsp;Results</span>]</span></div></div>
+}</pre><div style="float: right; position: relative; top: -35px; text-align: right;">[<a href="/sparql?query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+DISTINCT+%3Ftype+%0D%0AWHERE+%7B+%0D%0A++%3C<?= urlencode($datauri) ?>workflows%2F16%3E+rdf%3Atype+%3Ftype+%0D%0A%7D%0D%0A%0D%0A&amp;formatting=HTML Table">Run <font style="font-size: 0.6em;">(Without Reasoning)</font></a>]
+[<a href="/sparql?query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0ASELECT+DISTINCT+%3Ftype+%0D%0AWHERE+%7B+%0D%0A++%3C<?= urlencode($datauri) ?>workflows%2F16%3E+rdf%3Atype+%3Ftype+%0D%0A%7D%0D%0A%0D%0A&amp;formatting=HTML Table&amp;reasoning=1">Run <font style="font-size: 0.6em;">(With Reasoning)</font></a>]<br/><span id="results2_show" onclick="showResults('results2');" style="display: none;">[<span class="link">Show&nbsp;Example&nbsp;Results</span>]</span><span id="results2_hide" onclick="hideResults('results2');">[<span class="link">Hide&nbsp;Example&nbsp;Results</span>]</span></div></div>
 <div class="green" id="results2" style="clear: both; position: relative; top: -26px;">
   <table style="margin-left: auto; margin-right: auto;"><tr><td style="vertical-align: top;">
     <h4 style="text-align: center; padding-bottom: 5px;">Without Reasoning</h4>
@@ -49,10 +49,24 @@ WHERE {
     <h4 style="text-align: center; padding-bottom: 5px;">With Reasoning</h4>
     <table class="listing">
       <tr><th>type</th></tr>
-      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/contributions/Workflow</td></tr>
+      <tr><td class="shade">b139c71020000004f</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/base/Submission</td></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/attrib_credit/Attributable</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/annotations/Favouritable</td></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/annotations/Commentable</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/attrib_credit/Creditable</td></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/base/Upload</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/annotations/Taggable</td></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/annotations/Citationable</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/contributions/Workflow</td></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/annotations/Rateable</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/base/Annotatable</td></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/base/Contribution</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/base/Interface</td></tr>
+      <tr><td class="shade">http://rdf.myexperiment.org/ontologies/base/Versionable</td></tr>
       <tr><td>http://rdf.myexperiment.org/ontologies/contributions/AbstractWorkflow</td></tr>
       <tr><td class="shade">http://rdf.myexperiment.org/ontologies/experiments/Runnable</td></tr>
-      <tr><td>http://rdf.myexperiment.org/ontologies/base/Interface</td></tr>
+      <tr><td>http://rdf.myexperiment.org/ontologies/annotations/Reviewable</td></tr>
     </table>
   </td></tr></table>
 </div>
