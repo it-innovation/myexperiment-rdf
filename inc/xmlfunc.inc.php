@@ -611,16 +611,18 @@ function extractRDF($id,$wfid,$version,$posthash){
 	//echo "$filename = $uri\n";
         $lines=file($filename);
         $l=0;
-        while ((strpos($lines[$l],"rdf:about=\"$uri\"") === FALSE) && ($l<sizeof($lines))){
+        while ($l<sizeof($lines) && (strpos($lines[$l],"rdf:about=\"$uri\"") === FALSE)){
                 $l++;
         }
 	$rdf="";
-        $ebits=explode(" ",str_replace(array("<",">"),"",trim($lines[$l])));
-        while ((strpos($lines[$l],'</'.$ebits[0].'>') === FALSE) && ($l<sizeof($lines))){
-                $rdf.=$lines[$l];
-                $l++;
-        }
-        $rdf.=$lines[$l];
+        if ($l<sizeof($lines)) {
+		$ebits=explode(" ",str_replace(array("<",">"),"",trim($lines[$l])));
+	        while ($l<sizeof($lines) && (strpos($lines[$l],'</'.$ebits[0].'>') === FALSE)){
+        	        $rdf.=$lines[$l];
+               	 	$l++;
+        	}
+ 		if ($l<sizeof($lines)) $rdf.=$lines[$l];
+	}
        	return $rdf;
 }
 

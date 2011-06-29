@@ -181,13 +181,13 @@ function getThumbnailBig($workflow){
 	return $url;
 }
 function getPreview($workflow){
-        $url=getUrl($workflow);
+        $url=getUrl($workflow,'full');
 	if (isset($workflow['format'])) $format = $workflow['format'];
         else $format = "";
 	return $url;
 }
 function getSVG($workflow){	
-	$url=getUrl($workflow,'','svg');
+	$url=getUrl($workflow,'svg');
 	if (isset($workflow['format'])) $format = $workflow['format'];
         else $format = "";
 	return $url;
@@ -198,14 +198,12 @@ function workflowOrVersion($entity){
         else $type="WorkflowVersion";
 	return $datauri.$type."/".$entity['id'];
 }
-function getUrl($workflow,$type="",$format="image"){
+function getUrl($workflow,$type=""){
  	global $datauri;
-        if (!isset($workflow[$format])) return '';
-	if ($type) $type.="/";
         if (isset($workflow['workflow_id'])){
-                return $datauri."workflow/version/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
+                return $datauri."workflows/".$workflow['workflow_id']."/versions/".$workflow['version']."/previews/".$type;
         }
-        return $datauri."workflow/$format/".$workflow['id']."/".$type.urlencode($workflow[$format]);
+        return $datauri."workflows/".$workflow['id']."/previews/".$type;
 }
 function getWorkflowDownloadUrl($workflow){
 	global $datauri;

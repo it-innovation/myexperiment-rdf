@@ -79,6 +79,7 @@
 					if (isset($mhbits[1])) $posthash=$mhbits[1];
 					else $posthash="";
 					$mbits=explode('/',$mhbits[0]);
+					if (in_array("previews",$mbits) && (in_array("full",$mbits)||in_array("medium",$mbits)||in_array("thumb",$mbits)||in_array("svg",$mbits))) continue;
 					if (strpos($m,'.') === false && $mbits[0] && $sql[$mbits[0]] && $datauri.$m != $uri){
 						if ($posthash){
 							$wfid=$mbits[1];
