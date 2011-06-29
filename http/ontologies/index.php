@@ -87,7 +87,7 @@
 </ul>
 <p>Users can request friendships with other users, which can then be accepted.  Users can request membership of a group which may be accepted by the group's owner.  A group owner may also request for a user to join a group which the user may then choose to join.  All information about the friends a user has and groups they are a member of are store within the Friendship and Membership objects.  FriendshipInvitation and MembershipInvitation are similar to their non-invitation counterpart except the request is made to an external party via an email address.</p>
 
-<p>Friendships and Memberships are separate objects from the User or Group.  However, it is possible to write <a href="http://www.w3.org/Submission/SWRL/" title="SWRL W3C Member Submission Page">SWRL</a> rules to infer <a href="specification#mebase:is-friends-with">is-friend-with</a> and (<a href="specification#mebase:is-member">is</a>/<a href="specification#mebase:has-member">has</a>)-member triples that can be stored as properties of the User or Group object.</p>
+<p>Friendships and Memberships are separate objects from the User or Group.  However, it is possible to write <a href="http://www.w3.org/Submission/SWRL/" title="SWRL W3C Member Submission Page">SWRL</a> rules to infer <a href="specification#mebase:is-friends-with">is-friends-with</a> and (<a href="specification#mebase:is-member">is</a>/<a href="specification#mebase:has-member">has</a>)-member triples that can be stored as properties of the User or Group object.</p>
 
 <p>The Base module also contains a <a href="specification#mebase:Message">Message</a> class for sending messages between users within myExperiment.</p>
 
@@ -132,8 +132,8 @@
   <li><b><a href="specification#mecomp:Processor">Processor</a></b> A service that performs some processing on one or more Inputs and produces one or more Ouputs.</li>
   <li><b><a href="specification#mecomp:Source">Source</a></b> An initial piece of data to be processed by the Workflow</li>
   <li><b><a href="specification#mecomp:Sink">Sink</a></b> A final piece of data produced by the Workflow</li>
-  <li><b><a href="specification#mecomp:Input"></a></b>A piece of data going into a Processor</li>
-  <li><b><a href="specification#mecomp:Output">Output</a></b>A piece of data coming out of a Processor</li>
+  <li><b><a href="specification#mecomp:Input">Input</a></b> A piece of data going into a Processor</li>
+  <li><b><a href="specification#mecomp:Output">Output</a></b> A piece of data coming out of a Processor</li>
   <li><b><a href="specification#mecomp:Link">Link</a></b> A connection between an Output of a Source of Processor to the Input for another Processor or Sink</li>
 </ul>
 <p>All these Workflow Components are encompassed within a <a href="specification#mecomp:Dataflow">Dataflow</a>. Fig. 5 shows how these Workflow Components interlink to form a Dataflow.  Currently every publicly available Taverna workflow has an <a href="specification#mecomp:executes-dataflow">executes-dataflow</a> property to it's Dataflow. </p>
@@ -149,6 +149,6 @@
    <li><b><a href="specification#mecomp:WSDLProcessor">WSDLProcessor</a></b> This calls a remote WSDL service </li>
    <li><b><a href="specification#mecomp:OtherProcessor">OtherProcessor</a></b> Represent all other type of Processor.  All Processor have a <a href="specification#mecomp:processor-type">processor-type</a> property that gives a more specific categorisation for the Processor</li>
 </ul>
-<p>Due to it being possible to nest one Dataflow within another each Workflow Component has a <a href="specification#mecomp:belongs-to-worflow">belongs-to-worflow</a> that makes its possible to execute a simple SPARQL query to find all the components of a paticular workflow.</p>
+<p>Due to it being possible to nest one Dataflow within another each Workflow Component has a <a href="specification#mecomp:belongs-to-workflow">belongs-to-workflow</a> that makes its possible to execute a simple SPARQL query to find all the components of a paticular workflow.</p>
 
 <?php include('footer.inc.php'); ?>
