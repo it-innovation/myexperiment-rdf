@@ -94,7 +94,7 @@
 	function getHomepageAndFormats($uri,$type,$id,$entity=''){
 		global $homepage, $xmluri, $datauri;
 		$xml="";
-		if ($homepage[$type]) $xml.="    <foaf:homepage rdf:resource=\"${uri}.html\"/>\n";
+		if (isset($homepage[$type])) $xml.="    <foaf:homepage rdf:resource=\"${uri}.html\"/>\n";
                 $xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.rdf\"/>\n";
 		if (isset($xmluri[$type])){
 		//	if ($entity['workflow_id']) $curxmluri=$datauri.str_replace("!",$entity['version'],str_replace("~",$entity['workflow_id'],$xmluri[$type]));
