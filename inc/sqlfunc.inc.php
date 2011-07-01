@@ -8,7 +8,7 @@ function entityExists($type,$ids=array()){
                 $idstr="";
                 foreach($ids as $id) $idstr.="$id,";
                 $cursql.=" where id in (".substr($idstr,0,-1).")";
-		if ($type=="comments") $cursql.=" and commentable_type in ('Workflow','File','Pack','Network')";
+		if ($type=="comments") $cursql.=" and commentable_type in ('Workflow','Blob','Pack','Network')";
         }
 	else{
 		$res=mysql_query($cursql);

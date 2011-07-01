@@ -56,15 +56,29 @@
 	list($type,$id,$params,$wfid)=setTypeIDandParams($argv);
 	if (entityExists($type,$id)){
 	        $res=getEntityResults($type,$id);
-		$uri=getEntityURI($type,$id,mysql_fetch_assoc($res));
-		$res=getEntityResults($type,$id);
+		$row=mysql_fetch_assoc($res);
+		$uri=getEntityURI($type,$id,$row);
+		mysql_data_seek($res,0);
 		$e=1;
-		$xml=pageheader();
-		if ($id) $xml.=rdffiledescription($uri);
+		if ($type=="ontologies" && $id){
+			$xml=ontologypageheader($row);
+		}
+		else{
+			$xml=pageheader();
+			if ($id) $xml.=rdffiledescription($uri);
+		}
+		
 		for ($e=0; $e<mysql_num_rows($res); $e++){
        			$xml.=printEntity(mysql_fetch_assoc($res),$type);
 	       	}
-	 	if ($e==1){
+		if ($e==1 && $type=="ontologies"){
+			$xml.=printPredicates($id);
+		}
+		elseif ($e==1 && $type=="predicates"){
+			$ontres=getEntityResults("ontologies",$row['ontology_id']);
+			$xml.=printEntity(mysql_fetch_assoc($ontres),"ontologies");
+		}
+	 	elseif ($e==1){
 			$regex=$datauri.'[^<>]+>';
 			preg_match_all("!$regex!",$xml,$matches);
 			foreach ($matches as $m => $match){

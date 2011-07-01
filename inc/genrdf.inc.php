@@ -97,13 +97,10 @@
 		if (isset($homepage[$type])) $xml.="    <foaf:homepage rdf:resource=\"${uri}.html\"/>\n";
                 $xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.rdf\"/>\n";
 		if (isset($xmluri[$type])){
-		//	if ($entity['workflow_id']) $curxmluri=$datauri.str_replace("!",$entity['version'],str_replace("~",$entity['workflow_id'],$xmluri[$type]));
-		//	else $curxmluri=$datauri.$xmluri[$type].$id;
 			$curxmluri=$uri.".xml";
 			
 			$xml.="    <dcterms:hasFormat rdf:resource=\"$curxmluri\"/>\n";
 		}
-//		$xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.xml\"/>\n";
 		return $xml;
 	}
 
@@ -244,6 +241,16 @@
 	        $header.=">\n";
 	        return $header;
 	}
+	function ontologypageheader($ontology){
+		$namespaces['rdf']='http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+                $namespaces['rdfs']='http://www.w3.org/2000/01/rdf-schema#';
+                $namespaces['owl']='http://www.w3.org/2002/07/owl#';
+                $namespaces['dc']='http://purl.org/dc/elements/1.1/';
+                $namespaces['dcterms']='http://purl.org/dc/terms/';
+                $namespaces['xsd']='http://www.w3.org/2001/XMLSchema#';
+		$namespaces[$ontology['prefix']]=$ontology['uri']."/";
+		return varpageheader($namespaces);
+	}	
 
 	function pageheader($namespaces=array()){
 		global $ontopath;

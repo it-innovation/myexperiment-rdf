@@ -26,13 +26,14 @@ function getEntityURI($type,$id,$entity,$format=''){
 				return $datauri."packs/".$entity[$nesting[$type][0]]."/$type/$id";
 			case 'taggings':
 				return $datauri."tags/".$entity[$nesting[$type][0]]."/$type/$id";
-			case 'concepts':
-				return $datauri."vocabularies/".$entity[$nesting[$type][0]]."/$type/$id";
+			case 'ontologies':
+                                return $entity['uri'];
+			case 'predicates':
+				return $entity['ontology_uri']."/".$entity['title'];
 			default:
 				break;
 		}
 	 }
-	 elseif ($format=="ore") return $datauri."aggregations/$type/$id";
          elseif ($type=="workflow_versions"){
 	        $wvsql="select workflow_id, version from workflow_versions where id=$id";
                 $wvres=mysql_query($wvsql);
@@ -43,6 +44,7 @@ function getEntityURI($type,$id,$entity,$format=''){
                 $gares=mysql_query($gasql);
                 return $datauri."groups/".mysql_result($gares,0,'network_id')."/announcements/".$id;
          }
+	 elseif ($type=="ontologies") return $entity['uri'];
          return $datauri."$type/$id";
 }
 
@@ -576,45 +578,21 @@ function getPackRelationships($pack){
 	}
 	return $xml;
 }
-function getConcepts($entity){
-	global $sql, $datauri;
-        $conceptsql=$sql['concepts'];
-        if (!stripos('where',$sql['concepts'])) $conceptsql.=" where ";
-        else $conceptsql.=" and ";
-        $conceptsql.="vocabulary_id=$entity[id]";
-        $res=mysql_query($conceptsql);
-	$xml="";
-        for ($c=0; $c<mysql_num_rows($res); $c++){
-                $row=mysql_fetch_assoc($res);
-		$xml.="    <mecontrib:has-concept rdf:resource=\"${datauri}vocabularies/$entity[id]/concepts/$row[id]\"/>\n";
-	}
-	return $xml;
-}	
 
-function getConceptRelations($entity){
+// Needs rewriting once predicate relationships are introduced.
+function getPredicateRelations($entity){
 	global $sql, $datauri;
 	$xml="";
-	$conceptsql=$sql['concept_relations'];
-	if (!stripos('where',$sql['concept_relations'])) $conceptsql.=" where ";
-        else $conceptsql.=" and ";
-        $conceptrelsql=$conceptsql."subject_concept_id=$entity[id]";
-        $res=mysql_query($conceptrelsql);
+	$predicatesql=$sql['predicate_relations'];
+	if (!stripos('where',$sql['predicate_relations'])) $predicatesql.=" where ";
+        else $predicatesql.=" and ";
+        $predicaterelsql=$predicatesql."subject_predicate_id=$entity[id]";
+        $res=mysql_query($predicaterelsql);
 	if ($res!==false){
 	        for ($r=0; $r<mysql_num_rows($res); $r++){
         	        $row=mysql_fetch_assoc($res);
-                	$xml.="    <skos:$row[relation_type] rdf:resource=\"${datauri}vocabularies/$entity[vocabulary_id]/concepts/$row[object_concept_id]\"/>\n";
+                	$xml.="    <rdfs:subClassOf rdf:resource=\"$entity[ontology_uri]/$row[object_predicate_id]\"/>\n";
 	        }
-		$conceptrelrevsql=$conceptsql."object_concept_id=$entity[id]";
-		$res2=mysql_query($conceptrelrevsql);
-		for ($r=0; $r<mysql_num_rows($res2); $r++){
-			$row2=mysql_fetch_assoc($res2);
-			$relationtype="";
-			if ($row2['relation_type']=="broader") $relationtype="narrower";	
-			elseif ($row2['relation_type']=="narrower") $relationtype="broader";
-			elseif ($row2['relation_type']=="related") $relationtype="related";
-			if (strlen($relationtype)>0)
-	        	        $xml.="    <skos:$relationtype rdf:resource=\"${datauri}vocabularies/$entity[vocabulary_id]/concepts/$row2[subject_concept_id]\"/>\n";
-		}
 	}
 	return $xml;
 }
@@ -625,7 +603,7 @@ function getRelationshipObject($entity){
         return getRelationshipNode($entity['objekt_id'],$entity['objekt_type']);
 }
 function getRelationshipPredicate($entity){
-	return getConcept(array('vocabulary_id'=>$entity['vocabulary_id'],'id'=>$entity['concept_id']));
+	return getPredicate($entity['predicate_id']);
 }
 function getRelationshipNode($id,$type){
 	global $datauri, $tables;
@@ -641,14 +619,34 @@ function getRelationshipNode($id,$type){
 		return $uri;
 	}
 }
-function getConcept($entity){
-	return "vocabularies/$entity[vocabulary_id]/concepts/$entity[id]";
+function getPredicate($id){
+	$predsql="select ontologies.uri as ontology_uri, predicates.title as predicate from predicates inner join ontologies on predicates.ontology_id=ontologies.id where predicates.id=$id";
+	$res=mysql_result($predsql);
+	return mysql_result($res,0,'ontology_uri')."/".mysql_result($res,0,'predicate');
 }
+function printPredicates($id){
+	global $sql;
+	$predssql=$sql['predicates'];
+	if (!stripos('where',$sql['predicates'])) $predssql.=" where ";
+        else $predssql.=" and ";
+	$predssql.="predicates.ontology_id=$id";
+	echo $predssql;
+	$res=mysql_query($predssql);
+	$xml="";
+	for ($p=0; $p<mysql_num_rows($res); $p++){
+		$xml.=printEntity(mysql_fetch_assoc($res),"predicates");
+	}
+	return $xml;
+}
+	
 function getOntologyEntityTypeFromDBType($type){
 	global $modelalias, $ontent;
 	if (in_array($type,$modelalias)) $type=array_search($type,$modelalias);
 	if (in_array($type,$ontent)) $type=array_search($type,$ontent);
 	return $type;
+}
+function getStaticOntologyDetails($entity){
+	return "    <dc:language rdf:datatype=\"&xsd;string\">en</dc:language>\n    <dc:publisher rdf:resource=\"http://www.myexperiment.org\"/>\n    <dc:format rdf:datatype=\"&xsd;string\">rdf/xml</dc:format>\n";
 }
 
 ?>

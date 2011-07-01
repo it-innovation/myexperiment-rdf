@@ -66,3 +66,7 @@ neiss:zoom positiveInteger
 neiss:map_descriptor string
 neiss:copyright_statement string
 neiss:copyright_text string
+rdfs:label string
+rdfs:comment string
+dc:language string
+dc:format string
