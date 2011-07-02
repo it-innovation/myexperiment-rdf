@@ -157,7 +157,7 @@ update(){
 	reason-ontology $1        
 	get-dataflows
 	delete-non-public-dataflows $1
-        reason-dataflows $1
+#       reason-dataflows $1
 	data-dump $1
 #	if [ -n "$2" ]; then 
 #		if [ $2 == "no-cache" ]; then

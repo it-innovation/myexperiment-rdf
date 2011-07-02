@@ -621,7 +621,7 @@ function getRelationshipNode($id,$type){
 }
 function getPredicate($id){
 	$predsql="select ontologies.uri as ontology_uri, predicates.title as predicate from predicates inner join ontologies on predicates.ontology_id=ontologies.id where predicates.id=$id";
-	$res=mysql_result($predsql);
+	$res=mysql_query($predsql);
 	return mysql_result($res,0,'ontology_uri')."/".mysql_result($res,0,'predicate');
 }
 function printPredicates($id){

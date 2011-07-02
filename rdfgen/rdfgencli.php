@@ -58,7 +58,7 @@
 	        $res=getEntityResults($type,$id);
 		$row=mysql_fetch_assoc($res);
 		$uri=getEntityURI($type,$id,$row);
-		mysql_data_seek($res,0);
+		if (mysql_num_rows($res)>0) mysql_data_seek($res,0);
 		$e=1;
 		if ($type=="ontologies" && $id){
 			$xml=ontologypageheader($row);
