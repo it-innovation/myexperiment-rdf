@@ -92,10 +92,10 @@
 		return $xml;
 	}
 	function getHomepageAndFormats($uri,$type,$id,$entity=''){
-		global $homepage, $xmluri, $datauri;
+		global $homepage, $nordf, $xmluri, $datauri;
 		$xml="";
-		if (isset($homepage[$type])) $xml.="    <foaf:homepage rdf:resource=\"${uri}.html\"/>\n";
-                $xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.rdf\"/>\n";
+		if (isset($homepage[$type]) && $homepage[$type]) $xml.="    <foaf:homepage rdf:resource=\"${uri}.html\"/>\n";
+                if (!isset($nordf[$type])) $xml.="    <dcterms:hasFormat rdf:resource=\"${uri}.rdf\"/>\n";
 		if (isset($xmluri[$type])){
 			$curxmluri=$uri.".xml";
 			

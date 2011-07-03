@@ -34,7 +34,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">February 10, 2011</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">July 3, 2011</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -86,6 +86,10 @@
     <rdfs:range rdf:resource="&xsd;string"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="&skos;ConceptScheme">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="&mebase;text">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
   </rdf:Description>
@@ -95,6 +99,10 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="&mebase;Annotation">
+    <rdf:type rdf:resource="&owl;Class"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="&mebase;Contribution">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
 
@@ -274,6 +282,21 @@
     <rdfs:subClassOf rdf:resource="&mebase;Annotation" />
     <rdfs:isDefinedBy rdf:resource="&meannot;"/>
   </owl:Class>
+
+  <owl:Class rdf:about="Vocabulary">
+    <rdfs:label>Vocabulary</rdfs:label>
+    <rdfs:comment>A Vocabulary of Tags</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Contribution"/>
+    <rdfs:subClassOf rdf:resource="&skos;ConceptScheme"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&dcterms;title" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&meannot;"/>
+  </owl:Class>
+
 
   <!-- =============== Object Properties ============== -->
 

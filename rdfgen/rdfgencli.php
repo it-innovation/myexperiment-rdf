@@ -66,8 +66,7 @@
 		else{
 			$xml=pageheader();
 			if ($id) $xml.=rdffiledescription($uri);
-		}
-		
+		}	
 		for ($e=0; $e<mysql_num_rows($res); $e++){
        			$xml.=printEntity(mysql_fetch_assoc($res),$type);
 	       	}
@@ -94,7 +93,7 @@
 					else $posthash="";
 					$mbits=explode('/',$mhbits[0]);
 					if (in_array("previews",$mbits) && (in_array("full",$mbits)||in_array("medium",$mbits)||in_array("thumb",$mbits)||in_array("svg",$mbits))) continue;
-					if (strpos($m,'.') === false && $mbits[0] && $sql[$mbits[0]] && $datauri.$m != $uri){
+					elseif (strpos($m,'.') === false && $mbits[0] && isset($sql[$mbits[0]]) && $datauri.$m != $uri){
 						if ($posthash){
 							$wfid=$mbits[1];
                                                	        $version=$mbits[3];
@@ -112,6 +111,17 @@
 								$xml.=printEntity(mysql_fetch_assoc($res),$type);	
 							}
 						}
+					}
+					elseif ($datauri.$m != $uri){
+						$onturl=$datauri;
+						for ($i=0;$i<sizeof($mbits)-1;$i++) $onturl.=$mbits[$i]."/";
+						$onturl=substr($onturl,0,-1);
+						$predsql=$sql['predicates'];
+						if (stripos("where",$predsql)>0) $predsql.=" and ";
+						else $predsql.=" where ";
+						$predsql.="ontologies.uri=\"$onturl\" and predicates.title=\"".$mbits[sizeof($mbits)-1]."\"";
+						$res=mysql_query($predsql);
+						if ($res && mysql_num_rows($res)>0) $xml.=printEntity(mysql_fetch_assoc($res),'predicates');
 					}
 				}
 			}

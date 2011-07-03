@@ -364,18 +364,32 @@ function getFilename($entity,$type){
 	return '';
 }
 function getPackEntries($pack){
-	global $datauri;
-	$lsql="select * from pack_contributable_entries where pack_id=$pack[id]";
+	global $datauri, $sql;
+	$lsql=$sql['local_pack_entries'];
+	if (stripos($lsql,'where')>0) $lsql.=" and ";
+	else $lsql.=" where ";	
+	$lsql.="pack_id=$pack[id]";
 	$lres=mysql_query($lsql);
 	$xml="";
 	$packurl=getEntityURI('packs',$pack['id'],$pack);
 	for ($e=0; $e<mysql_num_rows($lres); $e++){
 		$xml.="    <mepack:has-pack-entry rdf:resource=\"$packurl/local_pack_entries/".mysql_result($lres,$e,'id')."\"/>\n";
 	}
-	$rsql="select * from pack_remote_entries where pack_id=$pack[id]";
+	$rsql=$sql['remote_pack_entries'];
+	if (stripos($rsql,'where')>0) $rsql.=" and ";
+        else $rsql.=" where ";
+        $rsql.="pack_id=$pack[id]";
 	$rres=mysql_query($rsql);
         for ($e=0; $e<mysql_num_rows($rres); $e++){
                 $xml.="    <mepack:has-pack-entry rdf:resource=\"$packurl/remote_pack_entries/".mysql_result($rres,$e,'id')."\"/>\n";
+        }
+	$prsql=$sql['pack_relationships'];
+	if (stripos($prsql,'where')>0) $prsql.=" and ";
+        else $prsql.=" where ";
+        $prsql.="context_id=$pack[id]";
+        $prres=mysql_query($prsql);
+	for ($e=0; $e<mysql_num_rows($prres); $e++){
+                $xml.="    <mepack:has-pack-entry rdf:resource=\"$packurl/relationships/".mysql_result($prres,$e,'id')."\"/>\n";
         }
 	return $xml;
 }
@@ -596,6 +610,21 @@ function getPredicateRelations($entity){
 	}
 	return $xml;
 }
+function getRelationshipURI($entity){
+	global $datauri;
+        $subj=getRelationshipSubject($entity);
+        $pred=getRelationshipPredicate($entity);
+        $obj=getRelationshipObject($entity);
+        return "${datauri}relationships/".sha1(getRelationshipSubject($entity).getRelationshipPredicate($entity).getRelationshipObject($entity));
+}
+function getRelationship($entity){
+	global $datauri;
+	$subj=getRelationshipSubject($entity);
+	$pred=getRelationshipPredicate($entity);
+	$obj=getRelationshipObject($entity);
+	$relhash=sha1($subj.$pred.$obj);
+	return "    <ore:ProxyFor>\n      <mepack:Relationship rdf:about=\"${datauri}relationships/$relhash\">\n        <rdf:subject rdf:resource=\"$subj\" />\n        <rdf:predicate rdf:resource=\"$pred\" />\n        <rdf:object rdf:resource=\"$obj\" />\n      </mepack:Relationship>\n    </ore:proxyFor>\n";
+}
 function getRelationshipSubject($entity){
 	return getRelationshipNode($entity['subject_id'],$entity['subject_type']);
 }
@@ -648,5 +677,4 @@ function getOntologyEntityTypeFromDBType($type){
 function getStaticOntologyDetails($entity){
 	return "    <dc:language rdf:datatype=\"&xsd;string\">en</dc:language>\n    <dc:publisher rdf:resource=\"http://www.myexperiment.org\"/>\n    <dc:format rdf:datatype=\"&xsd;string\">rdf/xml</dc:format>\n";
 }
-
 ?>

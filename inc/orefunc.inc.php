@@ -33,7 +33,22 @@ function getOREAggregatedResources($entry,$type){
                         else $fulluri=getEntityURI($etype,$row['id'],$row);
                         $xml.="    <ore:aggregates rdf:resource=\"".str_replace("&","&amp;",$fulluri)."\"/>\n";
                 }
+		if ($type=="packs"){
+			$prsql=$sql['pack_relationships'];
+			if (stripos($prsql,'where')>0) $prsql.=" and ";
+			else $prsql.=" where ";
+			$prsql.="context_id=$entry[id]";
+			$res=mysql_query($prsql);
+			for ($i=0; $i<mysql_num_rows($res); $i++){
+        	                $row=mysql_fetch_assoc($res);
+				$reluri=getRelationshipURI($row);
+				$xml.="    <ore:aggregates rdf:resource=\"$reluri\"/>\n";
+			}
+		}
         }
         return $xml;
+}
+function getOREDescribedBy($entity,$type){
+        return getEntityURI($type,$entity['id'],$entity).".rdf";
 }
 ?>

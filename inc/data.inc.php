@@ -169,7 +169,7 @@ PREFIX ore: <http://www.openarchives.org/ore/terms/>";
         	$sql['messages']="select * from messages where 1=2";
 		$sql['ontologies']="select * from ontologies";
 	        $sql['packs']="select packs.*, contributions.viewings_count, contributions.downloads_count, policies.id as policy_id, policies.update_mode, policies.share_mode from packs inner join contributions on packs.id=contributions.contributable_id and contributions.contributable_type='Pack' inner join policies on contributions.policy_id=policies.id where ($pubcond)";
-		$sql['pack_relationships']="select relationships.*, predicates.vocabulary_id from relationships inner join predicates on relationships.predicate_id=predicates.id inner join packs on relationships.pack_id=pack.id inner join contributions on packs.id=contributions.contributable_id and contributions.contributable_type='Pack' inner join policies on contributions.policy_id=policies.id where ($pubcond)";
+		$sql['pack_relationships']="select relationships.*, predicates.title as predicate, ontologies.uri as ontology_uri from relationships inner join predicates on relationships.predicate_id=predicates.id inner join ontologies on predicates.ontology_id=ontologies.id inner join packs on relationships.conext_id=packs.id inner join contributions on packs.id=contributions.contributable_id and contributions.contributable_type='Pack' inner join policies on contributions.policy_id=policies.id where context_type='Pack' and ($pubcond)";
 		$sql['policies']="select contributions.contributable_type, contributions.contributable_id, contributions.contributor_type, contributions.contributor_id, policies.id as policy_id, policies.id from policies inner join contributions on policies.id=contributions.policy_id where contributable_type in ('Workflow','Pack','Blob','Network') and ($pubcond)";
         	$sql['ratings']="select ratings.* from ratings inner join contributions on ratings.rateable_id=contributions.contributable_id and ratings.rateable_type=contributions.contributable_type inner join policies on contributions.policy_id=policies.id where ($pubcond)";
 	        $sql['remote_pack_entries']="select pack_remote_entries.* from pack_remote_entries inner join packs on pack_remote_entries.pack_id=packs.id inner join contributions on packs.id=contributions.contributable_id and contributions.contributable_type='Pack' inner join policies on contributions.policy_id=policies.id where ($pubcond)";
@@ -205,7 +205,7 @@ PREFIX ore: <http://www.openarchives.org/ore/terms/>";
         	$sql['messages']="select messages.* from messages";
 		$sql['ontologies']="select * from ontologies";
 	        $sql['packs']="select packs.*, contributions.viewings_count, contributions.downloads_count, policies.id as policy_id, policies.update_mode, policies.share_mode from packs inner join contributions on packs.id = contributions.contributable_id and contributions.contributable_type='Pack' inner join policies on contributions.policy_id=policies.id";
-		$sql['pack_relationships']="select relationships.*, predicates.ontology_id from relationships inner join predicates on relationships.predicate_id=predicates.id where context_type='Pack'";
+		$sql['pack_relationships']="select relationships.*, predicates.title as predicate, ontologies.uri as ontology_uri from relationships inner join predicates on relationships.predicate_id=predicates.id inner join ontologies on predicates.ontology_id=ontologies.id inner join packs on relationships.context_id=packs.id inner join contributions on packs.id=contributions.contributable_id and contributions.contributable_type='Pack' inner join policies on contributions.policy_id=policies.id where context_type='Pack'";
 		$sql['policies']="select contributions.contributable_type, contributions.contributable_id, contributions.contributor_type, contributions.contributor_id, policies.id as policy_id, policies.id from policies inner join contributions on policies.id=contributions.policy_id where contributable_type in ('Workflow','Pack','Blob','Network')";
 		$sql['ratings']="select ratings.* from ratings";
 	        $sql['remote_pack_entries']="select pack_remote_entries.* from pack_remote_entries";
@@ -240,8 +240,8 @@ PREFIX ore: <http://www.openarchives.org/ore/terms/>";
        	$mappings['memberships']=array('id'=>'url','requester'=>'@getRequester|mebase:has-requester','accepter'=>'@getAccepter|mebase:has-accepter','requested_at'=>'@getRequesterTime|dcterms:created','accepted_at'=>'@getAccepterTime|mebase:accepted-at','message'=>'mebase:text');
        	$mappings['messages']=array('id'=>'url','from'=>'&User|mebase:from','to'=>'&User|mebase:to','subject'=>'mebase:subject','body'=>'mebase:text','created_at'=>'dcterms:created','read_at'=>'mebase:read-at','deleted_by_sender'=>'mebase:deleted-by-sender','deleted_by_recepient'=>'mebase:deleted-by-recepient');
 	$mappings['ontologies']=array('id'=>'url','title'=>'rdfs:label','description'=>'rdfs:comment','user_id'=>'&User|dc:creator','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified','staticdetails'=>'@getStaticOntologyDetails');
-        $mappings['packs']=array('id'=>'url','described_by'=>'@&getResourceMapURI|ore:isDescribedBy','described_by_atom'=>'@&getAtomEntryURI|ore:isDescribedBy','manifest'=>'@&getOREAggregatedResources|','entries'=>'@getPackEntries|','relationships'=>'@getPackRelationships|','contributor_type'=>'+contributor_id|sioc:has_owner','title'=>'dcterms:title', 'description'=>'dcterms:description','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified','viewings_count'=>'mevd:viewed','downloads_count'=>'mevd:downloaded','policy_id'=>'@&-getPolicyURI|mebase:has-policy','annotations'=>'@&getAnnotations|');
-	$mappings['pack_relationships']=array('id'=>'url','subject'=>'@-getRelationshipSubject|rdf:subject','predicate'=>'@getRelationshipPredicate|rdf:predicate','object'=>'@-getRelationshipObject|rdf:object','context_id'=>'&Pack|mepack:in-pack','user_id'=>'&User|sioc:has_owner','created_at'=>'dcterms:created');
+        $mappings['packs']=array('id'=>'url','described_by2'=>'@&-getOREDescribedBy|ore:isDescribedBy','manifest'=>'@&getOREAggregatedResources|','entries'=>'@getPackEntries|','relationships'=>'@getPackRelationships|','contributor_type'=>'+contributor_id|sioc:has_owner','title'=>'dcterms:title', 'description'=>'dcterms:description','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified','viewings_count'=>'mevd:viewed','downloads_count'=>'mevd:downloaded','policy_id'=>'@&-getPolicyURI|mebase:has-policy','annotations'=>'@&getAnnotations|');
+	$mappings['pack_relationships']=array('id'=>'url','relationship'=>'@-getRelationship|','context_id'=>'&Pack|ore:proxyIn','user_id'=>'&User|sioc:has_owner','created_at'=>'dcterms:created');
 	$mappings['policies']=array('policy_id'=>'url','policy'=>'@&getPolicy|');
        	$mappings['ratings']=array('id'=>'url','rateable_type'=>'+rateable_id|mebase:annotates','rating'=>'meannot:rating-score','user_id'=>'&User|mebase:has-annotator','created_at'=>'dcterms:created');
        	$mappings['reviews']=array('id'=>'url','title'=>'dcterms:title','review'=>'mebase:text','reviewable_type'=>'+reviewable_id|mebase:annotates','user_id'=>'&User|mebase:has-annotator','created_at'=>'dcterms:created','updated_at'=>'dcterms:modified');
@@ -317,7 +317,8 @@ PREFIX ore: <http://www.openarchives.org/ore/terms/>";
         $homepage['vocabularies']=0;
         $homepage['workflows']=1;
         $homepage['workflow_versions']=1; 
-	
+
+	$nordf['predicates']=1;	
 	
 	$entannot['experiments']=array();
 	$entannot['files']=array('comments','favourites','ratings','taggings');

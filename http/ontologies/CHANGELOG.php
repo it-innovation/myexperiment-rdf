@@ -6,7 +6,8 @@
 <p><big>This page includes the changelog for the <a href=".">myExperiment Ontology</a> and consequently myExperiment's RDF data.</big></p>
 
 <ul class="changelog">
-  <li><b>09/03/2011</b> Updated Packs module to create a separate Relationship class that has PackRelationship as an ore:Proxy to describe it in the context of the Pack. Fixed some other subclassing issues with PackEntry and Vocabulary</li>
+  <li><b>03/07/2011</b> Removed Concepts from packs module, predicates of relationships now defined as OWL ObjectProperties that make up <a href="../examples/ontologies">user-defined ontologies</a>.  Vocabulary moved to annotations module to be used to represent at set of tags.</li>
+  <li><b>09/03/2011</b> Updated Packs module to create a separate Relationship class that has PackRelationship as an ore:Proxy to describe it in the context of the Pack. Fixed some other subclassing issues with PackEntry and Vocabulary.</li>
   <li><b>10/02/2011</b> Added PackRelationship to Packs module to allow relationship between items in Packs to be defined.  Moved Vocabularies from Contributions to Packs module to support PackRelationships.  Added Concepts to Packs module, as a specific form of SKOS Concept to define the predicate of a PackRelationship.</li>
   <li><b>25/11/2010</b> Added foaf:name to user as more commonly used than sioc:name and added restriction for sioc:has_member and sioc:member_of to Group and User respectively.</li>
   <li><b>15/09/2010</b> Added DBPedia's residence property as potential field(s) for a User.</li>
