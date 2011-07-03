@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+ <!ENTITY pack 'http://www.myexperiment.org/2010/pack/'>
+]>
+
+<rdf:RDF xmlns:rdf      ="&rdf;"
+        xmlns:rdfs      ="&rdfs;"
+        xmlns:owl       ="&owl;"
+        xmlns:dc        ="&dc;"
+        xmlns:dcterms   ="&dcterms;"
+        xmlns:xsd       ="&xsd;"
+        xmlns:pack      ="&pack;"
+>
+  <owl:Ontology rdf:about="http://www.myexperiment.org/2010/pack">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/2010/pack.rdf"/>
+    <rdfs:label rdf:datatype="&xsd;string">myExperiment pack ontology</rdfs:label>
+    <rdfs:comment rdf:datatype="&xsd;string">This is an ontology for expressing the relationships between pack items in myExperiment.</rdfs:comment>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:modified>
+    <dc:language rdf:datatype="&xsd;string">en</dc:language>
+    <dc:publisher rdf:resource="http://www.myexperiment.org"/>
+    <dc:format rdf:datatype="&xsd;string">rdf/xml</dc:format>
+  </owl:Ontology>
+
+  <owl:ObjectProperty rdf:about="http://www.myexperiment.org/2010/pack/inputDataTo">
+    <rdfs:label rdf:datatype="&xsd;string">inputDataTo</rdfs:label>
+    <rdfs:comment rdf:datatype="&xsd;string">This concept is used to indicate that the subject is an input to the object.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.myexperiment.org/2010/pack" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:modified>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.myexperiment.org/2010/pack/outputDataFrom">
+    <rdfs:label rdf:datatype="&xsd;string">outputDataFrom</rdfs:label>
+    <rdfs:comment rdf:datatype="&xsd;string">This concept is used to indicate that the subject is an output from the object.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.myexperiment.org/2010/pack" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:modified>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.myexperiment.org/2010/pack/exampleInputDataTo">
+    <rdfs:label rdf:datatype="&xsd;string">exampleInputDataTo</rdfs:label>
+    <rdfs:comment rdf:datatype="&xsd;string">This concept is used to indicate that the subject is an example input to the object.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.myexperiment.org/2010/pack" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:modified>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.myexperiment.org/2010/pack/exampleOutputDataFrom">
+    <rdfs:label rdf:datatype="&xsd;string">exampleOutputDataFrom</rdfs:label>
+    <rdfs:comment rdf:datatype="&xsd;string">This concept is used to indicate that the subject is an example output from the object.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.myexperiment.org/2010/pack" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:modified>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.myexperiment.org/2010/pack/presentAt">
+    <rdfs:label rdf:datatype="&xsd;string">presentAt</rdfs:label>
+    <rdfs:comment rdf:datatype="&xsd;string">This concept is used to indicate that the subject was presented at the object.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.myexperiment.org/2010/pack" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:22:20Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-28T17:22:20Z</dcterms:modified>
+  </owl:ObjectProperty>
+
+</rdf:RDF>
