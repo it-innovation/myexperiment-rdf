@@ -9,7 +9,6 @@
  <!ENTITY dcterms 'http://purl.org/dc/terms/'>
  <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
  <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
- <!ENTITY skos 'http://www.w3.org/2004/02/skos/core#'>
  <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
  <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
  <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
@@ -26,7 +25,6 @@
 	 xmlns:dcterms		="&dcterms;"
          xmlns:ore              ="&ore;"
          xmlns:sioc		="&sioc;"
-         xmlns:skos		="&skos;"
          xmlns:xsd		="&xsd;"
 >
   <!-- =============== Description ==================== -->
@@ -39,7 +37,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">July 3, 2011</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">July 4, 2011</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -75,7 +73,7 @@
 
 
   <!-- ========= OWL-DL Compliance statements ======== -->  
-  
+ 
   <rdf:Description rdf:about="&dcterms;description">
     <rdf:type rdf:resource="&owl;DatatypeProperty"/>
     <rdfs:range rdf:resource="&xsd;string"/>
@@ -275,12 +273,6 @@
       <owl:Restriction>
         <owl:onProperty rdf:resource="&rdf;predicate" />
         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="&rdf;predicate" />
-        <owl:allValuesFrom rdf:resource="&owl;ObjectProperty" />
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>

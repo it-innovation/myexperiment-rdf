@@ -128,7 +128,7 @@ Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
 
   <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/105/pack_relationships/2">
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105/pack_relationships/2.rdf"/>
-    <ore:ProxyFor>
+    <ore:proxyFor>
       <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/8f27682622e098a882b88255cca342af70f4c056">
         <rdf:subject rdf:resource="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.pptx" />
         <rdf:predicate rdf:resource="http://www.myexperiment.org/2010/pack/presentAt" />

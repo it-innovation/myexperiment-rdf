@@ -99,7 +99,7 @@ function getUsefulPrefixes($domain){
 	global $datauri;
 	list($myexp,$other)=getUsefulPrefixesArray($domain);
 	if (sizeof($myexp)>0){
-		$usepref='    <table class="borders">
+		$usepref='    <table class="borders" style="width: 100%;">
       <tr><th>myExperiment</th><th>Other</th></tr>
       <tr>
         <td style="text-align: left;"><ul class="nonesmall">

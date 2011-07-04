@@ -109,16 +109,20 @@ if($clientlive && !$done){
 ?>
     <div align="center"> 
     <div class="purple">
-      <h3 style="margin: 0;">Useful Prefixes</h3>
-      <div style="font-size: 0.8em"><?=getUsefulPrefixes($domain)?></div>
+      <div style="float: left; width: 10%;">&nbsp;</div>
+      <h3 style="float: left; width: 80%; text-align: center; margin: 0;">Useful Prefixes</h3>
+      <div id="prefixes_show" onclick="showPrefixes();" style="float: right; text-align: right; width: 10%; display: none;">[<span class="link" style="font-size: 1em;">Show</span>]</div><div id="prefixes_hide" onclick="hidePrefixes();" style="float: right; text-align: right; width: 10%;">[<span class="link" style="font-size: 1em;">Hide</span>]</div>
+
+      <div style="clear: both;"></div>
+      <div id="prefixes" style="font-size: 0.8em;"><?=getUsefulPrefixes($domain)?></div>
     </div>
     <br/>
     <div class="yellow">
       <h3 style="text-align: center; margin: 0; margin-bottom: 10px;">Querying</h3>
       <p style="text-align: right; position: relative; top: -38px;"><small><a href="/howtosparql" title="How to SPARQL in myExperiment Guide">Need help querying myExperiment RDF?<br/>New to SPARQL?</a></small></p>
-      <div class="green" style="position: relative; top: -28px;">This SPARQL Endpoint nows supports query time RDFS reasoning using <a href="http://4sreasoner.ecs.soton.ac.uk/">4Store Reasoner</a>.  Click <a href="howtosparql?page=Using the SPARQL Endpoint#Reasoning">here</a> for more details.</div>
+      <div class="green" style="position: relative; top: -28px; font-size: 0.9em;">This SPARQL Endpoint nows supports query time RDFS reasoning using <a href="http://4sreasoner.ecs.soton.ac.uk/">4Store Reasoner</a>.  Click <a href="howtosparql?page=Using the SPARQL Endpoint#Reasoning">here</a> for more details.</div>
     <form name="queryform" method="post" action="">
-       <p style="padding: 10px 100px; margin-top: -30px;"><small>From time to time modifications are made to the <a href="/ontologies/">myExperiment Ontology</a> and therefore the RDF queried by this SPARQL endpoint.  Please check the <a href="/ontologies/CHANGELOG">CHANGELOG</a> if your query has ceased to function.</p>
+       <p style="padding: 10px 70px; margin-top: -30px;"><small>From time to time modifications are made to the <a href="/ontologies/">myExperiment Ontology</a> and therefore the RDF queried by this SPARQL endpoint.  Please check the <a href="/ontologies/CHANGELOG">CHANGELOG</a> and/or the <a href="/ontologies/specification">Ontology specification</a> if your query has ceased to function.</p>
        <table style="font-size: 10pt;">
           <tr>
             <th style="text-align: right;">Version Info:</th>
@@ -197,6 +201,9 @@ var editor = CodeMirror.fromTextArea('querybox', {
 		echo "</div>\n<br/><br/>\n";
 	}
     ?>
+    <script type= "text/javascript"><!-- 
+      hidePrefixes();
+    --></script>
 <?php 
 	include('footer.inc.php');
 }
