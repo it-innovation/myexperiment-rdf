@@ -5,4 +5,5 @@ if [ "${bashsource:0:1}" == "/" ]; then
 else
   source "`pwd`/$bashsource/settings.sh"
 fi
-$STORE4EXEC_PATH/4s-query $1 "$2" -s $3 > $4
+$STORE4EXEC_PATH/4s-query $5 $1 "$2" -s $3 > $4
+echo "$STORE4EXEC_PATH/4s-query $5 $1 \"$2\" -s $3 > $4"

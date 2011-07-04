@@ -18,6 +18,7 @@
  <!ENTITY cc 'http://web.resource.org/cc/'>
  <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
  <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY skos 'http://www.w3.org/2004/02/skos/core#'>
  <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
  <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
  <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
@@ -41,190 +42,215 @@
 	xmlns:cc	="&cc;"
 	xmlns:foaf	="&foaf;"
 	xmlns:sioc	="&sioc;"
+	xmlns:skos	="&skos;"
 	xmlns:ore	="&ore;"
 	xmlns:dbpedia	="&dbpedia;"
 	xmlns:snarm	="&snarm;"
 	xmlns:xsd	="&xsd;"
 >
-  <rdf:Description rdf:about="http://www.myexperiment.org/packs/1.rdf">
-    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/packs/1"/>
+  <rdf:Description rdf:about="http://www.myexperiment.org/packs/105.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/packs/105"/>
   </rdf:Description>
 
-  <mepack:Pack rdf:about="http://www.myexperiment.org/packs/1">
-    <foaf:homepage rdf:resource="http://www.myexperiment.org/packs/1.html"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1.rdf"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1.xml"/>
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/files/2"/>
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/files/1"/>
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/workflows/1"/>
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd"/>
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/relationships/wuodfghufoghurosf"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/1"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/2"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/4"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/relationships/1"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/1/relationships/2"/>
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <dcterms:title rdf:datatype="&xsd;string">Test pack</dcterms:title>
-    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This is a pack that will&amp;nbsp;contain relationships.&lt;/p&gt;</dcterms:description>
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T16:55:05Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T16:55:05Z</dcterms:modified>
-    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">10</mevd:viewed>
-    <mebase:has-policy rdf:resource="http://www.myexperiment.org/packs/1/policies/26" />
+  <mepack:Pack rdf:about="http://www.myexperiment.org/packs/105">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/packs/105.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105.xml"/>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/packs/105.rdf" />
+    <ore:aggregates rdf:resource="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.pptx"/>
+    <ore:aggregates rdf:resource="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.ppt"/>
+    <ore:aggregates rdf:resource="http://www.escience2009.org/"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/relationships/8f27682622e098a882b88255cca342af70f4c056"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/142"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/143"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/433"/>
+    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/105/relationships/2"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/16" />
+    <dcterms:title rdf:datatype="&xsd;string">Presentation - Socialising e-Science</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;Title: Socialising e-Science&lt;br /&gt;
+&lt;br /&gt;
+Speaker: David De Roure&lt;br /&gt;
+&lt;br /&gt;
+Event: IEEE e-Science 2009&lt;br /&gt;
+&lt;br /&gt;
+Event URL: http://www.escience2009.org/&lt;br /&gt;
+&lt;br /&gt;
+Location: Oxford, UK&lt;br /&gt;
+&lt;br /&gt;
+Date: Tuesday December 8, 2009&lt;br /&gt;
+&lt;br /&gt;
+Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-12-13T11:01:20Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-28T17:15:22Z</dcterms:modified>
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">169</mevd:viewed>
+    <mevd:downloaded rdf:datatype="&xsd;nonNegativeInteger">69</mevd:downloaded>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/packs/105/policies/1622" />
   </mepack:Pack>
 
-  <mecontrib:File rdf:about="http://www.myexperiment.org/files/2">
-    <foaf:homepage rdf:resource="http://www.myexperiment.org/files/2.html"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/2.rdf"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/2.xml"/>
-    <mebase:content-url rdf:resource="http://www.myexperiment.org/blobs/2/download/post_workflow.xml" />
-    <mebase:filename rdf:datatype="&xsd;string">post_workflow.xml</mebase:filename>
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/10" />
-    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T17:02:25Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:02:25Z</dcterms:modified>
-    <dcterms:title rdf:datatype="&xsd;string">Population parameters</dcterms:title>
-    <mebase:has-policy rdf:resource="http://www.myexperiment.org/files/2/policies/29" />
-  </mecontrib:File>
+  <mepack:RemotePackEntry rdf:about="http://www.myexperiment.org/packs/105/remote_pack_entries/142">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/142.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/105" />
+    <dcterms:title rdf:datatype="&xsd;string">Socialising e-Science</dcterms:title>
+    <ore:proxyFor>
+          <rdf:Description rdf:about="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.pptx"/>
+    </ore:proxyFor>
+    <dcterms:description rdf:datatype="&xsd;string">PowerPoint 2007</dcterms:description>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/16" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-12-13T11:02:24Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-28T17:26:57Z</dcterms:modified>
+  </mepack:RemotePackEntry>
 
-  <mecontrib:File rdf:about="http://www.myexperiment.org/files/1">
-    <foaf:homepage rdf:resource="http://www.myexperiment.org/files/1.html"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/1.rdf"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/1.xml"/>
-    <mebase:content-url rdf:resource="http://www.myexperiment.org/blobs/1/download/post_workflow.xml" />
-    <mebase:filename rdf:datatype="&xsd;string">post_workflow.xml</mebase:filename>
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/10" />
-    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T17:01:53Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:01:53Z</dcterms:modified>
-    <dcterms:title rdf:datatype="&xsd;string">Results from experiment</dcterms:title>
-    <mebase:has-policy rdf:resource="http://www.myexperiment.org/files/1/policies/28" />
-  </mecontrib:File>
+  <mepack:RemotePackEntry rdf:about="http://www.myexperiment.org/packs/105/remote_pack_entries/143">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/143.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/105" />
+    <dcterms:title rdf:datatype="&xsd;string">Socialising e-Science (ppt)</dcterms:title>
+    <ore:proxyFor>
+          <rdf:Description rdf:about="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.ppt"/>
+    </ore:proxyFor>
+    <dcterms:description rdf:datatype="&xsd;string">PowerPoint 97-2003</dcterms:description>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/16" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2009-12-13T11:02:38Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-28T17:27:16Z</dcterms:modified>
+  </mepack:RemotePackEntry>
 
-  <mecontrib:Workflow rdf:about="http://www.myexperiment.org/workflows/1">
-    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/1.html"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/1.rdf"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/1.xml"/>
-    <dcterms:title rdf:datatype="&xsd;string">Demonstration of configurable iteration</dcterms:title>
-    <dcterms:description rdf:datatype="&xsd;string">This workflow shows the use of the iteration strategy editor to ensure that only relevant combinations of inputs are used during an implicit iteration.</dcterms:description>
-    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T17:00:33Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:00:33Z</dcterms:modified>
-    <mebase:filename rdf:datatype="&xsd;string">demonstration_of_configurable_iteration_548200.xml</mebase:filename>
-    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/1/download/demonstration_of_configurable_iteration_548200.xml" />
-    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflow/image/1/demonstration_of_configurable_iteration.png" />
-    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflow/image/1/thumb/demonstration_of_configurable_iteration.png" />
-    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflow/image/1/medium/demonstration_of_configurable_iteration.png" />
-    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflow/svg/1/demonstration_of_configurable_iteration.svg.xml" />
-    <mebase:has-current-version rdf:resource="http://www.myexperiment.org/workflows/1/versions/1" />
-    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
-    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/1" />
-    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/1/policies/27" />
-  </mecontrib:Workflow>
+  <mepack:RemotePackEntry rdf:about="http://www.myexperiment.org/packs/105/remote_pack_entries/433">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/433.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/105" />
+    <dcterms:title rdf:datatype="&xsd;string">IEEE e-Science 2009</dcterms:title>
+    <ore:proxyFor>
+          <rdf:Description rdf:about="http://www.escience2009.org/"/>
+    </ore:proxyFor>
+    <dcterms:description rdf:datatype="&xsd;string">The fifth IEEE e-Science conference was held in Oxford, UK from Dec 9-11 2009. The meeting coincided with the UK e-Science All Hands Meeting that was held from Dec 7-9th, 2009.</dcterms:description>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:22:45Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-28T17:23:39Z</dcterms:modified>
+  </mepack:RemotePackEntry>
 
-  <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd.rdf"/>
-    <rdf:subject rdf:resource="http://www.myexperiment.org/files/2" />
-    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/9" />
-    <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
-  </mepack:Relationship>
-
-  <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/wuodfghufoghurosf">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/relationships/wuodfghufoghurosf.rdf"/>
-    <rdf:subject rdf:resource="http://www.myexperiment.org/files/1" />
-    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/10" />
-    <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
-  </mepack:Relationship>
-
-  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/1/local_pack_entries/1">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/1.rdf"/>
-    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
-    <ore:proxyFor rdf:resource="http://www.myexperiment.org/files/2" />
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T17:03:02Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:03:02Z</dcterms:modified>
-  </mepack:LocalPackEntry>
-
-  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/1/local_pack_entries/2">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/2.rdf"/>
-    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
-    <ore:proxyFor rdf:resource="http://www.myexperiment.org/files/1" />
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T17:03:16Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:03:16Z</dcterms:modified>
-  </mepack:LocalPackEntry>
-
-  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/1/local_pack_entries/4">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/local_pack_entries/4.rdf"/>
-    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
-    <ore:proxyFor rdf:resource="http://www.myexperiment.org/workflows/1" />
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T17:03:37Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-01T17:03:37Z</dcterms:modified>
-  </mepack:LocalPackEntry>
-
-  <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/1/relationships/1">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/relationships/1.rdf"/>
-    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
-    <ore:proxyFor rdf:resource="http://www.myexperiment.org/relationships/sodfudghsodfugfhsd"/>
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-10T17:54:21Z</dcterms:created>
+  <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/105/pack_relationships/2">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105/pack_relationships/2.rdf"/>
+    <ore:ProxyFor>
+      <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/8f27682622e098a882b88255cca342af70f4c056">
+        <rdf:subject rdf:resource="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.pptx" />
+        <rdf:predicate rdf:resource="http://www.myexperiment.org/2010/pack/presentAt" />
+        <rdf:object rdf:resource="http://www.escience2009.org/" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/105" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
   </mepack:PackRelationship>
 
-  <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/1/pack_relationships/2">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/pack_relationships/2.rdf"/>
-    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
-    <ore:proxyFor rdf:resource="http://www.myexperiment.org/relationships/wuodfghufoghurosf"/>
-    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-10T17:54:21Z</dcterms:created>
-  </mepack:PackRelationship>
-
-  <mebase:User rdf:about="http://www.myexperiment.org/users/1">
-    <foaf:homepage rdf:resource="http://www.myexperiment.org/users/1.html"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/1.rdf"/>
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/1.xml"/>
-    <dcterms:created rdf:datatype="&xsd;dateTime">2010-04-15T10:42:19Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2010-09-20T10:17:35Z</dcterms:modified>
-    <sioc:name rdf:datatype="&xsd;string">Don Cruickshank</sioc:name>
-    <foaf:name rdf:datatype="&xsd;">Don Cruickshank</foaf:name>
-    <sioc:avatar rdf:resource="http://www.myexperiment.org/pictures/show/1?size=160x160.png" />
-    <foaf:based_near rdf:datatype="&xsd;string">Southampton</foaf:based_near>
+  <mebase:User rdf:about="http://www.myexperiment.org/users/16">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/users/16.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/16.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/16.xml"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-21T07:26:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-30T22:11:31Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">David De Roure</sioc:name>
+    <foaf:name rdf:datatype="&xsd;string">David De Roure</foaf:name>
+    <sioc:avatar rdf:resource="http://www.myexperiment.org/images/avatar.png" />
+    <foaf:based_near rdf:datatype="&xsd;string">Oxford</foaf:based_near>
     <mebase:country rdf:datatype="&xsd;string">United Kingdom</mebase:country>
-    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Southampton"/>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Oxford"/>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_Kingdom"/>
-    <foaf:homepage rdf:resource="http://www.facebook.com/don.cruickshank" />
-    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2010-09-20T10:17:35Z</mebase:last-seen-at>
-    <mebase:activated-at rdf:datatype="&xsd;dateTime">2010-04-15T10:43:28Z</mebase:activated-at>
+    <foaf:homepage rdf:resource="http://www.oerc.ox.ac.uk/people/dder" />
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2011-06-30T22:11:31Z</mebase:last-seen-at>
+    <mebase:activated-at rdf:datatype="&xsd;dateTime">2007-07-21T07:26:51Z</mebase:activated-at>
     <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
-    <foaf:mbox_sha1sum rdf:datatype="&xsd;string">a1d03dcfb2c4bc3ce9c50d890ccf380ec80aa8ee</foaf:mbox_sha1sum>
-    <mebase:field rdf:datatype="&xsd;string">Computer Science</mebase:field>
+    <foaf:mbox rdf:resource="mailto:david.deroure@oerc.ox.ac.uk" />
+    <foaf:mbox_sha1sum rdf:datatype="&xsd;string">e863bf9318709e46288323423dd5f75f8bd3c184</foaf:mbox_sha1sum>
+    <mebase:field rdf:datatype="&xsd;string">e-Research</mebase:field>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/17"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/18"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/19"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/20"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/21"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/22"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/33"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/25/friendships/38"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/26/friendships/54"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/98"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/197"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/198"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/199"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/242"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/166/friendships/262"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/270"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/18/friendships/286"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/321"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/322"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/323"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/162/friendships/340"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/450/friendships/361"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/412"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/15/friendships/445"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/164/friendships/471"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/384/friendships/515"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1017/friendships/620"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/83/friendships/664"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2705/friendships/782"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/1019/friendships/878"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/6817/friendships/901"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/7466/friendships/914"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/221/friendships/917"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/16/friendships/1043"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/12770/friendships/1098"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2784/friendships/1213"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/16/memberships/5"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/16/memberships/7"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/16/memberships/32"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/16/memberships/65"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/16/memberships/406"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/16/memberships/649"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/16/memberships/737"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/16/favourites/21"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/16/favourites/33"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/16/favourites/35"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/16/favourites/60"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/16/favourites/70"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/16/favourites/149"/>
   </mebase:User>
 
-  <snarm:Policy rdf:about="http://www.myexperiment.org/packs/1/policies/26">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/policies/26.rdf"/>
+  <snarm:Policy rdf:about="http://www.myexperiment.org/packs/105/policies/1622">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105/policies/1622.rdf"/>
     <snarm:has-access>
       <snarm:RestrictedAccess>
-        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/1"/>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/16"/>
         <snarm:has-access-type rdf:resource="&mespec;View"/>
       </snarm:RestrictedAccess>
     </snarm:has-access>
     <snarm:has-access>
       <snarm:RestrictedAccess>
-        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/1"/>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/16"/>
         <snarm:has-access-type rdf:resource="&mespec;Download"/>
       </snarm:RestrictedAccess>
     </snarm:has-access>
     <snarm:has-access>
       <snarm:RestrictedAccess>
-        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/1"/>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/16"/>
         <snarm:has-access-type rdf:resource="&mespec;Edit"/>
       </snarm:RestrictedAccess>
     </snarm:has-access>
     <snarm:has-access rdf:resource="&mespec;PublicView"/>
     <snarm:has-access rdf:resource="&mespec;PublicDownload"/>
+    <snarm:has-access>
+      <snarm:RestrictedAccess rdf:about="http://www.myexperiment.org/packs/105/policies/1622/accesses/ViewUser22">
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/User/22"/>
+        <snarm:has-access-type rdf:resource="&mespec;View"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
+    <snarm:has-access>
+      <snarm:RestrictedAccess rdf:about="http://www.myexperiment.org/packs/105/policies/1622/accesses/DownloadUser22">
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/User/22"/>
+        <snarm:has-access-type rdf:resource="&mespec;Download"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
+    <snarm:has-access>
+      <snarm:RestrictedAccess rdf:about="http://www.myexperiment.org/packs/105/policies/1622/accessed/EditUser22">
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/User/22"/>
+        <snarm:has-access-type rdf:resource="&mespec;Edit"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
   </snarm:Policy>
 
 </rdf:RDF>

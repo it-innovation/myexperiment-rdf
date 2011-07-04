@@ -2,62 +2,62 @@
 include('include.inc.php');
 require_once('xmlfunc.inc.php');
 require_once('4storefunc.inc.php');
-$reasonedont = "file://${datapath}${triplestore}/${triplestore}_reasoned.owl";
+//$reasonedont = "file://${datapath}${triplestore}/${triplestore}_reasoned.owl";
 
 
 //Query 1: Property Domain Class-Property Relations
 $query[1]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-select ?class ?property where { GRAPH <$reasonedont> { ?class rdf:type owl:Class . ?class rdfs:subClassOf ?sclass . ?property rdfs:domain ?sclass . FILTER( REGEX(STR(?sclass),'^$ontopath'))}}";
+select ?class ?property where { ?class rdf:type owl:Class . ?property rdfs:domain ?class . FILTER( REGEX(STR(?class),'^$ontopath'))}";
 
 //Query 2: Class Property Restictions Class-Property Relations
 $query[2]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-select ?class ?property where { GRAPH <$reasonedont> { ?class rdfs:subClassOf ?sclass . ?sclass rdfs:subClassOf ?a . ?a rdf:type owl:Restriction . ?a owl:onProperty ?property . FILTER( REGEX(STR(?sclass),'^$ontopath'))}}";
+select ?class ?property where { ?class rdfs:subClassOf ?sclass . ?sclass rdf:type owl:Restriction . ?sclass owl:onProperty ?property . FILTER( REGEX(STR(?class),'^$ontopath'))}";
 
 //Query 3: Label and Comment for Classes
-$query[3]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ $query[3]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-select ?class ?label ?comment where { GRAPH <$reasonedont> { ?class rdf:type owl:Class . ?class rdfs:label ?label . ?class rdfs:comment ?comment . FILTER( REGEX(STR(?class),'^$ontopath'))}}";
+select ?class ?label ?comment where { ?class rdf:type owl:Class . ?class rdfs:label ?label . ?class rdfs:comment ?comment . FILTER( REGEX(STR(?class),'^$ontopath'))}";
 
 //Query 4: Superclasses for Classes
 $query[4]="PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-select ?class ?superclass where {  GRAPH <$reasonedont> { ?class rdfs:subClassOf ?superclass . FILTER(?superclass!=?class && REGEX(STR(?class),'^$ontopath') && REGEX(STR(?superclass),'^$ontopath'))}}";
+select ?class ?superclass where { ?class rdfs:subClassOf ?superclass . FILTER(?superclass!=?class && REGEX(STR(?class),'^$ontopath') && REGEX(STR(?superclass),'^$ontopath'))}";
 
 //Query 5: Label and Comment for Properties
 $query[5]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-select ?property ?label ?comment ?property_type where {  GRAPH <$reasonedont> { ?property rdfs:label ?label . ?property rdfs:comment ?comment . ?property rdf:type ?property_type . { ?property rdf:type <http://www.w3.org/2002/07/owl#ObjectProperty> } union { ?property rdf:type <http://www.w3.org/2002/07/owl#DatatypeProperty> } . FILTER(REGEX(STR(?property),'^$ontopath'))}}";
+select ?property ?label ?comment ?property_type where { ?property rdfs:label ?label . ?property rdfs:comment ?comment . ?property rdf:type ?property_type . { ?property rdf:type <http://www.w3.org/2002/07/owl#ObjectProperty> } union { ?property rdf:type <http://www.w3.org/2002/07/owl#DatatypeProperty> } . FILTER(REGEX(STR(?property),'^$ontopath'))}";
 
 //Query 6: Equivalent Classes
 $query[6]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-select distinct ?myclass ?exclass where { GRAPH <$reasonedont> { ?myclass rdf:type owl:Class . ?myclass owl:equivalentClass ?exclass . FILTER( !REGEX(STR(?exclass),'^$ontopath') && REGEX(STR(?myclass),'^$ontopath'))}}";
+select distinct ?myclass ?exclass where { ?myclass rdf:type owl:Class . ?myclass owl:equivalentClass ?exclass . FILTER( !REGEX(STR(?exclass),'^$ontopath') && REGEX(STR(?myclass),'^$ontopath'))}";
 
 //Query 7: Equivalent Properties
 $query[7]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-select distinct ?myprop ?exprop where { GRAPH <$reasonedont> { {?myprop rdf:type owl:DatatypeProperty} UNION {?myprop rdf:type owl:ObjectProperty} . ?myprop owl:equivalentProperty ?exprop . FILTER( !REGEX(STR(?exprop),'^$ontopath') && REGEX(STR(?myprop),'^$ontopath'))}}";
+select distinct ?myprop ?exprop where {{?myprop rdf:type owl:DatatypeProperty} UNION {?myprop rdf:type owl:ObjectProperty} . ?myprop owl:equivalentProperty ?exprop . FILTER( !REGEX(STR(?exprop),'^$ontopath') && REGEX(STR(?myprop),'^$ontopath'))}";
 
 //Query 8: SubClass Classes
 $query[8]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-select distinct ?myclass ?exclass where {  GRAPH <$reasonedont> { ?myclass rdf:type owl:Class . ?myclass rdfs:subClassOf ?exclass . FILTER( !REGEX(STR(?exclass),'^$ontopath') && !REGEX(STR(?exclass),'^http://www.w3.org/2000/01/rdf-schema#Resource') && REGEX(STR(?myclass),'^$ontopath'))}}";
+select distinct ?myclass ?exclass where {  ?myclass rdf:type owl:Class . ?myclass rdfs:subClassOf ?exclass . FILTER( !REGEX(STR(?exclass),'^$ontopath') && !REGEX(STR(?exclass),'^http://www.w3.org/2000/01/rdf-schema#Resource') && REGEX(STR(?myclass),'^$ontopath'))}";
 
 //Query 9: SubProperty Properties
 $query[9]="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-select distinct ?myprop ?exprop where {  GRAPH <$reasonedont> { {?myprop rdf:type owl:DatatypeProperty} UNION {?myprop rdf:type owl:ObjectProperty} . ?myprop rdfs:subPropertyOf ?exprop . FILTER( !REGEX(STR(?exprop),'^$ontopath') && REGEX(STR(?myprop),'^$ontopath'))}}";
+select distinct ?myprop ?exprop where {{?myprop rdf:type owl:DatatypeProperty} UNION {?myprop rdf:type owl:ObjectProperty} . ?myprop rdfs:subPropertyOf ?exprop . FILTER( !REGEX(STR(?exprop),'^$ontopath') && REGEX(STR(?myprop),'^$ontopath'))}";
 
-$res=sparqlQueryClientMultiple($triplestore,$query,100000,300);
+$res=sparqlQueryClientMultiple($triplestore,$query,100000,300,true);
 
 $tableres1=array();
 if (queryFailed($res[1])){

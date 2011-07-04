@@ -16,7 +16,7 @@ function handle_Request($params){
                 }
         }
 	else{
-		if ($params['op']=="reasonOntology") reasonOntology($params['name'],$params['url'],$params['ontology'],$params['log']);
+		if ($params['op']=="retrieveOntology") retrieveOntology($params['name'],$params['url'],$params['ontology'],$params['log']);
 		elseif ($params['op']=="cacheSpec") cacheSpec($params['name'],$params['url'],$params['ontology'],$params['log']);
 		$logtext="Initializing - About to start printing logfile ".$params['log'];
 	}

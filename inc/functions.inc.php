@@ -623,7 +623,7 @@ function getRelationship($entity){
 	$pred=getRelationshipPredicate($entity);
 	$obj=getRelationshipObject($entity);
 	$relhash=sha1($subj.$pred.$obj);
-	return "    <ore:ProxyFor>\n      <mepack:Relationship rdf:about=\"${datauri}relationships/$relhash\">\n        <rdf:subject rdf:resource=\"$subj\" />\n        <rdf:predicate rdf:resource=\"$pred\" />\n        <rdf:object rdf:resource=\"$obj\" />\n      </mepack:Relationship>\n    </ore:proxyFor>\n";
+	return "    <ore:proxyFor>\n      <mepack:Relationship rdf:about=\"${datauri}relationships/$relhash\">\n        <rdf:subject rdf:resource=\"$subj\" />\n        <rdf:predicate rdf:resource=\"$pred\" />\n        <rdf:object rdf:resource=\"$obj\" />\n      </mepack:Relationship>\n    </ore:proxyFor>\n";
 }
 function getRelationshipSubject($entity){
 	return getRelationshipNode($entity['subject_id'],$entity['subject_type']);

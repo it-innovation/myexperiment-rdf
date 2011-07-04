@@ -112,17 +112,30 @@
 <div class="hr"></div>
 
 <h3><a name="Packs">Packs</a></h3>
-<p>The Packs module provides a way for aggregating myExperiment <a href="specification#mebase:Contribution">Contributions</a> and external URLs within a single object and implements the <a href="http://www.openarchives.org/ore/" title="OAI-ORE Abstract Data Model">OAI-ORE Specification</a> (see <a href="packs/example">example</a>).  <a href="specification#mepack:Pack">Packs</a> are a subclass of <a href="http://rdf.myexperiment.org/generic/spec?ontology=13" title="OAI-ORE Specification Document">OAI-ORE schema</a>'s <a href="http://rdf.myexperiment.org/generic/spec?ontology=13#Aggregation">Aggregation</a> class.  To allow metadata to be associated only with an <a href=http://rdf.myexperiment.org/generic/spec?ontology=13#AggregatedResource">AggregatedResource</a> when it occurs within a particular Aggregation, the Packs module implements two ORE  <a href="http://rdf.myexperiment.org/generic/spec?ontology=13#Proxy">Proxy</a> classes:</p>
+<p>The Packs module provides a way for aggregating myExperiment <a href="specification#mebase:Contribution">Contributions</a> and external URLs within a single object and implements the <a href="http://www.openarchives.org/ore/" title="OAI-ORE Abstract Data Model">OAI-ORE Specification</a> (see <a href="packs/example">example</a>).  <a href="specification#mepack:Pack">Packs</a> are a subclass of <a href="http://rdf.myexperiment.org/ore/specification" title="OAI-ORE Specification Document">OAI-ORE schema</a>'s <a href="http://rdf.myexperiment.org/ore/specification#Aggregation">Aggregation</a> class.  To allow metadata to be associated only with an <a href=http://rdf.myexperiment.org/ore/specificationAggregatedResource">AggregatedResource</a> when it occurs within a particular Aggregation, the Packs module implements two ORE  <a href="http://rdf.myexperiment.org/ore/specification#Proxy">Proxy</a> classes:</p>
 <ul>
   <li><a href="specification#mepack:LocalPackEntry">LocalPackEntry</a></li>
   <li><a href="specification#mepack:RemotePackEntry">RemotePackEntry</a></li>
 </ul>
-<p>Remote Pack Entries are pointers to URLs (see <a href="/remote_pack_entries/example">example</a>) whereas Local Pack Entries have a pointer (<a href="specification#mepack:requires">mepack:requires</a>) to specify the myExperiment Contribution they represent (see <a href="/local_pack_entries/example">example</a>).  Packs contain the property  <a href="http://rdf.myexperiment.org/generic/spec?ontology=13#isDescribedBy">ore:isDescribedBy</a> to allow the discovery of the associated <a href="http://rdf.myexperiment.org/generic/spec?ontology=13#ResourceMap">ResourceMaps</a> allowing the Pack to be exported to another repository (see <a href="/pack_resource_maps/example">example</a>).
+<p>Remote Pack Entries are pointers to URLs (see <a href="/remote_pack_entries/example">example</a>) whereas Local Pack Entries have a pointer (<a href="specification#mepack:requires">mepack:requires</a>) to specify the myExperiment Contribution they represent (see <a href="/local_pack_entries/example">example</a>).  Packs contain the property  <a href="http://rdf.myexperiment.org/ore/specification#isDescribedBy">ore:isDescribedBy</a> to allow the discovery of the associated <a href="http://rdf.myexperiment.org/ore/specification#ResourceMap">ResourceMaps</a> allowing the Pack to be exported to another repository (see <a href="/pack_resource_maps/example">example</a>).
+
+<div class="hr"></div>
+
+<h3><a name="Pack Relationships">Pack Relationships </a></h3>
+<p>As well as describing items in a Pack it is possible to describe the relationships between them.  A <a href="specification#mepack:PackRelationship">PackRelationship</a> allows two items to be link together with a predicate.  These predicates can be described in <a href="../examples/ontologies">user-defined ontologies</a>.  A PackRelationship is similar to a LocalPackEntry or RemotePackEntry in that it refers to a <a href="specification#mepack:Relationship">Relationship</a> and allows its use it with the context of a particular Pack.  It does this by using a ore:proxyFor to the Relationship and an ore:ProxyIn to the Pack, (see Fig.5).</p>
+
+<div align="center">
+  <img src="/img/RO_structure.png" title="Example Structure of a Pack (Research Object)" alt="Example Pack Structure"/>
+  <p><b>Fig.5</b> Example Structure of a Pack (Research Object)</p>
+</div>
+
+<p>A Relationship is made up of an RDF, subject, predicate and object. The hashed part of the URI is an SHA1 hash of the concatenated subject, predicate and object URIs.  This ensures that all identical relationships have the same URI, essentially indexing relationships to make it easier to find packs that share the same relationships.</p>
+
 
 <div class="hr"></div>
 
 <h3><a name="Experiments">Experiments</a></h3>
-<p>myExperiment provides cloud services to run <a href="specification#meexp:Runnable">Runnable</a> <a href="specification#mebase:Contribution">Contributions</a> (e.g. <a href="specification#mecontrib:Workflow">Workflows</a>) in remote <a href="specification#meexp:Runner">Runners</a>.  These cloud services are provided by the <a href="experiments/">Experiments</a> module. An <a href="specification#meexp:Experiment">Experiment</a> is a specialisation of a <a href="specification#mepack:Pack">Pack</a> that aggregates <a href="specification#meexp:Job">Jobs</a>, (making Jobs <a href=http://rdf.myexperiment.org/generic/spec?ontology=13#AggregatedResource">AggregatedResources</a>). Jobs are enacted workflows on a remote runner.  A Job contains all the information about the Workflow being run, the Runner being used, the inputs/outputs of the Job and status information.  The inputs and outputs of a Job have their own URIs so they can be referenced separately.  (See an <a href="/jobs/example" title="Example RDF for a Job">example of a Job</a>). Like Packs, Experiments have an <a href="http://rdf.myexperiment.org/generic/spec?ontology=13#isDescribedBy">ore:isDescribedBy</a> property to allow the discovery of the associated <a href="http://rdf.myexperiment.org/generic/spec?ontology=13#ResourceMap">ResourceMaps</a> allowing them exported to another repository (see <a href="/experiment_resource_maps/example">example</a>).</p>
+<p>myExperiment provides cloud services to run <a href="specification#meexp:Runnable">Runnable</a> <a href="specification#mebase:Contribution">Contributions</a> (e.g. <a href="specification#mecontrib:Workflow">Workflows</a>) in remote <a href="specification#meexp:Runner">Runners</a>.  These cloud services are provided by the <a href="experiments/">Experiments</a> module. An <a href="specification#meexp:Experiment">Experiment</a> is a specialisation of a <a href="specification#mepack:Pack">Pack</a> that aggregates <a href="specification#meexp:Job">Jobs</a>, (making Jobs <a href=http://rdf.myexperiment.org/ore/specification#AggregatedResource">AggregatedResources</a>). Jobs are enacted workflows on a remote runner.  A Job contains all the information about the Workflow being run, the Runner being used, the inputs/outputs of the Job and status information.  The inputs and outputs of a Job have their own URIs so they can be referenced separately.  (See an <a href="/jobs/example" title="Example RDF for a Job">example of a Job</a>). Like Packs, Experiments have an <a href="http://rdf.myexperiment.org/ore/specification#isDescribedBy">ore:isDescribedBy</a> property to allow the discovery of the associated <a href="http://rdf.myexperiment.org/ore/specification#ResourceMap">ResourceMaps</a> allowing them exported to another repository.</p>
 
 <div class="hr"></div>
 
@@ -136,10 +149,10 @@
   <li><b><a href="specification#mecomp:Output">Output</a></b> A piece of data coming out of a Processor</li>
   <li><b><a href="specification#mecomp:Link">Link</a></b> A connection between an Output of a Source of Processor to the Input for another Processor or Sink</li>
 </ul>
-<p>All these Workflow Components are encompassed within a <a href="specification#mecomp:Dataflow">Dataflow</a>. Fig. 5 shows how these Workflow Components interlink to form a Dataflow.  Currently every publicly available Taverna workflow has an <a href="specification#mecomp:executes-dataflow">executes-dataflow</a> property to it's Dataflow. </p>
+<p>All these Workflow Components are encompassed within a <a href="specification#mecomp:Dataflow">Dataflow</a>. Fig.6 shows how these Workflow Components interlink to form a Dataflow.  Currently every publicly available Taverna workflow has an <a href="specification#mecomp:executes-dataflow">executes-dataflow</a> property to it's Dataflow. </p>
 <div align="center">
   <img src="/img/components.png" title="Overview of Organisation of Components into a Workflow" alt="Workflow Components Overview"/>
-  <p><b>Fig. 5</b> Overview of Organisation of Components into a Workflow</p>
+  <p><b>Fig.6</b> Overview of Organisation of Components into a Workflow</p>
 </div>
 <p>A Workflow may have many Processors, each must be one of the following types:</p>
 <ul>

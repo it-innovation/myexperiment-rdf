@@ -21,7 +21,7 @@ for ($i=0; $i<mysql_num_rows($res); $i++){
 		$filteront=$ontologies[$i]['namespace'];
 		$queryset=$ontologies[$i]['ontology_type'];
 		$timeout=$ontologies[$i]['timeout'];
-		$reasonedont="file://".$datapath."ontologies/reasoned/".$ontology."_".$headername."_reasoned.owl";
+		$remoteont="file://".$datapath."ontologies/remoteont/".$ontology."_".$headername.".owl";
         }
 }
 if (!$_GET['ontology']){
@@ -64,7 +64,7 @@ if ($ontology){
 	else include('specqueries.inc.php');
 //	print_r($queries);
 	//exit;
-	$res=sparqlQueryClientMultiple($ts,$queries,10000,$timeout);
+	$res=sparqlQueryClientMultiple($ts,$queries,10000,$timeout,true);
 //	print_r($res);	
 	//Retrieve Class Property Relations
 	$tableres1=array();

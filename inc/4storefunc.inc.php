@@ -107,14 +107,15 @@ function sparqlQueryClient($kb,$query,$format="sparql",$softlimit=1000,$reasonin
 	mysql_query($sql); 
         return $data;
 }
-function sparqlQueryClientMultiple($kb,$queries,$softlimit=1000,$timeout=30){
+function sparqlQueryClientMultiple($kb,$queries,$softlimit=1000,$timeout=30,$reasoning=0){
 	global $lddir, $datapath;
 	$qfp=md5(time().rand());
 	$qids=array_keys($queries);
+	if ($reasoning==1 || (is_string($reasoning) && (strtolower($reasoning)=="true" || strtolower($reasoning)=="yes"))) $reason='"-R CPDR"';
 	foreach($qids as $qid){
 		$filenames[$qid]="${datapath}tmp/queries/".$qfp."_$qid";
-		$cmd=$lddir."4store/scripts/runquery.sh $kb \"".$queries[$qid]."\" $softlimit ".$filenames[$qid]." &";
-		//echo $cmd."<br/>\n";
+		$cmd=$lddir."4store/scripts/runquery.sh $kb \"".$queries[$qid]."\" $softlimit ".$filenames[$qid]." $reason &";
+//		echo $cmd."<br/>\n";
 		exec($cmd);
 	}
 
@@ -184,8 +185,8 @@ select ?x where {?x rdfs:isDefinedBy <".$ontopath."snarm/>}";
         return '0';
 }
 
-function reasonOntology($name,$url,$id,$log){
-	$cmd=getScriptPath()."/reasonRemoteOntology.sh '$url' $name $id > $log &";
+function retrieveOntology($name,$url,$id,$log){
+	$cmd=getScriptPath()."/retrieveRemoteOntology.sh '$url' $name $id > $log &";
 	//echo $cmd."###<br/>";
         exec($cmd);
 }

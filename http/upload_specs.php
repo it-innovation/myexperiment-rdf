@@ -9,7 +9,7 @@
 		$_POST[$postkey]= mysql_real_escape_string($postvar);
 	}
 	if (!$_POST['timeout'] || !is_int(intval($_POST['timeout'])) || intval($_POST['timeout'])<=0) $_POST['timeout']=30;
-	if ($_POST['addedit']||$_POST['cache']||$_POST['uploadreason']){
+	if ($_POST['addedit']||$_POST['cache']||$_POST['uploadcache']){
 		if ($_POST['ontology']){
                 $tab10=array();
 			$uquery="update ontologies set name='$_POST[name]', url='$_POST[url]', image='$_POST[image]', namespace='$_POST[namespace]', ontology_type='$_POST[ontology_type]', timeout=$_POST[timeout] where id='$_POST[ontology]'";
@@ -20,12 +20,12 @@
 			$ires=mysql_query($iquery);
 			$_POST['ontology']=mysql_insert_id();
 		}
-		if ($_POST['cache']||$_POST['uploadreason']){
+		if ($_POST['cache']||$_POST['uploadcache']){
 			if (preg_match("/^[a-zA-Z]+[:\/\/]+[A-Za-z0-9\-_]+\\.+[A-Za-z0-9\.\/%&=\?\-_]+$/i",$_POST['url']) && preg_match("/[A-Za-z\-_]+/",$_POST['name'])){
 		//		if (ontologiesFullTestSparqlQueryClient(getPortForTriplestore('ontologies'))){
-			                if ($_POST['uploadreason']){
-						$log="/tmp/".$_POST['name']."_reason_".time().".log";
-						$qstr="op=reasonOntology&amp;name=".$_POST['name']."&amp;url=".$_POST['url']."&amp;ontology=".$_POST['ontology']."&amp;log=".$log;
+			                if ($_POST['uploadcache']){
+						$log="/tmp/".$_POST['name']."_retrieve_".time().".log";
+						$qstr="op=retrieveOntology&amp;name=".$_POST['name']."&amp;url=".$_POST['url']."&amp;ontology=".$_POST['ontology']."&amp;log=".$log;
 					}
 					elseif ($_POST['cache']){
 						$log="/tmp/".$_POST['name']."_cache_".time().".log";
@@ -105,7 +105,7 @@
       </td>
     </tr>
     <tr><td><b>Image:</b></td><td><input type="text" name="image" size="50" value="<?=$image ?>"/></td>
-    <tr><td colspan="2" style="text-align: center;"><input type="submit" name="addedit" value="Add/Edit"/>&nbsp;&nbsp;<input type="submit" name="uploadreason" value="Upload &amp; Reason"/>&nbsp;&nbsp;<input type="submit" name="cache" value="Cache"/>&nbsp;&nbsp;<a href="generic/spec?ontology=<?= $_POST['ontology'] ?>">View Ontology Spec</a></td></tr>
+    <tr><td colspan="2" style="text-align: center;"><input type="submit" name="addedit" value="Add/Edit"/>&nbsp;&nbsp;<input type="submit" name="uploadcache" value="Upload &amp; Cache"/>&nbsp;&nbsp;<input type="submit" name="cache" value="Cache"/>&nbsp;&nbsp;<a href="generic/spec?ontology=<?= $_POST['ontology'] ?>">View Ontology Spec</a></td></tr>
   </table>
 </form>
 <?php include('footer.inc.php'); ?>
