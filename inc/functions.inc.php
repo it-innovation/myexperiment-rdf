@@ -614,8 +614,8 @@ function getRelationshipSPO($entity){
 	return array('subject'=>getRelationshipSubject($entity),'predicate'=>getRelationshipPredicate($entity),'object'=>getRelationshipObject($entity));
 }
 function getRelationshipURN($spo){
-	require_once('uuid.class.php');
-        return "urn:uuid:".UUID::v5($spo['subject'].$spo['predicate'],$spo['object']);
+	require_once('class.uuid.php');
+        return "urn:uuid:".UUID::generate(UUID::UUID_NAME_SHA1,UUID::FMT_STRING,$spo['subject'].$spo['predicate'],$spo['object']);
 }
 function getRelationship($entity){
 	$spo=getRelationshipSPO($entity);
