@@ -129,7 +129,7 @@
   <p><b>Fig.5</b> Example Structure of a Pack (Research Object)</p>
 </div>
 
-<p>A Relationship is made up of an RDF, subject, predicate and object. The hashed part of the URI is an SHA1 hash of the concatenated subject, predicate and object URIs.  This ensures that all identical relationships have the same URI, essentially indexing relationships to make it easier to find packs that share the same relationships.</p>
+<p>A Relationship is made up of an RDF, subject, predicate and object. URI is a <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_5_.28SHA-1_hash.29">UUID version 5</a> URN (i.e. an SHA-1 hash) generated from the concatenation of the subject, predicate and object URIs.  This ensures that all identical relationships have the same URI, essentially indexing relationships to make it easier to find packs that share the same relationships.</p>
 
 
 <div class="hr"></div>

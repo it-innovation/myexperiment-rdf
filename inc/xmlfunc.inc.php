@@ -273,8 +273,8 @@ function drawSparqlResultsTable($table){
 	return $tablehtml;
 }
 function xmlentities($data){
-	$find=array("&#xD;","&","<",">","'",'"',"\x0b");
-	$replace=array(" ","&amp;","&lt;","&gt;","&apos;","&quot;"," ");
+	$find=array("&#xD;","&","<",">","'",'"',"\x0b","\x0c","\x09","\x0a","\x0d","\x1d","\x1e","\xa0");
+	$replace=array(" ","&amp;","&lt;","&gt;","&apos;","&quot;"," ","","\t","\n","\t","-","-","&#160;");
 	$replaced=str_replace($find, $replace, $data);
 	for( $c=0; $c<strlen($replaced); $c++){
 		$char=substr($replaced,$c,1);
