@@ -41,8 +41,8 @@ function getOREAggregatedResources($entry,$type){
 			$res=mysql_query($prsql);
 			for ($i=0; $i<mysql_num_rows($res); $i++){
         	                $row=mysql_fetch_assoc($res);
-				$reluri=getRelationshipURI($row);
-				$xml.="    <ore:aggregates rdf:resource=\"$reluri\"/>\n";
+				$relurn=getRelationshipURN(getRelationshipSPO($row));
+				$xml.="    <ore:aggregates rdf:resource=\"$relurn\"/>\n";
 			}
 		}
         }

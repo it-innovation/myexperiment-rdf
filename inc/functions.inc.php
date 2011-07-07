@@ -610,20 +610,17 @@ function getPredicateRelations($entity){
 	}
 	return $xml;
 }
-function getRelationshipURI($entity){
-	global $datauri;
-        $subj=getRelationshipSubject($entity);
-        $pred=getRelationshipPredicate($entity);
-        $obj=getRelationshipObject($entity);
-        return "${datauri}relationships/".sha1(getRelationshipSubject($entity).getRelationshipPredicate($entity).getRelationshipObject($entity));
+function getRelationshipSPO($entity){
+	return array('subject'=>getRelationshipSubject($entity),'predicate'=>getRelationshipPredicate($entity),'object'=>getRelationshipObject($entity));
+}
+function getRelationshipURN($spo){
+	require_once('uuid.class.php');
+        return "urn:uuid:".UUID::v5($spo['subject'].$spo['predicate'],$spo['object']);
 }
 function getRelationship($entity){
-	global $datauri;
-	$subj=getRelationshipSubject($entity);
-	$pred=getRelationshipPredicate($entity);
-	$obj=getRelationshipObject($entity);
-	$relhash=sha1($subj.$pred.$obj);
-	return "    <ore:proxyFor>\n      <mepack:Relationship rdf:about=\"${datauri}relationships/$relhash\">\n        <rdf:subject rdf:resource=\"$subj\" />\n        <rdf:predicate rdf:resource=\"$pred\" />\n        <rdf:object rdf:resource=\"$obj\" />\n      </mepack:Relationship>\n    </ore:proxyFor>\n";
+	$spo=getRelationshipSPO($entity);
+	$urn=getRelationshipURN($spo);
+	return "    <ore:proxyFor>\n      <mepack:Relationship rdf:about=\"$urn\">\n        <rdf:subject rdf:resource=\"$spo[subject]\" />\n        <rdf:predicate rdf:resource=\"$spo[predicate]\" />\n        <rdf:object rdf:resource=\"$spo[object]\" />\n      </mepack:Relationship>\n    </ore:proxyFor>\n";
 }
 function getRelationshipSubject($entity){
 	return getRelationshipNode($entity['subject_id'],$entity['subject_type']);
