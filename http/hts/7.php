@@ -1,5 +1,5 @@
 <h2>7. ORDER BY</h2>
-<p>Like with the <a href="?page=FILTER#On Dates">dates example</a> previously you may want to go further so that the most recent workflows are listed first.  The <em>ORDER BY</em> clause can be used to do this:</p>
+<p>The <a href="?page=FILTER#On Dates">filter on dates example</a> restricts the workflows returned, however you may want to go further, listing the most recent workflows first.  The <em>ORDER BY</em> clause can be used to do this:</p>
 <div class="yellow"><pre>PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
 PREFIX mecontrib: &lt;http://rdf.myexperiment.org/ontologies/contributions/&gt;
@@ -22,7 +22,7 @@ WHERE {
   <tr><td class="shade"><?= $datauri ?>workflows/1002</td><td class="shade">2009-12-15T22:16:23Z</td></tr>
 </table>
 </div>
-<p>The <em>DESC</em> operand means order the results in descending order, in this case latest workflows first.  If you wanted them ordered ascending you don't require any operand.  If you want a second criteria to order on you just add this after the first parammeter.  An example of this might be order by workflow type with the latest of each type first:</p>
+<p>The <em>DESC</em> operand means order the results in descending order, in this case, the latest workflows first.  If you wanted them ordered ascending you don't require any operand.  If you want a second criteria to order on, you just add this after the first.  An example of this might be order by workflow type with the latest of each type first:</p>
 <div class="yellow"><pre>PREFIX mebase: &lt;http://rdf.myexperiment.org/ontologies/base/&gt;
 PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
@@ -49,7 +49,7 @@ ORDER BY <b>?ct_title</b> DESC(?added)</pre>
 </table>
 </div>
 <br/>
-<p>By default, <em>ORDER BY</em> will treat the field(s) it is ordering on as being alphanumeric.  In some cases it is necessary to treat a field as being numeric.  An example of this is a list of the most downloaded workflows.  Below is an example of how to treat <em>?downloaded</em> as a numeric field.</p>
+<p>By default, <em>ORDER BY</em> will treat the field(s) it is ordering on as alphanumeric.  In some cases it is necessary to treat a field as being numeric.  An example of this is a list of the most downloaded workflows.  Below is an example of how to treat <em>?downloaded</em> as a numeric field.</p>
 <div class="yellow"><pre>BASE &lt;http://www.myexperiment.org/&gt;
 PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 PREFIX mevd: &lt;http://rdf.myexperiment.org/ontologies/viewings_downloads/&gt;

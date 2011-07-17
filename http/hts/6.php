@@ -1,6 +1,6 @@
 <h2>6. GROUP BY</h2>
 
-<p>The purpose of the <em>GROUP BY</em> clause is to allow aggregation over one or more properties.  This is particularly useful when you wannt to use mathematical functions on variables in the <a href="?page=SELECT">SELECT</a> clause.  A good example is using <a href="?page=SELECT#COUNT">COUNT</a> to list how many workflows are owned by each user.</p>
+<p>The purpose of the <em>GROUP BY</em> clause is to allow aggregation over one or more properties.  This is particularly useful when you want to use mathematical functions on variables in the <a href="?page=SELECT">SELECT</a> clause.  A good example is using <a href="?page=SELECT#COUNT">COUNT</a> to list how many workflows are owned by each user.</p>
 <div class="yellow"><pre>PREFIX sioc: &lt;http://rdfs.org/sioc/ns#&gt;
 PREFIX mecontrib: &lt;http://rdf.myexperiment.org/ontologies/contributions/&gt;
 PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
@@ -52,7 +52,7 @@ GROUP BY ?user</pre>
 </table>
 </div>
 <br/>
-<p>Again, the <em>GROUP BY</em> clause can also be used with the <a href="?page=SELECT#AVG">AVG</a>, <a href="?page=SELECT#MAX_MIN">MAX and MIN</a> function to get for example the average, maximum and minium ratings of workflows.</p>
+<p>Again, the <em>GROUP BY</em> clause can also be used with the <a href="?page=SELECT#AVG">AVG</a>, <a href="?page=SELECT#MAX_MIN">MAX and MIN</a> functions to get for example the average, maximum and minium ratings of workflows.</p>
 <div class="yellow"><pre>PREFIX mebase: &lt;http://rdf.myexperiment.org/ontologies/base/&gt;
 PREFIX meannot: &lt;http://rdf.myexperiment.org/ontologies/annotations/&gt;
 PREFIX mecontrib: &lt;http://rdf.myexperiment.org/ontologies/contributions/&gt;
@@ -78,7 +78,7 @@ GROUP BY ?workflow</pre>
   <tr><td>http://www.myexperiment.org/workflows/688</td><td>4</td><td>4</td><td>4</td></tr>
 </table>
 <br/>
-<p style="font-size: 0.9em; font-weight: bold;">N.B. Currently (March 9th 2011) 4Store does not properly handle floating point numbers properly so average results may need to be manually rounded to make 4.4999999999999999991 into 4.5.</p>
+<p style="font-size: 0.9em; font-weight: bold;">N.B. Currently (March 9th 2011) 4Store does not properly handle floating point numbers properly so average results may need to be manually rounded to make for example 4.4999999999999999991 into 4.5.</p>
 </div>
 <br/>
 <script type= "text/javascript"><!-- 

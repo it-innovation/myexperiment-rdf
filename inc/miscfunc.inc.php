@@ -70,6 +70,7 @@ function getUsefulPrefixesArray($domain,$merge=false){
         $other['xsd']='http://www.w3.org/2001/XMLSchema#';
         $other['dc']='http://purl.org/dc/elements/1.1/';
         $other['dcterms']='http://purl.org/dc/terms/';
+	$other['skos']='http://www.w3.org/2004/02/skos/core#';
 	if (trim($domain)=="private" || trim($domain)=="public"){
 		$myexp['myexp']='http://www.myexperiment.org/';
 		$myexp['snarm']='http://rdf.myexperiment.org/ontologies/snarm/';

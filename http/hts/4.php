@@ -46,6 +46,25 @@ WHERE {
 <div class="green" id="results2">
 <?php include('hts/email_homepage.inc.php'); ?>
 </div>
+<br/>
+<p>Sometimes as well as having the same subject multiple times over you may also have the same predicate.  in this case you can use a comma (,) to separate each object.  Another way to save time writing your query is to use 'a' rather than rdf:type to specify the type of a particular entity.</p>
+<div class="yellow"><pre>BASE &lt;http://www.myexperiment.org/&gt;
+PREFIX ore: &lt;http://www.openarchives.org/ore/terms/&gt;
+PREFIX mepack: &lt;http://rdf.myexperiment.org/ontologies/packs/&gt;
+
+SELECT ?pack
+WHERE {
+  ?pack <b>a</b> mepack:Pack ;
+        <b>ore:aggregates &lt;workflows/181&gt;, &lt;workflows/246&gt;</b>
+}</pre><div style="float: right; position: relative; top: -35px; text-align: right;">[<a href="/sparql?query=BASE+%3Chttp%3A%2F%2Fwww.myexperiment.org%2F%3E%0D%0APREFIX+ore%3A+%3Chttp%3A%2F%2Fwww.openarchives.org%2Fore%2Fterms%2F%3E%0D%0APREFIX+mepack%3A+%3Chttp%3A%2F%2Frdf.myexperiment.org%2Fontologies%2Fpacks%2F%3E%0D%0A%0ASELECT+%3Fpack%0D%0AWHERE+%7B%0D%0A++%3Fpack+a+mepack%3APack+%3B%0D%0A++++++++ore%3Aaggregates+%3Cworkflows%2F181%3E%2C+%3Cworkflows%2F246%3E%0D%0A%7D%0D%0A&amp;formatting=HTML Table">Run</a>]<br/><span id="results2b_show" onclick="showResults('results2b');" style="display: none;">[<span class="link">Show&nbsp;Example&nbsp;Results</span>]</span><span id="results2b_hide" onclick="hideResults('results2b');">[<span class="link">Hide&nbsp;Example&nbsp;Results</span>]</span></div></div>
+<div class="green" id="results2b">
+<table class="listing">
+  <tr><th>pack</th></tr>
+  <tr><td class="shade">http://www.myexperiment.org/packs/1</td></tr>
+  <tr><td>http://www.myexperiment.org/packs/47</td></tr>
+</table>
+</div>
+
 <h3>4.1. UNION<a name="UNION"/></h3>
 <p>The <em>UNION</em> clause allows you to return results where you want to match multiple patterns.  An example of this may be returning all comments and ratings for a particular workflow:</p>
 <div class="yellow"><pre>BASE &lt;<?= $datauri ?>&gt;
@@ -107,6 +126,7 @@ WHERE{
 <script type= "text/javascript"><!-- 
   hideResults('results1');
   hideResults('results2');
+  hideResults('results2b');
   hideResults('results3');
   hideResults('results4');
 --></script>

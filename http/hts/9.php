@@ -1,5 +1,5 @@
 <h2>9. Troubleshooting</h2>
-<p>When trying to execute a query you may get one or more warning/error messages.  If you are using the query form with In Page results these messages will be shown in a red box just above the query textbox. E.g.</p>
+<p>When trying to execute a query you may get one or more warning/error messages.  If you are using the query form with <em>HTML Table</em> results these messages will be shown in a red box just above the query text box. E.g.</p>
 <div class="red" style="text-align: center;"><b> parser warning: Variable q was selected but is unused in the query. at line 1 </b></div>
 <br/>
 <p>If you request raw SPARQL results XML these messages will appear as within a comment tag <code><small>&lt;!-- --&gt;</small></code> in the XML itself.  Usually between the <em>head</em> and <em>results</em> tags.</p>
@@ -26,6 +26,7 @@ WHERE {
   UNION / OPTIONAL
   FILTER 
 }
+GROUP BY
 ORDER BY
 LIMIT
 OFFSET</pre></div>
@@ -46,7 +47,7 @@ WHERE{
   FILTER (?score &gt;= 4)
 }</pre>
 </div>
-<p>SPARQL queries often you several levels of parentheses either curly parentheses {} in WHERE, OPTIONAL and UNION clauses or round parentheses () in FILTER clauses.  If you get an error message like the one below you should check that all your parentheses pair up.
+<p>SPARQL queries often use several levels of parentheses either curly parentheses {} in WHERE, OPTIONAL and UNION clauses or round parentheses () in FILTER clauses.  If you get an error message like the one below you should check that all your parentheses pair up.
 <div class="red" style="text-align: center;"><b> parser error: syntax error, unexpected $end, expecting '}' at line 11 </b></div>
 
 <h3><a name="Complexity Warnings"/>8.2. Complexity Warnings</h3>

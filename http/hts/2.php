@@ -26,7 +26,7 @@ WHERE {
 </div>
 
 <h3><a name="BASE"/>2.1. BASE</h3>
-<p>The <em>BASE</em> clause is similar to the PREFIX clause but a name is not required, just the domain path need be defined.  If you wish to use the BASE clause it must proceed any PREFIX clauses.  A common use of the BASE clause is to define the path for data that is being queried. E.g.
+<p>The <em>BASE</em> clause is similar to the PREFIX clause but a name is not required, just the URI path needs be defined.  If you wish to use the BASE clause it must proceed any PREFIX clauses.  A common use of the BASE clause is to define the path for data that is being queried. E.g.
 <div class="yellow"><pre>SELECT ?p ?o
 WHERE{
   &lt;<b><?= $datauri ?></b>workflows/12&gt; ?p ?o
