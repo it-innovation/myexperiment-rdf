@@ -22,7 +22,7 @@ function getEntityURI($type,$id,$entity,$format=''){
 				return $datauri."experiments/".$entity[$nesting[$type][0]]."/$type/$id";
 			case 'local_pack_entries':
 			case 'remote_pack_entries':
-			case 'pack_relationships':
+			case 'relationship_entries':
 				return $datauri."packs/".$entity[$nesting[$type][0]]."/$type/$id";
 			case 'taggings':
 				return $datauri."tags/".$entity[$nesting[$type][0]]."/$type/$id";
@@ -373,7 +373,7 @@ function getPackEntries($pack){
 	$xml="";
 	$packurl=getEntityURI('packs',$pack['id'],$pack);
 	for ($e=0; $e<mysql_num_rows($lres); $e++){
-		$xml.="    <mepack:has-pack-entry rdf:resource=\"$packurl/local_pack_entries/".mysql_result($lres,$e,'id')."\"/>\n";
+		$xml.="    <mepack:has-entry rdf:resource=\"$packurl/local_pack_entries/".mysql_result($lres,$e,'id')."\"/>\n";
 	}
 	$rsql=$sql['remote_pack_entries'];
 	if (stripos($rsql,'where')>0) $rsql.=" and ";
@@ -381,15 +381,15 @@ function getPackEntries($pack){
         $rsql.="pack_id=$pack[id]";
 	$rres=mysql_query($rsql);
         for ($e=0; $e<mysql_num_rows($rres); $e++){
-                $xml.="    <mepack:has-pack-entry rdf:resource=\"$packurl/remote_pack_entries/".mysql_result($rres,$e,'id')."\"/>\n";
+                $xml.="    <mepack:has-entry rdf:resource=\"$packurl/remote_pack_entries/".mysql_result($rres,$e,'id')."\"/>\n";
         }
-	$prsql=$sql['pack_relationships'];
+	$prsql=$sql['relationship_entries'];
 	if (stripos($prsql,'where')>0) $prsql.=" and ";
         else $prsql.=" where ";
         $prsql.="context_id=$pack[id]";
         $prres=mysql_query($prsql);
 	for ($e=0; $e<mysql_num_rows($prres); $e++){
-                $xml.="    <mepack:has-pack-entry rdf:resource=\"$packurl/relationships/".mysql_result($prres,$e,'id')."\"/>\n";
+                $xml.="    <mepack:has-entry rdf:resource=\"$packurl/relationship_entries/".mysql_result($prres,$e,'id')."\"/>\n";
         }
 	return $xml;
 }
@@ -473,7 +473,7 @@ function getProxyFor($entity){
 		$etype=array_search($etype,$ontent);
 		return $etype."/".$entity['contributable_id'];
 	}
-	$xml.="    <rdf:Description rdf:about=\"".str_replace("&","&amp;",$entity['uri'])."\"";
+	$xml.="<rdf:Description rdf:about=\"".str_replace("&","&amp;",$entity['uri'])."\"";
         if ($entity['alternate_uri']) $xml.=">\n      <rdfs:seeAlso>\n        <rdf:Description rdf:about=\"".str_replace("&","&amp;",$entity['alternate_uri'])."\"/>\n      </rdfs:seeAlso>\n    </rdf:Description>\n";
 	else $xml.="/>";
         return $xml;
@@ -577,9 +577,9 @@ function getAnnotations($entity,$type){
 	}
 	return $xml;
 }
-function getPackRelationships($pack){
+function getPackRelationshipEntries($pack){
 	global $sql, $datauri;
-	$rsql=$sql['pack_relationships'];
+	$rsql=$sql['relationship_entries'];
 	if (strpos("where",$rsql)>0) $rsql.=" and ";
 	else $rsql.=" where ";
 	$rsql.="pack_id=$pack[id]";
@@ -587,7 +587,7 @@ function getPackRelationships($pack){
 	$xml="";
 	if ($res!==false){
 		for ($r=0; $r<mysql_num_rows($res); $r++){
-			$xml.="    <mepack:has-pack-relationship rdf:resource=\"${datauri}packs/$pack[id]/relationships/".mysql_result($res,$r,'id')."\"/>\n";
+			$xml.="    <mepack:has-relationship-entry rdf:resource=\"${datauri}packs/$pack[id]/relationship_entries/".mysql_result($res,$r,'id')."\"/>\n";
 		}
 	}
 	return $xml;

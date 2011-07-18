@@ -6,6 +6,7 @@
 <p><big>This page includes the changelog for the <a href=".">myExperiment Ontology</a> and consequently myExperiment's RDF data.</big></p>
 
 <ul class="changelog">
+  <li><b>18/07/2011</b> Replaced PackRelationship with RelationshipEntry as a more generic way of associating a Relationship with an Aggregation.  Made Entry class to hang PackEntry and RelationshipEntry off as subclasses.</li>
   <li><b>03/07/2011</b> Removed Concepts from packs module, predicates of relationships now defined as OWL ObjectProperties that make up <a href="../examples/ontologies">user-defined ontologies</a>.  Vocabulary moved to annotations module to be used to represent at set of tags.</li>
   <li><b>09/03/2011</b> Updated Packs module to create a separate Relationship class that has PackRelationship as an ore:Proxy to describe it in the context of the Pack. Fixed some other subclassing issues with PackEntry and Vocabulary.</li>
   <li><b>10/02/2011</b> Added PackRelationship to Packs module to allow relationship between items in Packs to be defined.  Moved Vocabularies from Contributions to Packs module to support PackRelationships.  Added Concepts to Packs module, as a specific form of SKOS Concept to define the predicate of a PackRelationship.</li>

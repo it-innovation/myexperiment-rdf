@@ -34,7 +34,7 @@ function getOREAggregatedResources($entry,$type){
                         $xml.="    <ore:aggregates rdf:resource=\"".str_replace("&","&amp;",$fulluri)."\"/>\n";
                 }
 		if ($type=="packs"){
-			$prsql=$sql['pack_relationships'];
+			$prsql=$sql['relationship_entries'];
 			if (stripos($prsql,'where')>0) $prsql.=" and ";
 			else $prsql.=" where ";
 			$prsql.="context_id=$entry[id]";

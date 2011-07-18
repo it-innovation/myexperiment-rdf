@@ -37,7 +37,7 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">July 4, 2011</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">July 18, 2011</dc:date>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -165,9 +165,9 @@
 
   <!-- =================== Abstract Classes =================== -->
 
-  <owl:Class rdf:about="PackEntry">
-    <rdfs:label>PackEntry</rdfs:label>
-    <rdfs:comment>An entry in a Pack</rdfs:comment>
+  <owl:Class rdf:about="Entry">
+    <rdfs:label>Entry</rdfs:label>
+    <rdfs:comment>An entry into some aggregation</rdfs:comment>
     <rdfs:subClassOf rdf:resource="&mebase;Submission" />
     <rdfs:subClassOf rdf:resource="&ore;Proxy" />
     <rdfs:subClassOf>
@@ -202,6 +202,18 @@
     </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:resource="&mepack;"/>
   </owl:Class>
+
+  <owl:Class rdf:about="PackEntry">
+    <rdfs:label>Entry</rdfs:label>
+    <rdfs:comment>An entry in a Pack</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&mebase;Entry" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&ore;proxyIn" />
+        <owl:allValuesFrom rdf:resource="Pack" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
  
 
   <!-- =============== myExperiment Entity Classes ================= -->
@@ -210,7 +222,6 @@
     <rdfs:label>LocalPackEntry</rdfs:label>
     <rdfs:comment>An entry in a Pack that is a Contribution</rdfs:comment>
     <owl:disjointWith rdf:resource="RemotePackEntry"/>
-    <owl:disjointWith rdf:resource="PackRelationship"/>
     <rdfs:subClassOf rdf:resource="PackEntry" />
     <rdfs:subClassOf>
       <owl:Restriction>
@@ -244,12 +255,10 @@
     <rdfs:isDefinedBy rdf:resource="&mepack;"/>
   </owl:Class>
 
-  <owl:Class rdf:about="PackRelationship">
-    <rdfs:label>PackRelationship</rdfs:label>
+  <owl:Class rdf:about="RelationshipEntry">
+    <rdfs:label>RelationshipEntry</rdfs:label>
     <rdfs:comment>A Relationship in the context of a particular Pack</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PackEntry"/>
-    <owl:disjointWith rdf:resource="LocalPackEntry"/>
-    <owl:disjointWith rdf:resource="RemotePackEntry"/>
+    <rdfs:subClassOf rdf:resource="Entry"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&ore;proxyFor" />
@@ -287,7 +296,6 @@
     <rdfs:label>RemotePackEntry</rdfs:label>
     <rdfs:comment>An entry in a Pack that is a remote url.</rdfs:comment>
     <owl:disjointWith rdf:resource="LocalPackEntry"/>
-    <owl:disjointWith rdf:resource="PackRelationship"/>
     <rdfs:subClassOf rdf:resource="PackEntry" />
      <rdfs:subClassOf>
       <owl:Restriction>
@@ -300,11 +308,11 @@
 
 <!-- =============== Object Properties ============== -->
 
-  <owl:ObjectProperty rdf:about="has-pack-entry">
+  <owl:ObjectProperty rdf:about="has-entry">
     <rdfs:label>has-pack-entry</rdfs:label>
     <rdfs:comment>A pack may have zero or more pack entries.</rdfs:comment>
     <rdfs:domain rdf:resource="Pack"/>
-    <rdfs:range rdf:resource="PackEntry"/>
+    <rdfs:range rdf:resource="Entry"/>
     <owl:inverseOf rdf:resource="&ore;proxyIn"/>
     <rdfs:isDefinedBy rdf:resource="&mepack;"/>
   </owl:ObjectProperty>

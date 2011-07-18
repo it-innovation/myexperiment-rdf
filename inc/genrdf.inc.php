@@ -12,7 +12,7 @@
 	function printEntity($row,$type,$format=''){
 		global $datauri,$domain,$datatypes,$entityns, $mappings, $ontent;
 		$template=$mappings[$type];
-//		echo "<!-- $type -->\n";
+		//echo "<!-- $type -->\n";
 		$idfield=array_search('url',$template);
 		$id=$row[$idfield];
 		unset($template[$idfield]);
