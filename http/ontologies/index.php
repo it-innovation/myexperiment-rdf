@@ -121,8 +121,8 @@
 
 <div class="hr"></div>
 
-<h3><a name="PackRelationships">Pack Relationships</a></h3>
-<p>As well as describing items in a Pack it is possible to describe the relationships between them.  A <a href="specification#mepack:PackRelationship">PackRelationship</a> allows two items to be link together with a predicate.  These predicates can be described in <a href="../examples/ontologies">user-defined ontologies</a>.  A PackRelationship is similar to a LocalPackEntry or RemotePackEntry in that it refers to a <a href="specification#mepack:Relationship">Relationship</a> and allows its use it with the context of a particular Pack.  It does this by using a ore:proxyFor to the Relationship and an ore:ProxyIn to the Pack, (see Fig.5).</p>
+<h3><a name="RelationshipsInPacks">Relationships in Packs</a></h3>
+<p>As well as describing items in a Pack it is possible to describe the relationships between them.  A <a href="specification#mepack:RelationshipEntry">RelationshipEntry</a> allows two items to be link together with a predicate.  These predicates can be described in <a href="../examples/ontologies">user-defined ontologies</a>.  A RelationshipEntry is similar to a LocalPackEntry or RemotePackEntry in that it refers to a <a href="specification#mepack:Relationship">Relationship</a> and allows its use it with the context of a particular Pack.  It does this by using a ore:proxyFor to the Relationship and an ore:ProxyIn to the Pack, (see Fig.5).  A RelationshipEntry differs from LocalPackEntry and RemotePackEntry because it can be used to assert a Relationship in the context of any entity, not just a Pack.</p>
 
 <div align="center">
   <img src="/img/RO_structure.png" title="Example Structure of a Pack (Research Object)" alt="Example Pack Structure"/>

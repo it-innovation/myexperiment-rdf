@@ -60,29 +60,29 @@
     <ore:aggregates rdf:resource="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.pptx"/>
     <ore:aggregates rdf:resource="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.ppt"/>
     <ore:aggregates rdf:resource="http://www.escience2009.org/"/>
-    <ore:aggregates rdf:resource="http://www.myexperiment.org/relationships/8f27682622e098a882b88255cca342af70f4c056"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/142"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/143"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/433"/>
-    <mepack:has-pack-entry rdf:resource="http://www.myexperiment.org/packs/105/relationships/2"/>
+    <ore:aggregates rdf:resource="urn:uuid:c030a449-9ba2-5634-9814-974d1afa0b73"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/142"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/143"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/105/remote_pack_entries/433"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/105/relationship_entries/2"/>
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/16" />
     <dcterms:title rdf:datatype="&xsd;string">Presentation - Socialising e-Science</dcterms:title>
-    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;Title: Socialising e-Science&lt;br /&gt;
-&lt;br /&gt;
-Speaker: David De Roure&lt;br /&gt;
-&lt;br /&gt;
-Event: IEEE e-Science 2009&lt;br /&gt;
-&lt;br /&gt;
-Event URL: http://www.escience2009.org/&lt;br /&gt;
-&lt;br /&gt;
-Location: Oxford, UK&lt;br /&gt;
-&lt;br /&gt;
-Date: Tuesday December 8, 2009&lt;br /&gt;
-&lt;br /&gt;
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;Title: Socialising e-Science&lt;br /&gt;	
+&lt;br /&gt;	
+Speaker: David De Roure&lt;br /&gt;	
+&lt;br /&gt;	
+Event: IEEE e-Science 2009&lt;br /&gt;	
+&lt;br /&gt;	
+Event URL: http://www.escience2009.org/&lt;br /&gt;	
+&lt;br /&gt;	
+Location: Oxford, UK&lt;br /&gt;	
+&lt;br /&gt;	
+Date: Tuesday December 8, 2009&lt;br /&gt;	
+&lt;br /&gt;	
 Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
     <dcterms:created rdf:datatype="&xsd;dateTime">2009-12-13T11:01:20Z</dcterms:created>
     <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-28T17:15:22Z</dcterms:modified>
-    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">169</mevd:viewed>
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">183</mevd:viewed>
     <mevd:downloaded rdf:datatype="&xsd;nonNegativeInteger">69</mevd:downloaded>
     <mebase:has-policy rdf:resource="http://www.myexperiment.org/packs/105/policies/1622" />
   </mepack:Pack>
@@ -92,7 +92,7 @@ Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
     <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/105" />
     <dcterms:title rdf:datatype="&xsd;string">Socialising e-Science</dcterms:title>
     <ore:proxyFor>
-          <rdf:Description rdf:about="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.pptx"/>
+      <rdf:Description rdf:about="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.pptx"/>
     </ore:proxyFor>
     <dcterms:description rdf:datatype="&xsd;string">PowerPoint 2007</dcterms:description>
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/16" />
@@ -105,7 +105,7 @@ Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
     <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/105" />
     <dcterms:title rdf:datatype="&xsd;string">Socialising e-Science (ppt)</dcterms:title>
     <ore:proxyFor>
-          <rdf:Description rdf:about="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.ppt"/>
+      <rdf:Description rdf:about="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.ppt"/>
     </ore:proxyFor>
     <dcterms:description rdf:datatype="&xsd;string">PowerPoint 97-2003</dcterms:description>
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/16" />
@@ -118,7 +118,7 @@ Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
     <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/105" />
     <dcterms:title rdf:datatype="&xsd;string">IEEE e-Science 2009</dcterms:title>
     <ore:proxyFor>
-          <rdf:Description rdf:about="http://www.escience2009.org/"/>
+      <rdf:Description rdf:about="http://www.escience2009.org/"/>
     </ore:proxyFor>
     <dcterms:description rdf:datatype="&xsd;string">The fifth IEEE e-Science conference was held in Oxford, UK from Dec 9-11 2009. The meeting coincided with the UK e-Science All Hands Meeting that was held from Dec 7-9th, 2009.</dcterms:description>
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
@@ -126,10 +126,10 @@ Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
     <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-28T17:23:39Z</dcterms:modified>
   </mepack:RemotePackEntry>
 
-  <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/105/pack_relationships/2">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105/pack_relationships/2.rdf"/>
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/105/relationship_entries/2">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/105/relationship_entries/2.rdf"/>
     <ore:proxyFor>
-      <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/8f27682622e098a882b88255cca342af70f4c056">
+      <mepack:Relationship rdf:about="urn:uuid:c030a449-9ba2-5634-9814-974d1afa0b73">
         <rdf:subject rdf:resource="http://dl.dropbox.com/u/1202407/Presentations/SocialisingEScienceAHM2009final.pptx" />
         <rdf:predicate rdf:resource="http://www.myexperiment.org/2010/pack/presentAt" />
         <rdf:object rdf:resource="http://www.escience2009.org/" />
@@ -138,14 +138,14 @@ Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
     <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/105" />
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
     <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
-  </mepack:PackRelationship>
+  </mepack:RelationshipEntry>
 
   <mebase:User rdf:about="http://www.myexperiment.org/users/16">
     <foaf:homepage rdf:resource="http://www.myexperiment.org/users/16.html"/>
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/16.rdf"/>
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/16.xml"/>
     <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-21T07:26:51Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-30T22:11:31Z</dcterms:modified>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-07-12T22:31:30Z</dcterms:modified>
     <sioc:name rdf:datatype="&xsd;string">David De Roure</sioc:name>
     <foaf:name rdf:datatype="&xsd;string">David De Roure</foaf:name>
     <sioc:avatar rdf:resource="http://www.myexperiment.org/images/avatar.png" />
@@ -154,7 +154,7 @@ Formats: .ppt and .pptx&lt;/p&gt;</dcterms:description>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Oxford"/>
     <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_Kingdom"/>
     <foaf:homepage rdf:resource="http://www.oerc.ox.ac.uk/people/dder" />
-    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2011-06-30T22:11:31Z</mebase:last-seen-at>
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2011-07-12T22:31:30Z</mebase:last-seen-at>
     <mebase:activated-at rdf:datatype="&xsd;dateTime">2007-07-21T07:26:51Z</mebase:activated-at>
     <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
     <foaf:mbox rdf:resource="mailto:david.deroure@oerc.ox.ac.uk" />

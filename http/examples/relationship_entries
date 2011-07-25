@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY skos 'http://www.w3.org/2004/02/skos/core#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:skos	="&skos;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/packs/187/relationship_entries/1.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/packs/187/relationship_entries/1"/>
+  </rdf:Description>
+
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/187/relationship_entries/1">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/187/relationship_entries/1.rdf"/>
+    <ore:proxyFor>
+      <mepack:Relationship rdf:about="urn:uuid:77a2b953-3b32-5b9f-bfb6-3c0b09a54669">
+        <rdf:subject rdf:resource="http://www.myexperiment.org/files/141" />
+        <rdf:predicate rdf:resource="http://www.myexperiment.org/2010/pack/inputDataTo" />
+        <rdf:object rdf:resource="http://www.myexperiment.org/workflows/173" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/187" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-03T18:05:04Z</dcterms:created>
+  </mepack:RelationshipEntry>
+
+  <mecontrib:File rdf:about="http://www.myexperiment.org/files/141">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/files/141.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/141.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/files/141.xml"/>
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/blobs/141/download/Astronomic" />
+    <mebase:filename rdf:datatype="&xsd;string">Astronomic</mebase:filename>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/16" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-10-08T13:31:47Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-10-08T13:31:47Z</dcterms:modified>
+    <dcterms:title rdf:datatype="&xsd;string">One</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;Two&lt;/p&gt;</dcterms:description>
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">2</mevd:viewed>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/files/141/policies/895" />
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/1869/taggings/6041"/>
+  </mecontrib:File>
+
+  <owl:ObjectProperty rdf:about="http://www.myexperiment.org/2010/pack/inputDataTo">
+    <rdfs:label rdf:datatype="&xsd;string">inputDataTo</rdfs:label>
+    <rdfs:comment rdf:datatype="&xsd;string">This concept is used to indicate that the subject is an input to the object.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.myexperiment.org/2010/pack" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-03T18:04:56Z</dcterms:modified>
+  </owl:ObjectProperty>
+
+  <mecontrib:Workflow rdf:about="http://www.myexperiment.org/workflows/173">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/173.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/173.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/173.xml"/>
+    <dcterms:title rdf:datatype="&xsd;string">Unique tags</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">This workflow takes a comma separated list of tags and removes duplicate entries.  Tags may have multiple words in them.  An example string is &quot;carrots,handbags,carrots,cheese&quot;.</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-03-11T16:52:42Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-03-11T16:53:13Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">unique_tags_18054.xml</mebase:filename>
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/173/download/unique_tags_18054.xml" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflows/173/previews/full" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflows/173/previews/thumb" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflows/173/previews/medium" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflows/173/previews/svg" />
+    <mebase:has-current-version rdf:resource="http://www.myexperiment.org/workflows/173/versions/2" />
+    <mebase:has-version rdf:resource="http://www.myexperiment.org/workflows/173/versions/1"/>
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/22" />
+    <mevd:viewed rdf:datatype="&xsd;nonNegativeInteger">874</mevd:viewed>
+    <mevd:downloaded rdf:datatype="&xsd;nonNegativeInteger">918</mevd:downloaded>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/173/policies/387" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/173/versions/2#dataflow" />
+    <meannot:has-comment rdf:resource="http://www.myexperiment.org/workflows/173/comments/327"/>
+    <meannot:has-comment rdf:resource="http://www.myexperiment.org/workflows/173/comments/357"/>
+    <meannot:has-comment rdf:resource="http://www.myexperiment.org/workflows/173/comments/358"/>
+    <meannot:has-comment rdf:resource="http://www.myexperiment.org/workflows/173/comments/360"/>
+    <meannot:has-comment rdf:resource="http://www.myexperiment.org/workflows/173/comments/366"/>
+    <meannot:has-comment rdf:resource="http://www.myexperiment.org/workflows/173/comments/387"/>
+    <meannot:has-rating rdf:resource="http://www.myexperiment.org/workflows/173/ratings/109"/>
+    <meannot:has-rating rdf:resource="http://www.myexperiment.org/workflows/173/ratings/124"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/555/taggings/975"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/450/taggings/976"/>
+    <meannot:has-tagging rdf:resource="http://www.myexperiment.org/tags/760/taggings/1024"/>
+  </mecontrib:Workflow>
+
+  <mepack:Pack rdf:about="http://www.myexperiment.org/packs/187">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/packs/187.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/187.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/187.xml"/>
+    <ore:isDescribedBy rdf:resource="http://www.myexperiment.org/packs/187.rdf" />
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/workflows/173"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/files/141"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/packs/147"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/files/16"/>
+    <ore:aggregates rdf:resource="urn:uuid:77a2b953-3b32-5b9f-bfb6-3c0b09a54669"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/187/local_pack_entries/800"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/187/local_pack_entries/801"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/187/local_pack_entries/802"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/187/local_pack_entries/803"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/187/relationship_entries/1"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:title rdf:datatype="&xsd;string">Test pack for relationships</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This is my private pack for testing out the pack relationships.&lt;/p&gt;</dcterms:description>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-03T12:48:09Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-06-03T12:48:09Z</dcterms:modified>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/packs/187/policies/3078" />
+  </mepack:Pack>
+
+  <mebase:User rdf:about="http://www.myexperiment.org/users/22">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/users/22.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/22.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/users/22.xml"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2007-07-23T09:14:48Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-07-07T10:34:45Z</dcterms:modified>
+    <sioc:name rdf:datatype="&xsd;string">Don Cruickshank</sioc:name>
+    <foaf:name rdf:datatype="&xsd;string">Don Cruickshank</foaf:name>
+    <sioc:avatar rdf:resource="http://www.myexperiment.org/images/avatar.png" />
+    <foaf:based_near rdf:datatype="&xsd;string">Southampton</foaf:based_near>
+    <mebase:country rdf:datatype="&xsd;string">United Kingdom</mebase:country>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/Southampton"/>
+    <dbpedia:residence rdf:resource="http://dbpedia.org/resource/United_Kingdom"/>
+    <foaf:homepage rdf:resource="http://www.ecs.soton.ac.uk/people/dgc" />
+    <mebase:last-seen-at rdf:datatype="&xsd;dateTime">2011-07-07T10:24:18Z</mebase:last-seen-at>
+    <mebase:activated-at rdf:datatype="&xsd;dateTime">2007-07-23T09:14:48Z</mebase:activated-at>
+    <mebase:receive-notifications rdf:datatype="&xsd;boolean">1</mebase:receive-notifications>
+    <foaf:mbox rdf:resource="mailto:dgc@ecs.soton.ac.uk" />
+    <foaf:mbox_sha1sum rdf:datatype="&xsd;string">a1d03dcfb2c4bc3ce9c50d890ccf380ec80aa8ee</foaf:mbox_sha1sum>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/33"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/34"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/35"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/36"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/25/friendships/39"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/26/friendships/51"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/43/friendships/93"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/6/friendships/139"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/70/friendships/241"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/267"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/268"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/18/friendships/290"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/162/friendships/404"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/15/friendships/446"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/453"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/164/friendships/470"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2213/friendships/754"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/2705/friendships/780"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/805"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/22/friendships/806"/>
+    <mebase:has-friendship rdf:resource="http://www.myexperiment.org/users/437/friendships/983"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/22/memberships/6"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/22/memberships/267"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/22/memberships/360"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/22/memberships/543"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/22/memberships/590"/>
+    <mebase:has-membership rdf:resource="http://www.myexperiment.org/users/22/memberships/824"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/22/favourites/78"/>
+    <mebase:has-favourite rdf:resource="http://www.myexperiment.org/users/22/favourites/148"/>
+  </mebase:User>
+
+</rdf:RDF>
