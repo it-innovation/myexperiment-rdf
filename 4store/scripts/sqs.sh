@@ -310,7 +310,7 @@ generate-voidspec(){
 	        filename="myExperiment-$linkset"
         	nolinks=`cat $DATA_PATH/${1}/linksets/$filename.nt | wc -l`
 	        echo "  <void:Linkset rdf:about=\"$HTTPRDF_PATH/linksets/$filename\">
-    <void:subjectsTarget rdf:resource=\"$HTTPRDF_PATH/myExperiment.rdf#myexpDataset\"/>
+    <void:subjectsTarget rdf:resource=\"$HTTPRDF_PATH/void.rdf#myexpDataset\"/>
     <void:objectsTarget rdf:resource=\"$objset\"/>
     <void:dataDump rdf:resource=\"$HTTPRDF_PATH/linksets/$filename.nt\"/>" >> $outputfile
         	cat $DATA_PATH/${1}/linksets/$filename.nt | awk 'BEGIN{FS=" "}{print $2}' | sed 's/[<>]//g' | sort -u | sed 's/^/    <void:linkPredicate rdf:resource=\"/g' | sed 's/$/\"\/>/g' >> $outputfile
