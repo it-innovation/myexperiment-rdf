@@ -246,7 +246,7 @@ delete-non-public-dataflows(){
 	$PHPEXEC_PATH/php $STORE4_PATH/scripts/getPublicDownloadableDataflows.php | sort > /tmp/public_downloadable_dataflows.txt
 	ls $DATA_PATH/dataflows/rdf/ | sort > /tmp/current_dataflows.txt
 	for  dfdel in `diff /tmp/public_downloadable_dataflows.txt /tmp/current_dataflows.txt | grep ">" | awk 'BEGIN{FS=" "}{print $2}'`; do
-		rm $DATA_PATH/dataflows/xml/$dfdel $DATA_PATH/dataflows/rdf/$dfdel $DATA_PATH/dataflows/reasoned/$dfdel
+		rm $DATA_PATH/dataflows/xml/$dfdel $DATA_PATH/dataflows/rdf/$dfdel
 		echo "[`date +%T`] Deleted retrieved XML and generated RDF for Workflow Version $dfdel"
 	done
  	rm /tmp/public_downloadable_dataflows.txt /tmp/current_dataflows.txt
