@@ -33,6 +33,9 @@ Examples
   E.g. <filespath> = /home/user/files_to_reasoned.txt
   <reasonedpath> = $DATA_PATH/$TRIPLESTORE/reasoned/
 
+./sqs.sh <triplestore> manage-dataflows
+  <triplestore> = [ $TRIPLESTORE ]
+
 ./sqs.sh <triplestore> add <filename> 
   <triplestore> = [ $TRIPLESTORE, ontologies ]
   E.g. <filename> = $DATA_PATH/$TRIPLESTORE/workflows/12

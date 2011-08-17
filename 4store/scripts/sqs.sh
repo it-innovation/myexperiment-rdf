@@ -374,20 +374,16 @@ case "$2" in
   reason-ontology)
 	reason-ontology $1
 	;;
-  generate-dataflows-rdf)
-	generate-dataflows-rdf $1
-	;;
-  get-dataflows)
-        get-dataflows $1
-        ;;
-  delete-non-public-dataflows)
-	delete-non-public-dataflows $1
-	;;
   reason-file)
 	reason-file $1 $3 $4
 	;;
   reason-files)
         reason-files $1 $3 $4
+	;;
+  manage-dataflows)
+        get-dataflows $1
+        delete-non-public-dataflows $1
+        generate-dataflows-rdf $1
 	;;
   add)
 	added=`add $1 $3`
