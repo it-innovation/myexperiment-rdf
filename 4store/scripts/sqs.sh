@@ -157,7 +157,7 @@ update(){
 	reason-ontology $1        
 	get-dataflows
 	delete-non-public-dataflows $1
-#       reason-dataflows $1
+	generate-dataflows-rdf $1
 	data-dump $1
 #	if [ -n "$2" ]; then 
 #		if [ $2 == "no-cache" ]; then
@@ -251,16 +251,9 @@ delete-non-public-dataflows(){
 	done
  	rm /tmp/public_downloadable_dataflows.txt /tmp/current_dataflows.txt
 }			
-reason-dataflows(){
+generate-dataflows-rdf(){
 	echo "[`date +%T`] Generating Dataflow RDF"
 	$PHPEXEC_PATH/php $STORE4_PATH/scripts/generateDataflowRDF.php $1
-	nographs=`cat /tmp/dataflows.txt | wc -l`
-	if [ $nographs -gt 0 ]; then
-		echo "[`date +%T`] Reasoning Dataflow RDF"
-		java -cp $JAVA_CP RDFSReasonerMultiFile $STORE4_PATH/config/"$TRIPLESTORE"_ontologies.txt /tmp/dataflows.txt $DATA_PATH/dataflows/reasoned/
-	else
-		echo "[`date +%T`] No Workflow Dataflow RDF to reason"
-	fi
 	rm /tmp/dataflows.txt
 }
 reason-files(){
@@ -381,8 +374,8 @@ case "$2" in
   reason-ontology)
 	reason-ontology $1
 	;;
-  reason-dataflows)
-	reason-dataflows $1
+  generate-dataflows-rdf)
+	generate-dataflows-rdf $1
 	;;
   get-dataflows)
         get-dataflows $1
