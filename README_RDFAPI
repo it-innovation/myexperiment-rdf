@@ -12,4 +12,6 @@ README - Instructions for setting up myExperiment Linked Data Architecture (RDF 
 
 4. Add the following cronjob for the user who has permission to the data/ directory:
 
-   23 * * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/getdataflows.sh >> <LINKED_DATA_REPO>/4store/log/dataflows.log
+   23 * * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> manage-dataflows >> <LINKED_DATA_REPO>/4store/log/dataflows.log
+
+Where the variable <LINKED_DATA_REPO> is where this codebase is checked out to and <TRIPLESTORE> is the value set of TRIPLESTORE in 4store/scripts/settings.sh.  Even though a triplestore is not being used this variable is need to tell the script where to put the RDF generated for dataflows.
