@@ -46,7 +46,7 @@
 	$tables['workflows']="workflows";
 	$tables['workflow_versions']="workflow_versions";
 
-
+	
 	//Ontology entities
 	$ontent['announcements']="Announcement";
         $ontent['attributions']="Attribution";
@@ -81,6 +81,8 @@
         $ontent['vocabularies']="Vocabulary";
         $ontent['workflows']="Workflow";
         $ontent['workflow_versions']="WorkflowVersion";
+
+	$urient=array_flip($ontent);
 
 	//Model Aliases
 	$modelalias['File']="Blob";

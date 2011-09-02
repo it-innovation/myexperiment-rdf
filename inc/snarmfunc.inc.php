@@ -1,10 +1,9 @@
 <?php
-
+	
 	function getContributorPermissions($contrib_type,$contrib_id,$policy_url){
-		global $datauri;
-		$contrib_type_fpr_uris=array('Group'=>'groups','User'=>'users');
-		if ($contrib_type=="Network") $contrib_type="Group";
-		$contributor=$contrib_type_fpr_uris[$contrib_type]."/".$contrib_id;
+		global $datauri, $urient, $modelalias;
+		if (isset($modelalias[$contrib_type])) $contrib_type=$modelalias[$contrib_type];
+		$contributor=$urient[$contrib_type]."/".$contrib_id;
 		return "    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;View\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Download\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri."$contributor\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Edit\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
 	}
 	function getShareModeAccesses($sm){
@@ -54,22 +53,22 @@
 		return $contrib;
 	}
 	function getPermissionAccesses($perms,$policy_url){
-		global $datauri;
+		global $datauri, $urient, $modelalias;
 		$accesses="";
 		$a=3;
 		for ($p=0; $p<sizeof($perms); $p++){
-			if ($perms[$p]['contributor_type']=="Network") $perms[$p]['contributor_type']="groups";
+			if ($alias=array_search($perms[$p]['contributor_type'],$modelalias)) $perms[$p]['contributor_type']=$alias;
 			if ($perms[$p]['view']){
 				$a++;
-				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/View".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n        <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;View\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
+				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri.$urient[$perms[$p]['contributor_type']]."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;View\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
 			}
 			if ($perms[$p]['download']){
 				$a++;
- 				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess rdf:about=\"$policy_url/accesses/Download".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n        <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Download\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
+ 				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri.$urient[$perms[$p]['contributor_type']]."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Download\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
 			}
 			if ($perms[$p]['edit']){
 				$a++;
- 				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess rdf:about=\"$policy_url/accessed/Edit".$perms[$p]['contributor_type'].$perms[$p]['contributor_id']."\">\n        <snarm:has-accesser rdf:resource=\"".$datauri.$perms[$p]['contributor_type']."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Edit\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
+ 				$accesses.="    <snarm:has-access>\n      <snarm:RestrictedAccess>\n        <snarm:has-accesser rdf:resource=\"".$datauri.$urient[$perms[$p]['contributor_type']]."/".$perms[$p]['contributor_id']."\"/>\n        <snarm:has-access-type rdf:resource=\"&mespec;Edit\"/>\n      </snarm:RestrictedAccess>\n    </snarm:has-access>\n";
 			}
 		}
 		return $accesses;
