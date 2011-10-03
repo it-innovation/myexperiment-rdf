@@ -38,7 +38,8 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">May 20, 2010</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2009-01-28</dc:date>
+    <owl:versionInfo>$Date: 2010/05/20 $</owl:versionInfo>
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 

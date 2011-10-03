@@ -37,7 +37,8 @@
     <dc:creator rdf:resource="http://rdf.ecs.soton.ac.uk/person/9421"/>
     <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">David R Newman</dc:contributor>
     <dc:publisher rdf:resource="http://rdf.myexperiment.org"/>
-    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">July 18, 2011</dc:date>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2009-01-28</dc:date>
+    <owl:versionInfo>$Date: 2011/10/03 $</owl:versionInfo> 
     <dc:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rdf/xml</dc:format>
   </owl:Ontology>
 
@@ -206,7 +207,7 @@
   <owl:Class rdf:about="PackEntry">
     <rdfs:label>Entry</rdfs:label>
     <rdfs:comment>An entry in a Pack</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="&mebase;Entry" />
+    <rdfs:subClassOf rdf:resource="Entry" />
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty rdf:resource="&ore;proxyIn" />
