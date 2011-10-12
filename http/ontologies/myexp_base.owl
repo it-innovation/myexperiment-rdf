@@ -185,7 +185,7 @@
     <owl:inverseOf rdf:resource="&sioc;has_owner"/>
   </rdf:Description>
 
-  <rdf:Description rdf:about="&sioc;User">
+  <rdf:Description rdf:about="&sioc;UserAccount">
     <rdf:type rdf:resource="&owl;Class"/>
   </rdf:Description>
 

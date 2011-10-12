@@ -55,7 +55,7 @@
   <mepack:Relationship rdf:about="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo">
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo.rdf"/>
     <rdf:subject rdf:resource="http://www.myexperiment.org/files/2" />
-    <rdf:predicate rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/9" />
+    <rdf:predicate rdf:resource="http://www.myexperiment.org/2010/pack/inputDataTo" />
     <rdf:object rdf:resource="http://www.myexperiment.org/workflows/1" />
   </mepack:Relationship>
 
@@ -74,15 +74,13 @@
     <mebase:has-policy rdf:resource="http://www.myexperiment.org/files/2/policies/29" />
   </mecontrib:File>
 
-  <mepack:Concept rdf:about="http://www.myexperiment.org/vocabularies/1/concepts/9">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/9.rdf"/>
-    <skos:prefLabel rdf:datatype="&xsd;string">is input data for</skos:prefLabel>
-    <skos:definition rdf:datatype="&xsd;string">this term is used to indicate that an object is input data to another object.</skos:definition>
-    <skos:inScheme rdf:resource="http://www.myexperiment.org/vocabularies/1" />
-    <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-01T16:53:27Z</dcterms:created>
-    <dcterms:modified rdf:datatype="&xsd;dateTime">2011-02-10T17:29:33Z</dcterms:modified>
-    <skos:narrower rdf:resource="http://www.myexperiment.org/vocabularies/1/concepts/11"/>
-  </mepack:Concept>
+  <owl:ObjectProperty rdf:about="http://www.myexperiment.org/2010/pack/inputDataTo">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">inputDataTo</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This concept is used to indicate that the subject is an input to the object.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="http://www.myexperiment.org/2010/pack"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2011-06-03T18:04:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2011-06-03T18:04:56Z</dcterms:modified>
+  </owl:ObjectProperty>
 
   <mecontrib:Workflow rdf:about="http://www.myexperiment.org/workflows/1">
     <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/1.html"/>
