@@ -169,7 +169,7 @@ update(){
 #		update-cached-files $1
 #	fi
 	import $1
-	generic-spec $1
+	generate-spec $1
 #	day=`date +%e`
 #       month=`date +%b`
 #	date +%s > $STORE4_PATH/log/$1_update_time.log
