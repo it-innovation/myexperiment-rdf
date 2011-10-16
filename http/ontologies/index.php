@@ -46,15 +46,6 @@
 <p>Fig.2 is a class hierarchy diagram for all the classes used in the myExperiment ontology, colour-coded by the module they belong to.</p>
 <div align="center">
   <img src="/img/class_hierarchy.png" title="myExperiment Ontology Class Hierarchy Diagram (Colour-coded)"/>
-   <table class="key">
-<tr><td><img src="/img/oval.png" alt="Oval"/></td><td>Abstract Class</td><td>&nbsp;</td><td><img src="/img/rectangle.png" alt="Rectangle"/></td><td>myExperiment Object Class</td></tr>
-  </table>
-  <table class="key">
-<tr><td class="box" style="background-color: DarkKhaki;">&nbsp;</td><td>SNARM&nbsp;</td><td class="box" style="background-color: LightGreen;">&nbsp;</td><td>Base&nbsp;</td><td class="box" style="background-color: Khaki;">&nbsp;</td><td>Attributions &amp; Creditations&nbsp;</td><td class="box" style="background-color: LightSalmon">&nbsp;</td><td>Annotations</td><td class="box" style="background-color: MediumSlateBlue;">&nbsp;</td><td>Experiments&nbsp;</td></tr>
-  </table>
-  <table class="key">
-<tr><td class="box" style="background-color: PaleTurquoise;">&nbsp;</td><td>Packs&nbsp;</td><td class="box" style="background-color: RosyBrown;">&nbsp;</td><td>Viewings &amp; Creditations&nbsp;</td><td class="box" style="background-color: LightPink">&nbsp;</td><td>Contributions</td><td class="box" style="background-color: Crimson;">&nbsp;</td><td>Components&nbsp;</td><td class="box" style="background-color: Silver">&nbsp;</td><td>Specific</td></tr>
-  </table>
   <br/>
   <p><b>Fig.2</b> Class Hierarchy Diagram for Ontology Modules</p>
 </div>
