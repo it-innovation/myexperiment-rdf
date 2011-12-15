@@ -25,7 +25,7 @@
 		$entsize['newsize']=trim(fgets($ph,8192));
 		fclose($ph);
 		if ($entsize['newsize']<$entsize['size']){
-			file_put_contents("php://stderr","Current size of $entsize[id] is smaller than previous size ($entsize[newsize] v $entsize[size])");
+			file_put_contents("php://stderr","Current size of $entity/$entsize[id] is smaller than previous size ($entsize[newsize] v $entsize[size])");
 			echo "\nERROR: $entsize[newsize] < $entsize[size]\n\n\n";
 		}
 		echo "\nOK: $entsize[newsize] >= $entsize[size]\n\n\n";

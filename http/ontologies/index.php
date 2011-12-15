@@ -138,7 +138,7 @@
   <li><b><a href="specification#mecomp:Sink">Sink</a></b> A final piece of data produced by the Workflow</li>
   <li><b><a href="specification#mecomp:Input">Input</a></b> A piece of data going into a Processor</li>
   <li><b><a href="specification#mecomp:Output">Output</a></b> A piece of data coming out of a Processor</li>
-  <li><b><a href="specification#mecomp:Link">Link</a></b> A connection between an Output of a Source of Processor to the Input for another Processor or Sink</li>
+  <li><b><a href="specification#mecomp:Link">Link</a></b> A connection between an Output of a Source or Processor to the Input for another Processor or Sink</li>
 </ul>
 <p>All these Workflow Components are encompassed within a <a href="specification#mecomp:Dataflow">Dataflow</a>. Fig.6 shows how these Workflow Components interlink to form a Dataflow.  Currently every publicly available Taverna workflow has an <a href="specification#mecomp:executes-dataflow">executes-dataflow</a> property to it's Dataflow. </p>
 <div align="center">

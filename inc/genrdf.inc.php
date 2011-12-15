@@ -28,6 +28,7 @@
 			//$xml.="<!-- $field -->\n";
 			switch (substr($property, 0, 1)){
 			case '<':
+				if (!isset($row[$field])) break;
 				$row[$field]=xmlentities($row[$field]);
 				 if (isset($row[$field])){
                                         if (isset($datatypes[substr($property, 1)])){

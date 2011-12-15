@@ -112,32 +112,38 @@ function getMembers($group){
 function getMemberships($user){
 	global $sql, $datauri;
 	$xml="";
-	$msql=$sql['memberships']." where user_id=$user[id]";
-	$mres=mysql_query($msql);
-	for ($m=0; $m<mysql_num_rows($mres); $m++){
-		$xml.="    <mebase:has-membership rdf:resource=\"${datauri}users/$user[id]/memberships/".mysql_result($mres,$m,'id')."\"/>\n";
+	if (isset($user['id'])){
+		$msql=$sql['memberships']." where user_id=$user[id]";
+		$mres=mysql_query($msql);
+		for ($m=0; $m<mysql_num_rows($mres); $m++){
+			$xml.="    <mebase:has-membership rdf:resource=\"${datauri}users/$user[id]/memberships/".mysql_result($mres,$m,'id')."\"/>\n";
+		}
 	}
 	return $xml;
 }
 function getFriendships($user){
         global $sql, $datauri;
 	$xml="";
-	$fsql=addWhereClause($sql['friendships'],"user_id=$user[id] or friend_id=$user[id]");
-        $fres=mysql_query($fsql);
-        for ($f=0; $f<mysql_num_rows($fres); $f++){
-                $xml.="    <mebase:has-friendship rdf:resource=\"${datauri}users/".mysql_result($fres,$f,'user_id')."/friendships/".mysql_result($fres,$f,'id')."\"/>\n";
-        }
+	if (isset($user['id'])){
+		$fsql=addWhereClause($sql['friendships'],"user_id=$user[id] or friend_id=$user[id]");
+        	$fres=mysql_query($fsql);
+	        for ($f=0; $f<mysql_num_rows($fres); $f++){
+        	        $xml.="    <mebase:has-friendship rdf:resource=\"${datauri}users/".mysql_result($fres,$f,'user_id')."/friendships/".mysql_result($fres,$f,'id')."\"/>\n";
+        	}
+	}
         return $xml;
 }
 function getFavourites($user){
 	global $sql, $datauri;
 	$xml="";
-        $fsql=addWhereClause($sql['favourites'],"user_id=$user[id]");
-        $fres=mysql_query($fsql);
-        for ($f=0; $f<mysql_num_rows($fres); $f++){
-                $xml.="    <mebase:has-favourite rdf:resource=\"${datauri}users/$user[id]/favourites/".mysql_result($fres,$f,'id')."\"/>\n";
-        }
-        return $xml;
+	if (isset($user['id'])){
+	        $fsql=addWhereClause($sql['favourites'],"user_id=$user[id]");
+        	$fres=mysql_query($fsql);
+	        for ($f=0; $f<mysql_num_rows($fres); $f++){
+        	        $xml.="    <mebase:has-favourite rdf:resource=\"${datauri}users/$user[id]/favourites/".mysql_result($fres,$f,'id')."\"/>\n";
+        	}
+        	return $xml;
+	}
 }
 function getUser($action,$hash=0){
 	global $salt, $data, $ontopath;
@@ -289,21 +295,23 @@ function mailto_foaf($email){
 }
 function getSiocAndFoafName($user){
 	global $datatypes;
-	return "    <sioc:name rdf:datatype=\"&xsd;".$datatypes['sioc:name']."\">$user[name]</sioc:name>\n    <foaf:name rdf:datatype=\"&xsd;".$datatypes['foaf:name']."\">$user[name]</foaf:name>\n";
+	if (isset($user['name'])) return "    <sioc:name rdf:datatype=\"&xsd;".$datatypes['sioc:name']."\">$user[name]</sioc:name>\n    <foaf:name rdf:datatype=\"&xsd;".$datatypes['foaf:name']."\">$user[name]</foaf:name>\n";
+	return "";
 }   
 function mailto($user){
 	global $userid, $domain;
 	if (validateEmail($user['email']) && ($userid==$user['id'] || $domain=="private")) return "mailto:".$user['email'];
 }
 function mbox_sha1sum($user){
-	return sha1($user['email']);
+	if (isset($user['email'])) return sha1($user['email']);
+	return "";
 }
 function mailto_unconfirmed($user){
 	global $userid, $domain;
 	if (validateEmail($user['unconfirmed_email']) && ($userid==$user['id'] || $domain=="private")) return "mailto:".$user['unconfirmed_email'];
 }
 function mailto_profile($user){
-	if (validateEmail($user['profile_email'])) return "mailto:".$user['profile_email'];
+	if (isset($user['profile_email']) && validateEmail($user['profile_email'])) return "mailto:".$user['profile_email'];
 }
 function openid_url($user){
 	global $userid, $domain;
@@ -615,7 +623,7 @@ function getRelationshipSPO($entity){
 }
 function getRelationshipURN($spo){
 	require_once('class.uuid.php');
-        return "urn:uuid:".UUID::generate(UUID::UUID_NAME_SHA1,UUID::FMT_STRING,$spo['subject'].$spo['predicate'],$spo['object']);
+        return "urn:uuid:".UUID::generate(UUID::UUID_NAME_SHA1,UUID::FMT_STRING,$spo['subject'].$spo['predicate'].$spo['object']);
 }
 function getRelationship($entity){
 	$spo=getRelationshipSPO($entity);

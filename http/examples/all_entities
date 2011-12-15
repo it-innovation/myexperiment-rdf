@@ -275,13 +275,13 @@ query_protein: P53
     <mebase:has-policy rdf:resource="http://www.myexperiment.org/packs/1/policies/26" />
   </mepack:Pack>
 
-  <mepack:PackRelationship rdf:about="http://www.myexperiment.org/packs/1/relationships/1">
-    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/relationships/1.rdf"/>
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/1/relationship_entries/1">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/1/relationship_entries/1.rdf"/>
     <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/1" />
     <ore:proxyFor rdf:resource="http://www.myexperiment.org/relationships/wdoufhduioghrhgsdhudo"/>
     <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/1" />
     <dcterms:created rdf:datatype="&xsd;dateTime">2011-02-10T17:54:21Z</dcterms:created>
-  </mepack:PackRelationship>
+  </mepack:RelationshipEntry>
 
   <snarm:Policy rdf:about="http://www.myexperiment.org/Workflow/16/policies/185">
     <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/Workflow/16/policies/185.rdf"/>
