@@ -1,10 +1,7 @@
 #!/bin/bash
-bashsource=`dirname $BASH_SOURCE`
-if [ "${bashsource:0:1}" == "/" ]; then
-  source "$bashsource/settings.sh"
-else
-  source "`pwd`/$bashsource/settings.sh"
-fi
+d=`dirname $0`
+basedir=`cd ${d}; pwd`
+source "$basedir/settings.sh"
 echo "============== `date` =============="
 cd $STORE4_PATH/scripts
 scp backup@tents:/home/backup/www.myexperiment.org/latest_db.txt /tmp/

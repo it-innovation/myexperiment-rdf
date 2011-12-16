@@ -82,6 +82,9 @@ Examples
 ./sqs.sh <triplestore> check-versions
   <triplestore> = [ $TRIPLESTORE ]
 
+./sqs.sh <triplestore> check-entity-sizes
+  <triplestore> = [ $TRIPLESTORE ]
+
 ./sqs.sh <triplestore> help
   <triplestore> = [ $TRIPLESTORE ontologies ]"
 

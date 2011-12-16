@@ -26,9 +26,9 @@
 		fclose($ph);
 		if ($entsize['newsize']<$entsize['size']){
 			file_put_contents("php://stderr","Current size of $entity/$entsize[id] is smaller than previous size ($entsize[newsize] v $entsize[size])");
-			echo "\nERROR: $entsize[newsize] < $entsize[size]\n\n\n";
+			echo "\nERROR: $entity/$entsize[id] - $entsize[newsize] < $entsize[size]\n\n\n";
 		}
-		echo "\nOK: $entsize[newsize] >= $entsize[size]\n\n\n";
+		echo "\nOK: $entity/$entsize[id] - $entsize[newsize] >= $entsize[size]\n\n\n";
 		if (isset($argv[1]) && $argv[1]=="Regenerate") fwrite($fh,"$entity $entsize[id] $entsize[newsize]\n");
 	}
 	if (isset($argv[1]) && $argv[1]=="Regenerate") fclose($fh);

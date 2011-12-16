@@ -1,6 +1,7 @@
 #!/bin/bash
-source `dirname $BASH_SOURCE`/settings.sh
-cd $STORE4_PATH/code
+d=`dirname $0`
+basedir=`cd ${d}; pwd`
+source "$basedir/settings.sh"
 
 echo "============== `date` =============="
 check(){
@@ -54,20 +55,14 @@ status(){
 	echo "[`date +%T`] SPARQL Query Server $1 was updated with database snapshot from $updatetimef ($updatetime)"
 }
 test(){
-	working=`$PHPEXEC_PATH/php $STORE4_PATH/scripts/test4store.php $1`
-	if [ "$working" ]; then
-		if [ $working -eq 1 ]; then
-			echo "[`date +%T`] SPARQL Query Server $1 is functioning correctly"
-		else
-			echo "[`date +%T`] SPARQL Query Server $1 is not functioning correctly and will be restarted"
-	                stop $1
-        	        start $1
-		fi
-	else
-		echo "[`date +%T`] SPARQL Query Server $1 is not functioning correctly and will be restarted"
-		stop $1
-		start $1
-	fi
+	`$PHPEXEC_PATH/php $STORE4_PATH/scripts/test4store.php $1` && { 
+		echo "[`date +%T`] SPARQL Query Server $1 is functioning correctly" 
+	} || { 
+		echo "[`date +%T`] SPARQL Query Server $1 is not functioning correctly and will be restarted"; 
+		stop $1; 
+		sudo /etc/init.d/avahi-daemon restart; 
+		start $1; 
+	}
 }
 reason-ontology(){
 	check_triplestore $1
@@ -153,6 +148,7 @@ import(){
 }
 update(){
         check_triplestore $1
+	update-database
         check-versions $1
 	reason-ontology $1        
 	get-dataflows
@@ -169,7 +165,10 @@ update(){
 #		update-cached-files $1
 #	fi
 	import $1
+	check-entity-sizes
 	generate-spec $1
+	generate-linksets $1
+	generate-voidspec $1
 #	day=`date +%e`
 #       month=`date +%b`
 #	date +%s > $STORE4_PATH/log/$1_update_time.log
@@ -348,6 +347,25 @@ check-versions(){
  	echo "4store ($store4version), Raptor (v$raptorversion), Rasqal (v$rasqalversion)" > $STORE4_PATH/log/4storeversions.log
  	echo "[`date +%T`] Check 4Store, Raptor and Rasqal versions for $1 triplestore and written to $STORE4_PATH/log/4storeversions.log"
 }
+
+check-entity-sizes(){
+	$PHPEXEC_PATH/php $LD_PATH/rdfgen/testrdfgen.php 1>> ${STORE4_PATH}/log/entity_sizes.log
+}
+update-database(){
+	cd $STORE4_PATH/scripts
+	scp backup@tents:/home/backup/www.myexperiment.org/latest_db.txt /tmp/
+	filepath=`cat /tmp/latest_db.txt`
+	filename=`cat /tmp/latest_db.txt | awk 'BEGIN{FS="/"}{ print $NF }'`
+	scp backup@tents:$filepath /tmp/
+	echo "[`date +%T`] Downloaded Latest myExperiment Database Snapshot: $filename"
+	if [ ${#MYSQL_PASSWORD} -gt 0 ]; then
+        	zcat /tmp/$filename | grep -v 'INSERT INTO `sessions`' | grep -v 'INSERT INTO `viewings`' | grep -v 'INSERT INTO `downloads`' | grep -v 'INSERT INTO `pictures`' | grep -v 'INSERT INTO `content_blobs`' | mysql -u $MYSQL_USERNAME -p$MYSQL_PASSWORD m2_production
+	else
+        	zcat /tmp/$filename | grep -v 'INSERT INTO `sessions`' | grep -v 'INSERT INTO `viewings`' | grep -v 'INSERT INTO `downloads`' | grep -v 'INSERT INTO `pictures`' | grep -v 'INSERT INTO `content_blobs`' | mysql -u $MYSQL_USERNAME m2_production
+	fi
+	echo "[`date +%T`] Uploaded SQL File ($filename) to MySQL"
+	rm -f /tmp/$filename
+}
 	
 case "$2" in
   start)
@@ -452,6 +470,12 @@ case "$2" in
   check-versions)
         check-versions $1
         ;; 
+  check-entity-sizes)
+	check-entity-sizes
+	;;
+  update-database)
+	update-database
+	;;
   *)
 	$STORE4_PATH/scripts/sqs_help.sh
 	;;
