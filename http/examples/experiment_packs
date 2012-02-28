@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE rdf:RDF [
+ <!ENTITY mebase 'http://rdf.myexperiment.org/ontologies/base/'>
+ <!ENTITY meac 'http://rdf.myexperiment.org/ontologies/attrib_credit/'>
+ <!ENTITY meannot 'http://rdf.myexperiment.org/ontologies/annotations/'>
+ <!ENTITY mepack 'http://rdf.myexperiment.org/ontologies/packs/'>
+ <!ENTITY meexp 'http://rdf.myexperiment.org/ontologies/experiments/'>
+ <!ENTITY mecontrib 'http://rdf.myexperiment.org/ontologies/contributions/'>
+ <!ENTITY mevd 'http://rdf.myexperiment.org/ontologies/viewings_downloads/'>
+ <!ENTITY mecomp 'http://rdf.myexperiment.org/ontologies/components/'>
+ <!ENTITY mespec 'http://rdf.myexperiment.org/ontologies/specific/'>
+ <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+ <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+ <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+ <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+ <!ENTITY dcterms 'http://purl.org/dc/terms/'>
+ <!ENTITY cc 'http://web.resource.org/cc/'>
+ <!ENTITY foaf 'http://xmlns.com/foaf/0.1/'>
+ <!ENTITY sioc 'http://rdfs.org/sioc/ns#'>
+ <!ENTITY ore 'http://www.openarchives.org/ore/terms/'>
+ <!ENTITY dbpedia 'http://dbpedia.org/ontology/'>
+ <!ENTITY snarm 'http://rdf.myexperiment.org/ontologies/snarm/'>
+ <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF xmlns:mebase	="&mebase;"
+	xmlns:meac	="&meac;"
+	xmlns:meannot	="&meannot;"
+	xmlns:mepack	="&mepack;"
+	xmlns:meexp	="&meexp;"
+	xmlns:mecontrib	="&mecontrib;"
+	xmlns:mevd	="&mevd;"
+	xmlns:mecomp	="&mecomp;"
+	xmlns:mespec	="&mespec;"
+	xmlns:rdf	="&rdf;"
+	xmlns:rdfs	="&rdfs;"
+	xmlns:owl	="&owl;"
+	xmlns:dc	="&dc;"
+	xmlns:dcterms	="&dcterms;"
+	xmlns:cc	="&cc;"
+	xmlns:foaf	="&foaf;"
+	xmlns:sioc	="&sioc;"
+	xmlns:ore	="&ore;"
+	xmlns:dbpedia	="&dbpedia;"
+	xmlns:snarm	="&snarm;"
+	xmlns:xsd	="&xsd;"
+>
+  <rdf:Description rdf:about="http://www.myexperiment.org/packs/experiment.rdf">
+    <foaf:primaryTopic rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+  </rdf:Description>
+
+  <mepack:Pack rdf:about="http://www.myexperiment.org/packs/experiment">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/packs/experiment.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment.xml?id=20"/>
+    <dcterms:title rdf:datatype="&xsd;string">Don&apos;s unique tag experiment</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This is a test experiment where I will run the Unique Tags example workflow a few times.&lt;/p&gt;</dcterms:description>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/jobs/66"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/jobs/67"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/workflows/154/versions/8"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/runners/3"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/runners/5"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/jobs/66/inputs/1"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/jobs/67/inputs/1"/>
+    <ore:aggregates rdf:resource="http://www.myexperiment.org/jobs/67/outputs/1"/>
+    <ore:aggregates rdf:resource="urn:uuid:cb3cf2c5-4e69-51d3-a1fc-94bf18a96920"/>
+    <ore:aggregates rdf:resource="urn:uuid:76cd3203-bff1-5345-894c-6d9bf1fcbbff"/>
+    <ore:aggregates rdf:resource="urn:uuid:d6ab73e1-27b1-5d9d-97f8-d43e68a89508"/>
+    <ore:aggregates rdf:resource="urn:uuid:914b0394-f2d1-5108-a907-a80b8a140679"/>
+    <ore:aggregates rdf:resource="urn:uuid:65a9bb0e-4b9d-5ecf-a981-c6994afa6883"/>
+    <ore:aggregates rdf:resource="urn:uuid:7b1c8d05-5866-5909-941e-83ba7ea832a7"/>
+    <ore:aggregates rdf:resource="urn:uuid:a25764f4-dc5b-5c9d-907f-d57d6d51dc5b"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/1"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/2"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/3"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/4"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/5"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/6"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/7"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/8"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/1"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/2"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/3"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/4"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/5"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/6"/>
+    <mepack:has-entry rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/7"/>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-07-25T15:09:08Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-07-25T15:09:08Z</dcterms:modified>
+    <mevd:viewed rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">183</mevd:viewed>
+    <mevd:downloaded rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">69</mevd:downloaded>
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/packs/experiment/policies/12345"/>
+  </mepack:Pack>
+
+  <meexp:Job rdf:about="http://www.myexperiment.org/jobs/66">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/jobs/66.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/job.xml?id=66"/>
+    <dcterms:title rdf:datatype="&xsd;string">Job_20080910-1319_Don Cruickshank</dcterms:title>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-09-10T13:20:23Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-09-10T13:21:05Z</dcterms:modified>
+  </meexp:Job>
+
+  <meexp:Job rdf:about="http://www.myexperiment.org/experiments/20/jobs/67">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/experiments/20/jobs/67.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/job.xml?id=67"/>
+    <dcterms:title rdf:datatype="&xsd;string">Job_20080910-1323_Don Cruickshank</dcterms:title>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <meexp:submitted-at rdf:datatype="&xsd;dateTime">2008-09-10T13:24:38Z</meexp:submitted-at>
+    <meexp:started-at rdf:datatype="&xsd;dateTime">2008-09-10T14:24:38Z</meexp:started-at>
+    <meexp:completed-at rdf:datatype="&xsd;dateTime">2008-09-10T14:25:40Z</meexp:completed-at>
+    <meexp:last-status rdf:datatype="&xsd;string">COMPLETE</meexp:last-status>
+    <meexp:last-status-at rdf:datatype="&xsd;dateTime">2009-01-30T14:45:14Z</meexp:last-status-at>
+    <mebase:uri rdf:resource="http://aida.science.uva.nl:9999/remotetaverna/v1/jobs/f1ae6518-134c-467a-9b93-ff922fa586d0" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-09-10T13:24:13Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2009-01-30T14:45:14Z</dcterms:modified>
+  </meexp:Job>
+
+  <mecontrib:WorkflowVersion rdf:about="http://www.myexperiment.org/workflows/154/versions/8">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/workflows/154/versions/8.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/154/versions/8.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/workflows/154/versions/8.xml"/>
+    <dcterms:title rdf:datatype="&xsd;string">BioAID_ProteinDiscovery_filterOnHumanUniprot_perDoc_html</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">&lt;p&gt;This workflow finds proteins relevant to the query string via the following steps: 1. A user query: a single gene/protein name. E.g.: (EZH2 OR &amp;quot;Enhancer of Zeste&amp;quot;). 2. Retrieve documents: finds &apos;maximumNumberOfHits&apos; relevant documents (abstract+title) based on query (the AIDA service inside is based on Apache&apos;s Lucene) 3. Discover proteins: extract proteins discovered in the set of relevant abstracts with a &apos;named entity recognizer&apos; trained on genomic terms using a Bayesian approach; the AIDA service inside is based on LingPipe. This subworkflow also &apos;filters&apos; false positives from the discovered protein by requiring a discovery has a valid UniProt ID. Martijn Schuemie&apos;s service to do that contains only human UniProt IDs, which is why this workflow only works for human proteins.  Workflow by Marco Roos (AID = Adaptive Information Disclosure, University of Amsterdam; http://adaptivedisclosure.org)  Text mining services by Sophia Katrenko and Edgar Meij (AID), and Martijn Schuemie (BioSemantics, Erasmus University Rotterdam).  Changes to our original BioAID_DiseaseDiscovery workflow:    * Stops at protein discovery    * Use of Martijn Schuemie&apos;s synsets service to        * add synonyms to the query.        * provide uniprot ids to discovered proteins        * filter false positive discoveries, only proteins with a uniprot id go through; this introduces some false negatives (e.g. discovered proteins with a name shorter than 3 characters)    * Counting of results in various ways, but no outputs defined in this simplified workflow.    * Output into simple html table.&lt;/p&gt;</dcterms:description>
+    <mebase:has-content-type rdf:resource="http://www.myexperiment.org/content_types/1" />
+    <dcterms:isVersionOf rdf:resource="http://www.myexperiment.org/workflows/154" />
+    <mebase:version-number rdf:datatype="&xsd;positiveInteger">8</mebase:version-number>
+    <mebase:is-current-version rdf:datatype="&xsd;boolean">0</mebase:is-current-version>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/18" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-02-29T01:34:46Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-10-29T09:29:36Z</dcterms:modified>
+    <mebase:filename rdf:datatype="&xsd;string">bioaid_proteindiscovery_filteronhumanuniprot_perdoc_html_14081.xml</mebase:filename>
+    <mebase:content-url rdf:resource="http://www.myexperiment.org/workflows/154/download/bioaid_proteindiscovery_filteronhumanuniprot_perdoc_html_14081.xml?version=8" />
+    <mecontrib:preview rdf:resource="http://www.myexperiment.org/workflows/154/versions/8/previews/full" />
+    <mecontrib:thumbnail rdf:resource="http://www.myexperiment.org/workflows/154/versions/8/previews/thumb" />
+    <mecontrib:thumbnail-big rdf:resource="http://www.myexperiment.org/workflows/154/versions/8/previews/medium" />
+    <mecontrib:svg rdf:resource="http://www.myexperiment.org/workflows/154/versions/8/previews/svg" />
+    <mebase:has-license rdf:resource="http://www.myexperiment.org/licenses/2" />
+    <mebase:last-edited-by rdf:resource="http://www.myexperiment.org/users/18" />
+    <mebase:has-policy rdf:resource="http://www.myexperiment.org/workflows/154/policies/363" />
+    <mecomp:executes-dataflow rdf:resource="http://www.myexperiment.org/workflows/154/versions/8#dataflow" />
+  </mecontrib:WorkflowVersion>
+
+  <mespec:TavernaEnactor rdf:about="http://www.myexperiment.org/runners/3">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/runners/3.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/runners/3.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/runners/3.xml"/>
+    <dcterms:title rdf:datatype="&xsd;string">Test runner for AID</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">Test runner for testing the run option of myExperiment for AID and NBIC</dcterms:description>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/groups/62" />
+    <meexp:runner-url rdf:resource="http://rpc269.cs.man.ac.uk:8180/remotetaverna/v1/" />
+    <mebase:username rdf:datatype="&xsd;string">marco</mebase:username>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-03-23T10:48:56Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-03-23T10:48:56Z</dcterms:modified>
+  </mespec:TavernaEnactor>
+
+  <mespec:TavernaEnactor rdf:about="http://www.myexperiment.org/runners/5">
+    <foaf:homepage rdf:resource="http://www.myexperiment.org/runners/5.html"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/runners/5.rdf"/>
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/runners/5.xml"/>
+    <dcterms:title rdf:datatype="&xsd;string">aida runner</dcterms:title>
+    <dcterms:description rdf:datatype="&xsd;string">aida runner</dcterms:description>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/groups/62" />
+    <meexp:runner-url rdf:resource="http://aida.science.uva.nl:9999/remotetaverna/v1/" />
+    <mebase:username rdf:datatype="&xsd;string">marco</mebase:username>
+    <dcterms:created rdf:datatype="&xsd;dateTime">2008-04-10T16:05:45Z</dcterms:created>
+    <dcterms:modified rdf:datatype="&xsd;dateTime">2008-12-03T11:20:58Z</dcterms:modified>
+  </mespec:TavernaEnactor>
+
+  <meexp:Data rdf:about="http://www.myexperiment.org/jobs/66/inputs/1">
+    <mebase:text rdf:datatype="&xsd;string">---
+query_protein: P53
+</mebase:text>
+  </meexp:Data>
+
+  <meexp:Data rdf:about="http://www.myexperiment.org/jobs/67/inputs/1">
+    <mebase:uri rdf:datatype="&xsd;anyURI">http://aida.science.uva.nl:9999/remotetaverna/v1/data/d782bc1b-9a2e-4a80-a71e-21e19a643470</mebase:uri>
+    <mebase:text rdf:datatype="&xsd;string">---
+query_protein: P53
+</mebase:text>
+  </meexp:Data>
+
+  <meexp:Data rdf:about="http://www.myexperiment.org/jobs/67/outputs/1">
+    <mebase:uri rdf:datatype="&xsd;anyURI">http://aida.science.uva.nl:9999/remotetaverna/v1/data/578c39d6-4a94-494b-81ac-a520e00eeac6</mebase:uri>
+  </meexp:Data>
+
+  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/experiment/local_pack_entries/1">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/1.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/jobs/66"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+
+  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/experiment/local_pack_entries/2">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/2.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/jobs/67"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+
+  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/experiment/local_pack_entries/3">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/3.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/workflows/154/versions/8"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+ 
+  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/experiment/local_pack_entries/4">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/4.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/workflows/runners/3"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+
+  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/experiment/local_pack_entries/5">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/5.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/workflows/runners/5"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+
+  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/experiment/local_pack_entries/6">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/6.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/workflows/jobs/66/inputs/1"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+
+  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/experiment/local_pack_entries/7">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/7.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/workflows/jobs/67/inputs/1"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+
+  <mepack:LocalPackEntry rdf:about="http://www.myexperiment.org/packs/experiment/local_pack_entries/8">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/local_pack_entries/8.rdf"/>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment"/>
+    <ore:proxyFor rdf:resource="http://www.myexperiment.org/workflows/jobs/66/outputs/1"/>
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-13T22:56:51Z</dcterms:modified>
+  </mepack:LocalPackEntry>
+ 
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/experiment/relationship_entries/1">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/1.rdf"/>
+    <ore:proxyFor>
+      <mepack:Relationship rdf:about="urn:uuid:cb3cf2c5-4e69-51d3-a1fc-94bf18a96920">
+        <rdf:subject rdf:resource="http://www.myexperiment.org/jobs/66" />
+        <rdf:predicate rdf:resource="http://rdf.myexperiment.org/ontologies/experiments/has-runnable" />
+        <rdf:object rdf:resource="http://www.myexperiment.org/workflows/154/versions/8" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
+  </mepack:RelationshipEntry>
+
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/experiment/relationship_entries/2">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/3.rdf"/>
+    <ore:proxyFor>
+      <mepack:Relationship rdf:about="urn:uuid:76cd3203-bff1-5345-894c-6d9bf1fcbbff">
+        <rdf:subject rdf:resource="http://www.myexperiment.org/jobs/66" />
+        <rdf:predicate rdf:resource="http://rdf.myexperiment.org/ontologies/experiments/has-runner" />
+        <rdf:object rdf:resource="http://www.myexperiment.org/runners/3" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
+  </mepack:RelationshipEntry>
+
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/experiment/relationship_entries/3">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/3.rdf"/>
+    <ore:proxyFor>
+      <mepack:Relationship rdf:about="urn:uuid:d6ab73e1-27b1-5d9d-97f8-d43e68a89508">
+        <rdf:subject rdf:resource="http://www.myexperiment.org/jobs/66" />
+        <rdf:predicate rdf:resource="http://rdf.myexperiment.org/ontologies/experiments/has-input" />
+        <rdf:object rdf:resource="http://www.myexperiment.org/jobs/66/inputs/1" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
+  </mepack:RelationshipEntry>
+
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/experiment/relationship_entries/4">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/4.rdf"/>
+    <ore:proxyFor>
+      <mepack:Relationship rdf:about="urn:uuid:914b0394-f2d1-5108-a907-a80b8a140679">
+        <rdf:subject rdf:resource="http://www.myexperiment.org/jobs/67" />
+        <rdf:predicate rdf:resource="http://rdf.myexperiment.org/ontologies/experiments/has-runnable" />
+        <rdf:object rdf:resource="http://www.myexperiment.org/workflows/154/versions/8" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
+  </mepack:RelationshipEntry>
+
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/experiment/relationship_entries/5">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/5.rdf"/>
+    <ore:proxyFor>
+      <mepack:Relationship rdf:about="urn:uuid:65a9bb0e-4b9d-5ecf-a981-c6994afa6883">
+        <rdf:subject rdf:resource="http://www.myexperiment.org/jobs/67" />
+        <rdf:predicate rdf:resource="http://rdf.myexperiment.org/ontologies/experiments/has-runner" />
+        <rdf:object rdf:resource="http://www.myexperiment.org/workflows/runners/5" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
+  </mepack:RelationshipEntry>
+
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/experiment/relationship_entries/6">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/6.rdf"/>
+    <ore:proxyFor>
+      <mepack:Relationship rdf:about="urn:uuid:7b1c8d05-5866-5909-941e-83ba7ea832a7">
+        <rdf:subject rdf:resource="http://www.myexperiment.org/jobs/67" />
+        <rdf:predicate rdf:resource="http://rdf.myexperiment.org/ontologies/experiments/has-input" />
+        <rdf:object rdf:resource="http://www.myexperiment.org/workflows/jobs/67/inputs/1" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
+  </mepack:RelationshipEntry>
+
+  <mepack:RelationshipEntry rdf:about="http://www.myexperiment.org/packs/experiment/relationship_entries/7">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/relationship_entries/7.rdf"/>
+    <ore:proxyFor>
+      <mepack:Relationship rdf:about="urn:uuid:a25764f4-dc5b-5c9d-907f-d57d6d51dc5b">
+        <rdf:subject rdf:resource="http://www.myexperiment.org/jobs/67" />
+        <rdf:predicate rdf:resource="http://rdf.myexperiment.org/ontologies/experiments/has-output" />
+        <rdf:object rdf:resource="http://www.myexperiment.org/workflows/jobs/67/outputs/1" />
+      </mepack:Relationship>
+    </ore:proxyFor>
+    <ore:proxyIn rdf:resource="http://www.myexperiment.org/packs/experiment" />
+    <sioc:has_owner rdf:resource="http://www.myexperiment.org/users/22" />
+    <dcterms:created rdf:datatype="&xsd;dateTime">2011-06-28T17:27:44Z</dcterms:created>
+  </mepack:RelationshipEntry>
+
+  <snarm:Policy rdf:about="http://www.myexperiment.org/packs/experiment/policies/12345">
+    <dcterms:hasFormat rdf:resource="http://www.myexperiment.org/packs/experiment/policies/12345.rdf"/>
+    <snarm:has-access>
+      <snarm:RestrictedAccess>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/16"/>
+        <snarm:has-access-type rdf:resource="&mespec;View"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
+    <snarm:has-access>
+      <snarm:RestrictedAccess>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/16"/>
+        <snarm:has-access-type rdf:resource="&mespec;Download"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
+    <snarm:has-access>
+      <snarm:RestrictedAccess>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/users/16"/>
+        <snarm:has-access-type rdf:resource="&mespec;Edit"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
+    <snarm:has-access rdf:resource="&mespec;PublicView"/>
+    <snarm:has-access rdf:resource="&mespec;PublicDownload"/>
+    <snarm:has-access>
+      <snarm:RestrictedAccess>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/User/22"/>
+        <snarm:has-access-type rdf:resource="&mespec;View"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
+    <snarm:has-access>
+      <snarm:RestrictedAccess>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/User/22"/>
+        <snarm:has-access-type rdf:resource="&mespec;Download"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
+    <snarm:has-access>
+      <snarm:RestrictedAccess>
+        <snarm:has-accesser rdf:resource="http://www.myexperiment.org/User/22"/>
+        <snarm:has-access-type rdf:resource="&mespec;Edit"/>
+      </snarm:RestrictedAccess>
+    </snarm:has-access>
+  </snarm:Policy>
+
+</rdf:RDF>
