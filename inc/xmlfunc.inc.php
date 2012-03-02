@@ -81,6 +81,7 @@ function xml2array($domnode,$topelement=false){
           		}
 			$nodeind['name']=$currentnode;
 			if (is_object($domnode->firstChild) && !is_object($domnode->firstChild->nextSibling) && $domnode->firstChild->nodeValue) $nodeind['tagData']=$domnode->firstChild->nodeValue;
+			elseif ($domnode->firstChild->nodeValue == '0') $nodeind['tagData']=$domnode->firstChild->nodeValue;
 			else $nodeind['children']=xml2array($domnode);
 
         	}
@@ -501,6 +502,63 @@ function tabulateDataflowComponents($parsedxml,$ent_uri,$nested=0){
 		return $dfs;
 	}
 }
+function processGalaxyComponents($parsedxml,$ent_uri){
+	$comps=array();
+	$components=array();
+	$hassource=array();
+	$allcomponents=$parsedxml[0]['children'][0]['children'];
+	foreach ($allcomponents as $typedcomponents){
+		if (!isset($typedcomponents['children']) || !is_array($typedcomponents['children'])) $typedcomponents['children']=array();
+		$cc=0;	
+                foreach ($typedcomponents['children'] as $comp){
+			$cc++;
+			$props=array();
+			$cid=null;
+                	foreach ($comp['children'] as $property){
+				if (isset($property['tagData'])) $props[$property['name']]=$property['tagData'];
+				if ($property['name']=="id" || $property['name']=="step-id") $cid=$property['tagData'];
+				elseif ($property['name']=="source-id") $hassource[$property['tagData']]=true;
+			}
+			if (isset($cid)) $comps[$comp['name']][$cid]=$props;
+			else $comps[$comp['name']]["cid$cc"]=$props;
+		}
+	}
+	$c=1;
+	foreach ($comps['input'] as $input){
+                $components[$c]['type']="Source";
+		$components[$c++]['props']=array(array('type'=>'dcterms:title','value'=>$input['name']),array('type'=>'dcterms:description','value'=>$input['description']));
+        }
+	foreach ($comps['output'] as $o => $output){
+                if (!isset($hassource[$o])){
+                        $components[$c]['type']="Sink";
+			$components[$c++]['props'][]=array('type'=>'dcterms:title','value'=>$output['name']);
+                }
+	}
+	foreach ($comps['step'] as $s => $step){
+		if (!isset($comps['input'][$s])){
+			$components[$c]['type']="Processor";
+			$components[$c]['props'][]=array('type'=>'dcterms:title','value'=>$step['name']);
+			if (isset($step['description'])) $components[$c]['props'][]=array('type'=>'dcterms:description','value'=>$step['description']);
+			$components[$c]['props'][]=array('type'=>'mecomp:service-name','value'=>$step['tool']);
+			$components[$c]['props'][]=array('type'=>'mecomp:waits-on', 'value'=>$c-1);	
+			$c++;
+		}
+	}
+	foreach ($comps['connection'] as $conn){
+		$components[$c]['type']="Input";
+                $components[$c++]['props']=array(array('type'=>'dcterms:title', 'value'=>$conn['sink-input']),array('type'=>'mecomp:for-component','value'=>$conn['sink-id']));
+		$components[$c]['type']="Output";
+		$components[$c++]['props']=array(array('type'=>'dcterms:title', 'value'=>$conn['source-output']),array('type'=>'mecomp:for-component','value'=>$conn['source-id']));
+		$components[$c]['type']="Link";
+		$components[$c]['props'][]=array('type'=>'mecomp:to-input', 'value'=>$c-2);
+		$components[$c]['props'][]=array('type'=>'mecomp:from-output', 'value'=>$c-1);
+		if (isset($comps['output'][$conn['source-id']])) $components[$c]['props'][]=array('type'=>'mecomp:link-datatype', 'value'=>$comps['output'][$conn['source-id']]['type']);
+		$c++;
+	}
+	return $components;
+		
+}
+		
 function processDataflowComponents($allcomponents,$ent_uri,$nested=0){
 	$components=array();
         $ptmappings=array("wsdl"=>"WSDLProcessor","arbitrarywsdl"=>"WSDLProcessor","soaplabwsdl"=>"WSDLProcessor","biomobywsdl"=>"WSDLProcessor","beanshell"=>"BeanshellProcessor","workflow"=>"DataflowProcessor");
@@ -520,7 +578,7 @@ function processDataflowComponents($allcomponents,$ent_uri,$nested=0){
 						$props[]=array('type'=>'dcterms:title','value'=>$property['tagData']);
 						break;
 					  case 'description':
-						$props[]=array('type'=>'dcterms:description','value'=>$property['tagData']);
+						if (isset($property['tagData'])) $props[]=array('type'=>'dcterms:description','value'=>$property['tagData']);
 						break;
 					  case 'type':
 						if (isset($ptmappings[$property['tagData']])) $classtype=$ptmappings[$property['tagData']];
