@@ -1,33 +1,10 @@
-README - Instructions for setting up myExperiment Linked Data Architecture
-==========================================================================
-*** N.B. If you only wish to set up the RDF API and not the SPARQL endpoint, public dataset snapshotting, voID specification generation etc. please use README_RDFAPI ***
+== Installation Instructions
 
-1. Create mysql databases: m2_production, ontology_specifications and sparql_queries
+1. Copy default_settings.bash to settings.bash and alter settings.bash parameters as appropiate
 
-
-2. Setup keys so that myExperiment database can be downloaded from the backup account on tents.
+	cp default_settings.bash settings.bash
 
 
-3. Copy inc/defaultsettings.inc.php to inc/settings.inc.php and update values appropriately.
+2. Run install.bash
 
-
-4. Copy 4store/scripts/default_settings.sh to 4store/scripts/settings.sh and adjust the values for STORE4_PATH and DATA_PATH so they point at where the 4store/ and data/ directories have been deployed on the server.
-
-
-5. Copy http/.htaccess_default to http/.htaccess and update .htaccess so that it points to the full path version of .htpass file in this directory.
-
-
-6. Create a triplestore using the 4s-backend-setup command
-
-   e.g. 4s-backend-setup --segments 8 <triplestore> 
-
-   Take the name of the triplestore and copy that name into the appropriate parameters in inc/settings.inc.php and 4store/scripts/settings.sh
-
-
-7. Run 4store/scripts/createLogFiles.sh, 4store/scripts/createConfigFolders.sh, 4store/scripts/createDataFolders.sh and 4store/scripts/createSymbolicLinks.sh to create files and folders for logs, config and data, as well as symbolic links from the http folder to specific data files.
-
-
-8. Add the following cronjob for the user who has permission to the data/ directory:
-
-   5 8 * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> update 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_4store.log
-   55 * * * * /bin/bash <LINKED_DATA_REPO>/4store/scripts/sqs.sh <TRIPLESTORE> test 1>> <LINKED_DATA_REPO>/4store/log/<TRIPLESTORE>_4store.log
+	/bin/bash install.bash
