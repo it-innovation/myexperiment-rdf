@@ -76,11 +76,6 @@ reason-ontology(){
 		echo "[`date +%T`] reason command cannot be used with $1 triplestore"
 	fi
 }
-reason-file(){
-	check_triplestore $1
-        java -cp $JAVA_CP RDFSReasonerSingleFile $STORE4_PATH/config/$1_ontologies.txt $2 $3
-	echo "[`date +%T`] Reasoned file $2 using $1 ontologies and saved to $3"
-}
 add(){
 	error=`$STORE4EXEC_PATH/4s-import $1 $2 2>&1`
 	errcount=1
@@ -151,72 +146,13 @@ update(){
 	update-database
         check-versions $1
 	reason-ontology $1        
-	get-dataflows
-	delete-non-public-dataflows $1
 	generate-dataflows-rdf $1
 	data-dump $1
-#	if [ -n "$2" ]; then 
-#		if [ $2 == "no-cache" ]; then
-#			echo "[`date +%T`] Not Updating Cached Files"
-#		else
-#			update-cached-files $1
-#		fi
-#	else
-#		update-cached-files $1
-#	fi
 	import $1
 	check-entity-sizes
 	generate-spec $1
 	generate-linksets $1
 	generate-voidspec $1
-#	day=`date +%e`
-#       month=`date +%b`
-#	date +%s > $STORE4_PATH/log/$1_update_time.log
-#	ontologies=( myexp_snarm.owl myexp_base.owl myexp_annot.owl myexp_attrib_cred.owl myexp_view_down.owl myexp_packs.owl myexp_contrib.owl myexp_exp.owl myexp_components.owl myexp_specific.owl )
-#	for o in ${ontologies[@]}; do
-#		added=`add $1 $LD_PATH/http/ontologies/$o`
-#		if [ $added -gt 0 ]; then
-#	                echo "[`date +%T`] Added/Updated myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
- #       	else
-  #              	echo "[`date +%T`] Could Not Add/Update myExperiment Ontology module $LD_PATH/http/ontologies/$o to $1 Knowledge Base"
-   #     	fi
-#	done
-#	added=`add $1 $DATA_PATH/$1/myexperiment.rdf`
- #       if [ $added -gt 0 ]; then
-  #      	echo "[`date +%T`] Added/Updated myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
-   #     else
-    #    	echo "[`date +%T`] Could Not Add/Update myExperiment Public Dataset ($DATA_PATH/$1/myexperiment.rdf) to $1 Knowledge Base"
-     #   fi
-
-	#stop $1
-	#start $1
-	#sleep 3
-#	for graph in `cat $DATA_PATH/tmp/$1/delete_files`; do
- #                      remove $1 $graph delete 
-#		echo "[`date +%T`] Removed $graph from $1"
-#	done
-#	echo "[`date +%T`] Removed all deleted entities from $1"
-#	ontology_updated=`ls -l $DATA_PATH/$1/$1_reasoned.owl 2>/dev/null | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print 1}'` 
-#	if [ -n "$ontology_updated" ]; then
-#		remove $1 $DATA_PATH/$1/$1_reasoned.owl
-#		added=`add $1 $DATA_PATH/$1/$1_reasoned.owl`
-#		if [ $added -gt 0 ]; then
-#			echo "[`date +%T`] Added/Updated $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
-#		else
-#			echo "[`date +%T`] Could Not Add/Update $DATA_PATH/$1/$1_reasoned.owl to $1 Knowledge Base"
-#		fi
-#	fi
-#	for e in ${ENTITIES[@]}; do
-#		filepath="$DATA_PATH/$1/$e/"
-#		thelist=`ls -l $filepath* 2>/dev/null | grep -v "*.owl" | awk -v month="$month" -v day="$day" '{if ($6 == month && $7 == day) print $9}' | tr '\n' ' '`
-#		if [ `echo $thelist | wc -w` -gt 0 ]; then 
-#			$STORE4EXEC_PATH/4s-import $1 $thelist 2>&1
- #              		echo "[`date +%T`] Finished adding/updating all graphs for $e to $1 Knowledge Base"
-#		else
-#			echo "[`date +%T`] No graphs to add/update for $e to $1 Knowledge Base"
-#		fi
- #       done
-#count-triples $1
 }	
 list-graphs(){
 	check_triplestore $1
@@ -230,37 +166,10 @@ count-triples(){
 	echo $notriples > $STORE4_PATH/log/$1_triples.log
 	echo "[`date +%T`] Printing number of triples to file $STORE4_PATH/log/$1_triples.log"
 }
-get-dataflows(){
-	$PHPEXEC_PATH/php $STORE4_PATH/scripts/getNewWorkflowVersions.php | awk -v datapath="$DATA_PATH" -v httpwwwpath="$HTTPWWW_PATH" 'BEGIN{FS=","}{ print " -O " datapath "/dataflows/xml/" $1 " -q " httpwwwpath "/workflow.xml?id=" $2 "&version=" $3 "&elements=components" }' > /tmp/dataflow_wgets.txt
-	exec</tmp/dataflow_wgets.txt
-	while read line
-	do
-        	wget $line
-	        echo "[`date +%T`] Executed wget $line"
-#	        sleep 2
-	done
-	rm /tmp/dataflow_wgets.txt
-}
-delete-non-public-dataflows(){
-	echo "[`date +%T`] Deleting Dataflow RDF for no longer public Workflows"
-	$PHPEXEC_PATH/php $STORE4_PATH/scripts/getPublicDownloadableDataflows.php | sort > /tmp/public_downloadable_dataflows.txt
-	ls $DATA_PATH/dataflows/rdf/ | sort > /tmp/current_dataflows.txt
-	for  dfdel in `diff /tmp/public_downloadable_dataflows.txt /tmp/current_dataflows.txt | grep ">" | awk 'BEGIN{FS=" "}{print $2}'`; do
-		rm $DATA_PATH/dataflows/xml/$dfdel $DATA_PATH/dataflows/rdf/$dfdel
-		echo "[`date +%T`] Deleted retrieved XML and generated RDF for Workflow Version $dfdel"
-	done
- 	rm /tmp/public_downloadable_dataflows.txt /tmp/current_dataflows.txt
-}			
 generate-dataflows-rdf(){
 	echo "[`date +%T`] Generating Dataflow RDF"
 	$PHPEXEC_PATH/php $STORE4_PATH/scripts/generateDataflowRDF.php $1
 	rm /tmp/dataflows.txt
-}
-reason-files(){
-	check_triplestore $1
-	java -cp $JAVA_CP RDFSReasonerMultiFile $STORE4_PATH/config/$1_ontologies.txt $2 $3
-	echo "java RDFSReasonerMultiFile $STORE4_PATH/config/$1_ontologies.txt $2 $3"
-	echo "[`date +%T`] Reasoned files in $2 using $1 ontologies and saved to $3"
 }
 generate-spec(){
 	if [ $1 == $TRIPLESTORE ]; then
@@ -393,15 +302,7 @@ case "$2" in
   reason-ontology)
 	reason-ontology $1
 	;;
-  reason-file)
-	reason-file $1 $3 $4
-	;;
-  reason-files)
-        reason-files $1 $3 $4
-	;;
-  manage-dataflows)
-        get-dataflows $1
-        delete-non-public-dataflows $1
+  generate-dataflows-rdf)
         generate-dataflows-rdf $1
 	;;
   add)

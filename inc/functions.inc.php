@@ -486,70 +486,44 @@ function getProxyFor($entity){
 	else $xml.="/>";
         return $xml;
 }
-function getDataflowComponents($entity,$type){
-	global $datauri,$datapath;
-	$comp_path=$datapath."dataflows/xml/";
+function writeDataflowToFile($wfvid,$ent_uri,$fileloc,$content_type){
+	global $myexppath;
 	require_once('xmlfunc.inc.php');
-	if ($type=="workflows"){
-		require_once('myexpconnect.inc.php');
-		$sql="select id from workflow_versions where version='$entity[current_version]' and workflow_id='$entity[id]'";
-		$res=mysql_query($sql);
-		$wfvid=mysql_result($res,0,'id');
-		$fileloc=$comp_path.$wfvid;
-		$ent_uri=$datauri."workflows/".$entity['id']."/versions/$entity[current_version]";
-	}
-	elseif ($type=="workflow_versions"){
-		$fileloc=$comp_path.$entity['id'];
-		$sql="select workflow_id, version from workflow_versions where id='$entity[id]'";
-                $res=mysql_query($sql);
-		$ent_uri=$datauri."workflows/".mysql_result($res,0,'workflow_id')."/versions/".mysql_result($res,0,'version');
-	}
-	if (file_exists($fileloc)){
-		$fh=fopen($fileloc,"r");
-		$xml="";
- 		while(!feof($fh)){
-                	$xml.=fgets($fh);
-	        }
-        	fclose($fh);
-		$dataflows=tabulateDataflowComponents(parseXML($xml),$ent_uri);
-		if ($dataflows) return generateDataflows($dataflows,$ent_uri);
-	}
+	$ph=popen("cd $myexppath; rake myexp:workflow:components ID=$wfvid | grep -v '^(in' 2>/dev/null",'r');
+        $xml="";
+        while(!feof($ph)){
+	        $xml.=fgets($ph);
+        }
+        fclose($ph);
+        $parsedxml=parseXML($xml);
+        $dataflows=tabulateDataflowComponents($parsedxml[0]['children'][0]['children'],$ent_uri,$content_type);
+        $fh=fopen($fileloc,'w');
+        if ($dataflows) fwrite($fh,generateDataflows($dataflows,$ent_uri));
+        else fwrite($fh,"NONE");
+        fclose($fh);
+}
+
+function getDataflow($entity,$type){
+	return getDataflowComponents($entity,$type,0);	
+}
+
+function getDataflowComponents($entity,$type,$retrieve=true){
+	global $datauri,$datapath,$myexppath;
+	$comp_path=$datapath."dataflows/inc/";
+	if ($type=="workflows") $sql="select * from workflow_versions where version='$entity[current_version]' and workflow_id='$entity[id]'";
+	elseif ($type=="workflow_versions") $sql="select * from workflow_versions where id='$entity[id]'";
+	$res=mysql_query($sql);
+	$wfv=mysql_fetch_assoc($res);
+        if ($wfv['content_type_id']==2) $ent_uri=$datauri."workflows/$wfv[workflow_id]/versions/$wfv[version]#dataflows/1";
+        else $ent_uri=$datauri."workflows/$wfv[id]/versions/$wfv[version]#dataflow";
+	$fileloc=$comp_path.$wfv['id'];
+	if (!file_exists($fileloc)) writeDataflowToFile($wfv['id'],$ent_uri,$fileloc,$wfv['content_type_id']);
+	$lines=file($fileloc);
+	if (trim($lines[0])=="NONE") return "";
+	elseif($retrieve==false) return "$ent_uri";
+	return implode("",$lines);
 }
 	
-function getDataflow($entity,$type){
-	global $datauri,$datapath;
-	$comp_path=$datapath."dataflows/rdf/";
- 	if ($type=="workflows"){
-                require_once('myexpconnect.inc.php');
-                $sql="select id from workflow_versions where version='$entity[current_version]' and workflow_id='$entity[id]'";
-                $res=mysql_query($sql);
-                $wfvid=mysql_result($res,0,'id');
-		$type="workflow_versions";
-                $fileloc=$comp_path.$wfvid;
-		$id=$entity['id'];
-		$version=$entity["current_version"];
-                
-        }
-        elseif ($type=="workflow_versions"){
-                $fileloc=$comp_path.$entity['id'];
-		$wfvid=$entity['id'];
-		$id=$entity['workflow_id'];
-		$version=$entity['version'];
-        }
-	$data="";
-	if (file_exists($fileloc)){
-		$fh=fopen($fileloc,'r');
-		$data=fread($fh,8192);
-		fclose($fh);
-	}
-	if (strlen($data)>0){
-		$sql="select content_type_id from workflow_versions where id='$wfvid'";
-                $res=mysql_query($sql);
-		if (mysql_result($res,0,'content_type_id')==2) return $datauri."workflows/$id/versions/$version#dataflows/1";
-		return $datauri."workflows/$id/versions/$version#dataflow";
-	}
-	return "";
-}
 function getLicenseAttributes($license){
 	$sql="select license_options.* from license_attributes inner join license_options on license_attributes.license_option_id=license_options.id where license_attributes.license_id=$license[id]";
 	$res=mysql_query($sql);

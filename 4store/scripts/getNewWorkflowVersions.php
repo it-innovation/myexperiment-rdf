@@ -9,7 +9,7 @@
 		$wfv_wv[]=mysql_result($res,$i,'id').",".mysql_result($res,$i,'workflow_id').",".mysql_result($res,$i,'version');
 		
 	}
-	$cmd="ls ".$datapath."/dataflows/xml/";
+	$cmd="ls ".$datapath."/dataflows/dump/";
 	$ph=popen($cmd,'r');
 	$lswfv="";
 	while (!feof($ph)){

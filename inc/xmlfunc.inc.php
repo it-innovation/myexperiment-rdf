@@ -467,46 +467,42 @@ function generateDataflows($dataflows,$ent_uri){
         return $rdf;
 }
 
-function tabulateDataflowComponents($parsedxml,$ent_uri,$nested=0){
+function tabulateDataflowComponents($allcomponents,$ent_uri,$content_type,$nested=0){
 	global $dfs;
 	$d=2;
-	if ($nested) $allcomponents=$parsedxml;
-	else{
-		$allcomponents=$parsedxml[0]['children'][0]['children'];
-		$dfs=array();
-	}
-	if ($allcomponents[0]['name']=="dataflows"){
-		foreach ($allcomponents[0]['children'] as $dataflow){
-			if (is_array($dataflow)){
-				if ($dataflow['attrs']['role']=="top") $id=1;
-				else{
-					$id=$d;
-					$d++;
-				}
-				$dfs[$ent_uri."#dataflows/$id"]=processDataflowComponents($dataflow['children'],$ent_uri."#dataflows/$d/",$nested);
-				$dfs[$ent_uri."#dataflows/$id"]['id']=$dataflow['attrs']['id'];
-			//	echo $ent_uri."#dataflows/$id = ".sizeof($dfs[$ent_uri."#dataflows/$id"])."\n";
-			}
-		}
-	}
-	else{
-		if (is_array($allcomponents)){
-			if (strpos($ent_uri,'dataflow') > 0) $dfs[$ent_uri."/dataflow"]=processDataflowComponents($allcomponents,$ent_uri."/dataflow/",$nested);
-			else $dfs[$ent_uri."#dataflow"]=processDataflowComponents($allcomponents,$ent_uri."#dataflow/",$nested);
-		}
-//		echo $ent_uri."/dataflow = ".sizeof($dfs[$ent_uri."/dataflow"])."\n";
+	if (!$nested) $dfs=array();
+	switch($content_type){
+		case 1:
+			if (strpos($ent_uri,'dataflow') > 0) $dfs[$ent_uri."/dataflow"]=processTavernaComponents($allcomponents,$ent_uri."/dataflow/",$content_type,$nested);
+	                else $dfs[$ent_uri."#dataflow"]=processTavernaComponents($allcomponents,$ent_uri."#dataflow/",$content_type,$nested);
+			break;
+		case 2:
+			foreach ($allcomponents[0]['children'] as $dataflow){
+	                        if (is_array($dataflow)){
+        	                        if ($dataflow['attrs']['role']=="top") $id=1;
+                	                else{
+                        	                $id=$d;
+                                	        $d++;
+	                                }
+        	                        $dfs[$ent_uri."#dataflows/$id"]=processTavernaComponents($dataflow['children'],$ent_uri."#dataflows/$d/",$content_type,$nested);
+                	                $dfs[$ent_uri."#dataflows/$id"]['id']=$dataflow['attrs']['id'];
+	                        }
+        	        }
+			break;
+		case 73:
+			$dfs[$ent_uri."/dataflow"]=processGalaxyComponents($allcomponents,$ent_uri."/dataflow/",$nested); 
+			break;
 
-	}	
+	}
 	if (!$nested){
 		if ($allcomponents[0]['name']!="dataflows") $dfs=array_reverse($dfs);
 		return $dfs;
 	}
 }
-function processGalaxyComponents($parsedxml,$ent_uri){
+function processGalaxyComponents($allcomponents,$ent_uri){
 	$comps=array();
 	$components=array();
 	$hassource=array();
-	$allcomponents=$parsedxml[0]['children'][0]['children'];
 	foreach ($allcomponents as $typedcomponents){
 		if (!isset($typedcomponents['children']) || !is_array($typedcomponents['children'])) $typedcomponents['children']=array();
 		$cc=0;	
@@ -559,12 +555,12 @@ function processGalaxyComponents($parsedxml,$ent_uri){
 		
 }
 		
-function processDataflowComponents($allcomponents,$ent_uri,$nested=0){
+function processTavernaComponents($allcomponents,$ent_uri,$content_type,$nested=0){
 	$components=array();
         $ptmappings=array("wsdl"=>"WSDLProcessor","arbitrarywsdl"=>"WSDLProcessor","soaplabwsdl"=>"WSDLProcessor","biomobywsdl"=>"WSDLProcessor","beanshell"=>"BeanshellProcessor","workflow"=>"DataflowProcessor");
         $c=1;
 	foreach ($allcomponents as $typedcomponents){
-		if (!isset($typedcomponents['children']) || !is_array($typedcomponents['children'])) $typedcomponents['children']=array();
+		if (!isset($typedcomponents['children']) || !is_array($typedcomponents)) $typedcomponents=array('children'=>array());
 		foreach ($typedcomponents['children'] as $comp){
 			$props=array();
                        	$ctype=ucfirst(strtolower($comp['name']));
@@ -597,7 +593,7 @@ function processDataflowComponents($allcomponents,$ent_uri,$nested=0){
 						else $props[]=array('type'=>'mecomp:processor-script');
 						break;
 					  case 'model':
-						tabulateDataflowComponents($property['children'],$ent_uri."components/$c",$nested+1);
+						tabulateDataflowComponents($property['children'],$ent_uri."components/$c",$content_type,$nested+1);
 						$props[]=array('type'=>'mecomp:executes-dataflow','value'=>$ent_uri."components/$c/dataflow");
                                                 break;
 					  case 'dataflow-id':

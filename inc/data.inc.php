@@ -5,6 +5,9 @@
 	//Get types for datatype properties
 	$datatypes=getDatatypes();
 
+	//Content type ids fro dataflows that have processable components
+	$dataflow_contenttypes=array(1,2,73);
+
 	//ORE Stuff
 	$all_ars=array();
 	$aggregateprops=array("mecontrib:preview","mecontrib:thumbnail","mecontrib:thumbnail-big","mecontrib:svg","mebase:has-version","mebase:has-current-version","mebase:content-url","foaf:homepage","meexp:has-input","meexp:has-output","meexp:has-runner","meexp:has-runnable","mebase:uri");

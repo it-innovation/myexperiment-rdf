@@ -17,6 +17,8 @@
 	$ontopath="http://rdf.myexperiment.org/ontologies/";
 	//The filesystem path for RDF data
         $datapath="/var/linkeddata/data/";
+	// Path to myExperiment as a Ruby-on-Rails application
+        $myexppath="/var/rails/myexperiment/";
 	//The salt to encrypt hidden values
         $salt="changeme";
 
