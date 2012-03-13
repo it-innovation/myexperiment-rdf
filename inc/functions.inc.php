@@ -510,14 +510,14 @@ function getDataflow($entity,$type){
 function getDataflowComponents($entity,$type,$retrieve=true){
 	global $datauri,$datapath,$myexppath;
 	$comp_path=$datapath."dataflows/inc/";
-	if ($type=="workflows") $sql="select * from workflow_versions where version='$entity[current_version]' and workflow_id='$entity[id]'";
+	if ($type=="workflows") $sql="select workflow_versions.*, content_types.mime_type from workflow_versions inner join content_types on workflow_versions.content_type_id=content_types.id where version='$entity[current_version]' and workflow_id='$entity[id]'";
 	elseif ($type=="workflow_versions") $sql="select * from workflow_versions where id='$entity[id]'";
 	$res=mysql_query($sql);
 	$wfv=mysql_fetch_assoc($res);
-        if ($wfv['content_type_id']==2) $ent_uri=$datauri."workflows/$wfv[workflow_id]/versions/$wfv[version]#dataflows/1";
+        if ($wfv['mime_type']=='application/vnd.taverna.t2flow+xml') $ent_uri=$datauri."workflows/$wfv[workflow_id]/versions/$wfv[version]#dataflows/1";
         else $ent_uri=$datauri."workflows/$wfv[id]/versions/$wfv[version]#dataflow";
 	$fileloc=$comp_path.$wfv['id'];
-	if (!file_exists($fileloc)) writeDataflowToFile($wfv['id'],$ent_uri,$fileloc,$wfv['content_type_id']);
+	if (!file_exists($fileloc)) writeDataflowToFile($wfv['id'],$ent_uri,$fileloc,$wfv['mime_type']);
 	$lines=file($fileloc);
 	if (trim($lines[0])=="NONE") return "";
 	elseif($retrieve==false) return "$ent_uri";

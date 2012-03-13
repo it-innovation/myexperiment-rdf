@@ -1,5 +1,6 @@
 <?php
 	$lddir="THIS_DIR";
+	ini_set('include_path',".:${lddir}inc/:");
 	$datapath="${lddir}data/";
 	$datauri="DATAURI";
 	$ontopath="http://rdf.myexperiment.org/ontologies/";

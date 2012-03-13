@@ -5,8 +5,8 @@
 	//Get types for datatype properties
 	$datatypes=getDatatypes();
 
-	//Content type ids fro dataflows that have processable components
-	$dataflow_contenttypes=array(1,2,73);
+	//Content type ids for dataflows that have processable components
+	$dataflow_contenttypes=array("application/vnd.taverna.scufl+xml","application/vnd.taverna.t2flow+xml","application/vnd.galaxy.workflow+xml");
 
 	//ORE Stuff
 	$all_ars=array();

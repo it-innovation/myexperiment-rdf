@@ -472,11 +472,11 @@ function tabulateDataflowComponents($allcomponents,$ent_uri,$content_type,$neste
 	$d=2;
 	if (!$nested) $dfs=array();
 	switch($content_type){
-		case 1:
+		case 'application/vnd.taverna.scufl+xml':
 			if (strpos($ent_uri,'dataflow') > 0) $dfs[$ent_uri."/dataflow"]=processTavernaComponents($allcomponents,$ent_uri."/dataflow/",$content_type,$nested);
 	                else $dfs[$ent_uri."#dataflow"]=processTavernaComponents($allcomponents,$ent_uri."#dataflow/",$content_type,$nested);
 			break;
-		case 2:
+		case 'application/vnd.taverna.t2flow+xml':
 			foreach ($allcomponents[0]['children'] as $dataflow){
 	                        if (is_array($dataflow)){
         	                        if ($dataflow['attrs']['role']=="top") $id=1;
@@ -489,7 +489,7 @@ function tabulateDataflowComponents($allcomponents,$ent_uri,$content_type,$neste
 	                        }
         	        }
 			break;
-		case 73:
+		case 'application/vnd.galaxy.workflow+xml':
 			$dfs[$ent_uri."/dataflow"]=processGalaxyComponents($allcomponents,$ent_uri."/dataflow/",$nested); 
 			break;
 
@@ -660,24 +660,10 @@ function extractRDF($id,$wfid,$version,$posthash){
 	//print_r($params);
 	$uri=$datauri."workflows/$wfid/versions/$version#$posthash";
 //	echo $uri."\n";
-        $filename=$datapath."dataflows/rdf/$id";
-//	echo $filename."\n";
+        $filename=$datapath."dataflows/inc/$id";
+//	echo $filename."\n"; exit;
 	//echo "$filename = $uri\n";
-        $lines=file($filename);
-        $l=0;
-        while ($l<sizeof($lines) && (strpos($lines[$l],"rdf:about=\"$uri\"") === FALSE)){
-                $l++;
-        }
-	$rdf="";
-        if ($l<sizeof($lines)) {
-		$ebits=explode(" ",str_replace(array("<",">"),"",trim($lines[$l])));
-	        while ($l<sizeof($lines) && (strpos($lines[$l],'</'.$ebits[0].'>') === FALSE)){
-        	        $rdf.=$lines[$l];
-               	 	$l++;
-        	}
- 		if ($l<sizeof($lines)) $rdf.=$lines[$l];
-	}
-       	return $rdf;
+        return implode('',file($filename));
 }
 
 
