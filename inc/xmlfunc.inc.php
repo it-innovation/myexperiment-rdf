@@ -492,7 +492,10 @@ function tabulateDataflowComponents($allcomponents,$ent_uri,$content_type,$neste
 		case 'application/vnd.galaxy.workflow+xml':
 			$dfs[$ent_uri."/dataflow"]=processGalaxyComponents($allcomponents,$ent_uri."/dataflow/",$nested); 
 			break;
-
+		case 'application/vnd.rapidminer.rmp+zip':
+			if (strpos($ent_uri,'dataflow') > 0) $dfs[$ent_uri."/dataflow"]=processRapidMinerComponents($allcomponents,$ent_uri."/dataflow/",$content_type,$nested);
+                        else $dfs[$ent_uri."#dataflow"]=processRapidMinerComponents($allcomponents,$ent_uri."#dataflow/",$content_type,$nested);
+                        break;
 	}
 	if (!$nested){
 		if ($allcomponents[0]['name']!="dataflows") $dfs=array_reverse($dfs);
@@ -554,6 +557,38 @@ function processGalaxyComponents($allcomponents,$ent_uri){
 	return $components;
 		
 }
+function processRapidMinerComponents($allcomponents,$ent_uri,$content_type,$nested=0){
+	$components=array();
+	if ($nested==0) $mainprocesscomps=$allcomponents[0]['children'][0]['children'][0]['children'];
+	else $mainprocesscomps=$allcomponents[0]['children'];
+	$c=1;
+	foreach ($mainprocesscomps as $mpcomp){
+		$props=array();
+		$props[]=array("type"=>"dcterms:title","value"=>$mpcomp['attrs']['name']);
+		if (sizeof($mpcomp['children'])>0){
+			$classtype="DataflowProcessor";
+			tabulateDataflowComponents($mpcomp['children'],$ent_uri."components/$c",$content_type,$nested+1);
+                        $props[]=array('type'=>'mecomp:executes-dataflow','value'=>$ent_uri."components/$c/dataflow");
+		}
+		else{
+			$classtype="Processor";
+		}
+		$components[$c]=array('type'=>$classtype,'props'=>$props);
+		$c++;
+	}
+	return $components;
+/*		
+	foreach ($components as $typedcomponents){
+		if (!isset($typedcomponents['children']) || !is_array($typedcomponents)) $typedcomponents=array('children'=>array());
+		
+                foreach ($typedcomponents['children'] as $comp){
+                        $props=array();
+                        $ctype=ucfirst(strtolower($comp['name']));
+                        if ($ctype=="Datalink") $ctype="Link";
+                        $classtype=$ctype;
+*/
+}
+
 		
 function processTavernaComponents($allcomponents,$ent_uri,$content_type,$nested=0){
 	$components=array();

@@ -6,7 +6,7 @@
 	$datatypes=getDatatypes();
 
 	//Content type ids for dataflows that have processable components
-	$dataflow_contenttypes=array("application/vnd.taverna.scufl+xml","application/vnd.taverna.t2flow+xml","application/vnd.galaxy.workflow+xml");
+	$dataflow_contenttypes=array("application/vnd.taverna.scufl+xml","application/vnd.taverna.t2flow+xml","application/vnd.galaxy.workflow+xml","application/vnd.rapidminer.rmp+zip");
 
 	//ORE Stuff
 	$all_ars=array();
