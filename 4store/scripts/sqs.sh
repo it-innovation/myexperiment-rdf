@@ -169,7 +169,6 @@ count-triples(){
 generate-dataflows-rdf(){
 	echo "[`date +%T`] Generating Dataflow RDF"
 	$PHPEXEC_PATH/php $STORE4_PATH/scripts/generateDataflowRDF.php $1
-	rm /tmp/dataflows.txt
 }
 generate-spec(){
 	if [ $1 == $TRIPLESTORE ]; then

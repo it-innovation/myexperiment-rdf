@@ -16,11 +16,10 @@ else
 	done
 	touch tmp/$TRIPLESTORE/delete_files
 	mkdir dataflows/
-	mkdir dataflows/xml
-	mkdir dataflows/rdf
-	mkdir dataflows/reasoned
-	ln -s $DATA_PATH/dataflows/reasoned/ $TRIPLESTORE/dataflows
-	echo "ln -s $DATA_PATH/dataflows/reasoned/ $TRIPLESTORE/dataflows"
+	mkdir dataflows/dump
+	mkdir dataflows/inc
+	ln -s $DATA_PATH/dataflows/dump/ $TRIPLESTORE/dataflows
+	echo "ln -s $DATA_PATH/dataflows/dump/ $TRIPLESTORE/dataflows"
 	mkdir ontologies
 	mkdir ontologies/remoteont
 	mkdir ontologies/reasoned

@@ -42,7 +42,7 @@
 	}
 	fclose($fh);
  	echo "[".date("H:i:s")."] Adding dataflows\n";
-	exec("for dffile in `ls ".$datapath."dataflows/rdf/*`; do
+	exec("for dffile in `ls ".$datapath."dataflows/dump/*`; do
         head -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`] \$dffile | tail -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`-48] >> $rdffile
 done");
 	$fh=fopen($rdffile,"a");

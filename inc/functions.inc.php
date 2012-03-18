@@ -510,8 +510,9 @@ function getDataflow($entity,$type){
 function getDataflowComponents($entity,$type,$retrieve=true){
 	global $datauri,$datapath,$myexppath;
 	$comp_path=$datapath."dataflows/inc/";
-	if ($type=="workflows") $sql="select workflow_versions.*, content_types.mime_type from workflow_versions inner join content_types on workflow_versions.content_type_id=content_types.id where version='$entity[current_version]' and workflow_id='$entity[id]'";
-	elseif ($type=="workflow_versions") $sql="select * from workflow_versions where id='$entity[id]'";
+	$sql="select workflow_versions.*, content_types.mime_type from workflow_versions inner join content_types on workflow_versions.content_type_id=content_types.id where ";
+	if ($type=="workflows") $sql="version='$entity[current_version]' and workflow_id='$entity[id]'";
+	elseif ($type=="workflow_versions") $sql="id='$entity[id]'";
 	$res=mysql_query($sql);
 	$wfv=mysql_fetch_assoc($res);
 	$ent_uri=$datauri."workflows/$wfv[workflow_id]/versions/$wfv[version]";
