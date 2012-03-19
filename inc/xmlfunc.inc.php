@@ -565,7 +565,7 @@ function processRapidMinerComponents($allcomponents,$ent_uri,$content_type,$nest
 	foreach ($mainprocesscomps as $mpcomp){
 		$props=array();
 		$props[]=array("type"=>"dcterms:title","value"=>$mpcomp['attrs']['name']);
-		if (sizeof($mpcomp['children'])>0){
+		if (isset($mpcomp['children']) && sizeof($mpcomp['children'])>0){
 			$classtype="DataflowProcessor";
 			tabulateDataflowComponents($mpcomp['children'],$ent_uri."components/$c",$content_type,$nested+1);
                         $props[]=array('type'=>'mecomp:executes-dataflow','value'=>$ent_uri."components/$c/dataflow");
@@ -577,16 +577,6 @@ function processRapidMinerComponents($allcomponents,$ent_uri,$content_type,$nest
 		$c++;
 	}
 	return $components;
-/*		
-	foreach ($components as $typedcomponents){
-		if (!isset($typedcomponents['children']) || !is_array($typedcomponents)) $typedcomponents=array('children'=>array());
-		
-                foreach ($typedcomponents['children'] as $comp){
-                        $props=array();
-                        $ctype=ucfirst(strtolower($comp['name']));
-                        if ($ctype=="Datalink") $ctype="Link";
-                        $classtype=$ctype;
-*/
 }
 
 		
