@@ -10,10 +10,10 @@ filename=`cat /tmp/latest_db.txt | awk 'BEGIN{FS="/"}{ print $NF }'`
 scp backup@tents:$filepath /tmp/
 ls -t /tmp/$filename
 echo "[`date +%T`] Downloaded Latest myExperiment Database Snapshot: $filename"
+passline=""
 if [ ${#MYSQL_PASSWORD} -gt 0 ]; then
-	zcat /tmp/$filename | grep -v 'INSERT INTO `sessions`' | grep -v 'INSERT INTO `viewings`' | grep -v 'INSERT INTO `downloads`' | grep -v 'INSERT INTO `pictures`' | mysql -u $MYSQL_USERNAME -p$MYSQL_PASSWORD m2_production2
-else
-	zcat /tmp/$filename | grep -v 'INSERT INTO `sessions`' | grep -v 'INSERT INTO `viewings`' | grep -v 'INSERT INTO `downloads`' | grep -v 'INSERT INTO `pictures`' | mysql -u $MYSQL_USERNAME m2_production2
+	passline="-p$MYSQL_PASSWORD" 
 fi
+zcat /tmp/$filename | grep -v 'INSERT INTO `sessions`' | grep -v 'INSERT INTO `viewings`' | grep -v 'INSERT INTO `downloads`' | grep -v 'INSERT INTO `pictures`' | grep -v "INSERT INTO `content_blobs`" | mysql -u $MYSQL_USERNAME $passline m2_production
 echo "[`date +%T`] Uploaded SQL File ($filename) to MySQL"
 rm -f /tmp/$filename
