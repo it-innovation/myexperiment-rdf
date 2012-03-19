@@ -685,7 +685,7 @@ function extractRDF($id,$wfid,$version,$posthash){
 	//print_r($params);
 	$uri=$datauri."workflows/$wfid/versions/$version#$posthash";
 //	echo $uri."\n";
-        $filename=$datapath."dataflows/inc/$id";
+        $filename=$datapath."dataflows/$id";
 //	echo $filename."\n"; exit;
 	//echo "$filename = $uri\n";
         return implode('',file($filename));

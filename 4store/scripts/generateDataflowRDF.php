@@ -2,12 +2,12 @@
 <?php
 	include('include.inc.php');
 	require_once('genrdf.inc.php');
-	$ph=popen('ls '.$datapath.'dataflows/dump/','r');
+	$ph=popen("cd ${datapath}dataflows/; du -b * | awk 'BEGIN{FS=\" \"}{ if ($1!=\"4\") print $2 }'",'r');
 	$temp="";
 	while (!feof($ph)){
 		$temp.=fread($ph,8192);
 	}
-	$curfiles=explode("\n",$temp);
+	$curfiles=explode("\n",trim($temp));
 	pclose($ph);
 	$dfct=array();
 	foreach ($dataflow_contenttypes as $ct) $dfct[]="'$ct'";
@@ -19,7 +19,7 @@
 	}
 	foreach ($curfiles as $cf){
 		if (!in_array($cf,$dbfiles)){
-			exec("rm ".$datapath."dataflows/dump/$cf  2> /dev/null");
+			exec("echo -n 'NONE' > ".$datapath."dataflows/$cf");
 			echo "[".date("H:i:s")."] Removed RDF for components of workflow_versions $cf because permissions have changed or workflow has been deleted\n";
 		}
 	}
@@ -29,10 +29,10 @@
 			$newfiles[]=$df;
 		}
 	}
-	$filelocdir=$datapath."dataflows/inc/";
+	$filelocdir=$datapath."dataflows/";
 	foreach ($newfiles as $wfvid){
                 if (file_exists($filelocdir.$wfvid)) continue;
-                $sql="select workflow_versions.*, content_types.mime_type from workflow_versions inner join content_types on workflow_versions.content_type_id=content_types.id where workflows_id='$wfvid'";
+                $sql="select workflow_versions.*, content_types.mime_type from workflow_versions inner join content_types on workflow_versions.content_type_id=content_types.id where workflow_versions.id='$wfvid'";
                 $wfv=mysql_fetch_assoc(mysql_query($sql));
                 $wget="wget -q -O /tmp/wfvc_$wfvid.xml -o /dev/null '${datauri}workflow.xml?id=$wfv[workflow_id]&versions=$wfv[version]&elements=components'";
                 exec($wget);
@@ -47,12 +47,5 @@
                 fclose($fh);
 		echo "[".date("H:i:s")."] Generated RDF for components of workflow_versions $wfvid\n";
         }
-	echo "[".date("H:i:s")."] Copying RDF for components to RDF dump directory and encapsulating in an RDF graph\n";
-	foreach ($newfiles as $nf){
-	 	$dataflows=pageheader().getDataflowComponents($nf,"workflow_versions","uris").pagefooter();
-                $fh=fopen($datapath."dataflows/dump/$nf",'w');
-                fwrite($fh,$dataflows);
-                fclose($fh);
-	}
 
 ?>

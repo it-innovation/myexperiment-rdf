@@ -42,8 +42,8 @@
 	}
 	fclose($fh);
  	echo "[".date("H:i:s")."] Adding dataflows\n";
-	exec("for dffile in `ls ".$datapath."dataflows/dump/*`; do
-        head -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`] \$dffile | tail -$[`wc -l \$dffile | awk 'BEGIN{FS=\" \"}{print $1}'`-48] >> $rdffile
+	exec("for dffile in `du -b ".$datapath."dataflows/* | awk 'BEGIN{FS=\" \"}{ if ($1 != \"4\") print $2 }'`; do
+        cat \$dffile >> $rdffile
 done");
 	$fh=fopen($rdffile,"a");
         fwrite($fh,pagefooter());
