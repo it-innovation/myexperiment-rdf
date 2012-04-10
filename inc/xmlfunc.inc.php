@@ -448,7 +448,7 @@ function generateDataflows($dataflows,$ent_uri){
 		        $comptype=$comp['type'];
                 	$rdf.="    <mecomp:has-component>\n      <mecomp:$comptype rdf:about=\"".$dfuri."/components/$cnum\">\n";
 	                foreach ($comp['props'] as $prop){
-                		if (in_array($prop['type'],$dtstr)){
+                		if (in_array($prop['type'],$dtstr) && isset($prop['value'])){
 	                	       $rdf.="        <".$prop['type']." rdf:datatype=\"&xsd;string\">".xmlentities($prop['value'])."</".$prop['type'].">\n";
                         	}
 				elseif (in_array($prop['type'],$dturi)){
