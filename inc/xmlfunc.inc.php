@@ -371,7 +371,8 @@ function tabulateSparqlResultsAssoc($parsedxml){
                 $vars[$v]=$vararray[$v]['attrs']['name'];
         }
 	$table=array();
-        $recs=$parsedxml[0]['children'][1]['children'];
+        if (isset($parsedxml[0]['children'][1]['children'])) $recs=$parsedxml[0]['children'][1]['children'];
+        else $recs=array();
         for ($r=0; $r<sizeof($recs); $r++){
                 for ($v=0; $v<sizeof($vars); $v++){
 			$bname=$recs[$r]['children'][$v]['attrs']['name'];

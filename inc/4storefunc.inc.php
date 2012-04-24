@@ -115,7 +115,7 @@ function sparqlQueryClientMultiple($kb,$queries,$softlimit=1000,$timeout=30,$rea
 	foreach($qids as $qid){
 		$filenames[$qid]="${datapath}tmp/queries/".$qfp."_$qid";
 		$cmd=$lddir."4store/scripts/runquery.sh $kb \"".$queries[$qid]."\" $softlimit ".$filenames[$qid]." $reason &";
-//		echo $cmd."<br/>\n";
+		//echo $cmd."<br/>\n";
 		exec($cmd);
 	}
 
@@ -136,7 +136,8 @@ function sparqlQueryClientMultiple($kb,$queries,$softlimit=1000,$timeout=30,$rea
 			$fh=fopen($filenames[$qid],'r');
 			while(!feof($fh)){
 				$data=fread($fh,8192);
-				$results[$qid].=$data;
+                                if (!isset($results[$qid])) $results[$qid]=$data;
+				else $results[$qid].=$data;
 			}
 			exec("rm -f ".$filenames[$qid]);
 			fclose($fh);

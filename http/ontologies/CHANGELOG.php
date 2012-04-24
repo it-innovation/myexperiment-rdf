@@ -6,6 +6,8 @@
 <p><big>This page includes the changelog for the <a href=".">myExperiment Ontology</a> and consequently myExperiment's RDF data.</big></p>
 
 <ul class="changelog">
+  <li><b>24/04/2012</b> Fixed mismatch between sioc:User and sioc:UserAccount in the base ontology.</li>
+  <li><b>02/03/2012</b> Added mecomp:waits-on and mecomp:is-waited-on to support chronologicial dependencies between Processors not explicitly defined by the data flow.</li>
   <li><b>12/10/2011</b> Changed mebase:User to be equivalent to a SIOC UserAccount rather than a SIOC User that no longer exists in the current specification.  A new mebase:Person class and migration of person based triples to this class will be performed shortly.</li>
   <li><b>03/10/2011</b> Corrected rdfs:label for Tagging as it was just set to Tag in Annotations module.  Corrected wrong namespace for Entry when defining PackEntry as a subClassOf it in Packs module.  Also modified all of the ontology module descriptors to include owl:versionInfo, so that dc:date captures the original modularization date of the ontology and owl:VersionInfo captures the last modification date of the ontology module.</li>
   <li><b>02/09/2011</b> Corrected rdfs:label for RestrictedAccess as it was just set to Access.</li>

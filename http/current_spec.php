@@ -1,4 +1,5 @@
 <?php
+//ini_set('display_errors',1);
 include('include.inc.php');
 require_once('xmlfunc.inc.php');
 require_once('4storefunc.inc.php');
@@ -141,7 +142,7 @@ $tab9=tabulateSparqlResultsAssoc(parseXML($res[9]));
 $pagetitle="Ontology Specification";
 $ignoreloc=1;
 include('header.inc.php');
-if (sizeof($errs)>0){
+if (isset($errs) && sizeof($errs)>0){
         echo "    <!-- Errors -->\n";
         echo "    <div class=\"red\">\n";
         echo "      <h3>Errors:</h3>\n";
