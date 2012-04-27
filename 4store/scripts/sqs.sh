@@ -145,7 +145,7 @@ update(){
         check_triplestore $1
 	update-database
         check-versions $1
-	reason-ontology $1        
+#	reason-ontology $1        
 	generate-dataflows-rdf $1
 	data-dump $1
 	import $1

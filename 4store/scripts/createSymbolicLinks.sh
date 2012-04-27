@@ -13,11 +13,11 @@ fi
 ln -s $DATA_PATH/$TRIPLESTORE/html/spec.html  $LD_PATH/http/ontologies/spec.html
 echo "Created Symbolic Link for spec.html"
 
-if [ -e $LD_PATH/http/ontologies/myexp_reasoned.owl ]; then
-        rm $LD_PATH/http/ontologies/myexp_reasoned.owl
-fi
-ln -s $DATA_PATH/$TRIPLESTORE/$TRIPLESTORE"_reasoned.owl" $LD_PATH/http/ontologies/myexp_reasoned.owl
-echo "Created Symbolic Link for myexp_reasoned.owl"
+#if [ -e $LD_PATH/http/ontologies/myexp_reasoned.owl ]; then
+#        rm $LD_PATH/http/ontologies/myexp_reasoned.owl
+#fi
+#ln -s $DATA_PATH/$TRIPLESTORE/$TRIPLESTORE"_reasoned.owl" $LD_PATH/http/ontologies/myexp_reasoned.owl
+#echo "Created Symbolic Link for myexp_reasoned.owl"
 
 if [ -e $LD_PATH/http/linksets ]; then
         rm $LD_PATH/http/linksets

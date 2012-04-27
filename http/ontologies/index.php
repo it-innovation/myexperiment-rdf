@@ -15,7 +15,7 @@
   <p><b>Fig.1</b> The Main Entities of the myExperiment</p>
 </div>
 
-<p>The myExperiment Ontology borrows terms from a number of well-known ontologies/schemas to foster reuse be simplifying ontology alignment:</p>
+<p>The myExperiment Ontology borrows terms from a number of well-known ontologies/schemas to foster reuse by simplifying ontology alignment:</p>
 <ul>
   <li><a href="http://dublincore.org/" title="Dublin Core Project Homepage">Dublin Core</a> to provide common metadata properties.
   <li><a href="http://www.foaf-project.org/" title="FOAF Project Homepage">FOAF</a> and <a href="http://www.sioc-project.org/" title="SIOC Project Homepage">SIOC</a> to describe the social network.</li>
